@@ -282,6 +282,19 @@ function PasswordGenerate($number) {
 }
 
 /**
+ * Возвращает форму слова в зависимости от колличества $count.
+ * 
+ * @param int $count <p>число элементов</p>
+ * @param array $forms <p>Формы слова, пример {носок,носка,носков}</p>
+ */
+function GetWordForms($count,$forms)
+{
+    if ($count==1) return $forms[0];
+    elseif (($count>1) && ($count<=4)) return $forms[1];
+    else return $forms[2];
+};
+
+/**
  * Возвращает полный адрес страницы по её id или name
  *
  * @param string/id $id  <p>id/name</p>
