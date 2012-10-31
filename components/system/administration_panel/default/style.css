@@ -300,3 +300,75 @@ select
 {
 font-size:13px;
 }
+body {
+  background-color: #FFFFFF;
+  color: #333333;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0;
+}
+h3 {
+  font-size: 18px;
+  line-height: 27px;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: inherit;
+  font-family: inherit;
+  font-weight: bold;
+  margin: 0;
+  text-rendering: optimizelegibility;
+}
+.navbar {
+  color: #999999;
+}
+.navbar-inner {
+  background-color: #2C2C2C;
+  background-image: -moz-linear-gradient(center top , #333333, #222222);
+  background-repeat: repeat-x;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+  min-height: 40px;
+}
+.navbar .brand {
+  color: #999999;
+  display: block;
+  float: left;
+  font-size: 20px;
+  font-weight: 200;
+  line-height: 1;
+  margin-left: -20px;
+  padding: 8px 20px 12px;
+  text-shadow:none;
+}
+.navbar .nav > li > a {
+  color: #999999;
+  float: none;
+  line-height: 19px;
+  padding: 9px 10px 11px;
+  text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.btn {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #F5F5F5;
+  background-image: -moz-linear-gradient(center top , #FFFFFF, #E6E6E6);
+  background-repeat: repeat-x;
+  border-image: none;
+  border-radius: 4px 4px 4px 4px;
+  border-style: solid;
+  border-width: 1px;
+  color: #333333;
+  display: inline-block;
+  font-size: 13px;
+  line-height: 18px;
+  padding: 4px 10px;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  vertical-align: middle;
+}
+.btn-group > .btn, .btn-group > .dropdown-menu {
+  font-size: 14px;
+}
