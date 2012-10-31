@@ -27,6 +27,7 @@ $item['block_name']=$tmp_element['caption']." [".$item['block_name']."]";
  
 $item['data_after']=  unserialize($item['data_after']);
 $item['data_before']=  unserialize($item['data_before']);
+//PrePrint($item);
 ?>
 
 
@@ -37,6 +38,14 @@ $item['data_before']=  unserialize($item['data_before']);
         </td>
         <td>
             <? echo $item['id'];?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b> Название:</b>
+        </td>
+        <td>
+            <? echo $item['data_caption'];?>
         </td>
     </tr>
     <tr>

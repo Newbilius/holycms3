@@ -68,8 +68,16 @@ function AddToJournal($data) {
     $user_ifno_holy = $H_USER->GetInfo();
     $data['user_id'] = $H_USER->GetID();
     $data['date_time'] = Array(0 => date("Y-m-d"), 1 => date("H"), 2 => date("i"), 3 => date("s"));
+    $tmp=$data['data_after'];
+    $tmp=unserialize($tmp);
+    $data['data_caption'] =$tmp['caption'];
+    if (!$tmp['caption'])
+    {
+        $tmp=$data['data_before'];
+        $tmp=unserialize($tmp);
+        $data['data_caption'] =$tmp['caption'];
+    };
     $element = new DBlockElement('journal');
-//$element->sql->debug=true;
     $element->Add($data);
 }
 

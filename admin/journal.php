@@ -151,6 +151,7 @@ $_global_bread[]=Array($tmp['caption'],"/engine/admin/journal.php?dblock=".$_GET
 	$fields->GetListByBlock($_GET['dblock']);
 	
 	$table->Add(Array("name"=>"item_id","caption"=>"ID элемента","type"=>"short_text"));
+        $table->Add(Array("name"=>"data_caption","caption"=>"Название","type"=>"short_text"));
         $table->Add(Array("name"=>"action","caption"=>"Действие","type"=>"journal_text"));
         $table->Add(Array("name"=>"date_time","caption"=>"Дата","type"=>"short_text"));
         $table->Add(Array("name"=>"block_name","caption"=>"Data-блок","type"=>"list","add_values"=>"system_data_block;name;caption"));
