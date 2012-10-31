@@ -372,3 +372,39 @@ h1, h2, h3, h4, h5, h6 {
 .btn-group > .btn, .btn-group > .dropdown-menu {
   font-size: 14px;
 }
+h4 {
+  font-size: 14px;
+}
+      /* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+      }
+
+
+	  #footer .container
+	  {
+	  width:auto;
+	  }
+	  #footer .container p
+	  {
+	  margin-left:30px;
+	  }

@@ -46,6 +46,7 @@
     <body>
         <div id=find0>
         </div>
+		<div id="wrap">
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
@@ -117,54 +118,12 @@
                                 <?
                             }
                         ?>
-                        <? /* <li class="dropdown">
-                          <a href="#"
-                          class="dropdown-toggle"
-                          data-toggle="dropdown">
-                          Утилиты
-                          <b class="caret"></b>
-                          </a>
-                          <ul class="dropdown-menu">
-                          <?
-                          //global $H_USER;
-                          $user_ifno_holy = $H_USER->GetInfo();
-                          global $_menu0;
-                          foreach ($_menu0 as $item_menu0)
-                          if (($item_menu0[2] == 0) || ($user_ifno_holy['block_control'])) {
-                          if ($item_menu0[0] == "-") {
-                          ?><li class="divider"></li><? } else { ?>
-                          <li><a href="<?= $item_menu0[0] ?>"><?= $item_menu0[1] ?></a></li>
-                          <?
-                          };
-                          };
-                          ?>
-                          </ul>
-                          </li>
-                          <li class="dropdown">
-                          <a href="#"
-                          class="dropdown-toggle"
-                          data-toggle="dropdown">
-                          Опции сайта
-                          <b class="caret"></b>
-                          </a>
-                          <ul class="dropdown-menu">
-                          <?
-                          global $_menu_options;
-                          foreach ($_menu_options as $item_menu_options) {
-                          if ($item_menu_options[0] == "-") {
-                          ?><li class="divider"></li><? } else { ?>
-                          <li><a href="<?= $item_menu_options[0] ?>"><?= $item_menu_options[1] ?></a></li>
-                          <?
-                          };
-                          };
-                          ?>
-                          </ul>
-                          </li> */ ?>
                     </ul>		  
 
                 </div>
             </div>
         </div>
+		
         <BR><BR><BR>
         <div class="container-fluid">
             <div class="row-fluid">
@@ -197,15 +156,18 @@
                     </div>
                 </div>
             </div>
+</div>
 
-            <hr>
 
-            <footer>
-                <p> <strong>HolyCMS <?= $_holy_vers ?></strong>, &copy <a href=http://www.siteszone.ru/ target=_new>Моисеев Дмитрий</a>. 2011-2012 год</p>
-            </footer>
 
+<div id="push"></div>
         </div>
-
+    <div id="footer">
+      <div class="container">
+            <hr style="margin-top:0px;">
+                <p> <strong>HolyCMS <?= $_holy_vers ?></strong>, &copy <a href=http://www.siteszone.ru/ target=_new>Моисеев Дмитрий aka Newbilius</a>. 2011-2012 год</p>
+      </div>
+    </div>
     </body>
     </html>
 <? }; ?>
