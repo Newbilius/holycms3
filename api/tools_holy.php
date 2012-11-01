@@ -1,5 +1,26 @@
 <?php
 
+/***
+ * Скачивает через Curl файл и возвращает его содержимое.
+ * 
+ * @param string $url <p>имя файла</p>
+ */
+
+function FileDownloadCURL($url) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+    curl_setopt($ch, CURLOPT_VERBOSE, 1);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 90);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return $result;
+}
+
 /**
  * Преобразует XML-данные в массив
  * 

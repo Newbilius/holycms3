@@ -1,5 +1,6 @@
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index - [L]
+RewriteRule ^info - [L]
 RewriteRule ^ajax - [L]
 RewriteRule ^([A-Za-z_0-9/-]+).php$ /engine/admin/index.php?path=$1&%{QUERY_STRING} [L]

@@ -3,7 +3,7 @@
 if (!isset($_log_name))
     $_log_name = $_SERVER['DOCUMENT_ROOT'] . "/log.txt";
 
-$_holy_vers = "3.0";
+$_holy_vers = file_get_contents($_SERVER['DOCUMENT_ROOT']."/engine/VERSION");
 
 $host_temp = explode(".", $_SERVER['HTTP_HOST']);
 if (($host_temp[0] == "www") || ($host_temp[0] == "local"))
