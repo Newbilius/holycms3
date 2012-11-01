@@ -156,7 +156,7 @@ $(document).ready(function() {
     $("a.about_show").fancybox({
         //'hideOnContentClick': true
         });
-	
+	$(".chosen").chosen();
 });
 function DeleteTmp()
 {

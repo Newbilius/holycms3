@@ -20,7 +20,7 @@ class HolyTags {
      * @param string $url  <p>шаблон для ссылки (#tag# - место для тэга)</p>
      * @return array
      */
-    function HolyTags($table, $property, $url) {
+    function HolyTags($table, $property, $url="") {
         $this->property = $property;
         $this->count_max = 0;
 
@@ -48,6 +48,7 @@ class HolyTags {
             );
         };
         asort($this->tags_out);
+        ksort($this->tags);
         return $this;
     }
 
@@ -84,6 +85,30 @@ class HolyTags {
         return $out_array;
     }
 
+    /**
+     * Возвращает простой массив тэгов, которые есть в наличии у данного элемента.
+     * 
+     * @param array $item <p>Массив данных элемента</a>
+     * 
+     * @return array
+     */
+    public function GetListSimple($item) {
+        $tmp_items = explode(",", $item[$this->property]);
+        $out_array = array();
+
+        foreach ($tmp_items as $tag) {
+            $tag = trim($tag);
+            if ($tag)
+                if ($tag != " ") {
+                    $out_array[] = $this->tags_out[$tag]['caption'];
+                    ;
+                };
+        };
+
+        asort($out_array);
+        return $out_array;
+    }
+    
     /**
      * Возвращает обработанный массив всех тэгов
      * 

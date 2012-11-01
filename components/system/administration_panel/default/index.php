@@ -38,6 +38,8 @@
 
             <script type="text/javascript" src="/engine/components/system/administration_panel/default/default.js"></script>
 
+            <script type="text/javascript" src="/engine/js/chosen/chosen.jquery.min.js"></script>
+            <link rel="stylesheet" type="text/css" media="screen" href="/engine/js/chosen/chosen.css">
 
         <div class="find0"></div>
 
