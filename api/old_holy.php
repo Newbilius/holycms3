@@ -1,6 +1,6 @@
 <?php
 
-function GetImageResizeCache($fname, $w, $h, $add = "", $rect = 0, $url_only = false) {
+function GetImageResizeCache($fname, $w, $h, $add = "", $rect = 0, $url_only = false,$now=false) {
     $pic = new HolyImg($fname);
     if ($rect)
         $pic->ResizeSquare($w);
@@ -11,7 +11,8 @@ function GetImageResizeCache($fname, $w, $h, $add = "", $rect = 0, $url_only = f
         return $url;
     else
         $pic->DrawHref(Array(
-            'draw_inner' => $add
+            'draw_inner' => $add,
+            'now' => $now,
         ));
 }
 

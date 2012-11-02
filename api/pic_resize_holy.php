@@ -337,6 +337,9 @@ class HolyImg {
             if (file_exists($this->complete_path)) {
                 $this->already = true;
                 $this->file_type = "png";
+                $_tmp_size=getimagesize($this->complete_path);
+                $this->width=$_tmp_size[0];
+                $this->height=$_tmp_size[1];
                 return false;
             };
 
@@ -413,7 +416,7 @@ class HolyImg {
             $params['draw_inner'] = "";
         if (!isset($params['now']))
             $params['now'] = false;
-        ?><?= $params['draw_before'] ?><img src="<? echo $this->GetURL($params['now']) ?>" <? echo $params['draw_inner'] ?>><?= $params['draw_after'] ?><?
+        ?><?= $params['draw_before'] ?><img src="<? echo $this->GetURL($params['now']) ?>" <? echo $params['draw_inner'] ?> <? if ($params['now']){?>width="<? echo $this->width?>" height="<? echo $this->height?>" <?};?>><?= $params['draw_after'] ?><?
     }
 
     protected function CreateDirs() {
