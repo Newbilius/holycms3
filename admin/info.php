@@ -2,7 +2,7 @@
 require_once("../engine.php");
 
 $_holy_new_vers = FileDownloadCURL("https://raw.github.com/Newbilius/holycms3/master/VERSION");
-$new_change_log=FileDownloadCURL("http://raw.github.com/Newbilius/holycms3/master/changelog.txt");
+$new_change_log=FileDownloadCURL("https://raw.github.com/Newbilius/holycms3/master/changelog.txt");
 ?>
 <b><?echo $_holy_new_vers;?></b>
 <hr style="margin-top:0px;margin-bottom:5px;">
