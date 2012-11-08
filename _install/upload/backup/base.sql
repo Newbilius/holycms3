@@ -121,6 +121,7 @@ INSERT INTO system_data_block_types VALUES("13","pass","Пароль","TEXT","15
 INSERT INTO system_data_block_types VALUES("14","tags","Тэги","TEXT","5000");
 INSERT INTO system_data_block_types VALUES("15","list_need","Выпадающий список обяз.","TEXT","1005");
 INSERT INTO system_data_block_types VALUES("16","file","Файл","TEXT","9000");
+INSERT INTO system_data_block_types VALUES("17","list_max","Выпадающий список множественный", "TEXT", "1001");
 DROP TABLE IF EXISTS templates;
 CREATE TABLE `templates` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `name` text NOT NULL,  `caption` text NOT NULL,  `sort` int(11) NOT NULL,  `parent` int(11) NOT NULL,  `folder` int(11) NOT NULL,  PRIMARY KEY (`id`)) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=cp1251;
 INSERT INTO templates VALUES("1","main","Основной шаблон","20","0","0");
