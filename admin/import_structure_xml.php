@@ -28,9 +28,21 @@ if (isset($_POST['go'])) {
           $new_block_values['group']=$_POST['group_in_id'];
           unset($new_block_values['bgroup']);
           $new_block->Create($new_block_values);
+          //$new_block_id=$new_block->sql->last_id;
           
           //создаем свойства
-          preprint($block_list["fields"]);
+          foreach ($block_list["fields"] as $_field){
+              $new_field_values=array();
+              $NewField=new DBlockFields();
+              foreach ($_field as $_field_p_name=>$_field_p_value)
+                  $new_field_values[$_field_p_name]=$_field_p_value;
+              unset($new_field_values['id']);
+              $new_field_values['data_block']=$block_name;
+              
+              $NewField->Create($new_field_values);
+              echo "Создаю свйоство ".$new_field_values['name']." блока ".$block_name."<BR>";
+          };
+          echo "<BR>";
       };
       ?>
 <HR>
