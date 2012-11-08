@@ -97,8 +97,24 @@ class XmlToArray
         $name = $values[$i]['tag'];
         $array[$name] = isset($values[$i]['attributes']) ? $values[$i]['attributes'] : '';
         $array[$name] = $this->_struct_to_array($values, $i);
+        
+        $array=$this->_simple_array($array);
+        
         return $array;
     }//createArray
+    
+    protected function _simple_array($data)
+    {
+        if (count($data)==1)
+            $data=reset($data);
+        
+        if (is_array ($data))
+            foreach ($data as &$datas)
+                if (is_array ($datas))
+                    $datas=$this->_simple_array ($datas);
+                
+        return $data;
+    }
  
 }//XmlToArray
 ?>
