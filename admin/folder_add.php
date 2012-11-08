@@ -62,10 +62,11 @@ if ($tmp_block['hide_code'])
 			//PrePrint($_POST);
 			if (isset($_POST['name']))
 			$_POST['name']=rus2translit($_POST['name']);
+                        $_tmp=$element->GetByID($element->sql->last_id);
 			JournalAdd(Array(
 				"block_name"=>$_GET['dblock'],
 				"item_id"=>$element->sql->last_id,
-				"data_after"=>serialize($_POST),
+				"data_after"=>serialize($_tmp),
 				"folder"=>1,
 			));
 			

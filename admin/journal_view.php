@@ -25,9 +25,8 @@ $tmp_element_src= new DBlockElement("system_data_block");
 $tmp_element=$tmp_element_src->GetOne("name='".$item['block_name']."'");
 $item['block_name']=$tmp_element['caption']." [".$item['block_name']."]";
  
-$item['data_after']=  unserialize($item['data_after']);
-$item['data_before']=  unserialize($item['data_before']);
-//PrePrint($item);
+$item['data_after']=  unserialize(base64_decode($item['data_after']));
+$item['data_before']=  unserialize(base64_decode($item['data_before']));
 ?>
 
 

@@ -77,6 +77,10 @@ function AddToJournal($data) {
         $tmp=unserialize($tmp);
         $data['data_caption'] =$tmp['caption'];
     };
+    
+    
+    $data['data_after']=base64_encode($data['data_after']);
+    $data['data_before']=base64_encode($data['data_before']);
     $element = new DBlockElement('journal');
     $element->Add($data);
 }

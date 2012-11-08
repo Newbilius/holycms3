@@ -95,11 +95,11 @@ if (isset($tmp['caption']))
 			$_POST['name']=rus2translit($_POST['name']);
 			
 			$element->Add($_POST);
-			
+			$_tmp=$element->GetByID($element->sql->last_id);
 			JournalAdd(Array(
 				"block_name"=>$_GET['dblock'],
 				"item_id"=>$element->sql->last_id,
-				"data_after"=>serialize($_POST),
+				"data_after"=>serialize($_tmp),
 				"folder"=>0,
 			));
 			
