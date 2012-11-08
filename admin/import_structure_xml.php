@@ -4,18 +4,37 @@ require_once("../engine.php");
 global $_global_bread;
 $_global_bread[] = Array("Импорт структуры из XML");
 
-
 $groups = new DBlockGroup();
 $groups->GetList();
 $groups_list = $groups->GetFullList();
+
+
 
 if (isset($_POST['go'])) {
   if ($_POST['xml_file']['error']==0){
       $data=PrepareXMLFromUrl($_POST['xml_file']['tmp_name']);
       //@todo функцию документировать
       $data=recursive_iconv("utf-8","windows-1251",$data);
-      preprint($_POST);
-      preprint($data);
+      
+      foreach ($data as $block_name=>$block_list)
+      {
+          $new_block=new DBlock();
+          echo "Создаю блок ".$block_name."<BR>";
+          $new_block_values=array();
+          foreach ($block_list as $block_fields_code=>$block_fields)
+              if ($block_fields_code!="fields"){
+                  $new_block_values[$block_fields_code]=$block_fields;
+              };
+          $new_block_values['group']=$_POST['group_in_id'];
+          unset($new_block_values['bgroup']);
+          $new_block->Create($new_block_values);
+          
+          //создаем свойства
+          preprint($block_list["fields"]);
+      };
+      ?>
+<HR>
+<?
   }
 };
 ?>
@@ -27,7 +46,7 @@ if (isset($_POST['go'])) {
         <?
         foreach ($groups_list as $_group){
             ?>
-        <option value="<?=$_group['name']?>"><?=$_group['caption']?> [<?=$_group['name']?>]</option>
+        <option value="<?=$_group['id']?>"><?=$_group['caption']?> [<?=$_group['name']?>]</option>
         <?
         }
         ?>
