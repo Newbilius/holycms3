@@ -53,8 +53,20 @@ $_top_menu['clear_cache'] = Array(
     "caption" => "Очистка кэша",
     "parent" => "options",
 );
-
-
+$_top_menu['line2'] = Array(
+    "caption" => "-",
+    "parent" => "utilits",
+);
+$_top_menu['export_structure_xml'] = Array(
+    "url" => "/engine/admin/export_structure_xml.php",
+    "caption" => "Экспорт в XML структуры",
+    "parent" => "utilits",
+);
+$_top_menu['import_structure_xml'] = Array(
+    "url" => "/engine/admin/import_structure_xml.php",
+    "caption" => "Импорт структуры из XML",
+    "parent" => "utilits",
+);
 //меню на первой левой закладке
 $_menu1['before'] = array();
 $_menu1['after'] = array(

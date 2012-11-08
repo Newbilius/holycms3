@@ -61,7 +61,6 @@ function onAjaxSuccess(data)
 
 $(document).ready(function() {
 
-
     AjaxLoadAlp();
 
     $(".meta_tr").hide();
@@ -85,9 +84,6 @@ $(document).ready(function() {
         $('ul.tabs.tabs_item li').removeClass('active');
         $(this).parent("li").addClass('active');
     }
-
-
-
     
     $("#tableform").tableDnD({
         onDragClass: "myDragClass",
@@ -119,6 +115,7 @@ $(document).ready(function() {
                 };
         }
     });
+    $(".alert").alert();
 });
 
 
