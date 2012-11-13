@@ -67,6 +67,20 @@ $_top_menu['import_structure_xml'] = Array(
     "caption" => "»мпорт структуры из XML",
     "parent" => "utilits",
 );
+$_top_menu['line3'] = Array(
+    "caption" => "-",
+    "parent" => "utilits",
+);
+$_top_menu['export_data_sql'] = Array(
+    "url" => "/engine/admin/export_data_sql.php",
+    "caption" => "Ёкспорт данных в SQL",
+    "parent" => "utilits",
+);
+$_top_menu['import_data_sql'] = Array(
+    "url" => "/engine/admin/import_data_sql.php",
+    "caption" => "»мпорт структуры из SQL",
+    "parent" => "utilits",
+);
 //меню на первой левой закладке
 $_menu1['before'] = array();
 $_menu1['after'] = array(
