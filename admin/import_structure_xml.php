@@ -1,6 +1,8 @@
 <?php
 require_once("../engine.php");
 
+//@todo подправить оформление коды и вывода
+
 global $_global_bread;
 $_global_bread[] = Array("Импорт структуры из XML");
 

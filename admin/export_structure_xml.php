@@ -82,19 +82,22 @@ if (isset($_POST['go'])) {
 <form method="post">
     <input type="hidden" name="go" value="1">
     <ul>
-<?
-foreach ($groups_list as $_group) {
-    ?>
-            <li>
-    <? echo $_group['caption'] ?>
+        <?
+        foreach ($groups_list as $_group) {
+            $check_name="check_".$_group['name'];
+            ?>
+            <li style="list-style:none;">
+                <label class="checkbox">
+                    <input onclick="var checkbox = $(this).is(':checked');$('.<?=$check_name?>').attr('checked',checkbox);" type="checkbox" class="<?=$check_name?>"><? echo $_group['caption'] ?><br>
+                </label>
                 <ul>
-    <?
-    $blocks->GetListByGroup($_group['id']);
-    $block_list = $blocks->GetFullList();
-    foreach ($block_list as $_block) {
-        ?>
+                    <?
+                    $blocks->GetListByGroup($_group['id']);
+                    $block_list = $blocks->GetFullList();
+                    foreach ($block_list as $_block) {
+                        ?>
                         <label class="checkbox">
-                            <input type="checkbox" name=block[] value="<? echo $_block['id'] ?>"><? echo $_block['caption'] ?><br>
+                            <input class="<?=$check_name?>" type="checkbox" name=block[] value="<? echo $_block['id'] ?>"><? echo $_block['caption'] ?><br>
                         </label>
 
                         <?
@@ -102,10 +105,10 @@ foreach ($groups_list as $_group) {
                     ?>
                 </ul>
             </li>
-    <?
-}
+            <?
+        }
 //получить список датаблоков в группе
-?>
+        ?>
     </ul>
     <input name=submit type=submit value="Запустить экспорт" style="width:40%;HEIGHT:28px;" class="btn btn-success">
 </form>
