@@ -21,8 +21,11 @@ class CForm_tags extends CForm_text {
                     <?
                 };
                 ?>
-        </select>
+        </select><br>
+        Добавить тэг:<input id="add_tag_<?= $name ?>" name="add_tag_<?= $name ?>" value=""><a onclick="return add_tag_click_<?=$name?>();" href="" class="btn btn-small">Добавить</a>
+        <br><br>
         <?
+        $this->_html_add($name);
     }
 
     function BeforeAdd($name, $value, $add) {
@@ -47,6 +50,26 @@ class CForm_tags extends CForm_text {
         return $new_value;
     }
 
+    protected function _html_add($name){
+        ?>
+        <script>
+            function add_tag_click_<?=$name?>(){
+                var val=$('#add_tag_<?= $name ?>').val();
+                if (val!=""){
+                        $('#<?= $name ?>')
+                            .append($("<option></option>")
+                            .attr("value",val)
+                            .attr("selected",true)
+                            .text(val)); 
+                    $("#<?= $name ?>").trigger("liszt:updated");
+                    $('#add_tag_<?= $name ?>').val("");
+                };
+                return false;
+            }
+        </script>
+        <?
+    }
+    
     function Add($name, $add, $multiple = false) {
         $add = explode(";", $add);
         $tags = new HolyTags($add[0], $add[1]);
@@ -60,8 +83,11 @@ class CForm_tags extends CForm_text {
                     <?
                 };
                 ?>
-        </select>
+        </select><br>
+        Добавить тэг:<input id="add_tag_<?= $name ?>" name="add_tag_<?= $name ?>" value=""><a onclick="return add_tag_click_<?=$name?>();" href="" class="btn btn-small">Добавить</a>
+        <br><br>
         <?
+        $this->_html_add($name);
     }
 
 }
