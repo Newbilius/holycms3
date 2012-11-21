@@ -37,7 +37,9 @@
                         $name_of_group = $data['name'];
 
                         $block->GetListByGroup($name_of_group);
-                        while ($data2 = $block->GetNext()) {
+                        while ($data2 = $block->GetNext()) 
+                            if (($H_USER->IsAdmin()) || ($H_USER->CanRead($data2['name'])))
+                                {
                             ?>
                             <li>
                                 <h4>

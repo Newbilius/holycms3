@@ -11,6 +11,10 @@ class DUser extends DBlock {
     var $cookie_prefix;
     var $table;
 
+    var $read;
+    var $add;
+    var $edit;
+    var $delete;
     /**
      * Определяем базовые настройки
      * 
@@ -43,6 +47,65 @@ class DUser extends DBlock {
         return $this;
     }
 
+    /**
+     * Возвращает <b>true</b>, если пользователь имеет админские права
+     * 
+     * @return boolean
+     */
+    public function IsAdmin(){
+        return $this->inform['block_control'];
+    }
+    
+
+    /**
+     * Возвращает <b>true</b>, если пользователь имеет право добавлять элементы или папки в блок <b>$name</b>
+     * 
+     * @param string $name <p>имя блока данных/таблицы</p>
+     * @return boolean
+     */
+    public function CanAdd($name){
+        if (in_array($name, $this->add))
+                return true;
+        return false;
+    }
+    
+    /**
+     * Возвращает <b>true</b>, если пользователь имеет право удалять элементы или папки из блока <b>$name</b>
+     * 
+     * @param string $name <p>имя блока данных/таблицы</p>
+     * @return boolean
+     */
+    public function CanDelete($name){
+        if (in_array($name, $this->delete))
+                return true;
+        return false;        
+    }
+    
+    /**
+     * Возвращает <b>true</b>, если пользователь имеет право редактировать элементы или папки в блоке <b>$name</b>
+     * 
+     * @param string $name <p>имя блока данных/таблицы</p>
+     * @return boolean
+     */
+    public function CanEdit($name){
+        if (in_array($name, $this->edit))
+                return true;
+        return false;        
+    }
+    
+    
+    /**
+     * Возвращает <b>true</b>, если пользователь имеет право просматривать элементы или папки в блоке <b>$name</b>
+     * 
+     * @param string $name <p>имя блока данных/таблицы</p>
+     * @return boolean
+     */
+    public function CanRead($name){
+        if (in_array($name, $this->read))
+                return true;
+        return false;        
+    }
+    
     /**
      * Проверяет, залогинен ли пользователь. Если да, возвращает его ID, если нет - false
      * 
@@ -101,7 +164,7 @@ class DUser extends DBlock {
             };
         };
         $this->ID = $dat['id'];
-        if ($this->ID != 0)
+        if ($this->ID != 0){
             if ($set_uid) {
                 $pass = MD5(uniqid(time(), true) . time());
                 setcookie($this->cookie_prefix . '_login', $user, time() + 90000, "/");
@@ -113,7 +176,16 @@ class DUser extends DBlock {
                     "uid" => $pass
                 ));
             };
-//preprint($this);
+            //получаем информацию о группе
+            //preprint($dat);           
+            $users_groups_rs = new DBlockElement("system_user_groups");
+            $users_groups = $users_groups_rs->GetOne("id=".$dat['group']);
+            
+            $this->read=explode(";",$users_groups['read']);
+            $this->add=explode(";",$users_groups['add']);
+            $this->edit=explode(";",$users_groups['edit']);
+            $this->delete=explode(";",$users_groups['delete']);
+            };
         return $this->GetID();
     }
 

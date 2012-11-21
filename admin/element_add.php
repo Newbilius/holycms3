@@ -15,6 +15,9 @@ parent.$.fancybox.close();
 <?
 if (!isset($_GET['dblock'])) die("не выбран конкретный блок");
 
+if ((!$H_USER->IsAdmin()) && (!$H_USER->CanAdd($_GET['dblock'])))
+SystemAlertFatal("Ќедостаточно прав.");
+
 $block= new DBlock();
 $tmp_block=$block->GetByID($_GET['dblock']);
 

@@ -32,6 +32,10 @@ class HFormTable {
     var $folder_link;
     var $short_links;
 
+    var $can_add;
+    var $can_edit;
+    var $can_delete;
+    
     function SetPaginator($count, $page) {
         $this->count_on_page = $count;
         $this->page = $page;
@@ -73,6 +77,15 @@ class HFormTable {
         if (!isset($values['folder_link']))
             $values['folder_link'] = true;
 
+        if (!isset($values['can_add']))
+            $values['can_add'] = true;
+        if (!isset($values['can_edit']))
+            $values['can_edit'] = true;
+        if (!isset($values['can_delete']))
+            $values['can_delete'] = true;
+        $this->can_add = $values['can_add'];
+        $this->can_edit = $values['can_edit'];
+        $this->can_delete = $values['can_delete'];
 
         if ($values['filter'] == "")
             $values['filter'] = "1";
@@ -150,12 +163,14 @@ class HFormTable {
             <?
         };
 
+        if ($this->can_add)
         if ($this->add_link_base != "") {
             ?>
             <a class="btn btn-success ajax" style="float:left;" href="<?= $this->add_link_base ?>">Добавить</a>
             <?
         };
 
+        if ($this->can_add)
         if ($this->add_link_base2 != "")
             if ($this->show_folders) {
                 ?>
@@ -225,8 +240,8 @@ class HFormTable {
                             <?
                         };
                     ?>
-                    <? if ($this->edit_link_base != "#") { ?><td>&nbsp;</td><? } ?>
-        <? if ($this->delete_link_base != "#") { ?><td>&nbsp;</td><? } ?>
+                    <? if ($this->edit_link_base != "#") if ($this->can_edit){ ?><td>&nbsp;</td><? } ?>
+        <? if ($this->delete_link_base != "#") if ($this->can_delete){ ?><td>&nbsp;</td><? } ?>
                 </tr>
             </thead>
             <tbody>
@@ -365,15 +380,18 @@ class HFormTable {
                     };
                 ?>
                 <?
-                if (($item['folder']) && ($this->folder_link)) {
+                if (($item['folder']) && ($this->folder_link)) 
+                    if ($this->can_edit){
                     ?>
                     <td><a href=folder_edit.php?dblock=<?= $_GET['dblock'] ?>&parent=<?= $item['parent'] ?>&id=<?= $item['id'] ?>><?= $this->edit_icon ?></a></td>
                     <?
                 } else
-                if ($this->edit_link_base != "#") {
+                if ($this->edit_link_base != "#") if ($this->can_edit){
                     $edit = $this->CreateLink($this->edit_link_base, $item);
                     ?><td><a href=<?= $edit ?>><?= $this->edit_icon ?></a></td><? }; ?>
-            <? if ($this->delete_link_base != "#") {
+            <? if ($this->delete_link_base != "#") 
+                if ($this->can_delete)
+                {
                 $del = $this->CreateLink($this->delete_link_base, $item);
                 ?><td><a onclick='return(window.confirm("Вы уверены, что хотите удалить?"))' href=<?= $del ?>><?= $this->delete_icon ?></a></td><? }; ?>
             </tr>

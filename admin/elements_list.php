@@ -1,4 +1,7 @@
 <?
+if ((!$H_USER->IsAdmin()) && (!$H_USER->CanRead($_GET['dblock'])))
+SystemAlertFatal("Недостаточно прав.");
+
 if (!isset($_GET['parent']))
 	$_GET['parent']=0;
 if ($_GET['parent']=="") $_GET['parent']=0;
@@ -166,6 +169,8 @@ if (isset($_POST['id'][0]))
 	{
 	if ($_POST['what_to_do']=="del")
 		{
+if ((!$H_USER->IsAdmin()) && (!$H_USER->CanDelete($_GET['dblock'])))
+SystemAlertFatal("Недостаточно прав.");
 			$gr= new DBlockElement(Array("table"=>$_GET['dblock']));
 			if (is_array($_POST['id']))
 			foreach ($_POST['id'] as $fid)
@@ -181,6 +186,8 @@ if (isset($_POST['id'][0]))
 		};
 	if ($_POST['what_to_do']=="move")
 		{
+            if ((!$H_USER->IsAdmin()) && (!$H_USER->CanEdit($_GET['dblock'])))
+SystemAlertFatal("Недостаточно прав.");
 			$gr= new DBlockElement(Array("table"=>$_GET['dblock']));
 			foreach ($_POST['id'] as $fid)
                         {
@@ -201,6 +208,9 @@ if (isset($_POST['id'][0]))
 
 	if (isset($_GET['delete']))
 		{
+if ((!$H_USER->IsAdmin()) && (!$H_USER->CanDelete($_GET['dblock'])))
+SystemAlertFatal("Недостаточно прав.");
+            
 			$gr= new DBlockElement(Array("table"=>$_GET['dblock']));
 			$_del_tmp=$gr->GetByID($_GET['delete']);
                         //preprint($_del_tmp);
@@ -227,15 +237,36 @@ if (isset($_POST['id'][0]))
 	if ($_GET['parent']!=-1)
 	$_GET['filter']['parent']=$_GET['parent'];
 	
+        $add_link="element_add.php?dblock=".$_GET['dblock']."&parent=".$_GET['parent'];
+        $add_link2="folder_add.php?parent=".$_GET['parent']."&dblock=".$_GET['dblock'];
+        $delete_link="?dblock=".$_GET['dblock']."&delete=#ID#";
+        $edit_link="element_edit.php?dblock=".$_GET['dblock']."&id=#ID#&parent=".$_GET['parent'];
+        
+        $can_delete=true;
+        $can_add=true;
+        $can_edit=true;
+        
+        if ((!$H_USER->IsAdmin()) && (!$H_USER->CanAdd($_GET['dblock'])))
+            $can_add=false;
+
+        if ((!$H_USER->IsAdmin()) && (!$H_USER->CanDelete($_GET['dblock'])))
+            $can_delete=false;
+
+        if ((!$H_USER->IsAdmin()) && (!$H_USER->CanEdit($_GET['dblock'])))
+            $can_edit=false;
+            
 	$table= new HElementForm(Array("table"=>$_GET['dblock'],
-	"edit_link"=>"element_edit.php?dblock=".$_GET['dblock']."&id=#ID#&parent=".$_GET['parent'],
-	"add_link"=>"element_add.php?dblock=".$_GET['dblock']."&parent=".$_GET['parent'],
-	"add_link2"=>"folder_add.php?parent=".$_GET['parent']."&dblock=".$_GET['dblock'],
-	"delete_link"=>"?dblock=".$_GET['dblock']."&delete=#ID#",
+	"edit_link"=>$edit_link,
+	"add_link"=>$add_link,
+	"add_link2"=>$add_link2,
+	"delete_link"=>$delete_need,
 	"filter"=>$_GET['filter'],
 	
 	"show_folders"=>$show_folders,
 	"show_code"=>$show_code,
+        "can_add"=>$can_add,
+        "can_edit"=>$can_edit,
+        "can_delete"=>$can_delete,
 	));
 	
 	if (!isset($_GET['page_count']))

@@ -44,6 +44,12 @@ $_top_menu['options_seo'] = Array(
     "caption" => "SEO опции сайта",
     "parent" => "options",
 );
+$_top_menu['options_groups_access'] = Array(
+    "url" => "/engine/admin/options_groups_access.php",
+    "caption" => "Настройки доступа",
+    "admin_right" => true,
+    "parent" => "options",
+);
 $_top_menu['line1'] = Array(
     "caption" => "-",
     "parent" => "options",

@@ -1,4 +1,9 @@
 <?
+if (!isset($_GET['id'])) die("не выбран элемент");
+
+if ((!$H_USER->IsAdmin()) && (!$H_USER->CanEdit($_GET['dblock'])))
+SystemAlertFatal("Недостаточно прав.");
+
 global $_global_bread;
 $block= new DBlock();
 $tmp=$block->GetByID($_GET['dblock']);

@@ -15,6 +15,10 @@ parent.$.fancybox.close();
 </script>
 <?
 if (!isset($_GET['id'])) die("не выбран элемент");
+
+if ((!$H_USER->IsAdmin()) && (!$H_USER->CanEdit($_GET['dblock'])))
+SystemAlertFatal("Недостаточно прав.");
+
 $user_ifno_holy=$H_USER->GetInfo();
 
 $block= new DBlock();

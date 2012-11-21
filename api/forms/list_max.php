@@ -46,6 +46,7 @@ class CForm_list_max extends CForm_text {
     
     function AfterEdit($name, $value, $add, $multiple = false) {
         $new_value = "";
+        if (is_array($value))
         foreach ($value as $_value)
             if ($_value) {
                 if ($new_value!="")

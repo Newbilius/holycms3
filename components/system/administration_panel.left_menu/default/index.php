@@ -102,13 +102,7 @@ function PrintFolder($id, $folder, $bl, $add = -1) {
                         $_GET['parent'] = 0;
                     ?>
                     <li id="tree_block_<?= $bl ?>_element_<?= $f['id'] ?>">
-
-
-
-
                         <a class=ajax href=elements_list.php?dblock=<?= $bl ?>&parent=<?= $f['id']; ?>><?= $f['caption']; ?></a>
-
-
                         <? PrintFolder($f['id'], $folder, $bl, $add) ?>
                     </li>
                     <? };
@@ -143,6 +137,7 @@ function PrintArrayLeftMenuBlock($array0) {
 ;
 
             function PrintArrayLeftMenuElements($array0, $admin = 0) {
+                global $H_USER;
                 foreach ($array0 as $array) {
                     if (!isset($_GET['dblock']))
                         $_GET['dblock'] = -1;
@@ -154,12 +149,12 @@ function PrintArrayLeftMenuBlock($array0) {
 
             <?
             if (isset($array['ELEMENTS']))
-                foreach ($array['ELEMENTS'] as $data) {
+                foreach ($array['ELEMENTS'] as $data) 
+                    if (($H_USER->IsAdmin()) || ($H_USER->CanRead($data['name'])))
+                    {
                     ?>
                             <li rel="block" id="tree_block_<?= $data['name'] ?>_element_0">
-
                                 <a class=ajax href=elements_list.php?dblock=<?= $data['name'] ?>><?= $data['caption'] ?></a>
-
                     <?
                     if (isset($data['FOLDERS']))
                         PrintFolder(0, $data['FOLDERS'], $data['name'], $array['id']);
@@ -236,7 +231,8 @@ if ((isset($fav)) || (count($_menu_best['before']) > 0) || (count($_menu_best['a
                 <? //preprint($fav);?>
                 <?
                 if (isset($fav))
-                    foreach ($fav as $ff) {
+                    foreach ($fav as $ff) 
+                        if (($H_USER->IsAdmin()) || ($H_USER->CanRead($ff['name']))){
                         ?><li><a onclick="$('#f1').jstree('close_all');$('#f1').jstree('deselect_all');$('#f1').jstree('select_node', '#tree_block_<?= $ff['name'] ?>_element_0');" href=/engine/admin/elements_list.php?dblock=<?= $ff['name'] ?>><?= $ff['caption'] ?></a></li><?
         };
                 ?>

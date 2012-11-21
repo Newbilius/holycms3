@@ -26,6 +26,17 @@ class HElementForm extends HFormTable {
         if (!isset($values['folder_link']))
             $values['folder_link'] = true;
 
+        if (!isset($values['can_add']))
+            $values['can_add'] = true;
+        if (!isset($values['can_edit']))
+            $values['can_edit'] = true;
+        if (!isset($values['can_delete']))
+            $values['can_delete'] = true;
+        $this->can_add = $values['can_add'];
+        $this->can_edit = $values['can_edit'];
+        $this->can_delete = $values['can_delete'];
+        
+        
         if ($values['filter'] == "")
             $values['filter'] = "1";
         else
@@ -55,7 +66,7 @@ class HElementForm extends HFormTable {
 
         $this->token = "table" . $table;
         $this->sql = new HolySQL($table);
-
+        
         $this->filter = $filter;
         $this->PrepareFilter();
 
@@ -209,7 +220,7 @@ class HElementForm extends HFormTable {
             $folders[] = $data;
         $ccount = $this->sql->GetCount();
         ?>
-        <? if (!$this->hide_group_action) { ?>
+        <? if ((!$this->hide_group_action) &&($this->can_delete OR $this->can_edit)) { ?>
             <script>
             function SecondList()
             {
@@ -221,8 +232,8 @@ class HElementForm extends HFormTable {
             <div>
                 Действия:
                 <select onchange="SecondList()" name=what_to_do id=what_to_do>
-                    <option value=del>Удалить</option>
-            <? if ($ccount) { ?><option value=move>Переместить</option> <? }; ?>
+                    <?if ($this->can_delete){?><option value=del>Удалить</option><?};?>
+            <? if ($ccount) if ($this->can_edit){ ?><option value=move>Переместить</option> <? }; ?>
                 </select>
 
                 <span class="where_move" style="display:none;">куда</span>

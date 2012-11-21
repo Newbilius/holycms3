@@ -419,9 +419,9 @@ class HolySQL {
                 if ($cnt > 0)
                     $query.=",";
                 if (is_numeric($w))
-                    $query.=$i . "=" . $w . "";
+                    $query.="`".$i . "`=" . $w . "";
                 else
-                    $query.=$i . "='" . mysql_real_escape_string($w) . "'";
+                    $query.="`".$i . "`='" . mysql_real_escape_string($w) . "'";
                 $cnt++;
             };
         }

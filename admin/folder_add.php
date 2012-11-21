@@ -1,4 +1,9 @@
 <?
+if (!isset($_GET['dblock'])) die("не выбран конкретный блок");
+
+if ((!$H_USER->IsAdmin()) && (!$H_USER->CanAdd($_GET['dblock'])))
+SystemAlertFatal("Ќедостаточно прав.");
+
 global $_global_bread;
 $block= new DBlock();
 $tmp=$block->GetByID($_GET['dblock']);

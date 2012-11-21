@@ -120,4 +120,14 @@ function SystemAlert($text) {
     </div>
     <?
 }
+
+/**
+ * Выводит сообщение об ошибке в системном оформлении, после чего прекращает работу скрипта.
+ * 
+ * @param string $text  <p>текст ошибки</p>
+ */
+function SystemAlertFatal($text){
+    SystemAlert($text);
+    die();
+}
 ?>
