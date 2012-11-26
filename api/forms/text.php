@@ -1,7 +1,18 @@
 <?
 class CForm_text{
 	
-	function NeedInsert($value)
+    protected $block;
+    
+    function SetBlock($name)
+    {
+        $this->block=$name;
+    }
+    
+    function GetBlock() {
+        return $this->block;
+    }
+    
+    function NeedInsert($value)
 	{
 		return false;
 	}

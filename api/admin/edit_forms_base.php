@@ -162,6 +162,7 @@ class HFormEdit {
             $name = "CForm_" . $item['type'];
 
             $obj = new $name;
+            $obj->SetBlock($_GET['dblock']);
             if ($item['multiple']) {
                 global $_global_counter;
                 $many_items = explode(";", $this->data[$item['name']]);
