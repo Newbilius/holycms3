@@ -11,10 +11,13 @@ class CForm_wysiwyg_html extends CForm_Text {
                 
 $('.wisiwig')
     .ckeditor( function() { 
+        var has_event = typeof event != 'undefined';
+        if (has_event){
         
         var editor = event.editor;
     var dialogDefinition = event.data.definition;
     var dialogName = event.data.name;
+    
     var tabCount = dialogDefinition.contents.length;
     for (var i = 0; i < tabCount; i++) { //цикл для замены клика всех кнопок "Посмотреть на сервере"
         var browseButton = dialogDefinition.contents[i].get('browse');
@@ -53,9 +56,9 @@ $('.wisiwig')
             }
         }
     }
-    
+    };
 }, { } )
-    .ckeditor( callback2 );
+    .ckeditor( );
     
             });
         </script>

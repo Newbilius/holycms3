@@ -1,4 +1,5 @@
-<? if (!isset($_GET['_ajax_mode'])) { ?>
+<? //if (!isset($_GET['_ajax_mode'])) 
+    { ?>
     <!DOCTYPE html>
     <? global $_holy_vers; ?>
     <html lang="ru">
@@ -7,13 +8,14 @@
             <title>Holy CMS 3</title>
 
             <link rel="stylesheet" type="text/css" href="/engine/js/bootstrap/css/bootstrap.min.css"  />
-            <script src="/engine/js/jquery-1.7.min.js"></script>
+            <script src="/engine/js/jquery.1.8.3.min.js"></script>
             <script src="/engine/js/bootstrap/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="/engine/js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
             <script type="text/javascript" src="/engine/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
             <link rel="stylesheet" type="text/css" href="/engine/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
             <script type="text/javascript" src="/engine/js/jquery.tablednd_0_51.js"></script>
 
+            
             <style>
                 body.el-rte-structure { white-space: pre-wrap; }
             </style>
@@ -41,6 +43,35 @@
             <script type="text/javascript" src="/engine/js/chosen/chosen.jquery.min.js"></script>
             <link rel="stylesheet" type="text/css" media="screen" href="/engine/js/chosen/chosen.css">
 
+<link rel="stylesheet" href="http://blueimp.github.com/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css">
+<link rel="stylesheet" href="/engine/js/jquery_file_upload/css/jquery.fileupload-ui.css">
+<!-- CSS adjustments for browsers with JavaScript disabled -->
+<noscript><link rel="stylesheet" href="/engine/js/jquery_file_upload/css/jquery.fileupload-ui-noscript.css"></noscript>
+<!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script src="/engine/js/jquery_file_upload/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="http://blueimp.github.com/JavaScript-Canvas-to-Blob/canvas-to-blob.min.js"></script>
+<!-- Bootstrap JS and Bootstrap Image Gallery are not required, but included for the demo -->
+<script src="http://blueimp.github.com/cdn/js/bootstrap.min.js"></script>
+<script src="http://blueimp.github.com/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="/engine/js/jquery_file_upload/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="/engine/js/jquery_file_upload/js/jquery.fileupload.js"></script>
+<!-- The File Upload file processing plugin -->
+<script src="/engine/js/jquery_file_upload/js/jquery.fileupload-fp.js"></script>
+<!-- The File Upload user interface plugin -->
+<script src="/engine/js/jquery_file_upload/js/jquery.fileupload-ui.js"></script>
+<!-- The main application script -->
+<script src="/engine/js/jquery_file_upload/js/main.js"></script>
+<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
+<!--[if gte IE 8]><script src="/engine/js/jquery_file_upload/js/cors/jquery.xdr-transport.js"></script><![endif]-->
+            
         <div class="find0"></div>
 
     </head>
