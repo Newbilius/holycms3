@@ -2,15 +2,43 @@
 
 class CForm_image_multiple extends CForm_Text {
 
+    function View($name,$data,$add,$multiple=false){
+        //echo $data[$name];
+        echo "";
+    }
+    
+    function BeforeAdd($name, $value, $add) {
+        if ($value == "")
+            return $value;
+        $tmp = explode(";", $value);
+        foreach ($tmp as $num => $_item)
+            if (!$_item) {
+                unset($tmp[$num]);
+            };
+        $value = implode(";", $tmp);
+        return $value;
+    }
+
+    function AfterEdit($name, $value, $add) {
+        if ($value == "")
+            return $value;
+        $tmp = explode(";", $value);
+        foreach ($tmp as $num => $_item)
+            if (!$_item) {
+                unset($tmp[$num]);
+            };
+        $value = implode(";", $tmp);
+        return $value;
+    }
+
     function HTML($name, $data = null) {
+        $file_id_name = "fileupload_" . $name
         ?>
-        <? /* <input name=<?= $name ?> value='<? if (isset($_POST[$name])) echo $_POST[$name]; ?>' style="width:100%"> */ ?>
         <? $_data_tmp = explode(";", $data[$name]); ?>
-<textarea style="width:100%;height:100px;" id="<?= $name ?>" name=<?= $name ?>><?echo $data[$name]?></textarea>
-        <? //pre_print($_data_tmp); ?>
+        <textarea style="display: none;width:100%;height:200px;" id="<?= $name ?>" name=<?= $name ?>><? echo $data[$name] ?></textarea>
 
         <!-- The file upload form used as target for the file upload widget -->
-        <div id="fileupload">
+        <div id="<?= $file_id_name ?>">
             <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
             <div class="row fileupload-buttonbar">
                 <div class="" style="padding-left:20px;padding-top:0px;">
@@ -18,7 +46,7 @@ class CForm_image_multiple extends CForm_Text {
                     <span class="btn btn-success fileinput-button">
                         <i class="icon-plus icon-white"></i>
                         <span>Добавить файлы...</span>
-                        <input type="file" name="files[]" multiple>
+                        <input type="file" name="json_json_<?= $file_id_name ?>[]" multiple>
                     </span>
                     <button type="submit" class="btn btn-primary start">
                         <i class="icon-upload icon-white"></i>
@@ -59,18 +87,14 @@ class CForm_image_multiple extends CForm_Text {
             <div class="modal-footer">
                 <a class="btn modal-download" target="_blank">
                     <i class="icon-download"></i>
-                    <span>Download</span>
-                </a>
-                <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000">
-                    <i class="icon-play icon-white"></i>
-                    <span>Slideshow</span>
+                    <span>Скачать</span>
                 </a>
                 <a class="btn btn-info modal-prev">
                     <i class="icon-arrow-left icon-white"></i>
-                    <span>Previous</span>
+                    <span>Назад</span>
                 </a>
                 <a class="btn btn-primary modal-next">
-                    <span>Next</span>
+                    <span>Вперед</span>
                     <i class="icon-arrow-right icon-white"></i>
                 </a>
             </div>
@@ -154,14 +178,12 @@ class CForm_image_multiple extends CForm_Text {
                 'use strict';
 
                 // Initialize the jQuery File Upload widget:
-                $('#fileupload').fileupload({
-                    // Uncomment the following to send cross-domain cookies:
-                    //xhrFields: {withCredentials: true},
+                $('#<?= $file_id_name ?>').fileupload({
                     url: 'server/php/'
                 });
 
                 // Enable iframe cross-domain access via redirect option:
-                $('#fileupload').fileupload(
+                $('#<?= $file_id_name ?>').fileupload(
                 'option',
                 'redirect',
                 window.location.href.replace(
@@ -169,60 +191,38 @@ class CForm_image_multiple extends CForm_Text {
                 '/cors/result.html?%s'
             )
             );
-                
-$('#fileupload').bind('fileuploaddestroyed',
-function (e, data) {
-    for(var prop in data) {
-    if (!data.hasOwnProperty(prop)) continue;
-    var filename = data.url;
-    var text_tmp=$("#<?=$name?>").val();
-    text_tmp=text_tmp.replace(new RegExp(filename+";",'g'),"");
-    text_tmp=text_tmp.replace(new RegExp(";".filename,'g'),"");
-    text_tmp=text_tmp.replace(new RegExp(filename,'g'),"");
-    $("#<?=$name?>").val(text_tmp);
-    alert(filename);
-};
-});
+                                                        
+                $('#<?= $file_id_name ?>').bind('fileuploaddestroyed',
+                function (e, data) {
+                    for(var prop in data) {
+                        if (!data.hasOwnProperty(prop)) continue;
+                        var filename = data.url.substring(data.url.indexOf("=") + 1);
+                        var text_tmp=$("#<?= $name ?>").val();
+                        text_tmp=text_tmp.replace(new RegExp(filename+";",'g'),"");
+                        text_tmp=text_tmp.replace(new RegExp(";".filename,'g'),"");
+                        text_tmp=text_tmp.replace(new RegExp(filename,'g'),"");
+                        $("#<?= $name ?>").val(text_tmp);
+                    };
+                });
 
-$('#fileupload').bind('fileuploaddone', function (e, data) {
- $.each(data.files, function (index, file) {
-        var text_tmp=$("#<?=$name?>").val();
-        text_tmp=text_tmp+";"+file.name;
-    $("#<?=$name?>").val(text_tmp);    
-});
-
-});
+                $('#<?= $file_id_name ?>').bind('fileuploaddone', function (e, data) {
+                    var filename = data.result[0].url;
+                    var text_tmp=$("#<?= $name ?>").val();
+                    text_tmp=text_tmp+";"+filename;
+                    $("#<?= $name ?>").val(text_tmp);
+                });
 
                 // Demo settings:
-                $('#fileupload').fileupload('option', {
-                    url: 'http://jquery-file-upload.appspot.com/',
-                    maxFileSize: 5000000,
-                    acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-                    process: [
-                        {
-                            action: 'load',
-                            fileTypes: /^image\/(gif|jpeg|png)$/,
-                            maxFileSize: 20000000 // 20MB
-                        },
-                        {
-                            action: 'resize',
-                            maxWidth: 1440,
-                            maxHeight: 900
-                        },
-                        {
-                            action: 'save'
-                        }
-                    ]
+                $('#<?= $file_id_name ?>').fileupload('option', {
+                    url: '/engine/admin/ajax/json_upload.php',
+                    acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
                 });
         <? if ($data !== null) { ?>
                     // Load existing files:
                     $.ajax({
-                        // Uncomment the following to send cross-domain cookies:
-                        //xhrFields: {withCredentials: true},
-                        //url: $('#fileupload').fileupload('option', 'url'),
                         url: "/engine/admin/ajax/json_uploader_info.php?dblock=<? echo $this->GetBlock(); ?>&id=<?= $data['id'] ?>&field=<?= $name ?>",
                         dataType: 'json',
-                        context: $('#fileupload')[0]
+                        context: $('#<?= $file_id_name ?>')[0]
                     }).done(function (result) {
                         if (result && result.length) {
                             $(this).fileupload('option', 'done')
