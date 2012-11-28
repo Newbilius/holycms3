@@ -10,6 +10,7 @@ class DUser extends DBlock {
     var $login_name;
     var $cookie_prefix;
     var $table;
+    protected $uid;
 
     var $read;
     var $add;
@@ -151,7 +152,7 @@ class DUser extends DBlock {
 
         $user = mysql_real_escape_string($user);
         $set_uid = false;
-        $dat = $this->sql->SelectOnce($this->login_name . "='" . $user . "' AND uid='" . mysql_real_escape_string($pass) . "'");
+        $dat = $this->sql->SelectOnce($this->login_name . "='" . $user . "' AND uid LIKE'%" . mysql_real_escape_string($pass) . "%'");
         $this->inform = $dat;
         if (!isset($dat['id'])) {
             $dat = $this->sql->SelectOnce($this->login_name . "='" . $user . "' AND " . $this->pass_name . "='" . MD5($pass) . "'");
@@ -167,17 +168,21 @@ class DUser extends DBlock {
         if ($this->ID != 0){
             if ($set_uid) {
                 $pass = MD5(uniqid(time(), true) . time());
+                $uid_list=explode(";",$dat['uid']);
+                $uid_list[]=$pass;
+                if (count($uid_list)>5)
+                    unset($uid_list[0]);
+                $save_uid=implode(";",$uid_list);
                 setcookie($this->cookie_prefix . '_login', $user, time() + 90000, "/");
                 setcookie($this->cookie_prefix . '_pass', $pass, time() + 90000, "/");
                 $_COOIKE[$this->cookie_prefix . '_login'] = $user;
                 $_COOIKE[$this->cookie_prefix . '_pass'] = $pass;
-                //$this->sql->debug=true;
                 $this->sql->Update("id=" . $this->ID, Array(
-                    "uid" => $pass
+                    "uid" => $save_uid
                 ));
+                $this->inform['uid']=$save_uid;
             };
-            //получаем информацию о группе
-            //preprint($dat);           
+            //получаем информацию о группе      
             $users_groups_rs = new DBlockElement("system_user_groups");
             $users_groups = $users_groups_rs->GetOne("id=".$dat['group']);
             
@@ -185,7 +190,9 @@ class DUser extends DBlock {
             $this->add=explode(";",$users_groups['add']);
             $this->edit=explode(";",$users_groups['edit']);
             $this->delete=explode(";",$users_groups['delete']);
+            $this->uid=$pass;
             };
+            
         return $this->GetID();
     }
 
@@ -215,6 +222,7 @@ class DUser extends DBlock {
     function Update($data)
     {
         $tmp=new DBlockElement($this->table);
+        $tmp->sql->debug=true;
         $tmp->Update($this->ID, $data,false);
         $this->ID=0;
         $this->IsAuth();
@@ -224,11 +232,24 @@ class DUser extends DBlock {
      */
     function Logout() {
         AddToLog("Пользователь " . $_COOKIE[$this->cookie_prefix . '_login'] . " (" . $this->ID . ") ВЫШЕЛ из системы администрирования.");
+       
+        $uid_list=explode(";",$this->inform['uid']);
+        
+        foreach ($uid_list as $num=>$_uid){
+            if ($_uid==$this->uid){
+                unset($uid_list[$num]);
+            };
+        }
+        
+        $uid_list_save=implode(";",$uid_list);
+        $this->sql->Update("id=" . $this->ID, Array(
+                    "uid" => $uid_list_save
+                ));
+        $this->ID = 0;
         setcookie($this->cookie_prefix . '_login', $_COOKIE[$this->cookie_prefix . '_login'], time() - 90000, "/");
         setcookie($this->cookie_prefix . '_pass', $_COOKIE[$this->cookie_prefix . '_pass'], time() - 90000, "/");
         $_COOKIE[$this->cookie_prefix . '_login'] = "";
         $_COOKIE[$this->cookie_prefix . '_pass'] = "";
-        $this->ID = 0;
     }
 
 }
