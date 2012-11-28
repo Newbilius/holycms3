@@ -1,10 +1,14 @@
 <?php
-
-function PrePrint($dat = "") {
-    if (isset($dat)) {
+/**
+ * Р’С‹РІРѕРґРёС‚СЊ РґР°РЅРЅС‹Рµ РєРѕРјР°РЅРґРѕР№ print_r, РѕР±РѕСЂР°С‡РёРІР°СЏ РІС‹РІРѕРґ РІ С‚СЌРі <b>pre</b>
+ * 
+ * @param mixed $data  <p>РґР°РЅРЅС‹Рµ РґР»СЏ РІС‹РІРѕРґР°</p>
+ */
+function preprint($data = "") {
+    if (isset($data)) {
         echo "<pre>";
 
-        print_r($dat);
+        print_r($data);
 
         echo "</pre>";
     };
@@ -12,14 +16,10 @@ function PrePrint($dat = "") {
 
 ;
 
-function pre_print($text) {
-    preprint($text);
-}
-
 /**
- * Увеличивае значение в debug-массиве на единицу
+ * РЈРІРµР»РёС‡РёРІР°Рµ Р·РЅР°С‡РµРЅРёРµ РІ debug-РјР°СЃСЃРёРІРµ РЅР° РµРґРёРЅРёС†Сѓ
  * 
- * @param string $name  <p>код значения</p>
+ * @param string $name  <p>РєРѕРґ Р·РЅР°С‡РµРЅРёСЏ</p>
  */
 function DebugADD($name) {
     global $_DEBUG;
@@ -31,23 +31,23 @@ function DebugADD($name) {
 ;
 
 /**
- * Добавляет значение в debug массив, одновременно увеличивая счетчик.
+ * Р”РѕР±Р°РІР»СЏРµС‚ Р·РЅР°С‡РµРЅРёРµ РІ debug РјР°СЃСЃРёРІ, РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ СѓРІРµР»РёС‡РёРІР°СЏ СЃС‡РµС‚С‡РёРє.
  * 
- * @param string $name  <p>код значения</p>
- * @param string $value  <p>значение</p>
+ * @param string $name  <p>РєРѕРґ Р·РЅР°С‡РµРЅРёСЏ</p>
+ * @param string $value  <p>Р·РЅР°С‡РµРЅРёРµ</p>
  */
 function DebugAddValue($name, $value) {
     global $_DEBUG;
-    DebugADD($name . " (счетчик)");
+    DebugADD($name . " (СЃС‡РµС‚С‡РёРє)");
     $_DEBUG[$name][] = $value;
 }
 
 ;
 
 /**
- * Заносит в лог-файл текст с текущей датой.
+ * Р—Р°РЅРѕСЃРёС‚ РІ Р»РѕРі-С„Р°Р№Р» С‚РµРєСЃС‚ СЃ С‚РµРєСѓС‰РµР№ РґР°С‚РѕР№.
  * 
- * @param string $text  <p>текст</p>
+ * @param string $text  <p>С‚РµРєСЃС‚</p>
  */
 function AddToLog($text) {
     global $_OPTIONS;
@@ -109,9 +109,9 @@ function JournalUpdate($data) {
 ;
 
 /**
- * Выводит сообщение об ошибке в системном оформлении.
+ * Р’С‹РІРѕРґРёС‚ СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ РІ СЃРёСЃС‚РµРјРЅРѕРј РѕС„РѕСЂРјР»РµРЅРёРё.
  * 
- * @param string $text  <p>текст ошибки</p>
+ * @param string $text  <p>С‚РµРєСЃС‚ РѕС€РёР±РєРё</p>
  */
 function SystemAlert($text) {
     ?>
@@ -122,9 +122,9 @@ function SystemAlert($text) {
 }
 
 /**
- * Выводит сообщение об ошибке в системном оформлении, после чего прекращает работу скрипта.
+ * Р’С‹РІРѕРґРёС‚ СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ РІ СЃРёСЃС‚РµРјРЅРѕРј РѕС„РѕСЂРјР»РµРЅРёРё, РїРѕСЃР»Рµ С‡РµРіРѕ РїСЂРµРєСЂР°С‰Р°РµС‚ СЂР°Р±РѕС‚Сѓ СЃРєСЂРёРїС‚Р°.
  * 
- * @param string $text  <p>текст ошибки</p>
+ * @param string $text  <p>С‚РµРєСЃС‚ РѕС€РёР±РєРё</p>
  */
 function SystemAlertFatal($text){
     SystemAlert($text);

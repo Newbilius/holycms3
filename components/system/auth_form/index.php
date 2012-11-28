@@ -7,14 +7,14 @@ if (!isset($_POST['pass'])) $_POST['pass']="";
 
 if (isset($_POST['submit']))
 	{
-		if (isset($_POST['login'])) if ($_POST['login']=="") $error[]="Не введён логин";
-		if (isset($_POST['pass'])) if ($_POST['pass']=="") $error[]="Не введён пароль";
+		if (isset($_POST['login'])) if ($_POST['login']=="") $error[]="РќРµ РІРІРµРґС‘РЅ Р»РѕРіРёРЅ";
+		if (isset($_POST['pass'])) if ($_POST['pass']=="") $error[]="РќРµ РІРІРµРґС‘РЅ РїР°СЂРѕР»СЊ";
 	};
 
 if (($_POST['login']!="") && ($_POST['pass']!=""))
 	if ($H_USER->Auth($_POST['login'],$_POST['pass']))
 		return true;
-	else $error[]="Неверный пароль или логин";
+	else $error[]="РќРµРІРµСЂРЅС‹Р№ РїР°СЂРѕР»СЊ РёР»Рё Р»РѕРіРёРЅ";
 	
 	include($full_template_path);
 	return false;

@@ -2,21 +2,24 @@
 require_once("../engine.php");
 
 global $_global_bread;
-$_global_bread[] = Array("Импорт структуры из XML");
+$_global_bread[] = Array("РРјРїРѕСЂС‚ СЃС‚СЂСѓРєС‚СѓСЂС‹ РёР· XML");
 
 $groups = new DBlockGroup();
 $groups->GetList();
 $groups_list = $groups->GetFullList();
 
+global $_CONFIG;
+
 if (isset($_POST['go'])) {
     if ($_POST['xml_file']['error'] == 0) {
         $data = PrepareXMLFromUrl($_POST['xml_file']['tmp_name']);
-        //@todo функцию документировать
-        $data = recursive_iconv("utf-8", "windows-1251", $data);
+
+		if ($_CONFIG['CODEPAGE']!="utf8")
+        $data = recursive_iconv("utf-8", $_CONFIG['CODEPAGE'], $data);
 
         foreach ($data as $block_name => $block_list) {
             $new_block = new DBlock();
-            echo "Создаю блок " . $block_name . "<BR>";
+            echo "РЎРѕР·РґР°СЋ Р±Р»РѕРє " . $block_name . "<BR>";
             $new_block_values = array();
             foreach ($block_list as $block_fields_code => $block_fields)
                 if ($block_fields_code != "fields") {
@@ -26,7 +29,7 @@ if (isset($_POST['go'])) {
             unset($new_block_values['bgroup']);
             $new_block->Create($new_block_values);
             //$new_block_id=$new_block->sql->last_id;
-            //создаем свойства
+            //СЃРѕР·РґР°РµРј СЃРІРѕР№СЃС‚РІР°
             foreach ($block_list["fields"] as $_field) {
                 $new_field_values = array();
                 $NewField = new DBlockFields();
@@ -36,7 +39,7 @@ if (isset($_POST['go'])) {
                 $new_field_values['data_block'] = $block_name;
 
                 $NewField->Create($new_field_values);
-                echo "Создаю свойство " . $new_field_values['name'] . " блока " . $block_name . "<BR>";
+                echo "РЎРѕР·РґР°СЋ СЃРІРѕР№СЃС‚РІРѕ " . $new_field_values['name'] . " Р±Р»РѕРєР° " . $block_name . "<BR>";
             };
             echo "<BR>";
         };
@@ -49,7 +52,7 @@ if (isset($_POST['go'])) {
 
 <form method=post enctype="multipart/form-data">
     <input type=hidden name=go value=1>
-    Выберите группу блоков:<br>
+    Р’С‹Р±РµСЂРёС‚Рµ РіСЂСѓРїРїСѓ Р±Р»РѕРєРѕРІ:<br>
     <select name="group_in_id">
 <?
 foreach ($groups_list as $_group) {
@@ -60,9 +63,9 @@ foreach ($groups_list as $_group) {
         ?>
     </select>
     <br>
-    Файл импорта:<br>
+    Р¤Р°Р№Р» РёРјРїРѕСЂС‚Р°:<br>
 
     <input type=file name=xml_file>
 
-    <input type=submit value="Начать импорт" class="btn">
+    <input type=submit value="РќР°С‡Р°С‚СЊ РёРјРїРѕСЂС‚" class="btn">
 </form>

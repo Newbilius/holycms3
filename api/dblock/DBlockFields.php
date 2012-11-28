@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Класс для работы со свойствами блоков.
+ * РљР»Р°СЃСЃ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃРѕ СЃРІРѕР№СЃС‚РІР°РјРё Р±Р»РѕРєРѕРІ.
  */
 class DBlockFields extends DBaseClass {
 
@@ -10,7 +10,7 @@ class DBlockFields extends DBaseClass {
     var $sql2;
 
     /**
-     * Конструктор.
+     * РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ.
      */
     function DBlockFields() {
         $this->sql = new HolySQL("system_data_block_fields");
@@ -20,11 +20,11 @@ class DBlockFields extends DBaseClass {
     }
 
     /**
-     * Возвращает список свойств по выбранному блоку
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРїРёСЃРѕРє СЃРІРѕР№СЃС‚РІ РїРѕ РІС‹Р±СЂР°РЅРЅРѕРјСѓ Р±Р»РѕРєСѓ
      * 
-     * @param string/int dblock  <p>выбранный блок</p>
-     * @param string/array $filter=Array()  <p>[не обязательное] фильтр свойств</p>
-     * @param string $sort = "sort ASC"  <p>[не обязательное] порядок сортировки свойств</p>
+     * @param string/int dblock  <p>РІС‹Р±СЂР°РЅРЅС‹Р№ Р±Р»РѕРє</p>
+     * @param string/array $filter=Array()  <p>[РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ] С„РёР»СЊС‚СЂ СЃРІРѕР№СЃС‚РІ</p>
+     * @param string $sort = "sort ASC"  <p>[РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ] РїРѕСЂСЏРґРѕРє СЃРѕСЂС‚РёСЂРѕРІРєРё СЃРІРѕР№СЃС‚РІ</p>
      */
     function GetListByBlock($dblock, $filter = Array(), $sort = "sort ASC") {
         if (is_numeric($dblock))
@@ -35,24 +35,24 @@ class DBlockFields extends DBaseClass {
     }
 
     /**
-     * Изменить данные свойства (данные нужно указывать целиком!)
+     * РР·РјРµРЅРёС‚СЊ РґР°РЅРЅС‹Рµ СЃРІРѕР№СЃС‚РІР° (РґР°РЅРЅС‹Рµ РЅСѓР¶РЅРѕ СѓРєР°Р·С‹РІР°С‚СЊ С†РµР»РёРєРѕРј!)
      * 
-     * @param string $id  <p>код свойства</p>
-     * @param array $values  <p>данные свойства</p>
+     * @param string $id  <p>РєРѕРґ СЃРІРѕР№СЃС‚РІР°</p>
+     * @param array $values  <p>РґР°РЅРЅС‹Рµ СЃРІРѕР№СЃС‚РІР°</p>
      */
     function Update($id, $values) {
-        //@fix поправить для id-шников
+        //@fix РїРѕРїСЂР°РІРёС‚СЊ РґР»СЏ id-С€РЅРёРєРѕРІ
         if (is_numeric($values['data_block'])) {
             
         } else {
             $values['data_block'] = $this->datab->GetIDByName($values['data_block']);
 
-            //проверить, не изменился ли код, если да - то всё будет сложнее
+            //РїСЂРѕРІРµСЂРёС‚СЊ, РЅРµ РёР·РјРµРЅРёР»СЃСЏ Р»Рё РєРѕРґ, РµСЃР»Рё РґР° - С‚Рѕ РІСЃС‘ Р±СѓРґРµС‚ СЃР»РѕР¶РЅРµРµ
             $type_info = $this->sql2->SelectOne("id=" . $id);
             if (isset($type_info['name']))
                 if (isset($values['name']))
                     if ($type_info['name'] != $values['name']) {
-                        //нужно переименовать столбец, а потом уже всё остальное
+                        //РЅСѓР¶РЅРѕ РїРµСЂРµРёРјРµРЅРѕРІР°С‚СЊ СЃС‚РѕР»Р±РµС†, Р° РїРѕС‚РѕРј СѓР¶Рµ РІСЃС‘ РѕСЃС‚Р°Р»СЊРЅРѕРµ
                         $type = $this->typeb->GetByID($values['type']);
 
                         $type = $type['basetype'];
@@ -68,24 +68,24 @@ class DBlockFields extends DBaseClass {
     }
 
     /**
-     * Создает новое свойство
+     * РЎРѕР·РґР°РµС‚ РЅРѕРІРѕРµ СЃРІРѕР№СЃС‚РІРѕ
      * 
-     * @param array $values  <p>данные свойства:</p>
-     * <br><b>caption</b> - string - заголовок
-     * <br><b>name</b> - string - код
-     * <br><b>data_block</b> - string - name блока
-     * <br><b>type</b> - string - name типа
-     * <br><b>sort</b> - int - порядок сортировки
-     * <br><b>required</b> - bool - обязательное ли поле, по умолчанию false
-     * <br><b>multiple</b> - bool - множественное,false (0 нет, 1 да)
-     * <br><b>owner_type</b> - int - владелец (0 - элементы,1 - папки и элементы)
+     * @param array $values  <p>РґР°РЅРЅС‹Рµ СЃРІРѕР№СЃС‚РІР°:</p>
+     * <br><b>caption</b> - string - Р·Р°РіРѕР»РѕРІРѕРє
+     * <br><b>name</b> - string - РєРѕРґ
+     * <br><b>data_block</b> - string - name Р±Р»РѕРєР°
+     * <br><b>type</b> - string - name С‚РёРїР°
+     * <br><b>sort</b> - int - РїРѕСЂСЏРґРѕРє СЃРѕСЂС‚РёСЂРѕРІРєРё
+     * <br><b>required</b> - bool - РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ Р»Рё РїРѕР»Рµ, РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ false
+     * <br><b>multiple</b> - bool - РјРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРµ,false (0 РЅРµС‚, 1 РґР°)
+     * <br><b>owner_type</b> - int - РІР»Р°РґРµР»РµС† (0 - СЌР»РµРјРµРЅС‚С‹,1 - РїР°РїРєРё Рё СЌР»РµРјРµРЅС‚С‹)
      */
     
     function Create($values = Array()) {
         $block_name = $values['data_block'];
         $values['data_block'] = $this->datab->GetIDByName($values['data_block']);
         
-        //@fix поправить работу с id
+        //@fix РїРѕРїСЂР°РІРёС‚СЊ СЂР°Р±РѕС‚Сѓ СЃ id
         if (is_numeric($values['type'])) {
             
         }
@@ -121,9 +121,9 @@ class DBlockFields extends DBaseClass {
     }
 
     /**
-     * Удаляет свойство
+     * РЈРґР°Р»СЏРµС‚ СЃРІРѕР№СЃС‚РІРѕ
      * 
-     * @param int/string $name <p>ID/код удаляемого свойства</p>
+     * @param int/string $name <p>ID/РєРѕРґ СѓРґР°Р»СЏРµРјРѕРіРѕ СЃРІРѕР№СЃС‚РІР°</p>
      */
     function Delete($name) {
         if (is_numeric($name))

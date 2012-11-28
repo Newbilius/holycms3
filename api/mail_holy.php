@@ -4,17 +4,17 @@ if (!defined('HCMS'))
     die();
 
 /**
- * Простейшая обертка для функции mail(), посылает HTML-письмо
+ * РџСЂРѕСЃС‚РµР№С€Р°СЏ РѕР±РµСЂС‚РєР° РґР»СЏ С„СѓРЅРєС†РёРё mail(), РїРѕСЃС‹Р»Р°РµС‚ HTML-РїРёСЃСЊРјРѕ
  * 
- * @param string/array $from_mail  <p>адрес отправителя или массив (имя, обратный адрес)</p>
- * @param string $to  <p>адрес получателя</p>
- * @param string $subject  <p>тема письма</p>
- * @param string $message  <p>текст письма</p>
- * @param string $send_charset  <p>[не обязательное] кодировка письма, по-умолчанию "windows-1251"</p>
+ * @param string/array $from_mail  <p>Р°РґСЂРµСЃ РѕС‚РїСЂР°РІРёС‚РµР»СЏ РёР»Рё РјР°СЃСЃРёРІ (РёРјСЏ, РѕР±СЂР°С‚РЅС‹Р№ Р°РґСЂРµСЃ)</p>
+ * @param string $to  <p>Р°РґСЂРµСЃ РїРѕР»СѓС‡Р°С‚РµР»СЏ</p>
+ * @param string $subject  <p>С‚РµРјР° РїРёСЃСЊРјР°</p>
+ * @param string $message  <p>С‚РµРєСЃС‚ РїРёСЃСЊРјР°</p>
+ * @param string $send_charset  <p>[РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ] РєРѕРґРёСЂРѕРІРєР° РїРёСЃСЊРјР°, РїРѕ-СѓРјРѕР»С‡Р°РЅРёСЋ "utf-8"</p>
  * 
  * @return HolyValidator
  */
-function HolyMail($from_mail, $to, $subject, $message, $send_charset = "windows-1251") {
+function HolyMail($from_mail, $to, $subject, $message, $send_charset = "utf-8") {
     if (!is_array($from_mail)) {
         $tmp = $from_mail;
         unset($from_mail);

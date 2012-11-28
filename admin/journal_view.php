@@ -1,6 +1,6 @@
 <?
 $user_ifno_holy=$H_USER->GetInfo();
-$_global_bread[]=Array("Журнал","/engine/admin/journal.php");
+$_global_bread[]=Array("Р–СѓСЂРЅР°Р»","/engine/admin/journal.php");
 
 //$block= new DBlock();
 //$tmp_block=$block->GetByID("journal");
@@ -12,9 +12,9 @@ $item=$element->GetByID($_GET['id']);
                     "add",
                     "delete",
                 ), Array(
-                    "Изменен",
-                    "Создан",
-                    "Удален"
+                    "РР·РјРµРЅРµРЅ",
+                    "РЎРѕР·РґР°РЅ",
+                    "РЈРґР°Р»РµРЅ"
                 ), $item['action']);
                 
 $tmp_element_src= new DBlockElement("users");            
@@ -33,7 +33,7 @@ $item['data_before']=  unserialize(base64_decode($item['data_before']));
 <table>
     <tr>
         <td>
-            <b> ID элемента:</b>
+            <b> ID СЌР»РµРјРµРЅС‚Р°:</b>
         </td>
         <td>
             <? echo $item['id'];?>
@@ -41,7 +41,7 @@ $item['data_before']=  unserialize(base64_decode($item['data_before']));
     </tr>
     <tr>
         <td>
-            <b> Название:</b>
+            <b> РќР°Р·РІР°РЅРёРµ:</b>
         </td>
         <td>
             <? echo $item['data_caption'];?>
@@ -49,15 +49,15 @@ $item['data_before']=  unserialize(base64_decode($item['data_before']));
     </tr>
     <tr>
         <td>
-            <b> Папка:</b>
+            <b> РџР°РїРєР°:</b>
         </td>
         <td>
-            <? if ($item['folder']){?>Да<?}else{?>Нет<?};?>
+            <? if ($item['folder']){?>Р”Р°<?}else{?>РќРµС‚<?};?>
         </td>
     </tr>
     <tr>
         <td>
-            <b> Пользователь:</b>
+            <b> РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ:</b>
         </td>
         <td>
             <? echo $item['user_id'];?>
@@ -65,7 +65,7 @@ $item['data_before']=  unserialize(base64_decode($item['data_before']));
     </tr>
     <tr>
         <td>
-            <b> Data-блок:</b>
+            <b> Data-Р±Р»РѕРє:</b>
         </td>
         <td>
             <? echo $item['block_name'];?>
@@ -73,7 +73,7 @@ $item['data_before']=  unserialize(base64_decode($item['data_before']));
     </tr>
     <tr>
         <td>
-            <b> Действие:</b>
+            <b> Р”РµР№СЃС‚РІРёРµ:</b>
         </td>
         <td>
             <? echo $item['action'];?>
@@ -81,7 +81,7 @@ $item['data_before']=  unserialize(base64_decode($item['data_before']));
     </tr>
     <tr>
         <td>
-            <b> Когда:</b>
+            <b> РљРѕРіРґР°:</b>
         </td>
         <td>
             <? echo $item['date_time'];?>
@@ -92,10 +92,10 @@ $item['data_before']=  unserialize(base64_decode($item['data_before']));
 <table width="100%">
     <tr>
         <? if ($item['data_before']){?><th>
-            До
+            Р”Рѕ
         </th><?};?>
        <? if ($item['data_after']){?> <th>
-            После
+            РџРѕСЃР»Рµ
         </th><?};?>
         
     </tr>

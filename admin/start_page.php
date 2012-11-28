@@ -1,15 +1,15 @@
-<BR>Добро пожаловать в систему управления сайтом. Ниже представлены все доступные блоки данных.
+<BR>Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ РІ СЃРёСЃС‚РµРјСѓ СѓРїСЂР°РІР»РµРЅРёСЏ СЃР°Р№С‚РѕРј. РќРёР¶Рµ РїСЂРµРґСЃС‚Р°РІР»РµРЅС‹ РІСЃРµ РґРѕСЃС‚СѓРїРЅС‹Рµ Р±Р»РѕРєРё РґР°РЅРЅС‹С….
 <HR>
 <div class="row" style="padding-left:40px;">
 
     <?php
     if (!defined('HCMS'))
         die();
-//наполнить списки
+//РЅР°РїРѕР»РЅРёС‚СЊ СЃРїРёСЃРєРё
     $blockGroups = new DBlockGroup();
     $block = new DBlock();
 
-//список групп
+//СЃРїРёСЃРѕРє РіСЂСѓРїРї
     $blockGroups->GetList();
 
     global $H_USER;
@@ -62,8 +62,8 @@
         <div class="span4" style="padding-left:40px;">
             <div class="well sidebar-nav">
                 <? global $_holy_vers; ?>
-                Ваша версия: <b><?= $_holy_vers ?></b><br>
-                Текущая версия:
+                Р’Р°С€Р° РІРµСЂСЃРёСЏ: <b><?= $_holy_vers ?></b><br>
+                РўРµРєСѓС‰Р°СЏ РІРµСЂСЃРёСЏ:
                 <div id="ajax_info_of_main_page" style="display:inline">
                     <img src="/engine/admin/img/ajax_loader_mini.gif">
                 </div>

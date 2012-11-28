@@ -1,12 +1,12 @@
 <?
-$_global_bread[]=Array("Управление резервными копиями базы данных","/engine/admin/sql_backup.php");
+$_global_bread[]=Array("РЈРїСЂР°РІР»РµРЅРёРµ СЂРµР·РµСЂРІРЅС‹РјРё РєРѕРїРёСЏРјРё Р±Р°Р·С‹ РґР°РЅРЅС‹С…","/engine/admin/sql_backup.php");
 //preprint($_POST);
 if (isset($_POST['form_go']))
-	if ($_POST['submit']=="Сделать новый бэкап")
+	if ($_POST['submit']=="РЎРґРµР»Р°С‚СЊ РЅРѕРІС‹Р№ Р±СЌРєР°Рї")
 		{
 			backup_database_tables('*');
 		}
-	elseif ($_POST['submit']=="Удалить выделенные")
+	elseif ($_POST['submit']=="РЈРґР°Р»РёС‚СЊ РІС‹РґРµР»РµРЅРЅС‹Рµ")
 		if (isset($_POST['file_list']))
 		if (count($_POST['file_list'])>0)
 		foreach ($_POST['file_list'] as $file)
@@ -24,10 +24,10 @@ if (isset($_POST['form_go']))
 <table width=100% border=0 cellpadding=1px cellspacing=0 id=tableform name=tableform class=tableform>
 <tr>
 	<td>
-		Файл
+		Р¤Р°Р№Р»
 	</td>
 	<td>
-		Значение
+		Р—РЅР°С‡РµРЅРёРµ
 	</td>
 </tr>
 <?
@@ -54,6 +54,6 @@ $good=false;
 <?};};
 ?>
 </table>
-<BR><br><input name=submit type=submit value="Удалить выделенные" style="width:40%;HEIGHT:28px;" class="btn btn-success">
-<input name=submit type=submit value="Сделать новый бэкап" style="width:40%;HEIGHT:28px;" class="btn btn-warning">
+<BR><br><input name=submit type=submit value="РЈРґР°Р»РёС‚СЊ РІС‹РґРµР»РµРЅРЅС‹Рµ" style="width:40%;HEIGHT:28px;" class="btn btn-success">
+<input name=submit type=submit value="РЎРґРµР»Р°С‚СЊ РЅРѕРІС‹Р№ Р±СЌРєР°Рї" style="width:40%;HEIGHT:28px;" class="btn btn-warning">
 </form>

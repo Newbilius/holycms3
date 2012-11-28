@@ -1,6 +1,5 @@
 <?
 if (!isset($_GET['tags'])) $_GET['tags']="";
-//pre_print($tags);
 //echo $tags_max_count;
 	foreach ($tags as $tag=>$tag_count)
 		{

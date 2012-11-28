@@ -5,16 +5,16 @@ global $_folder_selector;
 if (isset($_photo_id))
 if ($_photo_id)
 {
-$_global_bread[]=Array("Массовая загрузка фото");
+$_global_bread[]=Array("РњР°СЃСЃРѕРІР°СЏ Р·Р°РіСЂСѓР·РєР° С„РѕС‚Рѕ");
 
 ?>
-<? if ($_folder_selector){?><BR>В какую папку грузить:
+<? if ($_folder_selector){?><BR>Р’ РєР°РєСѓСЋ РїР°РїРєСѓ РіСЂСѓР·РёС‚СЊ:
 					<select class=par id=parent name=parent class="where_move">
-					<option value=0>[ корень ]</option>
+					<option value=0>[ РєРѕСЂРµРЅСЊ ]</option>
 						<?
 						function DrawFolderTree($parent,$array_of,$name_add="")
 						{
-						//получаем список папок
+						//РїРѕР»СѓС‡Р°РµРј СЃРїРёСЃРѕРє РїР°РїРѕРє
 						foreach ($array_of as $data)
 						if ($data['parent']==$parent)
 							{
@@ -34,11 +34,11 @@ $_global_bread[]=Array("Массовая загрузка фото");
 						</select>
 						<?}else{?>
 						<select class=par id=parent name=parent class="where_move" style="display:none;">
-					<option value=0>[ корень ]</option>
+					<option value=0>[ РєРѕСЂРµРЅСЊ ]</option>
 				</select>
 						<?};?>
 <BR><BR>
-<input type=buton value="Начать загрузку изображений" onclick="$('#file_upload').uploadify('upload','*')" class="btn btn-success">						
+<input type=buton value="РќР°С‡Р°С‚СЊ Р·Р°РіСЂСѓР·РєСѓ РёР·РѕР±СЂР°Р¶РµРЅРёР№" onclick="$('#file_upload').uploadify('upload','*')" class="btn btn-success">						
 <BR>
 <BR>
 <script type="text/javascript" src="/engine/js/uploadify/jquery.uploadify-3.1.min.js"></script>
@@ -46,19 +46,19 @@ $_global_bread[]=Array("Массовая загрузка фото");
 <input type="file" name="file_upload" id="file_upload" />
 <script>
 $(function() {
-    $('#file_upload').uploadify({
-        debug:false,
-		'swf'      : '/engine/js/uploadify/uploadify.swf',
-        'uploader' : '/engine/admin/ajax/uploadify.php',
-        // Put your options here
+В В В В $('#file_upload').uploadify({
+В В В В В В В В debug:false,
+		'swf'В В В В В В : '/engine/js/uploadify/uploadify.swf',
+В В В В В В В В 'uploader' : '/engine/admin/ajax/uploadify.php',
+В В В В В В В В // Put your options here
 		'auto'     : false,
 		//'debug'     : true,
-		'buttonText' : 'ВЫБРАТЬ ФАЙЛЫ',
+		'buttonText' : 'Р’Р«Р‘Р РђРўР¬ Р¤РђР™Р›Р«',
 		'formData'      : {'parent' : 0,'CODE':"asdasdas.sklfhjsjf.sdjl_akfsdhjf"},
 		'onUploadStart' : function(file) {
             $("#file_upload").uploadify("settings", "formData",{'parent' : $("select").val()});
         }
-    });
+В В В В });
 });
 </script>
-<?}else die("модуль отсутствует");?>
+<?}else die("РјРѕРґСѓР»СЊ РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚");?>

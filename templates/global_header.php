@@ -5,5 +5,5 @@
 <meta name="keywords" content="<?=$_OPTIONS['keywords']?>" />
 <title><?=$_OPTIONS['site_title']?></title>
 <meta name="description" content="<?=$_OPTIONS['description']?>">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>

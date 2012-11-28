@@ -1,5 +1,5 @@
 <? if (!defined('HCMS')) die(); ?>
-<BR>Страницы: 
+<BR>РЎС‚СЂР°РЅРёС†С‹: 
 <?
 //PrePrint($params);
 for ($i=1;$i<=$params['page_max'];$i++)
@@ -18,4 +18,4 @@ for ($i=1;$i<=$params['page_max'];$i++)
 };
 ?>
 <BR>
-Всего найдено: <?=$params['max_count']?>
+Р’СЃРµРіРѕ РЅР°Р№РґРµРЅРѕ: <?=$params['max_count']?>

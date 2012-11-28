@@ -2,9 +2,9 @@
 require_once("../engine.php");
 
 global $_global_bread;
-$_global_bread[] = Array("Экспорт структуры в XML");
+$_global_bread[] = Array("Р­РєСЃРїРѕСЂС‚ СЃС‚СЂСѓРєС‚СѓСЂС‹ РІ XML");
 
-//получить список групп датаблоков
+//РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РіСЂСѓРїРї РґР°С‚Р°Р±Р»РѕРєРѕРІ
 $groups = new DBlockGroup();
 $groups->GetList();
 $groups_list = $groups->GetFullList();
@@ -13,12 +13,14 @@ $fields = new DBlockFields();
 
 $blocks = new DBlock;
 
+global $_CONFIG;
+
 if (isset($_POST['go'])) {
     if (count($_POST['block']) == 0) {
         ?>
         <div class="alert alert-error fade in" style="max-width:400px;">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            Не выбран ни один блок данных, нечего экспортировать.
+            РќРµ РІС‹Р±СЂР°РЅ РЅРё РѕРґРёРЅ Р±Р»РѕРє РґР°РЅРЅС‹С…, РЅРµС‡РµРіРѕ СЌРєСЃРїРѕСЂС‚РёСЂРѕРІР°С‚СЊ.
         </div>
         <?
     } else {
@@ -38,7 +40,8 @@ if (isset($_POST['go'])) {
         foreach ($block_datas as $data) {
             $element1 = $dom->createElement($data['name']);
             foreach ($data as $_block_data_id => $_block_data) {
-                $_block_data = iconv('windows-1251', 'utf-8', $_block_data);
+			if ($_CONFIG['CODEPAGE']!="utf8")
+                $_block_data = iconv($_CONFIG['CODEPAGE'], 'utf-8', $_block_data);
                 $element2 = $dom->createElement($_block_data_id, $_block_data);
                 $element1->appendChild($element2);
             };
@@ -50,7 +53,8 @@ if (isset($_POST['go'])) {
             foreach ($fields_list as $_field) {
                 $element4 = $dom->createElement($_field['name']);
                 foreach ($_field as $_field_data_id => $_field_data) {
-                    $_field_data = iconv('windows-1251', 'utf-8', $_field_data);
+				if ($_CONFIG['CODEPAGE']!="utf8")
+                    $_field_data = iconv($_CONFIG['CODEPAGE'], 'utf-8', $_field_data);
                     $element5 = $dom->createElement($_field_data_id, $_field_data);
                     $element4->appendChild($element5);
                 };
@@ -73,7 +77,7 @@ if (isset($_POST['go'])) {
         ?>
         <div class="alert alert-success fade in" style="max-width:400px;">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            Файл экспорта сохранен. <a href="<?= $fname ?>">Скачать файл.</a>
+            Р¤Р°Р№Р» СЌРєСЃРїРѕСЂС‚Р° СЃРѕС…СЂР°РЅРµРЅ. <a href="<?= $fname ?>">РЎРєР°С‡Р°С‚СЊ С„Р°Р№Р».</a>
         </div>
         <?
     }
@@ -107,8 +111,8 @@ if (isset($_POST['go'])) {
             </li>
             <?
         }
-//получить список датаблоков в группе
+//РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РґР°С‚Р°Р±Р»РѕРєРѕРІ РІ РіСЂСѓРїРїРµ
         ?>
     </ul>
-    <input name=submit type=submit value="Запустить экспорт" style="width:40%;HEIGHT:28px;" class="btn btn-success">
+    <input name=submit type=submit value="Р—Р°РїСѓСЃС‚РёС‚СЊ СЌРєСЃРїРѕСЂС‚" style="width:40%;HEIGHT:28px;" class="btn btn-success">
 </form>

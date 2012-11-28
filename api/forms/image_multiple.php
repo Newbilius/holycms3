@@ -45,20 +45,20 @@ class CForm_image_multiple extends CForm_Text {
                     <!-- The fileinput-button span is used to style the file input field as button -->
                     <span class="btn btn-success fileinput-button">
                         <i class="icon-plus icon-white"></i>
-                        <span>Добавить файлы...</span>
+                        <span>Р”РѕР±Р°РІРёС‚СЊ С„Р°Р№Р»С‹...</span>
                         <input type="file" name="json_json_<?= $file_id_name ?>[]" multiple>
                     </span>
                     <button type="submit" class="btn btn-primary start">
                         <i class="icon-upload icon-white"></i>
-                        <span>Начать загрузку</span>
+                        <span>РќР°С‡Р°С‚СЊ Р·Р°РіСЂСѓР·РєСѓ</span>
                     </button>
                     <button type="reset" class="btn btn-warning cancel">
                         <i class="icon-ban-circle icon-white"></i>
-                        <span>Отменить загрузку</span>
+                        <span>РћС‚РјРµРЅРёС‚СЊ Р·Р°РіСЂСѓР·РєСѓ</span>
                     </button>
                     <button type="button" class="btn btn-danger delete">
                         <i class="icon-trash icon-white"></i>
-                        <span>Удалить</span>
+                        <span>РЈРґР°Р»РёС‚СЊ</span>
                     </button>
                     <input type="checkbox" class="toggle">
                 </div>
@@ -87,14 +87,14 @@ class CForm_image_multiple extends CForm_Text {
             <div class="modal-footer">
                 <a class="btn modal-download" target="_blank">
                     <i class="icon-download"></i>
-                    <span>Скачать</span>
+                    <span>РЎРєР°С‡Р°С‚СЊ</span>
                 </a>
                 <a class="btn btn-info modal-prev">
                     <i class="icon-arrow-left icon-white"></i>
-                    <span>Назад</span>
+                    <span>РќР°Р·Р°Рґ</span>
                 </a>
                 <a class="btn btn-primary modal-next">
-                    <span>Вперед</span>
+                    <span>Р’РїРµСЂРµРґ</span>
                     <i class="icon-arrow-right icon-white"></i>
                 </a>
             </div>
@@ -115,7 +115,7 @@ class CForm_image_multiple extends CForm_Text {
                 <td class="start">{% if (!o.options.autoUpload) { %}
                     <button class="btn btn-primary">
                         <i class="icon-upload icon-white"></i>
-                        <span>Старт</span>
+                        <span>РЎС‚Р°СЂС‚</span>
                     </button>
                     {% } %}</td>
                 {% } else { %}
@@ -124,7 +124,7 @@ class CForm_image_multiple extends CForm_Text {
                 <td class="cancel">{% if (!i) { %}
                     <button class="btn btn-warning">
                         <i class="icon-ban-circle icon-white"></i>
-                        <span>Отмена</span>
+                        <span>РћС‚РјРµРЅР°</span>
                     </button>
                     {% } %}</td>
             </tr>
@@ -152,7 +152,7 @@ class CForm_image_multiple extends CForm_Text {
                 <td class="delete">
                     <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}"{% if (file.delete_with_credentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                             <i class="icon-trash icon-white"></i>
-                        <span>Удалить</span>
+                        <span>РЈРґР°Р»РёС‚СЊ</span>
                     </button>
                     <input type="checkbox" name="delete" value="1">
                 </td>

@@ -1,5 +1,5 @@
 <?
-$_global_bread[]=Array("Очистка кэша","");
+$_global_bread[]=Array("РћС‡РёСЃС‚РєР° РєСЌС€Р°","");
 //preprint($_POST);
 if (isset($_POST['form_go']))
 		{
@@ -8,12 +8,12 @@ if (isset($_POST['form_go']))
 			//preprint($_POST);
 			if (isset($_POST['clear_base']))
 				{
-					$ok[]="Кэш базы очищен";
+					$ok[]="РљСЌС€ Р±Р°Р·С‹ РѕС‡РёС‰РµРЅ";
 					$SQL->Query('TRUNCATE TABLE `system_cache`');
 				};
 			if (isset($_POST['clear_resize']))
 				{
-					$ok[]="Кэш картинок очищен";
+					$ok[]="РљСЌС€ РєР°СЂС‚РёРЅРѕРє РѕС‡РёС‰РµРЅ";
 					$cache_img_folder=$_SERVER['DOCUMENT_ROOT']."/upload/resize_cache/";
 					if (file_exists($cache_img_folder))
 						{
@@ -23,7 +23,7 @@ if (isset($_POST['form_go']))
 				};
 			if (isset($_POST['clear_tmp']))
 				{
-					$ok[]="Временные файлы удалены";
+					$ok[]="Р’СЂРµРјРµРЅРЅС‹Рµ С„Р°Р№Р»С‹ СѓРґР°Р»РµРЅС‹";
 					$tmp_folder=$_SERVER['DOCUMENT_ROOT']."/upload/tmp/";
 					if (file_exists($cache_img_folder))
 						{
@@ -31,18 +31,18 @@ if (isset($_POST['form_go']))
 							mkdir($tmp_folder);
 						};
 				};
-			//дописать в будущем удаление файлов-сироток
+			//РґРѕРїРёСЃР°С‚СЊ РІ Р±СѓРґСѓС‰РµРј СѓРґР°Р»РµРЅРёРµ С„Р°Р№Р»РѕРІ-СЃРёСЂРѕС‚РѕРє
 			if (isset($_POST['clear_orphan']))
 				{/*
 					$arBlock=new DBlock();
 					
-					//получаем свойства ID
+					//РїРѕР»СѓС‡Р°РµРј СЃРІРѕР№СЃС‚РІР° ID
 						$types=new DBlockTypes();
 						$type_id=$types->GetIDByName("image");
-					//получаем свойства-картинки
+					//РїРѕР»СѓС‡Р°РµРј СЃРІРѕР№СЃС‚РІР°-РєР°СЂС‚РёРЅРєРё
 						$fields=new DBlockFields();
 						$fields->GetList("type=".$type_id);
-					//идем по списку свойств-картинок
+					//РёРґРµРј РїРѕ СЃРїРёСЃРєСѓ СЃРІРѕР№СЃС‚РІ-РєР°СЂС‚РёРЅРѕРє
 						while ($field=$fields->GetNext())
 							{
 								$block=$arBlock->GetByID($field['data_block']);
@@ -53,15 +53,15 @@ if (isset($_POST['form_go']))
 											preprint($block);
 											$elements=new DBlockElement($block);
 											$elements->GetList();
-											//получаем непосредственно картинки
+											//РїРѕР»СѓС‡Р°РµРј РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РєР°СЂС‚РёРЅРєРё
 											while ($pic[]=
 										};
 								
 								//$not_exists[]=$type_id;
 							};
-					//проверяем их существование
-					$ok[]="Несуществующие картинки удалены, освобо";
-					echo "Несуществующие:";
+					//РїСЂРѕРІРµСЂСЏРµРј РёС… СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ
+					$ok[]="РќРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РєР°СЂС‚РёРЅРєРё СѓРґР°Р»РµРЅС‹, РѕСЃРІРѕР±Рѕ";
+					echo "РќРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ:";
 					*/
 				};
 		};
@@ -83,20 +83,20 @@ if (isset($ok))
 ?>
 <form method=post>
 <input type=hidden name="form_go" value="512">
-Выберите, что очищать:<BR><BR>
+Р’С‹Р±РµСЂРёС‚Рµ, С‡С‚Рѕ РѕС‡РёС‰Р°С‚СЊ:<BR><BR>
 <?
 global $_CONFIG;
 if ($_CONFIG['CACHE_SYSTEM']){
 ?>
-<input checked type=checkbox name="clear_base" value="1"> &nbsp; Очистить кэш базы
+<input checked type=checkbox name="clear_base" value="1"> &nbsp; РћС‡РёСЃС‚РёС‚СЊ РєСЌС€ Р±Р°Р·С‹
 <BR>
 <?};?>
-<input checked type=checkbox name="clear_resize" value="1"> &nbsp; Удалить кэш картинок
+<input checked type=checkbox name="clear_resize" value="1"> &nbsp; РЈРґР°Р»РёС‚СЊ РєСЌС€ РєР°СЂС‚РёРЅРѕРє
 <BR>
-<input checked type=checkbox name="clear_tmp" value="1"> &nbsp; Удалить временные файлы
+<input checked type=checkbox name="clear_tmp" value="1"> &nbsp; РЈРґР°Р»РёС‚СЊ РІСЂРµРјРµРЅРЅС‹Рµ С„Р°Р№Р»С‹
 <?/*<BR>
-<input type=checkbox name="clear_orphan" value="1"> &nbsp; Удалить несуществующие картинки (долгий процесс, но позволяет сэкономить место)
+<input type=checkbox name="clear_orphan" value="1"> &nbsp; РЈРґР°Р»РёС‚СЊ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ РєР°СЂС‚РёРЅРєРё (РґРѕР»РіРёР№ РїСЂРѕС†РµСЃСЃ, РЅРѕ РїРѕР·РІРѕР»СЏРµС‚ СЃСЌРєРѕРЅРѕРјРёС‚СЊ РјРµСЃС‚Рѕ)
 */?>
 
-</br><br><input name=submit type=submit value="Очистить кэш" style="width:40%;HEIGHT:28px;" class="btn btn-success">
+</br><br><input name=submit type=submit value="РћС‡РёСЃС‚РёС‚СЊ РєСЌС€" style="width:40%;HEIGHT:28px;" class="btn btn-success">
 </form>

@@ -16,7 +16,7 @@ if (isset($result))
                 ?>
                 <a href="<? echo ReplaceURL($params['url'], $item); ?>">
                     <? echo $item['caption'] ?></a><BR>
-                    ÷ÂÌ‡:<? echo $item['cost'] ?><BR>
+                    –¶–µ–Ω–∞:<? echo $item['cost'] ?><BR>
             </div>
             <?
         };

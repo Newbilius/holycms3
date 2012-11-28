@@ -2,16 +2,16 @@
 <form method=post>
 <table align=center valign=center halign=center>
 	<tr>
-		<td>Логин</td>
+		<td>Р›РѕРіРёРЅ</td>
 		<td><input type=text value="<?=$_POST['login']?>" name=login></td>
 	</tr>
 	<tr>
-		<td>Пароль</td>
+		<td>РџР°СЂРѕР»СЊ</td>
 		<td><input type=password value="" name=pass></td>
 	</tr>
 	<tr>
 		<td colspan=2 align=center>
-			<input name=submit type=submit value=Войти>
+			<input name=submit type=submit value=Р’РѕР№С‚Рё>
 		</td>
 	</tr>
 	<tr>

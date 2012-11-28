@@ -9,4 +9,4 @@ $new_change_log=FileDownloadCURL("https://raw.github.com/Newbilius/holycms3/mast
 <div id="new_in_new_version" style="display:none;height: 200px;overflow-y: scroll;width: 230px;">
 <? echo nl2br($new_change_log);?>
 </div>
-<a onclick="$('#new_in_new_version').show();$(this).hide();return false;" href="#">Что нового в новой версии</a>
+<a onclick="$('#new_in_new_version').show();$(this).hide();return false;" href="#">Р§С‚Рѕ РЅРѕРІРѕРіРѕ РІ РЅРѕРІРѕР№ РІРµСЂСЃРёРё</a>

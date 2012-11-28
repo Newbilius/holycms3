@@ -1,7 +1,6 @@
 <?
 require_once($_SERVER['DOCUMENT_ROOT']."/engine/engine.php");
-//pre_print($_GET);
-//вывести список иблоков
+//РІС‹РІРµСЃС‚Рё СЃРїРёСЃРѕРє РёР±Р»РѕРєРѕРІ
 $src_block=new DBlock();
 $src_f=new DBlockFields();
 $src_f2=new DBlockFields();
@@ -15,7 +14,7 @@ $("#global_name").html(data);
 }
 </script>
 <div id=global_name name=global_name>
-Блок<BR>
+Р‘Р»РѕРє<BR>
 <select style="width:100%;" name=global_ajax_1 id=global_ajax_1 onchange="ReloadThis()">
 <?
 $src_block->GetList();
@@ -29,7 +28,7 @@ while ($data=$src_block->GetNext())
 </select>
 
 <BR>
-Свойство, из которого брать значение<BR>
+РЎРІРѕР№СЃС‚РІРѕ, РёР· РєРѕС‚РѕСЂРѕРіРѕ Р±СЂР°С‚СЊ Р·РЅР°С‡РµРЅРёРµ<BR>
 <select style="width:100%;" name=global_ajax_2 id=global_ajax_2>
 <option <? if ($_GET['val'][1]=="id"){?>selected<?};?> value="id">id</option>
 <option <? if ($_GET['val'][1]=="name"){?>selected<?};?> value="name">name</option>
@@ -47,7 +46,7 @@ while ($data=$src_f->GetNext())
 
 <BR>
 
-Свойство, из которого брать название<BR>
+РЎРІРѕР№СЃС‚РІРѕ, РёР· РєРѕС‚РѕСЂРѕРіРѕ Р±СЂР°С‚СЊ РЅР°Р·РІР°РЅРёРµ<BR>
 <select style="width:100%;" name=global_ajax_3 id=global_ajax_3>
 <option <? if ($_GET['val'][2]=="id"){?>selected<?};?> value="id">id</option>
 <option <? if ($_GET['val'][2]=="name"){?>selected<?};?> value="name">name</option>
@@ -64,5 +63,5 @@ while ($data=$src_f2->GetNext())
 ?>
 </select>
 
-<center><a style="cursor:pointer;" onclick="SaveOn('<?=$_GET['spec_id']?>')">Сохранить</a></center>
+<center><a style="cursor:pointer;" onclick="SaveOn('<?=$_GET['spec_id']?>')">РЎРѕС…СЂР°РЅРёС‚СЊ</a></center>
 </div>

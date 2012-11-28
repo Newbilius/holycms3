@@ -1,7 +1,7 @@
 <?
 if (isset($result))
     if (count($result) > 0) {
-        //тэги
+        //С‚СЌРіРё
         $tags = new HolyTags($params['table'], "tags", "/tags_filter/#tag#");
         ?>
         <?
@@ -17,9 +17,9 @@ if (isset($result))
                     <br>
                     <? echo $item['caption'] ?>
                     <br>
-                    Цена: <? echo $item['cost'] ?> руб.<br>
+                    Р¦РµРЅР°: <? echo $item['cost'] ?> СЂСѓР±.<br>
                     <?
-                    //тэги
+                    //С‚СЌРіРё
                     $cnt = 0;
                     $tags_list = $tags->GetList($item);
                     foreach ($tags_list as $tag) {
@@ -29,7 +29,7 @@ if (isset($result))
                         <a href="<? echo $tag['url'] ?>"><? echo $tag['caption'] ?>(<? echo $tag['count'] ?>)</a><?
                         ?>
                     <? }; ?>
-                    <? if ($item['spec1']) { ?><BR><b>спец-предложение!</b><? }; ?>
+                    <? if ($item['spec1']) { ?><BR><b>СЃРїРµС†-РїСЂРµРґР»РѕР¶РµРЅРёРµ!</b><? }; ?>
 
                 <? };
                 ?>

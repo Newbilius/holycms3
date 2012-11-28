@@ -13,7 +13,7 @@ if (!isset($params['count']))
 if (!isset($params['filter']))
     $params['filter'] = "";
 if (!isset($params['table']))
-    die("не указана таблица");
+    die("РЅРµ СѓРєР°Р·Р°РЅР° С‚Р°Р±Р»РёС†Р°");
 
 if (!isset($human_link[0]))
     IncludeComponent("list_items", $params['list_template'], Array(

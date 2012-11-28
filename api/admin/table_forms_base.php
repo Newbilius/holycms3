@@ -144,7 +144,7 @@ class HFormTable {
             ?>
             <div>
             </form><form method=get>
-                Число элементов: <select name=page_count id=page_count>
+                Р§РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ: <select name=page_count id=page_count>
                     <?
                     foreach ($sort_array as $sa) {
                         ?>
@@ -156,7 +156,7 @@ class HFormTable {
                 <? if (isset($_GET['sort_by'])) { ?><input type=hidden name=sort_by value=<?= $_GET['sort_by'] ?>><? }; ?>
                 <? if (isset($_GET['sort_direct'])) { ?><input type=hidden name=sort_direct value=<?= $_GET['sort_direct'] ?>><? }; ?>
                 <input type=hidden name=dblock value=<?= $_GET['dblock'] ?>>
-                <input type=submit value=сменить class="btn" >
+                <input type=submit value=СЃРјРµРЅРёС‚СЊ class="btn" >
             </form>
             <form method=post>
             </div>
@@ -166,7 +166,7 @@ class HFormTable {
         if ($this->can_add)
         if ($this->add_link_base != "") {
             ?>
-            <a class="btn btn-success ajax" style="float:left;" href="<?= $this->add_link_base ?>">Добавить</a>
+            <a class="btn btn-success ajax" style="float:left;" href="<?= $this->add_link_base ?>">Р”РѕР±Р°РІРёС‚СЊ</a>
             <?
         };
 
@@ -174,7 +174,7 @@ class HFormTable {
         if ($this->add_link_base2 != "")
             if ($this->show_folders) {
                 ?>
-                <a class="btn btn-info ajax" style="margin-left:15px;float:left;" href="<?= $this->add_link_base2 ?>">Добавить папку</a>
+                <a class="btn btn-info ajax" style="margin-left:15px;float:left;" href="<?= $this->add_link_base2 ?>">Р”РѕР±Р°РІРёС‚СЊ РїР°РїРєСѓ</a>
                 <?
             };
         ?>
@@ -187,7 +187,7 @@ class HFormTable {
                     $this->one_folder = $one_folder;
                     $this->Reload();
                     ?>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary ajax" style="margin-left:15px;float:left;" href="folder_edit.php?dblock=<?= $_GET['dblock'] ?>&parent=<?= $this->one_folder['parent'] ?>&id=<?= $_GET['parent'] ?>">Отредактировать папку</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary ajax" style="margin-left:15px;float:left;" href="folder_edit.php?dblock=<?= $_GET['dblock'] ?>&parent=<?= $this->one_folder['parent'] ?>&id=<?= $_GET['parent'] ?>">РћС‚СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ РїР°РїРєСѓ</a>
                     <?
                 };
         ?>
@@ -305,7 +305,7 @@ class HFormTable {
     function DrawTable() {
         $count = 1;
         if (!isset($_GET['parent']))
-            $_GET['parent'] = 0; //@todo ох неправильно это, ох неправильно
+            $_GET['parent'] = 0; //@todo РѕС… РЅРµРїСЂР°РІРёР»СЊРЅРѕ СЌС‚Рѕ, РѕС… РЅРµРїСЂР°РІРёР»СЊРЅРѕ
 
         if ($_GET['parent'] > 0) {
             $one_folder = $this->sql->SelectOne("id=" . $_GET['parent']);
@@ -314,7 +314,7 @@ class HFormTable {
             ?>
             <tr>
                 <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-                <td colspan="<?= count($this->columns) - 3 ?>"><!--[П1]--> <?= $this->folder_icon ?><a class=ajax onclick="jQuery('#f1').jstree('deselect_all');jQuery('#f1').jstree('select_node', '#tree_block_<?= $_GET['dblock'] ?>_element_<?= $one_folder['parent'] ?>'); " href=?dblock=<?= $_GET['dblock'] ?>&parent=<?= $one_folder['parent'] ?>>&nbsp;...папка выше...&nbsp;</a></td>
+                <td colspan="<?= count($this->columns) - 3 ?>"><!--[Рџ1]--> <?= $this->folder_icon ?><a class=ajax onclick="jQuery('#f1').jstree('deselect_all');jQuery('#f1').jstree('select_node', '#tree_block_<?= $_GET['dblock'] ?>_element_<?= $one_folder['parent'] ?>'); " href=?dblock=<?= $_GET['dblock'] ?>&parent=<?= $one_folder['parent'] ?>>&nbsp;...РїР°РїРєР° РІС‹С€Рµ...&nbsp;</a></td>
                 <td>&nbsp;</td><td>&nbsp;</td>
             </tr>
 
@@ -362,11 +362,11 @@ class HFormTable {
                         ?>
                             <? if ($column['name'] == "sort") { ?><img src=/engine/js/updown2.gif> <? }; ?>
                                 <? if (($item['folder']) && ($column['name'] == "caption")) { ?>
-                                     <!--[П2]--><?= $this->folder_icon ?><a class=ajax onclick="jQuery('#f1').jstree('deselect_all');jQuery('#f1').jstree('select_node', '#tree_block_<?= $_GET['dblock'] ?>_element_<?= $item['id'] ?>'); " href="?dblock=<?= $_GET['dblock'] ?>&parent=<?= $item['id'] ?>"><?
+                                     <!--[Рџ2]--><?= $this->folder_icon ?><a class=ajax onclick="jQuery('#f1').jstree('deselect_all');jQuery('#f1').jstree('select_node', '#tree_block_<?= $_GET['dblock'] ?>_element_<?= $item['id'] ?>'); " href="?dblock=<?= $_GET['dblock'] ?>&parent=<?= $item['id'] ?>"><?
                     };
                     if ($column['multiple']) {
                                     ?>
-                                    [множ]
+                                    [РјРЅРѕР¶]
                                     <?
                                 } else
                                     $obj->View($column['name'], $item, $column['add_values'], $column['multiple']);
@@ -393,7 +393,7 @@ class HFormTable {
                 if ($this->can_delete)
                 {
                 $del = $this->CreateLink($this->delete_link_base, $item);
-                ?><td><a onclick='return(window.confirm("Вы уверены, что хотите удалить?"))' href=<?= $del ?>><?= $this->delete_icon ?></a></td><? }; ?>
+                ?><td><a onclick='return(window.confirm("Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ?"))' href=<?= $del ?>><?= $this->delete_icon ?></a></td><? }; ?>
             </tr>
             <?
         };

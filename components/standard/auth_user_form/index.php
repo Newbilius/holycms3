@@ -6,12 +6,12 @@ if (!isset($_POST['pass'])) $_POST['pass']="";
 if (!isset($params['cabinet_url'])) $params['cabinet_url']="/";
 if (isset($_POST['submit']))
 	{
-		if (isset($_POST['login'])) if ($_POST['login']=="") $error[]="Íå ââåä¸í ëîãèí";
-		if (isset($_POST['pass'])) if ($_POST['pass']=="") $error[]="Íå ââåä¸í ïàðîëü";
+		if (isset($_POST['login'])) if ($_POST['login']=="") $error[]="ÐÐµ Ð²Ð²ÐµÐ´Ñ‘Ð½ Ð»Ð¾Ð³Ð¸Ð½";
+		if (isset($_POST['pass'])) if ($_POST['pass']=="") $error[]="ÐÐµ Ð²Ð²ÐµÐ´Ñ‘Ð½ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ";
 	};
 if (($_POST['login']!="") && ($_POST['pass']!=""))
 	if (!$user->Auth($_POST['login'],$_POST['pass']))
-		$error[]="Íåâåðíûé ïàðîëü èëè ëîãèí";
+		$error[]="ÐÐµÐ²ÐµÑ€Ð½Ñ‹Ð¹ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ Ð¸Ð»Ð¸ Ð»Ð¾Ð³Ð¸Ð½";
 	if (!$user->IsAuth())
 	include($full_template_path);
         else

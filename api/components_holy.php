@@ -1,19 +1,19 @@
 <?
 
 /**
- * Подключает на страницу компонент
+ * РџРѕРґРєР»СЋС‡Р°РµС‚ РЅР° СЃС‚СЂР°РЅРёС†Сѓ РєРѕРјРїРѕРЅРµРЅС‚
  * 
- * @param string $name <p>название компонента. Можно так же указать тип через слэш (тип\компонент)</p>
- * @param string $template <p>[не обязательное] шаблон компонента.</p>
- * @param array $params <p>параметры вызова компонента.</p>
+ * @param string $name <p>РЅР°Р·РІР°РЅРёРµ РєРѕРјРїРѕРЅРµРЅС‚Р°. РњРѕР¶РЅРѕ С‚Р°Рє Р¶Рµ СѓРєР°Р·Р°С‚СЊ С‚РёРї С‡РµСЂРµР· СЃР»СЌС€ (С‚РёРї\РєРѕРјРїРѕРЅРµРЅС‚)</p>
+ * @param string $template <p>[РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ] С€Р°Р±Р»РѕРЅ РєРѕРјРїРѕРЅРµРЅС‚Р°.</p>
+ * @param array $params <p>РїР°СЂР°РјРµС‚СЂС‹ РІС‹Р·РѕРІР° РєРѕРјРїРѕРЅРµРЅС‚Р°.</p>
  */
 /*
- * порядок поиска компонента или шаблона.
+ * РїРѕСЂСЏРґРѕРє РїРѕРёСЃРєР° РєРѕРјРїРѕРЅРµРЅС‚Р° РёР»Рё С€Р°Р±Р»РѕРЅР°.
  * 
- * /site/components/название компонента/
- * /site/components/тип/название компонента/
- * /engine/components/название компонента/
- * /engine/components/тип/название компонента/
+ * /site/components/РЅР°Р·РІР°РЅРёРµ РєРѕРјРїРѕРЅРµРЅС‚Р°/
+ * /site/components/С‚РёРї/РЅР°Р·РІР°РЅРёРµ РєРѕРјРїРѕРЅРµРЅС‚Р°/
+ * /engine/components/РЅР°Р·РІР°РЅРёРµ РєРѕРјРїРѕРЅРµРЅС‚Р°/
+ * /engine/components/С‚РёРї/РЅР°Р·РІР°РЅРёРµ РєРѕРјРїРѕРЅРµРЅС‚Р°/
  */
 function IncludeComponent($name, $template = "", $params = array()) {
     $temp = explode('\\', $name);
@@ -73,7 +73,7 @@ function IncludeComponent($name, $template = "", $params = array()) {
         };
     if ($result_cache) {
         //-----------------------------------------------------
-        //выбираем шаблон
+        //РІС‹Р±РёСЂР°РµРј С€Р°Р±Р»РѕРЅ
         //-----------------------------------------------------
         global $_selected_page;
         if (!isset($_selected_page['template_name']))
@@ -112,7 +112,7 @@ function IncludeComponent($name, $template = "", $params = array()) {
         $base_component_path2 = $_SERVER['DOCUMENT_ROOT'] . "/site/components/" . $type . "/" . $name . "/";
         $base_component_path3 = $_SERVER['DOCUMENT_ROOT'] . "/site/components/" . $name . "/";
         //-----------------------------------------------------
-        //закончили выбор шаблона
+        //Р·Р°РєРѕРЅС‡РёР»Рё РІС‹Р±РѕСЂ С€Р°Р±Р»РѕРЅР°
         //-----------------------------------------------------		
         if (file_exists($base_component_path3 . "index.php"))
             include($base_component_path3 . "index.php");
@@ -123,7 +123,7 @@ function IncludeComponent($name, $template = "", $params = array()) {
         elseif (file_exists($base_component_path . "index.php"))
             include($base_component_path . "index.php");
         else
-            SystemAlert("Не найден компонент <b>" . $type . "/" . $name . "</b>");
+            SystemAlert("РќРµ РЅР°Р№РґРµРЅ РєРѕРјРїРѕРЅРµРЅС‚ <b>" . $type . "/" . $name . "</b>");
 
         if (isset($params['cache']))
             if ($params['cache'])

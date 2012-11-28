@@ -28,9 +28,9 @@ class HTypeTable extends HFormTable {
 
             function addTableRow_meta(jQtable)
             {
-                addTableRow_spec(jQtable,"caption2","Заголовок","short_text",0,1,1,1);
+                addTableRow_spec(jQtable,"caption2","Р—Р°РіРѕР»РѕРІРѕРє","short_text",0,1,1,1);
                 addTableRow_spec(jQtable,"description","Description","wysiwyg_text",0,1,1,1);
-                addTableRow_spec(jQtable,"keywords","Ключевые слова","wysiwyg_text",0,1,1,1);
+                addTableRow_spec(jQtable,"keywords","РљР»СЋС‡РµРІС‹Рµ СЃР»РѕРІР°","wysiwyg_text",0,1,1,1);
             };
 
             function addTableRow_spec(jQtable,code_value,caption_value,type_value,multi,folder,not_in_list,meta){
@@ -39,12 +39,12 @@ class HTypeTable extends HFormTable {
                 var t_size=$(".tableform tr").size()-2;
                 	
                 /*
-                var code_value="code";			//код свойства
-                var caption_value="капшн";		//заголовок
-                var type_value="wysiwyg_html";	//тип
-                var multi=true;					//множественное
-                var folder=true;				//и папка тоже
-                var not_in_list=true;			//не в списке
+                var code_value="code";			//РєРѕРґ СЃРІРѕР№СЃС‚РІР°
+                var caption_value="РєР°РїС€РЅ";		//Р·Р°РіРѕР»РѕРІРѕРє
+                var type_value="wysiwyg_html";	//С‚РёРї
+                var multi=true;					//РјРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРµ
+                var folder=true;				//Рё РїР°РїРєР° С‚РѕР¶Рµ
+                var not_in_list=true;			//РЅРµ РІ СЃРїРёСЃРєРµ
                 var meta=true;					//meta
                  */
                 new_line=new_line.replace(new RegExp('name="name[[]]" value=""','g'),'name="name[]" value="'+code_value+'"');
@@ -69,12 +69,12 @@ class HTypeTable extends HFormTable {
         <form method=post>
             <input type=hidden name=token value=<?= $this->token ?>>
             
-            <input onclick="addTableRow('#tableform')" value="Добавить строчку" style="float:left;height:22px;width:15%;margin-right:10px;margin-bottom:10px;" class="btn btn-success">
+            <input onclick="addTableRow('#tableform')" value="Р”РѕР±Р°РІРёС‚СЊ СЃС‚СЂРѕС‡РєСѓ" style="float:left;height:22px;width:15%;margin-right:10px;margin-bottom:10px;" class="btn btn-success">
             <? if ($this->short_links){?>
-            <input onclick="addTableRow_meta('#tableform')" value="Добавить meta-тэги" style="float:left;height:22px;width:20%;margin-right:10px;margin-bottom:10px;" class="btn  btn-info">
+            <input onclick="addTableRow_meta('#tableform')" value="Р”РѕР±Р°РІРёС‚СЊ meta-С‚СЌРіРё" style="float:left;height:22px;width:20%;margin-right:10px;margin-bottom:10px;" class="btn  btn-info">
             <? global $_standard_element_fields; ?>
             <div class="btn-group" style="float:left;margin-right:10px;margin-bottom:10px;">
-                <button data-toggle="dropdown" style="height:32px;" class="btn dropdown-toggle">Добавить стандартное поле&nbsp;<span class="caret"></span></button>
+                <button data-toggle="dropdown" style="height:32px;" class="btn dropdown-toggle">Р”РѕР±Р°РІРёС‚СЊ СЃС‚Р°РЅРґР°СЂС‚РЅРѕРµ РїРѕР»Рµ&nbsp;<span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <?
                     foreach ($_standard_element_fields as $_stander_e_f) {
@@ -129,10 +129,10 @@ class HTypeTable extends HFormTable {
                     ?>
                     <? if ($this->edit_link_base != "#") {
                         $edit = $this->CreateLink($this->edit_link_base, $item);
-                        ?><td><a href=<?= $edit ?>>Изменить</a></td><? }; ?>
+                        ?><td><a href=<?= $edit ?>>РР·РјРµРЅРёС‚СЊ</a></td><? }; ?>
                     <? if ($this->delete_link_base != "#") {
                         $del = $this->CreateLink($this->delete_link_base, $item);
-                        ?><td><a onclick='return(window.confirm("Вы уверены, что хотите удалить?"))' href=<?= $del ?>>Удалить</a></td><? }; ?>
+                        ?><td><a onclick='return(window.confirm("Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ?"))' href=<?= $del ?>>РЈРґР°Р»РёС‚СЊ</a></td><? }; ?>
                 </tr>
                 <?
             };
@@ -171,7 +171,7 @@ class HTypeTable extends HFormTable {
         parent::DrawTableFooter();
         ?>
 
-        <BR><input type=submit value="Сохранить" style="float:left;height:26px;width:50%;" class="btn">
+        <BR><input type=submit value="РЎРѕС…СЂР°РЅРёС‚СЊ" style="float:left;height:26px;width:50%;" class="btn">
         </form>
         <?
     }

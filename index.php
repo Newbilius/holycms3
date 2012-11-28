@@ -1,7 +1,4 @@
 <?php
-//echo $_GET['path'];
-//require_once("engine/engine.php");
-//if ($_GET['path']=="") $_GET['path']="index.php";
 require_once("engine.php");
 global $_global_bread;
 
@@ -20,7 +17,7 @@ else {
     else
         $_GET['debug'] = 0;
 };
-$GTIMER1 = new CTimer("Время генерации страницы");
+$GTIMER1 = new CTimer("Р’СЂРµРјСЏ РіРµРЅРµСЂР°С†РёРё СЃС‚СЂР°РЅРёС†С‹");
 
 $H_USER = new DUser(1, "site_users", "email", "password", "holy_site");
 if ($H_USER->GetID() != 0)
@@ -28,19 +25,18 @@ if ($H_USER->GetID() != 0)
 else
     $user_info['id'] = false;
 
-//переменная никогда не будет пустой
+//РїРµСЂРµРјРµРЅРЅР°СЏ РЅРёРєРѕРіРґР° РЅРµ Р±СѓРґРµС‚ РїСѓСЃС‚РѕР№
 if (!isset($_GET['path']))
     $_GET['path'] = "index";
 
-//разбиваем путь на массив
+//СЂР°Р·Р±РёРІР°РµРј РїСѓС‚СЊ РЅР° РјР°СЃСЃРёРІ
 $path = explode("/", $_GET['path']);
 
-//если последний пустой, удаляем его
+//РµСЃР»Рё РїРѕСЃР»РµРґРЅРёР№ РїСѓСЃС‚РѕР№, СѓРґР°Р»СЏРµРј РµРіРѕ
 if (end($path) == "")
     unset($path[count($path) - 1]);
 
-//PrePrint($path);
-//число элементов
+//С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ
 $max_count = count($path) - 1;
 
 if (!isset($_OPTIONS['page_module']))
@@ -53,14 +49,11 @@ $find_end = false;
 $data['id'] = 0;
 foreach ($path as $i => $url)
     if (!$find_end) {
-        //$data=$inter->GetByID($url);
-        //$inter->sql->debug=true;
-        //$data=$inter->GetOne(Array("name"=>$url,"not_visible"=>0));
         $data = $inter->GetOne("name='" . $url . "' AND not_visible=0 AND parent=" . $data['id']);
         if (!isset($data['id']))
             $data['id'] = -1;
 
-        //если не найдено
+        //РµСЃР»Рё РЅРµ РЅР°Р№РґРµРЅРѕ
         if ($data['id'] == -1) {
             $selected_page = "e404";
             $find_end = true;
@@ -110,10 +103,9 @@ $template = $templ->GetByID($_selected_page['template']);
 
 $_selected_page['template_name'] = $template['name'];
 $_selected_page_old['template_name'] = $template['name'];
-//подключаем шаблон
+//РїРѕРґРєР»СЋС‡Р°РµРј С€Р°Р±Р»РѕРЅ
 //empty
-//PrePrint($_selected_page);
-//подгрузить настройки
+//РїРѕРґРіСЂСѓР·РёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё
 $_sp_opt = new DBlockElement("options");
 $_sp_opt->GetList();
 while ($options_temp = $_sp_opt->GetNext())
@@ -130,27 +122,22 @@ while ($options_temp = $_sp_opt->GetNext())
 if (isset($_selected_page['caption']))
     $_OPTIONS['page_title'] = $_selected_page['caption'];
 
-//preprint($_selected_page);
-//if (!isset($_selected_page['not_in_bread']))
-//$_global_bread[]=Array($_selected_page['caption']);
-
 if (isset($_selected_page['keywords']))
     if ($_selected_page['keywords'] != "")
         $_OPTIONS['keywords'] = $_selected_page['keywords'];
 
 //---------------------------------------
-//работаем с крошками
-//добавляем текущий элемент
+//СЂР°Р±РѕС‚Р°РµРј СЃ РєСЂРѕС€РєР°РјРё
+//РґРѕР±Р°РІР»СЏРµРј С‚РµРєСѓС‰РёР№ СЌР»РµРјРµРЅС‚
 if (!isset($_selected_page['not_in_bread']))
     $_selected_page['not_in_bread'] = 0;
 
 if (!$_selected_page['not_in_bread']) {
-//echo $_selected_page['name'];
     AddToBread($_selected_page['caption'], $_selected_page['name']);
     $global_current_link_array[] = $_selected_page['id'];
 };
 
-//работаем с папками - рекурсивно ищем уровень вложенности
+//СЂР°Р±РѕС‚Р°РµРј СЃ РїР°РїРєР°РјРё - СЂРµРєСѓСЂСЃРёРІРЅРѕ РёС‰РµРј СѓСЂРѕРІРµРЅСЊ РІР»РѕР¶РµРЅРЅРѕСЃС‚Рё
 $de_current = $_selected_page;
 $de_current_res = new DBlockElement("pages");
 if (isset($de_current))
@@ -159,7 +146,6 @@ if (isset($de_current))
             $de_current_res->GetList("id='" . $de_current['parent'] . "'");
             $de_current = $de_current_res->GetNext();
 
-            //pre_print($de_current);
             if (isset($de_current))
                 if (isset($de_current['caption']))
                     if ($de_current['caption']) {
@@ -168,19 +154,15 @@ if (isset($de_current))
                     };
         };
 if ($_selected_page['name'] != "index") {
-    //$first_page=new DBlockElement("pages");
-    //$first_page_item=$first_page->GetOne("name='index'");
     if (isset($_OPTIONS['f_bread']))
         if ($_OPTIONS['f_bread'])
             AddToBread($_OPTIONS['f_bread'], "/");
 };
 
-//pre_print($_global_bread);
 if (count($_global_bread) > 0)
     $_global_bread = array_reverse($_global_bread);
 
-//меняем ссылки
-//pre_print($_global_bread);
+//РјРµРЅСЏРµРј СЃСЃС‹Р»РєРё
 if (count($_global_bread) > 0) {
     foreach ($_global_bread as $i => $gb) {
         if (isset($_global_bread[$i - 1][1]))
@@ -190,25 +172,20 @@ if (count($_global_bread) > 0) {
                 $_global_bread[$i][1] = "/" . $_global_bread[$i][1];
         $_global_bread[$i][1] = str_replace("//", "/", $_global_bread[$i][1]);
 
-        //$_global_bread[$i][1].="/";
     };
 };
-//pre_print($_global_bread);
 //---------------------------------------
 
 ob_start();
-//echo $_selected_page['modules'];		
 if ($_selected_page['modules'] == "")
     $_selected_page['modules'] = "empty";
-//if ($_selected_page['modules']!="empty")
-//echo $_selected_page['modules'];		
 
 if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/site/modules/" . $_selected_page['modules'] . "/index.php"))
     include ($_SERVER['DOCUMENT_ROOT'] . "/site/modules/" . $_selected_page['modules'] . "/index.php");
 elseif (file_exists($_SERVER['DOCUMENT_ROOT'] . "/engine/modules/" . $_selected_page['modules'] . "/index.php"))
     include ($_SERVER['DOCUMENT_ROOT'] . "/engine/modules/" . $_selected_page['modules'] . "/index.php");
 else
-    SystemAlert("Не найден модуль <b>" . $_selected_page['modules'] . "</b>");
+    SystemAlert("РќРµ РЅР°Р№РґРµРЅ РјРѕРґСѓР»СЊ <b>" . $_selected_page['modules'] . "</b>");
 
 $page_text = ob_get_contents();
 ob_end_clean();
@@ -229,12 +206,8 @@ if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/site/templates/" . $template['name
 else
     include ($_SERVER['DOCUMENT_ROOT'] . "/engine/templates/" . $template['name'] . "/header.php");
 
-
-//if ($_selected_page['modules']!="empty")
-//$page_text=$_selected_page['detail_text'].$page_text;
 $page_text = str_replace('src="upload', 'src="/upload', $page_text);
 echo $page_text;
-
 
 if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/site/templates/" . $template['name'] . "/footer.php"))
     include ($_SERVER['DOCUMENT_ROOT'] . "/site/templates/" . $template['name'] . "/footer.php");
@@ -243,13 +216,13 @@ else
 
 
 
-$_DEBUG['Время генерации страницы'] = $GTIMER1->Stop();
+$_DEBUG['Р’СЂРµРјСЏ РіРµРЅРµСЂР°С†РёРё СЃС‚СЂР°РЅРёС†С‹'] = $GTIMER1->Stop();
 
 if ($_GET['debug'])
     if ($h_info) {
         ?>
         <HR><BR>
         <?
-        pre_print($_DEBUG);
+        preprint($_DEBUG);
     };
 ?>

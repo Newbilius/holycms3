@@ -1,6 +1,6 @@
 <?
 if ((!$H_USER->IsAdmin()) && (!$H_USER->CanRead($_GET['dblock'])))
-SystemAlertFatal("Недостаточно прав.");
+SystemAlertFatal("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ.");
 
 if (!isset($_GET['parent']))
 	$_GET['parent']=0;
@@ -22,13 +22,13 @@ if (($tmp_block['hide_folders2']) && (isset($_GET['parent'])))
 if ($tmp_block['hide_code'])
 	$show_code=false;
 	
-if (!isset($_GET['dblock'])) die("не выбран конкретный блок");
+if (!isset($_GET['dblock'])) die("РЅРµ РІС‹Р±СЂР°РЅ РєРѕРЅРєСЂРµС‚РЅС‹Р№ Р±Р»РѕРє");
 $user_ifno_holy=$H_USER->GetInfo();
 if (!$user_ifno_holy['block_control']) 
 {
 $not_editor_blocks=array("users","modules","cms_options");
 if (in_array($_GET['dblock'],$not_editor_blocks))
-die("недостаточно прав");
+die("РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ");
 
 
 }
@@ -170,7 +170,7 @@ if (isset($_POST['id'][0]))
 	if ($_POST['what_to_do']=="del")
 		{
 if ((!$H_USER->IsAdmin()) && (!$H_USER->CanDelete($_GET['dblock'])))
-SystemAlertFatal("Недостаточно прав.");
+SystemAlertFatal("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ.");
 			$gr= new DBlockElement(Array("table"=>$_GET['dblock']));
 			if (is_array($_POST['id']))
 			foreach ($_POST['id'] as $fid)
@@ -187,7 +187,7 @@ SystemAlertFatal("Недостаточно прав.");
 	if ($_POST['what_to_do']=="move")
 		{
             if ((!$H_USER->IsAdmin()) && (!$H_USER->CanEdit($_GET['dblock'])))
-SystemAlertFatal("Недостаточно прав.");
+SystemAlertFatal("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ.");
 			$gr= new DBlockElement(Array("table"=>$_GET['dblock']));
 			foreach ($_POST['id'] as $fid)
                         {
@@ -209,7 +209,7 @@ SystemAlertFatal("Недостаточно прав.");
 	if (isset($_GET['delete']))
 		{
 if ((!$H_USER->IsAdmin()) && (!$H_USER->CanDelete($_GET['dblock'])))
-SystemAlertFatal("Недостаточно прав.");
+SystemAlertFatal("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ.");
             
 			$gr= new DBlockElement(Array("table"=>$_GET['dblock']));
 			$_del_tmp=$gr->GetByID($_GET['delete']);
@@ -223,7 +223,7 @@ SystemAlertFatal("Недостаточно прав.");
                         ));
 			?>
 				<span style="color:green;">
-					Элемент <?=$_GET['delete']?> удалён
+					Р­Р»РµРјРµРЅС‚ <?=$_GET['delete']?> СѓРґР°Р»С‘РЅ
 				</span>
 			<?
 		};
@@ -285,11 +285,11 @@ SystemAlertFatal("Недостаточно прав.");
 	
 	$fields->GetListByBlock($_GET['dblock']);
 	
-	$table->Add(Array("name"=>"sort","caption"=>"Сортировка","type"=>"sort"));
+	$table->Add(Array("name"=>"sort","caption"=>"РЎРѕСЂС‚РёСЂРѕРІРєР°","type"=>"sort"));
 	$table->Add(Array("name"=>"id","caption"=>"ID","type"=>"short_text"));
 	if ($show_code)
-	$table->Add(Array("name"=>"name","caption"=>"Код","type"=>"short_text"));
-	$table->Add(Array("name"=>"caption","caption"=>"Название","type"=>"short_text"));
+	$table->Add(Array("name"=>"name","caption"=>"РљРѕРґ","type"=>"short_text"));
+	$table->Add(Array("name"=>"caption","caption"=>"РќР°Р·РІР°РЅРёРµ","type"=>"short_text"));
 	
 	while ($data=$fields->GetNext())
 		{

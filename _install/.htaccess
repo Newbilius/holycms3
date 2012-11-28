@@ -1,5 +1,5 @@
 DirectoryIndex index.html index.shtml index.pl index.cgi index.php
-AddDefaultCharset windows-1251
+AddDefaultCharset utf-8
 RewriteEngine On
 RewriteBase /
 RewriteRule ^cron - [L]

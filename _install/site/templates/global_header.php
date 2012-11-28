@@ -5,7 +5,7 @@
 <meta name="keywords" content="<?=$_OPTIONS['keywords']?>" />
 <title><?=$_OPTIONS['site_title']?></title>
 <meta name="description" content="<?=$_OPTIONS['description']?>">
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />	
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <script type="text/javascript" src="/engine/js/jquery.1.8.3.min.js"></script>

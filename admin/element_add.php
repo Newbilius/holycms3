@@ -13,10 +13,10 @@ parent.$.fancybox.close();
 }
 </script>
 <?
-if (!isset($_GET['dblock'])) die("не выбран конкретный блок");
+if (!isset($_GET['dblock'])) die("РЅРµ РІС‹Р±СЂР°РЅ РєРѕРЅРєСЂРµС‚РЅС‹Р№ Р±Р»РѕРє");
 
 if ((!$H_USER->IsAdmin()) && (!$H_USER->CanAdd($_GET['dblock'])))
-SystemAlertFatal("Недостаточно прав.");
+SystemAlertFatal("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ.");
 
 $block= new DBlock();
 $tmp_block=$block->GetByID($_GET['dblock']);
@@ -31,7 +31,7 @@ if (!$user_ifno_holy['block_control'])
 {
 $not_editor_blocks=array("users","modules","cms_options");
 if (in_array($_GET['dblock'],$not_editor_blocks))
-die("недостаточно прав");
+die("РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ");
 
 
 }
@@ -66,10 +66,10 @@ if (isset($tmp['caption']))
 	$fields=new DBlockFields();
 	$types= new DBlockTypes();
 	
-	$form->Add(Array("name"=>"caption","caption"=>"Название","type"=>"short_text",'required'=>1));
+	$form->Add(Array("name"=>"caption","caption"=>"РќР°Р·РІР°РЅРёРµ","type"=>"short_text",'required'=>1));
 	if ($show_code)
-	$form->Add(Array("name"=>"name","caption"=>"Код","type"=>"short_text",'required'=>1));
-	$form->Add(Array("name"=>"sort","caption"=>"Сортировка","type"=>"sort"));
+	$form->Add(Array("name"=>"name","caption"=>"РљРѕРґ","type"=>"short_text",'required'=>1));
+	$form->Add(Array("name"=>"sort","caption"=>"РЎРѕСЂС‚РёСЂРѕРІРєР°","type"=>"sort"));
 
 	$form->return_link="elements_list.php?dblock=".$_GET['dblock'];
 	if (isset($_GET['parent']))
@@ -110,7 +110,7 @@ if (isset($tmp['caption']))
 				include_once($_SERVER['DOCUMENT_ROOT']."/site/engine/admin/".$_GET['dblock']."_add.php");
 			?>
 				<span style="color:green;">
-					Элемент добавлен 
+					Р­Р»РµРјРµРЅС‚ РґРѕР±Р°РІР»РµРЅ 
 					<?=$form->return_link?>
 				</span>
 				<script>

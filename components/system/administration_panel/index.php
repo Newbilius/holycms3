@@ -1,7 +1,7 @@
 <?php 
 global $_global_bread;
 global $_PICTURES;
-$_global_bread[]=Array("¿‰ÏËÌËÒÚ‡ÚË‚Ì‡ˇ Ô‡ÌÂÎ¸","/engine/admin/");
+$_global_bread[]=Array("–ê–¥–º–∏–Ω–∏—Å—Ç—Ä–∞—Ç–∏–≤–Ω–∞—è –ø–∞–Ω–µ–ª—å","/engine/admin/");
 			ob_start( );
 			
 
@@ -24,7 +24,7 @@ include ($_SERVER['DOCUMENT_ROOT']."/engine/admin/".$selected_module.".php");
 			$global_page_text = ob_get_contents();
 			ob_end_clean( );
 }else
-SystemAlert("ÕÂ Ì‡È‰ÂÌ ÏÓ‰ÛÎ¸ ÒËÒÚÂÏ˚ ‡‰ÏËÌËÒÚËÓ‚‡ÌËˇ: <b>".$selected_module."</b>");
+SystemAlert("–ù–µ –Ω–∞–π–¥–µ–Ω –º–æ–¥—É–ª—å —Å–∏—Å—Ç–µ–º—ã –∞–¥–º–∏–Ω–∏—Å—Ç—Ä–∏—Ä–æ–≤–∞–Ω–∏—è: <b>".$selected_module."</b>");
 
 //PrePrint($_global_bread);
 include($full_template_path);

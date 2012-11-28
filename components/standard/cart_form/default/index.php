@@ -13,9 +13,9 @@ if ($user->IsAuth()) {
 
 if (isset($_POST['go'])) {
     $valid = new HolyValidator(Array(
-                "fio" => "Имя",
+                "fio" => "РРјСЏ",
                 "email" => "e-mail",
-                "text" => "текст",
+                "text" => "С‚РµРєСЃС‚",
             ));
 
     $valid->AddRule("not_empty", 'fio')
@@ -30,9 +30,9 @@ if (isset($_POST['go'])) {
     if ($errors === true) {
 
         $back_email = "info@" . $_SERVER['HTTP_HOST'];
-        $mail_text = "ФИО:" . $_POST["fio"] . "<BR>";
+        $mail_text = "Р¤РРћ:" . $_POST["fio"] . "<BR>";
         $mail_text.="E-mail:" . $_POST["email"] . "<BR>";
-        $mail_text.="Данные для доставки:<BR>" . $_POST["text"] . "<BR>";
+        $mail_text.="Р”Р°РЅРЅС‹Рµ РґР»СЏ РґРѕСЃС‚Р°РІРєРё:<BR>" . $_POST["text"] . "<BR>";
 
         $cookie_work = new HolyCookie($params['cookie_var']);
         $array_of_items = $cookie_work->GetArray();
@@ -60,16 +60,16 @@ if (isset($_POST['go'])) {
     <table border="1" width="100%">
         <tr align="center">
             <td>
-                Название
+                РќР°Р·РІР°РЅРёРµ
             </td>
             <td>
-                Цена
+                Р¦РµРЅР°
             </td>
             <td>
-                Число
+                Р§РёСЃР»Рѕ
             </td>
             <td>
-                Сумма
+                РЎСѓРјРјР°
             </td>
         </tr>';
 
@@ -99,24 +99,24 @@ if (isset($_POST['go'])) {
 
 
             $mail_text.='</table><br>';
-            $mail_text.="Общая сумма: " . $all_summ;
+            $mail_text.="РћР±С‰Р°СЏ СЃСѓРјРјР°: " . $all_summ;
         }
 
 
         global $_OPTIONS;
 
-        HolyMail($back_email, $_OPTIONS['mail'], "Создан заказ", $mail_text);
+        HolyMail($back_email, $_OPTIONS['mail'], "РЎРѕР·РґР°РЅ Р·Р°РєР°Р·", $mail_text);
 
-        $mail_text = "Поздравляю, ваш заказ принят! Скоро с вами свяжутся!";
+        $mail_text = "РџРѕР·РґСЂР°РІР»СЏСЋ, РІР°С€ Р·Р°РєР°Р· РїСЂРёРЅСЏС‚! РЎРєРѕСЂРѕ СЃ РІР°РјРё СЃРІСЏР¶СѓС‚СЃСЏ!";
 
-        HolyMail($back_email, $_POST["email"], "Ваш заказ принят!", $mail_text);
+        HolyMail($back_email, $_POST["email"], "Р’Р°С€ Р·Р°РєР°Р· РїСЂРёРЅСЏС‚!", $mail_text);
 
         unset($_POST);
         $_POST = array();
         if ($params['back_cart_url'])
             Redirect($params['back_cart_url'] . "?complete=1", true);
         $cookie_work->Delete();
-        echo "<p style='color:green'>сообщение отправлено успешно</p>";
+        echo "<p style='color:green'>СЃРѕРѕР±С‰РµРЅРёРµ РѕС‚РїСЂР°РІР»РµРЅРѕ СѓСЃРїРµС€РЅРѕ</p>";
     } else {
         foreach ($errors as $error) {
             ?>
@@ -134,15 +134,15 @@ $_POST = fill_empty_array($_POST, Array(
 ?>
 
 <form method="post">
-    Ваше имя:<br>
+    Р’Р°С€Рµ РёРјСЏ:<br>
     <input name="fio" value="<? echo $_POST['fio'] ?>" style="width: 300px;"><br>
 
     E-mail:<br>
     <input name="email" value="<? echo $_POST['email'] ?>" style="width: 300px;"><br>
 
-    Адрес и дополнительные данные:<br>
+    РђРґСЂРµСЃ Рё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РґР°РЅРЅС‹Рµ:<br>
     <textarea name="text" style="width: 300px;"><? echo $_POST['text'] ?></textarea><br> 
 
-    <input type="submit" value="Заказть">
+    <input type="submit" value="Р—Р°РєР°Р·С‚СЊ">
     <input type="hidden" name="go" value="1">
 </form>

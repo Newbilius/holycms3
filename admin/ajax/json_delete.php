@@ -14,7 +14,7 @@ if (isset($_GET['delete_path'])) {
         unlink($full_name);
     }
     else
-        echo "êàê ýòî?";
+        echo "ÐºÐ°Ðº ÑÑ‚Ð¾?";
 }
 };
 ?>

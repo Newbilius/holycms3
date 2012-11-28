@@ -19,13 +19,13 @@ class CForm_image extends CForm_Text {
         <div class="inner_foto">
             <ul class="tabs tabs2 nav nav-pills" style="padding-left:0px;">
                 <li class="fileimg1_button_li active" style="cursor:pointer;">
-                    <a class="fileimg1_button">Загрузить файл</a>
+                    <a class="fileimg1_button">Р—Р°РіСЂСѓР·РёС‚СЊ С„Р°Р№Р»</a>
                 </li>
-                <li style="cursor:pointer;" class="fileimg2_button_li"><a class="fileimg2_button">Выбрать файл</a></li>
+                <li style="cursor:pointer;" class="fileimg2_button_li"><a class="fileimg2_button">Р’С‹Р±СЂР°С‚СЊ С„Р°Р№Р»</a></li>
             </ul>
 
             <input class="fileimg1" type="file" name=<?= $name ?><? if ($multiple) { ?>[]<? }; ?> />
-            <input class="fileimg2" type="text" name=<?= $name ?>_MANUAL<? if ($multiple) { ?>[]<? }; ?> value="" /><a class="btn file_img_select fileimg2" style="margin-top:-0px;">Выбрать файл</a>			
+            <input class="fileimg2" type="text" name=<?= $name ?>_MANUAL<? if ($multiple) { ?>[]<? }; ?> value="" /><a class="btn file_img_select fileimg2" style="margin-top:-0px;">Р’С‹Р±СЂР°С‚СЊ С„Р°Р№Р»</a>			
         </div>
         <?
     }
@@ -36,9 +36,9 @@ class CForm_image extends CForm_Text {
         <div class="inner_foto">
             <ul class="tabs tabs2 nav nav-pills" style="padding-left:0px;">
                 <li class="fileimg1_button_li active" style="cursor:pointer;">
-                    <a class="fileimg1_button">Загрузить файл</a>
+                    <a class="fileimg1_button">Р—Р°РіСЂСѓР·РёС‚СЊ С„Р°Р№Р»</a>
                 </li>
-                <li style="cursor:pointer;" class="fileimg2_button_li"><a class="fileimg2_button">Выбрать файл</a></li>
+                <li style="cursor:pointer;" class="fileimg2_button_li"><a class="fileimg2_button">Р’С‹Р±СЂР°С‚СЊ С„Р°Р№Р»</a></li>
             </ul>
             <?
             global $_global_counter;
@@ -59,12 +59,12 @@ class CForm_image extends CForm_Text {
                     [$name] != "")
                 echo $_global_counter[$name]
                     ?>]<? }; ?> value="" />
-            <a class="btn file_img_select fileimg2" style="margin-top:-0px;">Выбрать файл</a>
+            <a class="btn file_img_select fileimg2" style="margin-top:-0px;">Р’С‹Р±СЂР°С‚СЊ С„Р°Р№Р»</a>
 
             <input class="fileimg1" type="file" name=<?= $name ?><? if ($multiple) { ?>[<? if ($data[$name] != "") echo $_global_counter[$name] ?>]<? }; ?> />
             <? if ($data[$name] != "") { ?>
-                <BR><a href='<?= $data[$name] ?>' target=_new>Полный размер</a><BR>
-                <input type="checkbox" name=<?= $name ?>_DELETE<? if ($multiple) { ?>[<?= $_global_counter[$name] ?>]<? }; ?> value="<?= $data[$name] ?>" /> Удалить<BR><BR>
+                <BR><a href='<?= $data[$name] ?>' target=_new>РџРѕР»РЅС‹Р№ СЂР°Р·РјРµСЂ</a><BR>
+                <input type="checkbox" name=<?= $name ?>_DELETE<? if ($multiple) { ?>[<?= $_global_counter[$name] ?>]<? }; ?> value="<?= $data[$name] ?>" /> РЈРґР°Р»РёС‚СЊ<BR><BR>
             <? } ?>
         </div>
         <?

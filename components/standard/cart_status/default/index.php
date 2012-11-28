@@ -2,15 +2,15 @@
 if ($_count >0) {
     $cost_full=0;
     ?>
-    Товаров в корзине: <? echo $all_count;?>
+    РўРѕРІР°СЂРѕРІ РІ РєРѕСЂР·РёРЅРµ: <? echo $all_count;?>
     <br>
-    Сумма в корзине: <? echo $all_summ;?>
+    РЎСѓРјРјР° РІ РєРѕСЂР·РёРЅРµ: <? echo $all_summ;?>
     <br>
-    <a href="<? echo $params['cart_url']?>">Перейти в корзину</a>
+    <a href="<? echo $params['cart_url']?>">РџРµСЂРµР№С‚Рё РІ РєРѕСЂР·РёРЅСѓ</a>
     <?
 } else {
     ?>
-    <a href="<? echo $params['cart_url']?>">Корзина пуста.</a>
+    <a href="<? echo $params['cart_url']?>">РљРѕСЂР·РёРЅР° РїСѓСЃС‚Р°.</a>
     <?
 }
 ?>

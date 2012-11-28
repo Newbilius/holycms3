@@ -162,7 +162,7 @@ function PrintArrayLeftMenuBlock($array0) {
                             </li>
                                 <?
                             }
-                        //внутри нужно будет вызывать показ папок и элементов... позже
+                        //РІРЅСѓС‚СЂРё РЅСѓР¶РЅРѕ Р±СѓРґРµС‚ РІС‹Р·С‹РІР°С‚СЊ РїРѕРєР°Р· РїР°РїРѕРє Рё СЌР»РµРјРµРЅС‚РѕРІ... РїРѕР·Р¶Рµ
                         ?>
                 </ul></li>
                 <? }; ?>
@@ -177,9 +177,9 @@ function PrintArrayLeftMenuBlock($array0) {
 <? if ($user_info['block_control']) { ?>
     <ul class="tabs tabs1 nav nav-pills" style="padding-left:0px;">
         <li class="t1 active">
-            <a href="#">Данные</a>
+            <a href="#">Р”Р°РЅРЅС‹Рµ</a>
         </li>
-        <li class="t2"><a href="#">Настройки</a></li>
+        <li class="t2"><a href="#">РќР°СЃС‚СЂРѕР№РєРё</a></li>
     </ul>
     <script>
         //$(".t1_div").hide();
@@ -223,7 +223,7 @@ function PrintArrayLeftMenuBlock($array0) {
 if ((isset($fav)) || (count($_menu_best['before']) > 0) || (count($_menu_best['after']) > 0)) {
     ?>
         <div class="well sidebar-nav">
-            <h3>Избранные блоки данных</h3>
+            <h3>РР·Р±СЂР°РЅРЅС‹Рµ Р±Р»РѕРєРё РґР°РЅРЅС‹С…</h3>
             <ul class="nav nav-list">
 
     <? if (isset($_menu_best['before'])) foreach ($_menu_best['before'] as $m_item) {
@@ -241,7 +241,7 @@ if ((isset($fav)) || (count($_menu_best['before']) > 0) || (count($_menu_best['a
             </ul>
         </div>
     <? }; ?>
-    <h3>Управление данными</h3>
+    <h3>РЈРїСЂР°РІР»РµРЅРёРµ РґР°РЅРЅС‹РјРё</h3>
     <div id=f1 name=f1>
         <ul class="p_class filetree filetree_data">
             <? if (isset($_menu1['before'])) foreach ($_menu1['before'] as $m_item) {
@@ -261,14 +261,14 @@ if ((isset($fav)) || (count($_menu_best['before']) > 0) || (count($_menu_best['a
 </div>
 <div class="t2_div"  style="display:none;">
     <? if ($user_info['block_control']) { ?>
-        <h3>Управление настройками</h3>
+        <h3>РЈРїСЂР°РІР»РµРЅРёРµ РЅР°СЃС‚СЂРѕР№РєР°РјРё</h3>
                 <? $count_id_tree++; ?>
         <div id=f2 name=f2>
             <ul class="p_class filetree">
                         <? if (isset($_menu2['before'])) foreach ($_menu2['before'] as $m_item) {
                                 $count_id_tree++; ?><li id="tree_<?= $count_id_tree ?>" class=sys3><a class=ajax href="<?= $m_item[0] ?>"><?= $m_item[1] ?></a></li><? }; ?>
                         <? $count_id_tree++; ?>
-                <li rel="main" id="tree_<?= $count_id_tree ?>"><a class=ajax href=group_list.php>Блоки</a><ul>
+                <li rel="main" id="tree_<?= $count_id_tree ?>"><a class=ajax href=group_list.php>Р‘Р»РѕРєРё</a><ul>
     <?
     PrintArrayLeftMenuBlock($groups);
     ?>

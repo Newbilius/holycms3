@@ -2,9 +2,9 @@
 require_once("../engine.php");
 
 global $_global_bread;
-$_global_bread[] = Array("Экспорт данных в SQL");
+$_global_bread[] = Array("Р­РєСЃРїРѕСЂС‚ РґР°РЅРЅС‹С… РІ SQL");
 
-//получить список групп датаблоков
+//РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РіСЂСѓРїРї РґР°С‚Р°Р±Р»РѕРєРѕРІ
 $groups = new DBlockGroup();
 $groups->GetList();
 $groups_list = $groups->GetFullList();
@@ -18,7 +18,7 @@ if (isset($_POST['go'])) {
         ?>
         <div class="alert alert-error fade in" style="max-width:400px;">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            Не выбран ни один блок данных, нечего экспортировать.
+            РќРµ РІС‹Р±СЂР°РЅ РЅРё РѕРґРёРЅ Р±Р»РѕРє РґР°РЅРЅС‹С…, РЅРµС‡РµРіРѕ СЌРєСЃРїРѕСЂС‚РёСЂРѕРІР°С‚СЊ.
         </div>
         <?
     } else {
@@ -34,7 +34,7 @@ if (isset($_POST['go'])) {
         ?>
         <div class="alert alert-success fade in" style="max-width:400px;">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            Файл экспорта сохранен. <a href="<?= $fname ?>">Скачать файл.</a>
+            Р¤Р°Р№Р» СЌРєСЃРїРѕСЂС‚Р° СЃРѕС…СЂР°РЅРµРЅ. <a href="<?= $fname ?>">РЎРєР°С‡Р°С‚СЊ С„Р°Р№Р».</a>
         </div>
         <?
     }
@@ -68,8 +68,8 @@ if (isset($_POST['go'])) {
             </li>
             <?
         }
-//получить список датаблоков в группе
+//РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РґР°С‚Р°Р±Р»РѕРєРѕРІ РІ РіСЂСѓРїРїРµ
         ?>
     </ul>
-    <input name=submit type=submit value="Запустить экспорт" style="width:40%;HEIGHT:28px;" class="btn btn-success">
+    <input name=submit type=submit value="Р—Р°РїСѓСЃС‚РёС‚СЊ СЌРєСЃРїРѕСЂС‚" style="width:40%;HEIGHT:28px;" class="btn btn-success">
 </form>

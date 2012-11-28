@@ -2,7 +2,7 @@
 require_once("../engine.php");
 
 global $_global_bread;
-$_global_bread[] = Array("Импорт данных из SQL");
+$_global_bread[] = Array("РРјРїРѕСЂС‚ РґР°РЅРЅС‹С… РёР· SQL");
 
 $groups = new DBlockGroup();
 $groups->GetList();
@@ -14,7 +14,7 @@ if (isset($_POST['go'])) {
         ?>
         <div class="alert alert-success fade in" style="max-width:400px;">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            Файл успешно (надеюсь) импортирован.
+            Р¤Р°Р№Р» СѓСЃРїРµС€РЅРѕ (РЅР°РґРµСЋСЃСЊ) РёРјРїРѕСЂС‚РёСЂРѕРІР°РЅ.
         </div>
         <?
     }
@@ -23,9 +23,9 @@ if (isset($_POST['go'])) {
 
 <form method=post enctype="multipart/form-data">
     <input type=hidden name=go value=1>
-    Файл импорта:<br>
+    Р¤Р°Р№Р» РёРјРїРѕСЂС‚Р°:<br>
 
     <input type=file name=xml_file>
 
-    <input type=submit value="Начать импорт" class="btn">
+    <input type=submit value="РќР°С‡Р°С‚СЊ РёРјРїРѕСЂС‚" class="btn">
 </form>

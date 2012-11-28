@@ -4,7 +4,7 @@ $holy_sql_cache = Array();
 $holy_sql_cache_count = Array();
 
 /**
- * Класс для работы с базой.
+ * РљР»Р°СЃСЃ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ Р±Р°Р·РѕР№.
  * 
  */
 class HolySQL {
@@ -12,7 +12,7 @@ class HolySQL {
     var $table;
     var $res;
     var $error;
-    var $debug; //выводить ли в процессе отладочные сообщения
+    var $debug; //РІС‹РІРѕРґРёС‚СЊ Р»Рё РІ РїСЂРѕС†РµСЃСЃРµ РѕС‚Р»Р°РґРѕС‡РЅС‹Рµ СЃРѕРѕР±С‰РµРЅРёСЏ
     var $safe;
     var $temp_clear_cache;
     var $counter;
@@ -20,52 +20,54 @@ class HolySQL {
     var $last_id;
 
     /**
-     * Добавляет в таблицу новый столбец
+     * Р”РѕР±Р°РІР»СЏРµС‚ РІ С‚Р°Р±Р»РёС†Сѓ РЅРѕРІС‹Р№ СЃС‚РѕР»Р±РµС†
      * 
-     * @param string $name  <p>имя колонки</p>
-     * @param string $type  <p>SQL-тип колонки</p>
+     * @param string $name  <p>РёРјСЏ РєРѕР»РѕРЅРєРё</p>
+     * @param string $type  <p>SQL-С‚РёРї РєРѕР»РѕРЅРєРё</p>
      * 
-     * @return bool результат запроса
+     * @return bool СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїСЂРѕСЃР°
      */
     function AddColumn($name, $type) {
         global $holy_sql_cache;
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
 
-        DebugADD("SQL запросов");
+        DebugADD("SQL Р·Р°РїСЂРѕСЃРѕРІ");
 
         $table = $this->table;
 
+		global $_CONFIG;
+		
         if (($type == "TEXT") || ($type == "LONGTEXT"))
-            $type.=" CHARACTER SET cp1251 COLLATE cp1251_general_ci ";
+            $type.=" CHARACTER SET ".$_CONFIG['CODEPAGE']." COLLATE ".$_CONFIG['COLLATE']." ";
 
         $query = "ALTER TABLE `" . $table . "` ADD `" . $name . "` " . $type . " NOT NULL";
 
         if ($this->debug)
             echo "<pre>" . $query . "</pre>";
 
-        DebugAddValue('команды', $query);
+        DebugAddValue('РєРѕРјР°РЅРґС‹', $query);
         $this->ClearCache();
         return mysql_query($query);
     }
 
     /**
-     * Переименовывает колонку в таблице, одновременно меняет тип
+     * РџРµСЂРµРёРјРµРЅРѕРІС‹РІР°РµС‚ РєРѕР»РѕРЅРєСѓ РІ С‚Р°Р±Р»РёС†Рµ, РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ РјРµРЅСЏРµС‚ С‚РёРї
      * 
-     * @param string $oldname  <p>текущее имя колонки</p>
-     * @param string $newname  <p>новое имя колонки</p>
-     * @param string $type  <p>SQL-тип колонки</p>
+     * @param string $oldname  <p>С‚РµРєСѓС‰РµРµ РёРјСЏ РєРѕР»РѕРЅРєРё</p>
+     * @param string $newname  <p>РЅРѕРІРѕРµ РёРјСЏ РєРѕР»РѕРЅРєРё</p>
+     * @param string $type  <p>SQL-С‚РёРї РєРѕР»РѕРЅРєРё</p>
      * 
-     * @return bool результат запроса
+     * @return bool СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїСЂРѕСЃР°
      */
     function RenameColumn($oldname, $newname, $type) {
-        DebugADD("SQL запросов");
+        DebugADD("SQL Р·Р°РїСЂРѕСЃРѕРІ");
 
         global $holy_sql_cache;
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
 
-        DebugADD("SQL запросов");
+        DebugADD("SQL Р·Р°РїСЂРѕСЃРѕРІ");
 
         $table = $this->table;
 
@@ -74,24 +76,24 @@ class HolySQL {
         if ($this->debug)
             echo "<pre>" . $query . "</pre>";
 
-        DebugAddValue('команды', $query);
+        DebugAddValue('РєРѕРјР°РЅРґС‹', $query);
         $this->ClearCache();
         return mysql_query($query);
     }
 
     /**
-     * Удаляет колонку из таблицы
+     * РЈРґР°Р»СЏРµС‚ РєРѕР»РѕРЅРєСѓ РёР· С‚Р°Р±Р»РёС†С‹
      * 
-     * @param string $name  <p>имя колонки</p>
+     * @param string $name  <p>РёРјСЏ РєРѕР»РѕРЅРєРё</p>
      * 
-     * @return bool результат запроса
+     * @return bool СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїСЂРѕСЃР°
      */
     function DeleteColumn($name) {
         global $holy_sql_cache;
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
 
-        DebugADD("SQL запросов");
+        DebugADD("SQL Р·Р°РїСЂРѕСЃРѕРІ");
 
         $table = $this->table;
 
@@ -100,17 +102,17 @@ class HolySQL {
         if ($this->debug)
             echo "<pre>" . $query . "</pre>";
 
-        DebugAddValue('команды', $query);
+        DebugAddValue('РєРѕРјР°РЅРґС‹', $query);
         $this->ClearCache();
         return mysql_query($query);
     }
 
     /**
-     * Переключает текущую таблицу
+     * РџРµСЂРµРєР»СЋС‡Р°РµС‚ С‚РµРєСѓС‰СѓСЋ С‚Р°Р±Р»РёС†Сѓ
      * 
-     * @param string $name  <p>имя таблицы</p>
+     * @param string $name  <p>РёРјСЏ С‚Р°Р±Р»РёС†С‹</p>
      * 
-     * @return bool результат запроса
+     * @return bool СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїСЂРѕСЃР°
      */
     function ChangeTable($name) {
         global $holy_sql_cache;
@@ -124,9 +126,9 @@ class HolySQL {
     }
 
     /**
-     * Конструктор
+     * РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
      * 
-     * @param string $name  <p>имя таблицы</p>
+     * @param string $name  <p>РёРјСЏ С‚Р°Р±Р»РёС†С‹</p>
      */
     function HolySQL($name = "") {
         $this->table = $name;
@@ -137,16 +139,16 @@ class HolySQL {
     }
 
     /**
-     * Запрос на получение данных
+     * Р—Р°РїСЂРѕСЃ РЅР° РїРѕР»СѓС‡РµРЅРёРµ РґР°РЅРЅС‹С…
      * 
-     * @param string/array $where  <p>список условий</p>
-     * @param string $order_by  <p>по какому столбцу сортировать</p>
-     * @param string/array $what  <p>список столбцов для получения данных</p>
-     * @param int $count_on_page  <p>число элементов на странице</p>
-     * @param int $page  <p>страница постраничной</p>
+     * @param string/array $where  <p>СЃРїРёСЃРѕРє СѓСЃР»РѕРІРёР№</p>
+     * @param string $order_by  <p>РїРѕ РєР°РєРѕРјСѓ СЃС‚РѕР»Р±С†Сѓ СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ</p>
+     * @param string/array $what  <p>СЃРїРёСЃРѕРє СЃС‚РѕР»Р±С†РѕРІ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РґР°РЅРЅС‹С…</p>
+     * @param int $count_on_page  <p>С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ РЅР° СЃС‚СЂР°РЅРёС†Рµ</p>
+     * @param int $page  <p>СЃС‚СЂР°РЅРёС†Р° РїРѕСЃС‚СЂР°РЅРёС‡РЅРѕР№</p>
      */
     function Select($where = "1", $order_by = "sort ASC", $what = "*", $count_on_page = 0, $page = 0) {
-        DebugADD("SQL запросов");
+        DebugADD("SQL Р·Р°РїСЂРѕСЃРѕРІ");
 
         $table = $this->table;
 
@@ -196,8 +198,8 @@ class HolySQL {
         $this->current_index = $query;
 
         if (!isset($holy_sql_cache[$query])) {
-            DebugADD("SQL запросов");
-            DebugAddValue('команды', $query);
+            DebugADD("SQL Р·Р°РїСЂРѕСЃРѕРІ");
+            DebugAddValue('РєРѕРјР°РЅРґС‹', $query);
             $this->res = mysql_query($query);
             if ($this->res) {
                 while ($row = mysql_fetch_array($this->res)) {
@@ -224,7 +226,7 @@ class HolySQL {
     }
 
     /**
-     * Получение следующего элемента после запроса.
+     * РџРѕР»СѓС‡РµРЅРёРµ СЃР»РµРґСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РїРѕСЃР»Рµ Р·Р°РїСЂРѕСЃР°.
      * 
      * @return array
      */
@@ -243,7 +245,7 @@ class HolySQL {
     }
 
     /**
-     * Получение списка полученных запросом элементов
+     * РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° РїРѕР»СѓС‡РµРЅРЅС‹С… Р·Р°РїСЂРѕСЃРѕРј СЌР»РµРјРµРЅС‚РѕРІ
      * 
      * @return int
      */
@@ -256,9 +258,9 @@ class HolySQL {
     }
 
     /**
-     * Получает значение для поля 'sort' или выбранного, на 100 больше предыдущего
+     * РџРѕР»СѓС‡Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ РїРѕР»СЏ 'sort' РёР»Рё РІС‹Р±СЂР°РЅРЅРѕРіРѕ, РЅР° 100 Р±РѕР»СЊС€Рµ РїСЂРµРґС‹РґСѓС‰РµРіРѕ
      * 
-     * @param string $sort_name='sort' <p>[не обязательное] имя поля</p>
+     * @param string $sort_name='sort' <p>[РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ] РёРјСЏ РїРѕР»СЏ</p>
      * @return int
      */
     function GetSortAuto($sort_name = 'sort') {
@@ -269,11 +271,11 @@ class HolySQL {
     }
 
     /**
-     * Возвращает массив с одиночным элементом
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ РјР°СЃСЃРёРІ СЃ РѕРґРёРЅРѕС‡РЅС‹Рј СЌР»РµРјРµРЅС‚РѕРј
      * 
-     * @param string/array $where  <p>список условий</p>
-     * @param string $order_by  <p>по какому столбцу сортировать</p>
-     * @param string/array $what  <p>список столбцов для получения данных</p>
+     * @param string/array $where  <p>СЃРїРёСЃРѕРє СѓСЃР»РѕРІРёР№</p>
+     * @param string $order_by  <p>РїРѕ РєР°РєРѕРјСѓ СЃС‚РѕР»Р±С†Сѓ СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ</p>
+     * @param string/array $what  <p>СЃРїРёСЃРѕРє СЃС‚РѕР»Р±С†РѕРІ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РґР°РЅРЅС‹С…</p>
      * 
      * @return array
      */
@@ -284,31 +286,31 @@ class HolySQL {
     }
 
     /**
-     * Возвращает массив с одиночным элементом
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ РјР°СЃСЃРёРІ СЃ РѕРґРёРЅРѕС‡РЅС‹Рј СЌР»РµРјРµРЅС‚РѕРј
      * 
-     * @param string/array $where  <p>список условий</p>
-     * @param string $order_by  <p>по какому столбцу сортировать</p>
-     * @param string/array $what  <p>список столбцов для получения данных</p>
+     * @param string/array $where  <p>СЃРїРёСЃРѕРє СѓСЃР»РѕРІРёР№</p>
+     * @param string $order_by  <p>РїРѕ РєР°РєРѕРјСѓ СЃС‚РѕР»Р±С†Сѓ СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ</p>
+     * @param string/array $what  <p>СЃРїРёСЃРѕРє СЃС‚РѕР»Р±С†РѕРІ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РґР°РЅРЅС‹С…</p>
      * 
      * @return array
      */
-//@fix избавиться от функции-дублёра
+//@fix РёР·Р±Р°РІРёС‚СЊСЃСЏ РѕС‚ С„СѓРЅРєС†РёРё-РґСѓР±Р»С‘СЂР°
     function SelectOne($where = "1", $order_by = "sort ASC", $what = "*") {
         return $this->SelectOnce($where, $order_by, $what);
     }
 
     /**
-     * Вставляет в таблицу строку
+     * Р’СЃС‚Р°РІР»СЏРµС‚ РІ С‚Р°Р±Р»РёС†Сѓ СЃС‚СЂРѕРєСѓ
      * 
-     * @param array $values  <p>данные, массив вида столбец=>значение</p>
+     * @param array $values  <p>РґР°РЅРЅС‹Рµ, РјР°СЃСЃРёРІ РІРёРґР° СЃС‚РѕР»Р±РµС†=>Р·РЅР°С‡РµРЅРёРµ</p>
      * 
-     * @return bool результат запроса
+     * @return bool СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїСЂРѕСЃР°
      */
     function Insert($values) {
         global $holy_sql_cache;
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
-        DebugADD("SQL запросов");
+        DebugADD("SQL Р·Р°РїСЂРѕСЃРѕРІ");
 
         $table = $this->table;
 
@@ -336,7 +338,7 @@ class HolySQL {
         $query = "INSERT INTO " . $table . " (" . $names . ") VALUES (" . $value_names . ")";
         if ($this->debug)
             echo "<pre>" . $query . "</pre>";
-        DebugAddValue('команды', $query);
+        DebugAddValue('РєРѕРјР°РЅРґС‹', $query);
         $this->ClearCache();
         $_tmp = mysql_query($query);
         $this->last_id = mysql_insert_id();
@@ -344,17 +346,17 @@ class HolySQL {
     }
 
     /**
-     * Выполняет произвольный запрос
+     * Р’С‹РїРѕР»РЅСЏРµС‚ РїСЂРѕРёР·РІРѕР»СЊРЅС‹Р№ Р·Р°РїСЂРѕСЃ
      * 
-     * @param string $query  <p>запрос</p>
+     * @param string $query  <p>Р·Р°РїСЂРѕСЃ</p>
      * 
-     * @return bool результат запроса
+     * @return bool СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїСЂРѕСЃР°
      */
     function Query($query) {
         global $holy_sql_cache;
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
-        DebugADD("SQL запросов");
+        DebugADD("SQL Р·Р°РїСЂРѕСЃРѕРІ");
 
         if ($this->debug)
             echo "<pre>" . $query . "</pre>";
@@ -364,8 +366,8 @@ class HolySQL {
         $this->current_index = $query;
 
         if (!isset($holy_sql_cache[$query])) {
-            DebugADD("SQL запросов");
-            DebugAddValue('команды', $query);
+            DebugADD("SQL Р·Р°РїСЂРѕСЃРѕРІ");
+            DebugAddValue('РєРѕРјР°РЅРґС‹', $query);
             //echo "<HR>1:".$query.":2<HR>";
             $this->res = mysql_query($query);
             if (($this->res) && (strpos($query, 'CREATE TABLE') === FALSE) && (strpos($query, 'DROP TABLE') === FALSE)) {
@@ -396,18 +398,18 @@ class HolySQL {
     }
 
     /**
-     * Обновляет данные в таблице
+     * РћР±РЅРѕРІР»СЏРµС‚ РґР°РЅРЅС‹Рµ РІ С‚Р°Р±Р»РёС†Рµ
      * 
-     * @param string/array $where  <p>условие, массив вида столбец=>значение или просто SQL-строка</p>
-     * @param string/array $values  <p>данные, массив вида столбец=>значение или просто SQL-строка</p>
+     * @param string/array $where  <p>СѓСЃР»РѕРІРёРµ, РјР°СЃСЃРёРІ РІРёРґР° СЃС‚РѕР»Р±РµС†=>Р·РЅР°С‡РµРЅРёРµ РёР»Рё РїСЂРѕСЃС‚Рѕ SQL-СЃС‚СЂРѕРєР°</p>
+     * @param string/array $values  <p>РґР°РЅРЅС‹Рµ, РјР°СЃСЃРёРІ РІРёРґР° СЃС‚РѕР»Р±РµС†=>Р·РЅР°С‡РµРЅРёРµ РёР»Рё РїСЂРѕСЃС‚Рѕ SQL-СЃС‚СЂРѕРєР°</p>
      * 
-     * @return bool результат запроса
+     * @return bool СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїСЂРѕСЃР°
      */
     function Update($where, $values) {
         global $holy_sql_cache;
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
-        DebugADD("SQL запросов");
+        DebugADD("SQL Р·Р°РїСЂРѕСЃРѕРІ");
 
         $table = $this->table;
 
@@ -447,13 +449,13 @@ class HolySQL {
 
         if ($this->debug)
             echo "<pre>" . $query . "</pre>";
-        DebugAddValue('команды', $query);
+        DebugAddValue('РєРѕРјР°РЅРґС‹', $query);
         $this->ClearCache();
         return mysql_query($query);
     }
 
     /**
-     * Очистка кэша, связанного с текущей таблицей
+     * РћС‡РёСЃС‚РєР° РєСЌС€Р°, СЃРІСЏР·Р°РЅРЅРѕРіРѕ СЃ С‚РµРєСѓС‰РµР№ С‚Р°Р±Р»РёС†РµР№
      * 
      */
     function ClearCache() {
@@ -463,17 +465,17 @@ class HolySQL {
     }
 
     /**
-     * Удаялет данные из таблицы
+     * РЈРґР°СЏР»РµС‚ РґР°РЅРЅС‹Рµ РёР· С‚Р°Р±Р»РёС†С‹
      * 
-     * @param string/array $where  <p>условие, массив вида столбец=>значение или просто SQL-строка</p>
+     * @param string/array $where  <p>СѓСЃР»РѕРІРёРµ, РјР°СЃСЃРёРІ РІРёРґР° СЃС‚РѕР»Р±РµС†=>Р·РЅР°С‡РµРЅРёРµ РёР»Рё РїСЂРѕСЃС‚Рѕ SQL-СЃС‚СЂРѕРєР°</p>
      * 
-     * @return bool результат запроса
+     * @return bool СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїСЂРѕСЃР°
      */
     function Delete($where = "") {
         global $holy_sql_cache;
         foreach ($holy_sql_cache as $a => $b)
             unset($holy_sql_cache[$a]);
-        DebugADD("SQL запросов");
+        DebugADD("SQL Р·Р°РїСЂРѕСЃРѕРІ");
 
         if ($where == "") {
             return false;
@@ -499,7 +501,7 @@ class HolySQL {
 
             if ($this->debug)
                 echo "<pre>" . $query . "</pre>";
-            DebugAddValue('команды', $query);
+            DebugAddValue('РєРѕРјР°РЅРґС‹', $query);
             $this->ClearCache();
             return mysql_query($query);
         }

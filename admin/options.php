@@ -1,5 +1,5 @@
 <?
-$_global_bread[] = Array("Настройки сайта", "/engine/admin/options.php");
+$_global_bread[] = Array("РќР°СЃС‚СЂРѕР№РєРё СЃР°Р№С‚Р°", "/engine/admin/options.php");
 $types = new DBlockElement("options_class");
 $values = new DBlockElement("options");
 
@@ -11,7 +11,7 @@ $values->GetList("parent=0 AND folder=0");
 while ($tmp = $values->GetNext())
     $arValues[$tmp['id']] = $tmp;
 
-//подготовка данных
+//РїРѕРґРіРѕС‚РѕРІРєР° РґР°РЅРЅС‹С…
 if (isset($_POST['form_go']))
     if ($_POST['form_go'] == 512) {
         //preprint($_FILES);
@@ -50,20 +50,20 @@ if (isset($_POST['form_go']))
 ?>
 <BR>
 <form method=post enctype="multipart/form-data">
-    <input type=submit value="Сохранить" style="width:100%;HEIGHT:35PX;" class="btn">
+    <input type=submit value="РЎРѕС…СЂР°РЅРёС‚СЊ" style="width:100%;HEIGHT:35PX;" class="btn">
     <BR>
     <input type=hidden name="form_go" value="512">
     <table width=100% border=0 cellpadding=0 cellspacing=0 id=tableform name=tableform class=tableform>
         <tr>
             <td>
-                Свойство
+                РЎРІРѕР№СЃС‚РІРѕ
             </td>
             <td>
-                Значение
+                Р—РЅР°С‡РµРЅРёРµ
             </td>
         </tr>
 <?
-//вывод значений
+//РІС‹РІРѕРґ Р·РЅР°С‡РµРЅРёР№
 $odd = 3;
 foreach ($arValues as $val) {
     $odd++;
@@ -127,7 +127,7 @@ foreach ($arValues as $val) {
         };
         ?>
     </table>
-    <br><input type=submit value="Сохранить" style="width:100%;HEIGHT:35PX;" class="btn">
+    <br><input type=submit value="РЎРѕС…СЂР°РЅРёС‚СЊ" style="width:100%;HEIGHT:35PX;" class="btn">
 </form>
 <? include_once FOLDER_ENGINE."api/forms/wysiwyg_html.php";?>
 <? CForm_wysiwyg_html::HTML("");?>

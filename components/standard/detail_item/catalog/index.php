@@ -15,15 +15,15 @@ if (isset($result)) {
         ?></a>
     <? }; ?>
 
-    <? echo $result['cost']; ?> руб.<br>
+    <? echo $result['cost']; ?> СЂСѓР±.<br>
     <? echo $result['detail_text']; ?>
     <BR>
-    <a href="<? echo ReplaceURL($params['cart_url'], $result); ?>">Купить одну штуку</a>
+    <a href="<? echo ReplaceURL($params['cart_url'], $result); ?>">РљСѓРїРёС‚СЊ РѕРґРЅСѓ С€С‚СѓРєСѓ</a>
     <form method="post" action="<? echo ReplaceURL($params['cart_url'], $result); ?>">
-        Купить несколько:
+        РљСѓРїРёС‚СЊ РЅРµСЃРєРѕР»СЊРєРѕ:
         <input name="count" value="1">
         <input type="hidden" name="add" value="<? echo $result['id']; ?>">
-        <input type="submit" value="Купить">
+        <input type="submit" value="РљСѓРїРёС‚СЊ">
     </form>
     <div style="clear:both"></div>
     <div>
@@ -43,9 +43,9 @@ if (isset($result)) {
     ?>
     </div>
     <div style="clear:both"></div>
-    <div>Тэги:
+    <div>РўСЌРіРё:
     <?
-    //тэги
+    //С‚СЌРіРё
     $cnt = 0;
     $tags_list = $tags->GetList($result);
     foreach ($tags_list as $tag) {
@@ -62,7 +62,7 @@ if (count($result['other']>0))
     if ($result['other'][0])
 {
     ?>
-    Подобные товары:<?
+    РџРѕРґРѕР±РЅС‹Рµ С‚РѕРІР°СЂС‹:<?
     $other="id IN (0";
     
     foreach ($result['other'] as $other_item)

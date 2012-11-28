@@ -12,41 +12,41 @@ else
     $_OPTIONS['LANG'] = $host_temp[0];
 
 
-$_top_menu['utilits'] = array("caption" => "Утилиты", "parent" => "");
-$_top_menu['options'] = array("caption" => "Настройки", "parent" => "");
+$_top_menu['utilits'] = array("caption" => "РЈС‚РёР»РёС‚С‹", "parent" => "");
+$_top_menu['options'] = array("caption" => "РќР°СЃС‚СЂРѕР№РєРё", "parent" => "");
 
 $_top_menu['file_manager'] = Array(
     "url" => "/engine/admin/file_manager.php",
-    "caption" => "Файловый менеджер",
+    "caption" => "Р¤Р°Р№Р»РѕРІС‹Р№ РјРµРЅРµРґР¶РµСЂ",
     "admin_right" => true,
     "parent" => "utilits",
 );
 $_top_menu['sql_backup'] = Array(
     "url" => "/engine/admin/sql_backup.php",
-    "caption" => "Управление бэкапами",
+    "caption" => "РЈРїСЂР°РІР»РµРЅРёРµ Р±СЌРєР°РїР°РјРё",
     "admin_right" => false,
     "parent" => "utilits",
 );
 $_top_menu['journal'] = Array(
     "url" => "/engine/admin/journal.php",
-    "caption" => "Журнал административных операций",
+    "caption" => "Р–СѓСЂРЅР°Р» Р°РґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅС‹С… РѕРїРµСЂР°С†РёР№",
     "admin_right" => false,
     "parent" => "utilits",
 );
 
 $_top_menu['options_simple'] = Array(
     "url" => "/engine/admin/options.php",
-    "caption" => "Опции сайта",
+    "caption" => "РћРїС†РёРё СЃР°Р№С‚Р°",
     "parent" => "options",
 );
 $_top_menu['options_seo'] = Array(
     "url" => "/engine/admin/options_seo.php",
-    "caption" => "SEO опции сайта",
+    "caption" => "SEO РѕРїС†РёРё СЃР°Р№С‚Р°",
     "parent" => "options",
 );
 $_top_menu['options_groups_access'] = Array(
     "url" => "/engine/admin/options_groups_access.php",
-    "caption" => "Настройки доступа",
+    "caption" => "РќР°СЃС‚СЂРѕР№РєРё РґРѕСЃС‚СѓРїР°",
     "admin_right" => true,
     "parent" => "options",
 );
@@ -56,7 +56,7 @@ $_top_menu['line1'] = Array(
 );
 $_top_menu['clear_cache'] = Array(
     "url" => "/engine/admin/clear_cache.php",
-    "caption" => "Очистка кэша",
+    "caption" => "РћС‡РёСЃС‚РєР° РєСЌС€Р°",
     "parent" => "options",
 );
 $_top_menu['line2'] = Array(
@@ -65,12 +65,12 @@ $_top_menu['line2'] = Array(
 );
 $_top_menu['export_structure_xml'] = Array(
     "url" => "/engine/admin/export_structure_xml.php",
-    "caption" => "Экспорт в XML структуры",
+    "caption" => "Р­РєСЃРїРѕСЂС‚ РІ XML СЃС‚СЂСѓРєС‚СѓСЂС‹",
     "parent" => "utilits",
 );
 $_top_menu['import_structure_xml'] = Array(
     "url" => "/engine/admin/import_structure_xml.php",
-    "caption" => "Импорт структуры из XML",
+    "caption" => "РРјРїРѕСЂС‚ СЃС‚СЂСѓРєС‚СѓСЂС‹ РёР· XML",
     "parent" => "utilits",
 );
 $_top_menu['line3'] = Array(
@@ -79,32 +79,32 @@ $_top_menu['line3'] = Array(
 );
 $_top_menu['export_data_sql'] = Array(
     "url" => "/engine/admin/export_data_sql.php",
-    "caption" => "Экспорт данных в SQL",
+    "caption" => "Р­РєСЃРїРѕСЂС‚ РґР°РЅРЅС‹С… РІ SQL",
     "parent" => "utilits",
 );
 $_top_menu['import_data_sql'] = Array(
     "url" => "/engine/admin/import_data_sql.php",
-    "caption" => "Импорт структуры из SQL",
+    "caption" => "РРјРїРѕСЂС‚ СЃС‚СЂСѓРєС‚СѓСЂС‹ РёР· SQL",
     "parent" => "utilits",
 );
-//меню на первой левой закладке
+//РјРµРЅСЋ РЅР° РїРµСЂРІРѕР№ Р»РµРІРѕР№ Р·Р°РєР»Р°РґРєРµ
 $_menu1['before'] = array();
 $_menu1['after'] = array(
 );
 
-//меню на второй левой закладке
+//РјРµРЅСЋ РЅР° РІС‚РѕСЂРѕР№ Р»РµРІРѕР№ Р·Р°РєР»Р°РґРєРµ
 $_menu2['before'] = array();
 $_menu2['after'] = array(
-    Array("/engine/admin/types.php", "Типы полей"),
+    Array("/engine/admin/types.php", "РўРёРїС‹ РїРѕР»РµР№"),
 );
 
-//избранные блоки
+//РёР·Р±СЂР°РЅРЅС‹Рµ Р±Р»РѕРєРё
 $_menu_best['before'] = array();
 $_menu_best['after'] = array();
 
 $_standard_element_fields = Array(
     array(
-        "caption" => "Дата",
+        "caption" => "Р”Р°С‚Р°",
         "code" => "sdate",
         "type" => "ddatetime",
         "multi" => false,
@@ -113,7 +113,7 @@ $_standard_element_fields = Array(
         "meta" => false,
     ),
     array(
-        "caption" => "Краткий текст",
+        "caption" => "РљСЂР°С‚РєРёР№ С‚РµРєСЃС‚",
         "code" => "preview_text",
         "type" => "wysiwyg_text",
         "multi" => false,
@@ -122,7 +122,7 @@ $_standard_element_fields = Array(
         "meta" => false,
     ),
     array(
-        "caption" => "Детальный текст",
+        "caption" => "Р”РµС‚Р°Р»СЊРЅС‹Р№ С‚РµРєСЃС‚",
         "code" => "detail_text",
         "type" => "wysiwyg_html",
         "multi" => false,
@@ -131,7 +131,7 @@ $_standard_element_fields = Array(
         "meta" => false,
     ),
     array(
-        "caption" => "Цена",
+        "caption" => "Р¦РµРЅР°",
         "code" => "cost",
         "type" => "double_integ",
         "multi" => false,
@@ -140,7 +140,7 @@ $_standard_element_fields = Array(
         "meta" => false,
     ),
     array(
-        "caption" => "Фото",
+        "caption" => "Р¤РѕС‚Рѕ",
         "code" => "foto",
         "type" => "image",
         "multi" => false,
@@ -149,7 +149,7 @@ $_standard_element_fields = Array(
         "meta" => false,
     ),
     array(
-        "caption" => "Дополнительные фото",
+        "caption" => "Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ С„РѕС‚Рѕ",
         "code" => "foto_multi",
         "type" => "image",
         "multi" => true,
@@ -158,7 +158,7 @@ $_standard_element_fields = Array(
         "meta" => false,
     ),
     array(
-        "caption" => "Спец-предложение",
+        "caption" => "РЎРїРµС†-РїСЂРµРґР»РѕР¶РµРЅРёРµ",
         "code" => "spec1",
         "type" => "checkbox",
         "multi" => false,
@@ -198,10 +198,15 @@ if (isset($_CONFIG['LOGIN'])) {
         $_CONFIG['SERVER'] = "localhost";
     if ($_CONFIG['SERVER'] == "")
         $_CONFIG['SERVER'] = "localhost";
-
-    @$link = mysql_connect($_CONFIG['SERVER'], $_CONFIG['LOGIN'], $_CONFIG['PASS']) or die("Проблемы подключения к базе данных - сайт не может функционировать!");
-    @mysql_select_db($_CONFIG['BASE']) or die("Нет такой базы.");
-    mysql_query("SET NAMES cp1251");
+	
+	if (!isset($_CONFIG['CODEPAGE']))
+		$_CONFIG['CODEPAGE']="utf8";
+	if (!isset($_CONFIG['COLLATE']))
+		$_CONFIG['COLLATE']="utf8_general_ci";
+	
+    @$link = mysql_connect($_CONFIG['SERVER'], $_CONFIG['LOGIN'], $_CONFIG['PASS']) or die("РџСЂРѕР±Р»РµРјС‹ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С… - СЃР°Р№С‚ РЅРµ РјРѕР¶РµС‚ С„СѓРЅРєС†РёРѕРЅРёСЂРѕРІР°С‚СЊ!");
+    @mysql_select_db($_CONFIG['BASE']) or die("РќРµС‚ С‚Р°РєРѕР№ Р±Р°Р·С‹.");
+    mysql_query("SET NAMES ".$_CONFIG['CODEPAGE']);
 };
 
 require_once("api/holy_api.php");

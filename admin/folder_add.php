@@ -1,8 +1,8 @@
 <?
-if (!isset($_GET['dblock'])) die("не выбран конкретный блок");
+if (!isset($_GET['dblock'])) die("РЅРµ РІС‹Р±СЂР°РЅ РєРѕРЅРєСЂРµС‚РЅС‹Р№ Р±Р»РѕРє");
 
 if ((!$H_USER->IsAdmin()) && (!$H_USER->CanAdd($_GET['dblock'])))
-SystemAlertFatal("Недостаточно прав.");
+SystemAlertFatal("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ.");
 
 global $_global_bread;
 $block= new DBlock();
@@ -40,10 +40,10 @@ if (!isset($tmp_block['hide_code'])) $tmp_block['hide_code']=0;
 if ($tmp_block['hide_code'])
 	$show_code=false;
 	
-	$form->Add(Array("name"=>"caption","caption"=>"Название","type"=>"short_text",'required'=>1));
+	$form->Add(Array("name"=>"caption","caption"=>"РќР°Р·РІР°РЅРёРµ","type"=>"short_text",'required'=>1));
 	if ($show_code)
-	$form->Add(Array("name"=>"name","caption"=>"Код","type"=>"short_text",'required'=>1));
-	$form->Add(Array("name"=>"sort","caption"=>"Сортировка","type"=>"sort"));
+	$form->Add(Array("name"=>"name","caption"=>"РљРѕРґ","type"=>"short_text",'required'=>1));
+	$form->Add(Array("name"=>"sort","caption"=>"РЎРѕСЂС‚РёСЂРѕРІРєР°","type"=>"sort"));
 
 	//$fields->sql->debug=true;
 	$fields->GetListByBlock($_GET['dblock'],Array("owner_type>"=>"1"));
@@ -78,7 +78,7 @@ if ($tmp_block['hide_code'])
 			$element->Add($_POST);
 			?>
 				<span style="color:green;">
-					Элемент добавлен
+					Р­Р»РµРјРµРЅС‚ РґРѕР±Р°РІР»РµРЅ
 				</span>
 				<script>
 window.location='<?=$form->return_link?>'

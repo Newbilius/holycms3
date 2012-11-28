@@ -7,22 +7,22 @@ if ($_count > 0) {
     <table border="1" width="100%">
         <tr align="center">
             <td>
-                Фото
+                Р¤РѕС‚Рѕ
             </td>
             <td>
-                Название
+                РќР°Р·РІР°РЅРёРµ
             </td>
             <td>
-                Цена
+                Р¦РµРЅР°
             </td>
             <td>
-                Число
+                Р§РёСЃР»Рѕ
             </td>
             <td>
-                Сумма
+                РЎСѓРјРјР°
             </td>
             <td>
-                Удалить
+                РЈРґР°Р»РёС‚СЊ
             </td>
         </tr>
         <?
@@ -41,7 +41,7 @@ if ($_count > 0) {
                   <? echo $img->DrawHref(); ?>
                </a>
                 <?}else{?>
-                нет
+                РЅРµС‚
                 <?};?>
             </td>
             <td>
@@ -69,15 +69,15 @@ if ($_count > 0) {
         ?>
     </table>
     
-    <br><input type="submit" value="Пересчитать">
+    <br><input type="submit" value="РџРµСЂРµСЃС‡РёС‚Р°С‚СЊ">
 </form>
 
 <br>
-Сумма: <b><? echo $cost_full;?></b>
+РЎСѓРјРјР°: <b><? echo $cost_full;?></b>
     <?
 } else {
     ?>
-    Корзина пуста.
+    РљРѕСЂР·РёРЅР° РїСѓСЃС‚Р°.
     <?
 }
 ?>

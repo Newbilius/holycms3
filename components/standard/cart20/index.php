@@ -6,7 +6,7 @@ if (!defined('HCMS'))
 if (!isset($params['filter']))
     $params['filter'] = "";
 if (!isset($params['table']))
-    die("не указана таблица");
+    die("РЅРµ СѓРєР°Р·Р°РЅР° С‚Р°Р±Р»РёС†Р°");
 if (!isset($params['item_url']))
     $params['item_url'] = "";
 if (!isset($params['cost_var']))
@@ -23,8 +23,8 @@ if (!isset($params['form_component']))
     $params['form_component'] = "";
 
 
-$add_need = 0; //номер товара, который будем добавлять
-$delete_need = 0; //номер товара, который нужно удалить
+$add_need = 0; //РЅРѕРјРµСЂ С‚РѕРІР°СЂР°, РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµРј РґРѕР±Р°РІР»СЏС‚СЊ
+$delete_need = 0; //РЅРѕРјРµСЂ С‚РѕРІР°СЂР°, РєРѕС‚РѕСЂС‹Р№ РЅСѓР¶РЅРѕ СѓРґР°Р»РёС‚СЊ
 
 if (!isset($_REQUEST['count']))
     $_REQUEST['count'] = 1;
@@ -44,7 +44,7 @@ if (isset($_REQUEST['delete']))
 $cookie_work = new HolyCookie($params['cookie_var']);
 if (isset($_REQUEST['complete']))
     $cookie_work->Delete ();
-//процесс добавления в корзину
+//РїСЂРѕС†РµСЃСЃ РґРѕР±Р°РІР»РµРЅРёСЏ РІ РєРѕСЂР·РёРЅСѓ
 if ($add_need > 0) {
     $cookie_work->AddToArray($add_need, $_REQUEST['count']);
     if ($params['back_cart_url'])
@@ -101,7 +101,7 @@ if ($params['form_component'])
     ));
 
 if (isset($_REQUEST['complete']))
-    echo "<BR>Заказ успешно отправлен!";
+    echo "<BR>Р—Р°РєР°Р· СѓСЃРїРµС€РЅРѕ РѕС‚РїСЂР°РІР»РµРЅ!";
 
 //preprint($_COOKIE);
 //preprint($_REQUEST);

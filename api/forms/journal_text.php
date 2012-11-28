@@ -7,9 +7,9 @@ class CForm_journal_text extends CForm_Text{
                     "add",
                     "delete",
                 ), Array(
-                    "Èçìåíåí",
-                    "Ñîçäàí",
-                    "Óäàëåí"
+                    "Ð˜Ð·Ð¼ÐµÐ½ÐµÐ½",
+                    "Ð¡Ð¾Ð·Ð´Ð°Ð½",
+                    "Ð£Ð´Ð°Ð»ÐµÐ½"
                 ), $data[$name]);
 		?>
 			<? if (strpos($data[$name],"<script")===FALSE){?>

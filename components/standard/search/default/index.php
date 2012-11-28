@@ -3,7 +3,7 @@ if (!defined('HCMS')) die();
 ?>
     <form action="<? echo $params['url']?>">
         <input type="text" name="find" value="<? echo $params['find_text']?>">
-        <input type="submit" value="Искать">
+        <input type="submit" value="РСЃРєР°С‚СЊ">
     </form>
 	
 <?
@@ -22,7 +22,7 @@ if (count($result)>0)
 	
 	{
 		?>
-		<p>Ничего не найдено.</p>
+		<p>РќРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ.</p>
 		<?
 	};
 ?>

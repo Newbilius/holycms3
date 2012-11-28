@@ -1,6 +1,6 @@
 <?php
 /**
- * Класс для работы с пользователями сайта и администраторами
+ * РљР»Р°СЃСЃ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРјРё СЃР°Р№С‚Р° Рё Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂР°РјРё
  */
 class DUser extends DBlock {
 
@@ -16,13 +16,13 @@ class DUser extends DBlock {
     var $edit;
     var $delete;
     /**
-     * Определяем базовые настройки
+     * РћРїСЂРµРґРµР»СЏРµРј Р±Р°Р·РѕРІС‹Рµ РЅР°СЃС‚СЂРѕР№РєРё
      * 
-     * @param bool $first  <p>сразу после создания объекта попытаться залогиниться по кукам</p>
-     * @param string $table  <p>таблица с пользователями</p>
-     * @param string $login_name  <p>поле с логинами</p>
-     * @param string $pass_name  <p>поле с паролями</p>
-     * @param string $cookie_prefix  <p>префикс сайтовых кук</p>
+     * @param bool $first  <p>СЃСЂР°Р·Сѓ РїРѕСЃР»Рµ СЃРѕР·РґР°РЅРёСЏ РѕР±СЉРµРєС‚Р° РїРѕРїС‹С‚Р°С‚СЊСЃСЏ Р·Р°Р»РѕРіРёРЅРёС‚СЊСЃСЏ РїРѕ РєСѓРєР°Рј</p>
+     * @param string $table  <p>С‚Р°Р±Р»РёС†Р° СЃ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРјРё</p>
+     * @param string $login_name  <p>РїРѕР»Рµ СЃ Р»РѕРіРёРЅР°РјРё</p>
+     * @param string $pass_name  <p>РїРѕР»Рµ СЃ РїР°СЂРѕР»СЏРјРё</p>
+     * @param string $cookie_prefix  <p>РїСЂРµС„РёРєСЃ СЃР°Р№С‚РѕРІС‹С… РєСѓРє</p>
      * 
      * @return DUser
      */
@@ -48,7 +48,7 @@ class DUser extends DBlock {
     }
 
     /**
-     * Возвращает <b>true</b>, если пользователь имеет админские права
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ <b>true</b>, РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РёРјРµРµС‚ Р°РґРјРёРЅСЃРєРёРµ РїСЂР°РІР°
      * 
      * @return boolean
      */
@@ -58,9 +58,9 @@ class DUser extends DBlock {
     
 
     /**
-     * Возвращает <b>true</b>, если пользователь имеет право добавлять элементы или папки в блок <b>$name</b>
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ <b>true</b>, РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РёРјРµРµС‚ РїСЂР°РІРѕ РґРѕР±Р°РІР»СЏС‚СЊ СЌР»РµРјРµРЅС‚С‹ РёР»Рё РїР°РїРєРё РІ Р±Р»РѕРє <b>$name</b>
      * 
-     * @param string $name <p>имя блока данных/таблицы</p>
+     * @param string $name <p>РёРјСЏ Р±Р»РѕРєР° РґР°РЅРЅС‹С…/С‚Р°Р±Р»РёС†С‹</p>
      * @return boolean
      */
     public function CanAdd($name){
@@ -70,9 +70,9 @@ class DUser extends DBlock {
     }
     
     /**
-     * Возвращает <b>true</b>, если пользователь имеет право удалять элементы или папки из блока <b>$name</b>
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ <b>true</b>, РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РёРјРµРµС‚ РїСЂР°РІРѕ СѓРґР°Р»СЏС‚СЊ СЌР»РµРјРµРЅС‚С‹ РёР»Рё РїР°РїРєРё РёР· Р±Р»РѕРєР° <b>$name</b>
      * 
-     * @param string $name <p>имя блока данных/таблицы</p>
+     * @param string $name <p>РёРјСЏ Р±Р»РѕРєР° РґР°РЅРЅС‹С…/С‚Р°Р±Р»РёС†С‹</p>
      * @return boolean
      */
     public function CanDelete($name){
@@ -82,9 +82,9 @@ class DUser extends DBlock {
     }
     
     /**
-     * Возвращает <b>true</b>, если пользователь имеет право редактировать элементы или папки в блоке <b>$name</b>
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ <b>true</b>, РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РёРјРµРµС‚ РїСЂР°РІРѕ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ СЌР»РµРјРµРЅС‚С‹ РёР»Рё РїР°РїРєРё РІ Р±Р»РѕРєРµ <b>$name</b>
      * 
-     * @param string $name <p>имя блока данных/таблицы</p>
+     * @param string $name <p>РёРјСЏ Р±Р»РѕРєР° РґР°РЅРЅС‹С…/С‚Р°Р±Р»РёС†С‹</p>
      * @return boolean
      */
     public function CanEdit($name){
@@ -95,9 +95,9 @@ class DUser extends DBlock {
     
     
     /**
-     * Возвращает <b>true</b>, если пользователь имеет право просматривать элементы или папки в блоке <b>$name</b>
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ <b>true</b>, РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РёРјРµРµС‚ РїСЂР°РІРѕ РїСЂРѕСЃРјР°С‚СЂРёРІР°С‚СЊ СЌР»РµРјРµРЅС‚С‹ РёР»Рё РїР°РїРєРё РІ Р±Р»РѕРєРµ <b>$name</b>
      * 
-     * @param string $name <p>имя блока данных/таблицы</p>
+     * @param string $name <p>РёРјСЏ Р±Р»РѕРєР° РґР°РЅРЅС‹С…/С‚Р°Р±Р»РёС†С‹</p>
      * @return boolean
      */
     public function CanRead($name){
@@ -107,7 +107,7 @@ class DUser extends DBlock {
     }
     
     /**
-     * Проверяет, залогинен ли пользователь. Если да, возвращает его ID, если нет - false
+     * РџСЂРѕРІРµСЂСЏРµС‚, Р·Р°Р»РѕРіРёРЅРµРЅ Р»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ. Р•СЃР»Рё РґР°, РІРѕР·РІСЂР°С‰Р°РµС‚ РµРіРѕ ID, РµСЃР»Рё РЅРµС‚ - false
      * 
      * @return bool/int
      */
@@ -122,7 +122,7 @@ class DUser extends DBlock {
     }
 
     /**
-     * Возвращает ID пользователя
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ ID РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
      * 
      * @return int
      */
@@ -131,7 +131,7 @@ class DUser extends DBlock {
     }
 
     /**
-     * Возвращает все поля пользователя
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ РІСЃРµ РїРѕР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
      * 
      * @return array
      */
@@ -140,10 +140,10 @@ class DUser extends DBlock {
     }
 
     /**
-     * Пытается залогиниться. Возвращает false или ID пользователя.
+     * РџС‹С‚Р°РµС‚СЃСЏ Р·Р°Р»РѕРіРёРЅРёС‚СЊСЃСЏ. Р’РѕР·РІСЂР°С‰Р°РµС‚ false РёР»Рё ID РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ.
      * 
-     * @param string $user  <p>логин</p>
-     * @param string $pass  <p>пароль</p>
+     * @param string $user  <p>Р»РѕРіРёРЅ</p>
+     * @param string $pass  <p>РїР°СЂРѕР»СЊ</p>
      * 
      * @return array/bool
      */
@@ -160,7 +160,7 @@ class DUser extends DBlock {
                 $dat['id'] = 0;
             } else {
                 $set_uid = true;
-                AddToLog("Пользователь " . $this->login_name . " (" . $dat['id'] . ") ВОШЕЛ в систему администрирования.");
+                AddToLog("РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ " . $this->login_name . " (" . $dat['id'] . ") Р’РћРЁР•Р› РІ СЃРёСЃС‚РµРјСѓ Р°РґРјРёРЅРёСЃС‚СЂРёСЂРѕРІР°РЅРёСЏ.");
             };
         };
         $this->ID = $dat['id'];
@@ -176,7 +176,7 @@ class DUser extends DBlock {
                     "uid" => $pass
                 ));
             };
-            //получаем информацию о группе
+            //РїРѕР»СѓС‡Р°РµРј РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РіСЂСѓРїРїРµ
             //preprint($dat);           
             $users_groups_rs = new DBlockElement("system_user_groups");
             $users_groups = $users_groups_rs->GetOne("id=".$dat['group']);
@@ -190,11 +190,11 @@ class DUser extends DBlock {
     }
 
     /**
-     * Создает нового пользователя
+     * РЎРѕР·РґР°РµС‚ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
      * 
-     * @param string $user  <p>логин</p>
-     * @param string $pass  <p>пароль</p>
-     * @param array $params  <p>дополнительные параметры</p>
+     * @param string $user  <p>Р»РѕРіРёРЅ</p>
+     * @param string $pass  <p>РїР°СЂРѕР»СЊ</p>
+     * @param array $params  <p>РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РїР°СЂР°РјРµС‚СЂС‹</p>
      */
     function AddUser($login, $pass,$params=array()) {
         $new_user_data = Array(
@@ -207,9 +207,9 @@ class DUser extends DBlock {
     }
 
     /**
-     * Обновить выбранные данные
+     * РћР±РЅРѕРІРёС‚СЊ РІС‹Р±СЂР°РЅРЅС‹Рµ РґР°РЅРЅС‹Рµ
      * 
-     * @param array $data  <p>данные</p>
+     * @param array $data  <p>РґР°РЅРЅС‹Рµ</p>
      */
     
     function Update($data)
@@ -220,10 +220,10 @@ class DUser extends DBlock {
         $this->IsAuth();
     }
     /**
-     * Выйти с сайта
+     * Р’С‹Р№С‚Рё СЃ СЃР°Р№С‚Р°
      */
     function Logout() {
-        AddToLog("Пользователь " . $_COOKIE[$this->cookie_prefix . '_login'] . " (" . $this->ID . ") ВЫШЕЛ из системы администрирования.");
+        AddToLog("РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ " . $_COOKIE[$this->cookie_prefix . '_login'] . " (" . $this->ID . ") Р’Р«РЁР•Р› РёР· СЃРёСЃС‚РµРјС‹ Р°РґРјРёРЅРёСЃС‚СЂРёСЂРѕРІР°РЅРёСЏ.");
         setcookie($this->cookie_prefix . '_login', $_COOKIE[$this->cookie_prefix . '_login'], time() - 90000, "/");
         setcookie($this->cookie_prefix . '_pass', $_COOKIE[$this->cookie_prefix . '_pass'], time() - 90000, "/");
         $_COOKIE[$this->cookie_prefix . '_login'] = "";
@@ -235,7 +235,7 @@ class DUser extends DBlock {
 
 
 /**
- * Класс-оберта для работы с пользователями сайта (НЕ администраторами)
+ * РљР»Р°СЃСЃ-РѕР±РµСЂС‚Р° РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРјРё СЃР°Р№С‚Р° (РќР• Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂР°РјРё)
  */
 class HolyUser extends DUser {
 

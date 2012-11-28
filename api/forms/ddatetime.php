@@ -8,7 +8,7 @@ class CForm_ddatetime extends CForm_Text {
             $().ready(function() {
                 //$('#<?= $name ?>').datepicker({format:'yy-mm-dd',today:true,close:true,effect:'slide',theme:'simple'});
 
-                $('#<?= $name ?>').attachDatepicker({ dayNamesMin: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вск"],dateFormat:'yy-mm-dd',monthNames: ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"] });
+                $('#<?= $name ?>').attachDatepicker({ dayNamesMin: ["РџРЅ", "Р’С‚", "РЎСЂ", "Р§С‚", "РџС‚", "РЎР±", "Р’СЃРє"],dateFormat:'yy-mm-dd',monthNames: ["РЇРЅРІР°СЂСЊ","Р¤РµРІСЂР°Р»СЊ","РњР°СЂС‚","РђРїСЂРµР»СЊ","РњР°Р№","РСЋРЅСЊ","РСЋР»СЊ","РђРІРіСѓСЃС‚","РЎРµРЅС‚СЏР±СЂСЊ","РћРєС‚СЏР±СЂСЊ","РќРѕСЏР±СЂСЊ","Р”РµРєР°Р±СЂСЊ"] });
 
             })
         </script>

@@ -1,9 +1,9 @@
 <?
 $user_ifno_holy=$H_USER->GetInfo();
-if (!$user_ifno_holy['block_control']) die("íåäîñòàòî÷íî ïðàâ");
+if (!$user_ifno_holy['block_control']) die("Ð½ÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ Ð¿Ñ€Ð°Ð²");
 
 global $_global_bread;
-$_global_bread[]=Array("Ôàéëîâûé ìåíåäæåð","/engine/admin/file_manager.php");
+$_global_bread[]=Array("Ð¤Ð°Ð¹Ð»Ð¾Ð²Ñ‹Ð¹ Ð¼ÐµÐ½ÐµÐ´Ð¶ÐµÑ€","/engine/admin/file_manager.php");
 ?>
 <BR>
 <?require_once($_SERVER['DOCUMENT_ROOT']."/engine/engine.php");

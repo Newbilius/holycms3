@@ -30,11 +30,11 @@ class HFormAdd {
                 ?>
                 <ul class="tabs tabs_item nav nav-pills" style="padding-left:0px;">
                     <li class="active">
-                        <a rel=tab1 href="#">Основные свойства</a>
+                        <a rel=tab1 href="#">РћСЃРЅРѕРІРЅС‹Рµ СЃРІРѕР№СЃС‚РІР°</a>
                     </li>
                     <?if ($meta){?>
                     <li class="">
-                        <a rel=tab2 href="#">Мета-тэги</a>
+                        <a rel=tab2 href="#">РњРµС‚Р°-С‚СЌРіРё</a>
                     </li>
                     <?};?>
                 </ul>
@@ -57,8 +57,8 @@ class HFormAdd {
                     ?>
                     <tr>
                         <td colspan=3>
-                            <input type=submit value="Добавить" style="float:left;height:26px;width:40%;margin-right:20px;" class="btn btn-success">
-                            <input onclick="window.location='<?= $this->return_link ?>';" type=button value="Отменить" style="float:left;height:26px;width:40%;" class="btn btn-warning">
+                            <input type=submit value="Р”РѕР±Р°РІРёС‚СЊ" style="float:left;height:26px;width:40%;margin-right:20px;" class="btn btn-success">
+                            <input onclick="window.location='<?= $this->return_link ?>';" type=button value="РћС‚РјРµРЅРёС‚СЊ" style="float:left;height:26px;width:40%;" class="btn btn-warning">
                         </td>
                     </tr>
                 </table>
@@ -97,12 +97,12 @@ class HFormAdd {
                         };
 
                     if ((!isset($_POST[$item['name']])) && ($item['required']))
-                        $this->e[] = "Поле <b>[" . $item['caption'] . "]</b> обязательно для заполнения!";
+                        $this->e[] = "РџРѕР»Рµ <b>[" . $item['caption'] . "]</b> РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ!";
                     else
                     if (isset($_POST[$item['name']]))
                         if ($_POST[$item['name']] == "")
                             if ($item['required'])
-                                $this->e[] = "Поле <b>[" . $item['caption'] . "]</b> обязательно для заполнения!";
+                                $this->e[] = "РџРѕР»Рµ <b>[" . $item['caption'] . "]</b> РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ!";
 
                     if ($item['multiple'])
                         if (isset($_POST[$item['name']]))
@@ -143,7 +143,7 @@ class HFormAdd {
                     if ($item['multiple']) {
                         ?>
                                 <div style="border:0px solid green;width:100%;">
-                                    Порядок вывода: <input name=<?= $item['name'] ?>[SORT][] value=100>
+                                    РџРѕСЂСЏРґРѕРє РІС‹РІРѕРґР°: <input name=<?= $item['name'] ?>[SORT][] value=100>
                                 </div>
                                 <?
                             };
@@ -157,11 +157,11 @@ class HFormAdd {
                                 $obj->Add($item['name'], $item['add_values'], $item['multiple']);
                                 ?>
                                     <div style="border:0px solid green;width:100%;;">
-                                        Порядок вывода: <input name=<?= $item['name'] ?>[SORT][] value=100>
+                                        РџРѕСЂСЏРґРѕРє РІС‹РІРѕРґР°: <input name=<?= $item['name'] ?>[SORT][] value=100>
                                     </div>
                                 </div>
                                 <BR>
-                                <div id=adddiv_<?= $item['name'] ?>><a class="btn btn-primary" onclick="AddElementDiv('#hiddden_<?= $item['name'] ?>','#adddiv_<?= $item['name'] ?>','<?= $item['name'] ?>');">Добавить ещё</a></div>
+                                <div id=adddiv_<?= $item['name'] ?>><a class="btn btn-primary" onclick="AddElementDiv('#hiddden_<?= $item['name'] ?>','#adddiv_<?= $item['name'] ?>','<?= $item['name'] ?>');">Р”РѕР±Р°РІРёС‚СЊ РµС‰С‘</a></div>
                                 <?
                             };
                             ?>

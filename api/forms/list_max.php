@@ -5,9 +5,9 @@ class CForm_list_max extends CForm_text {
     function Edit($name, $data, $add, $multiple = false) {
         $add_datas = explode(";", $add);
         $item_tags=explode(";",$data[$name]);
-        //0 òàáëèöà
-        //1 çíà÷àùåå ïîëå
-        //2 ïîëå îòîáğàæàåìîå
+        //0 Ñ‚Ğ°Ğ±Ğ»Ğ¸Ñ†Ğ°
+        //1 Ğ·Ğ½Ğ°Ñ‡Ğ°Ñ‰ĞµĞµ Ğ¿Ğ¾Ğ»Ğµ
+        //2 Ğ¿Ğ¾Ğ»Ğµ Ğ¾Ñ‚Ğ¾Ğ±Ñ€Ğ°Ğ¶Ğ°ĞµĞ¼Ğ¾Ğµ
         $spec_sql = new HolySQL($add_datas[0]);
         $spec_sql->Select();
         while ($ndata = $spec_sql->GetNext()) {
@@ -16,7 +16,7 @@ class CForm_list_max extends CForm_text {
             $result_list[] = $ndata;
         };
         ?>  
-        <select data-placeholder="Ââåäèòå íàçâàíèå..." style="width:100%;" multiple class="chosen" name="<?= $name ?>[]" id="<?= $name ?>">
+        <select data-placeholder="Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ½Ğ°Ğ·Ğ²Ğ°Ğ½Ğ¸Ğµ..." style="width:100%;" multiple class="chosen" name="<?= $name ?>[]" id="<?= $name ?>">
             <?
             foreach ($result_list as $_tag) {
                 $selected = "";
@@ -58,9 +58,9 @@ class CForm_list_max extends CForm_text {
 
     function Add($name, $add, $multiple = false) {
         $add_datas = explode(";", $add);
-        //0 òàáëèöà
-        //1 çíà÷àùåå ïîëå
-        //2 ïîëå îòîáğàæàåìîå
+        //0 Ñ‚Ğ°Ğ±Ğ»Ğ¸Ñ†Ğ°
+        //1 Ğ·Ğ½Ğ°Ñ‡Ğ°Ñ‰ĞµĞµ Ğ¿Ğ¾Ğ»Ğµ
+        //2 Ğ¿Ğ¾Ğ»Ğµ Ğ¾Ñ‚Ğ¾Ğ±Ñ€Ğ°Ğ¶Ğ°ĞµĞ¼Ğ¾Ğµ
         $spec_sql = new HolySQL($add_datas[0]);
         $spec_sql->Select();
         while ($ndata = $spec_sql->GetNext()) {
@@ -69,7 +69,7 @@ class CForm_list_max extends CForm_text {
             $result_list[] = $ndata;
         };
         ?>  
-        <select data-placeholder="Ââåäèòå íàçâàíèå..." style="width:100%;" multiple class="chosen" name="<?= $name ?>[]" id="<?= $name ?>">
+        <select data-placeholder="Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ½Ğ°Ğ·Ğ²Ğ°Ğ½Ğ¸Ğµ..." style="width:100%;" multiple class="chosen" name="<?= $name ?>[]" id="<?= $name ?>">
             <?
             foreach ($result_list as $_tag) {
                 ?>

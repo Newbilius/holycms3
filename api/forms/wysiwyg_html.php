@@ -19,22 +19,22 @@ $('.wisiwig')
     var dialogName = event.data.name;
     
     var tabCount = dialogDefinition.contents.length;
-    for (var i = 0; i < tabCount; i++) { //цикл для замены клика всех кнопок "Посмотреть на сервере"
+    for (var i = 0; i < tabCount; i++) { //С†РёРєР» РґР»СЏ Р·Р°РјРµРЅС‹ РєР»РёРєР° РІСЃРµС… РєРЅРѕРїРѕРє "РџРѕСЃРјРѕС‚СЂРµС‚СЊ РЅР° СЃРµСЂРІРµСЂРµ"
         var browseButton = dialogDefinition.contents[i].get('browse');
         if (browseButton !== null) {
             browseButton.hidden = false;
             browseButton.onClick = function (dialog, i) {
-                $('<div \>').dialog({ // вызов диалога при клике на кнопку
+                $('<div \>').dialog({ // РІС‹Р·РѕРІ РґРёР°Р»РѕРіР° РїСЂРё РєР»РёРєРµ РЅР° РєРЅРѕРїРєСѓ
                     modal: true,
                     width: "80%",
                     title: 'elFinder',
                     zIndex: 99999,
-                    create: function (event, ui) { //инициализация elFinder внутри модального окна
+                    create: function (event, ui) { //РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ elFinder РІРЅСѓС‚СЂРё РјРѕРґР°Р»СЊРЅРѕРіРѕ РѕРєРЅР°
                         $(this).elfinder({
                             resizable: false,
                             lang: 'ru',
                             url: '/engine/admin/ajax/elf/php/connector_img.php?mode=' + dialogName,
-                            getFileCallback: function (url) { // возврат ссылки, изображения, флэш
+                            getFileCallback: function (url) { // РІРѕР·РІСЂР°С‚ СЃСЃС‹Р»РєРё, РёР·РѕР±СЂР°Р¶РµРЅРёСЏ, С„Р»СЌС€
                                 var dialog = CKEDITOR.dialog.getCurrent();
                                 if (dialog._.name == "image") {
                                     var urlObj = 'txtUrl'
@@ -46,7 +46,7 @@ $('.wisiwig')
                                     return false
                                 };
                                 dialog.setValueOf(dialog._.currentTabId, urlObj, url);
-                                $('a.ui-dialog-titlebar-close[role="button"]').click(); //закрыть elFinder после выбора
+                                $('a.ui-dialog-titlebar-close[role="button"]').click(); //Р·Р°РєСЂС‹С‚СЊ elFinder РїРѕСЃР»Рµ РІС‹Р±РѕСЂР°
 								return false;
                             }
                         }).elfinder('instance')

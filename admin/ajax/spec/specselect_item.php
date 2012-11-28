@@ -1,13 +1,12 @@
 <?
 require_once($_SERVER['DOCUMENT_ROOT']."/engine/engine.php");
-//вывести список иблоков
+//РІС‹РІРµСЃС‚Рё СЃРїРёСЃРѕРє РёР±Р»РѕРєРѕРІ
 
 $src_block=new DBlockElement(Array("table"=>$_GET['block']));
 $src_block->GetList();
 while ($data=$src_block->GetNext())
 $array_of_items[$data['parent']][]=$data;
 
-//pre_print($array_of_items);
 function PrintTree($parent,&$array_of)
 	{
 		?>

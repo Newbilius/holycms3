@@ -1,17 +1,17 @@
 <?
 $user_ifno_holy = $H_USER->GetInfo();
 if (!$user_ifno_holy['block_control'])
-    die("недостаточно прав");
+    die("РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ");
 
 global $_global_bread;
-$_global_bread[] = Array("Блоки данных", "/engine/admin/group_list.php");
+$_global_bread[] = Array("Р‘Р»РѕРєРё РґР°РЅРЅС‹С…", "/engine/admin/group_list.php");
 
 if (isset($_GET['delete'])) {
     $gr = new DBlockGroup();
     $gr->Delete($_GET['delete']);
     ?>
     <span style="color:green;">
-        Элемент <?= $_GET['delete'] ?> удалён
+        Р­Р»РµРјРµРЅС‚ <?= $_GET['delete'] ?> СѓРґР°Р»С‘РЅ
     </span>
     <?
 };
@@ -29,11 +29,11 @@ $table = new HFormTable(Array("table" => "system_data_block_group",
 if (isset($_GET['parent']))
     $table->delete_link_base.="&parent=" . $_GET['parent'];
 $table->Add(Array("name" => "id", "caption" => "id", "type" => "label"));
-$table->Add(Array("name" => "caption", "caption" => "Название", "type" => "short_text"));
-$table->Add(Array("name" => "name", "caption" => "Код", "type" => "short_text"));
-$table->Add(Array("name" => "sort", "caption" => "Сортировка", "type" => "sort"));
+$table->Add(Array("name" => "caption", "caption" => "РќР°Р·РІР°РЅРёРµ", "type" => "short_text"));
+$table->Add(Array("name" => "name", "caption" => "РљРѕРґ", "type" => "short_text"));
+$table->Add(Array("name" => "sort", "caption" => "РЎРѕСЂС‚РёСЂРѕРІРєР°", "type" => "sort"));
 
-//@todot нужно ещё "число блоков внутри"
+//@todot РЅСѓР¶РЅРѕ РµС‰С‘ "С‡РёСЃР»Рѕ Р±Р»РѕРєРѕРІ РІРЅСѓС‚СЂРё"
 $table->Draw();
 ?>&nbsp;
 <script>

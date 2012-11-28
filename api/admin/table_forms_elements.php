@@ -95,8 +95,8 @@ class HElementForm extends HFormTable {
                     <td valign=top>
                         <table class="item_filter table table-bordered table-condensed">
                             <tr>
-                                <th align=center><center>Название поля</center></th>
-                            <th align=center><center>Фильтр по полю</center></th>
+                                <th align=center><center>РќР°Р·РІР°РЅРёРµ РїРѕР»СЏ</center></th>
+                            <th align=center><center>Р¤РёР»СЊС‚СЂ РїРѕ РїРѕР»СЋ</center></th>
                             <th align=center><center>-</center></th>
                 </tr>
                         <?
@@ -125,7 +125,7 @@ class HElementForm extends HFormTable {
                 $find_forme_array[] = array($item['caption'], $item['name']);
                                 ?></td>
                             <td>
-                                <a href=# onclick="find_form_hide('<?= $item['name'] ?>')">Скрыть</a>
+                                <a href=# onclick="find_form_hide('<?= $item['name'] ?>')">РЎРєСЂС‹С‚СЊ</a>
                             </td>
                         </tr>
                             <?
@@ -133,13 +133,13 @@ class HElementForm extends HFormTable {
                     ?>
                 <tr>
                     <td colspan=3 align=center><center>
-                    <input type=submit value=Фильтровать class="btn" style="margin-bottom:10px;">
+                    <input type=submit value=Р¤РёР»СЊС‚СЂРѕРІР°С‚СЊ class="btn" style="margin-bottom:10px;">
         <?
         if (!isset($_GET['parent']))
             $_GET['parent'] = 0;
         ?>
                     <input type=hidden name=parent value=-1 >
-                    <button class="btn" style="margin-bottom:10px;" onclick="window.location='?dblock=<?= $_GET['dblock'] ?>&parent=<?= $_GET['parent'] ?>';return false;">Сбросить</button>
+                    <button class="btn" style="margin-bottom:10px;" onclick="window.location='?dblock=<?= $_GET['dblock'] ?>&parent=<?= $_GET['parent'] ?>';return false;">РЎР±СЂРѕСЃРёС‚СЊ</button>
                 </center></td>
                 </tr>
             </table>
@@ -167,7 +167,7 @@ class HElementForm extends HFormTable {
 
             </script>	
             <div class="btn-group">
-                <button class="btn dropdown-toggle" data-toggle="dropdown">Скрытые поля фильтра <span class="caret"></span></button>
+                <button class="btn dropdown-toggle" data-toggle="dropdown">РЎРєСЂС‹С‚С‹Рµ РїРѕР»СЏ С„РёР»СЊС‚СЂР° <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <?
                     foreach ($find_forme_array as $fa) {
@@ -230,19 +230,19 @@ class HElementForm extends HFormTable {
             </script>
             <BR>
             <div>
-                Действия:
+                Р”РµР№СЃС‚РІРёСЏ:
                 <select onchange="SecondList()" name=what_to_do id=what_to_do>
-                    <?if ($this->can_delete){?><option value=del>Удалить</option><?};?>
-            <? if ($ccount) if ($this->can_edit){ ?><option value=move>Переместить</option> <? }; ?>
+                    <?if ($this->can_delete){?><option value=del>РЈРґР°Р»РёС‚СЊ</option><?};?>
+            <? if ($ccount) if ($this->can_edit){ ?><option value=move>РџРµСЂРµРјРµСЃС‚РёС‚СЊ</option> <? }; ?>
                 </select>
 
-                <span class="where_move" style="display:none;">куда</span>
+                <span class="where_move" style="display:none;">РєСѓРґР°</span>
                 <select name=where_move class="where_move" style="display:none;">
-                    <option value=0>[ корень ]</option>
+                    <option value=0>[ РєРѕСЂРµРЅСЊ ]</option>
                     <?
 
                     function DrawFolderTree($parent, $array_of, $name_add = "") {
-                        //получаем список папок
+                        //РїРѕР»СѓС‡Р°РµРј СЃРїРёСЃРѕРє РїР°РїРѕРє
                         foreach ($array_of as $data)
                             if ($data['parent'] == $parent) {
                                 ?>
@@ -256,7 +256,7 @@ class HElementForm extends HFormTable {
                     DrawFolderTree(0, $folders);
                     ?>
                 </select>
-                <input type=submit value="ОК" class="btn" >
+                <input type=submit value="РћРљ" class="btn" >
             </div>
         <? }; ?>
 

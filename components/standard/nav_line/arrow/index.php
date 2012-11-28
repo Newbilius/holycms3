@@ -4,7 +4,7 @@ foreach ($_global_bread as $i=>$gb)
 	{
 		if ($i!=0)
 			{
-			?>&nbsp;»&nbsp;<?
+			?>&nbsp;Â»&nbsp;<?
 			};
 		if (isset($gb[1])){?><a href="<?=$gb[1]?>"><?};?><?=$gb[0]?><? if (isset($gb[1])){?></a><?};
 	};

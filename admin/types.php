@@ -2,20 +2,20 @@
 
 $user_ifno_holy = $H_USER->GetInfo();
 if (!$user_ifno_holy['block_control'])
-    die("íåäîñòàòî÷íî ïğàâ");
+    die("Ğ½ĞµĞ´Ğ¾ÑÑ‚Ğ°Ñ‚Ğ¾Ñ‡Ğ½Ğ¾ Ğ¿Ñ€Ğ°Ğ²");
 
 global $_global_bread;
-$_global_bread[] = Array("Äîñòóïíûå òèïû", "/engine/admin/types.php");
+$_global_bread[] = Array("Ğ”Ğ¾ÑÑ‚ÑƒĞ¿Ğ½Ñ‹Ğµ Ñ‚Ğ¸Ğ¿Ñ‹", "/engine/admin/types.php");
 ?>
 <?
 
 $block = new DBlock();
 $table = new HTypeTable(Array("table" => "system_data_block_types","short_links"=>false));
 
-$mega_array[] = Array("name", "Êîä", "type_text", "");
-$mega_array[] = Array("caption", "Íàçâàíèå", "type_text", "");
-$mega_array[] = Array("basetype", "Áàçîâûé òèï", "type_text", "");
-$mega_array[] = Array("sort", "Ñîğòèğîâêà", "type_text", "");
+$mega_array[] = Array("name", "ĞšĞ¾Ğ´", "type_text", "");
+$mega_array[] = Array("caption", "ĞĞ°Ğ·Ğ²Ğ°Ğ½Ğ¸Ğµ", "type_text", "");
+$mega_array[] = Array("basetype", "Ğ‘Ğ°Ğ·Ğ¾Ğ²Ñ‹Ğ¹ Ñ‚Ğ¸Ğ¿", "type_text", "");
+$mega_array[] = Array("sort", "Ğ¡Ğ¾Ñ€Ñ‚Ğ¸Ñ€Ğ¾Ğ²ĞºĞ°", "type_text", "");
 
 foreach ($mega_array as $i => $mg)
     $table->Add(Array("name" => $mg[0], "caption" => $mg[1], "type" => $mg[2], "add_values" => $mg[3]));

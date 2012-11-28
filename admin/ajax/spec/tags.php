@@ -1,7 +1,6 @@
 <?
 require_once($_SERVER['DOCUMENT_ROOT']."/engine/engine.php");
-//pre_print($_GET);
-//вывести список иблоков
+//РІС‹РІРµСЃС‚Рё СЃРїРёСЃРѕРє РёР±Р»РѕРєРѕРІ
 $src_block=new DBlock();
 $src_f=new DBlockFields();
 ?>
@@ -16,7 +15,7 @@ $("#global_name").html(data);
 }
 </script>
 <div id=global_name name=global_name>
-Блок<BR>
+Р‘Р»РѕРє<BR>
 <select style="width:100%;" name=global_ajax_1 id=global_ajax_1 onchange="ReloadThis()">
 <?
 $src_block->GetList();
@@ -31,7 +30,7 @@ while ($data=$src_block->GetNext())
 
 <BR>
 
-Свойство, из которого брать тэги<BR>
+РЎРІРѕР№СЃС‚РІРѕ, РёР· РєРѕС‚РѕСЂРѕРіРѕ Р±СЂР°С‚СЊ С‚СЌРіРё<BR>
 <select style="width:100%;" name=global_ajax_2 id=global_ajax_2>
 <?
 $src_f->GetListByBlock($_GET['val'][0]);
@@ -45,5 +44,5 @@ while ($data=$src_f->GetNext())
 </select>
 <input style="display:none;" name=global_ajax_3 id=global_ajax_3 value="<?=$_GET['val'][2]?>">
 
-<center><a style="cursor:pointer;" onclick="SaveOn('<?=$_GET['spec_id']?>')">Сохранить</a></center>
+<center><a style="cursor:pointer;" onclick="SaveOn('<?=$_GET['spec_id']?>')">РЎРѕС…СЂР°РЅРёС‚СЊ</a></center>
 </div>

@@ -5,7 +5,7 @@ if (!defined('HCMS'))
 
 
 if (!isset($params['area']))
-    SystemAlert("не указана область поиска!");
+    SystemAlert("РЅРµ СѓРєР°Р·Р°РЅР° РѕР±Р»Р°СЃС‚СЊ РїРѕРёСЃРєР°!");
 if (!isset($params['find_text']))
     $params['find_text'] = "";
 
@@ -55,5 +55,5 @@ if ($params['find_text'] != "")
 if (file_exists($full_template_path))
     include($full_template_path);
 else
-    SystemAlert("Не найден шаблон <b>" . $full_template_path . "</b>");
+    SystemAlert("РќРµ РЅР°Р№РґРµРЅ С€Р°Р±Р»РѕРЅ <b>" . $full_template_path . "</b>");
 ?>

@@ -1,7 +1,6 @@
 <?
 if (!defined('HCMS')) die();
 if (!isset($_GET['tags'])) $_GET['tags']="";
-//pre_print($tags);
 //echo $tags_max_count;
 //echo $different."<HR>";
 $different_proc=$different/$tags_max_count;

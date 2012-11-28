@@ -1,8 +1,8 @@
 <?
-if (!isset($_GET['id'])) die("не выбран элемент");
+if (!isset($_GET['id'])) die("РЅРµ РІС‹Р±СЂР°РЅ СЌР»РµРјРµРЅС‚");
 
 if ((!$H_USER->IsAdmin()) && (!$H_USER->CanEdit($_GET['dblock'])))
-SystemAlertFatal("Недостаточно прав.");
+SystemAlertFatal("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ.");
 
 global $_global_bread;
 $block= new DBlock();
@@ -54,12 +54,12 @@ if (isset($tmp['caption']))
 	$fields=new DBlockFields();
 	$types= new DBlockTypes();
 	
-	$form->Add(Array("name"=>"caption","caption"=>"Название","type"=>"short_text",'required'=>1));
+	$form->Add(Array("name"=>"caption","caption"=>"РќР°Р·РІР°РЅРёРµ","type"=>"short_text",'required'=>1));
 	if ($show_code)
-	$form->Add(Array("name"=>"name","caption"=>"Код","type"=>"short_text",'required'=>1));
-	$form->Add(Array("name"=>"sort","caption"=>"Сортировка","type"=>"sort"));
+	$form->Add(Array("name"=>"name","caption"=>"РљРѕРґ","type"=>"short_text",'required'=>1));
+	$form->Add(Array("name"=>"sort","caption"=>"РЎРѕСЂС‚РёСЂРѕРІРєР°","type"=>"sort"));
 	if ($show_folders)
-	$form->Add(Array("name"=>"folder","caption"=>"Папка","type"=>"checkbox"));
+	$form->Add(Array("name"=>"folder","caption"=>"РџР°РїРєР°","type"=>"checkbox"));
 
 	$fields->GetListByBlock($_GET['dblock'],Array("owner_type>"=>"1"));
 	
@@ -82,7 +82,7 @@ if (isset($tmp['caption']))
 				$_POST['folder']=1;
 			if (!isset($_GET['parent'])) $_GET['parent']=0;
 			$_POST['parent']=$_GET['parent'];
-			$returns_now=false; if ($_POST['submit']=="Сохранить") $returns_now=true;
+			$returns_now=false; if ($_POST['submit']=="РЎРѕС…СЂР°РЅРёС‚СЊ") $returns_now=true;
 			unset($_POST['submit']);
 			
 			if (isset($_POST['name']))
@@ -102,7 +102,7 @@ if (isset($tmp['caption']))
 			
 			?>
 				<span style="color:green;">
-					Элемент изменён
+					Р­Р»РµРјРµРЅС‚ РёР·РјРµРЅС‘РЅ
 				</span>
 				<? if ($returns_now){?>
 				<script>

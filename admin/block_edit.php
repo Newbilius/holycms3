@@ -1,12 +1,12 @@
 <?
 $user_ifno_holy=$H_USER->GetInfo();
-if (!$user_ifno_holy['block_control']) die("недостаточно прав");
+if (!$user_ifno_holy['block_control']) die("РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ");
 $return=false;
-if (!isset($_GET['group'])) die("не выбрана группа блоков");
-if (!isset($_GET['dblock'])) die("не выбран конкретный блок");
+if (!isset($_GET['group'])) die("РЅРµ РІС‹Р±СЂР°РЅР° РіСЂСѓРїРїР° Р±Р»РѕРєРѕРІ");
+if (!isset($_GET['dblock'])) die("РЅРµ РІС‹Р±СЂР°РЅ РєРѕРЅРєСЂРµС‚РЅС‹Р№ Р±Р»РѕРє");
 
 global $_global_bread;
-$_global_bread[]=Array("Блоки данных","/engine/admin/group_list.php");
+$_global_bread[]=Array("Р‘Р»РѕРєРё РґР°РЅРЅС‹С…","/engine/admin/group_list.php");
 		$block = new DBlockGroup();
 		
 		if (!isset($_GET['group'])) $_GET['group']="";
@@ -22,18 +22,18 @@ $_global_bread[]=Array($tmp['caption'],"/engine/admin/block_edit.php?group=".$_G
 	$form= new HFormEdit(Array('table'=>"system_data_block",'id'=>$_GET['dblock']));
 	$form->return_link="blocks_list.php?group=".$_GET['group'];
 
-	$form->Add(Array("name"=>"caption","caption"=>"Название","type"=>"short_text",'required'=>true));
-	$form->Add(Array("name"=>"name","caption"=>"Код","type"=>"short_text",'required'=>true));
-	$form->Add(Array("name"=>"sort","caption"=>"Сортировка","type"=>"sort",'required'=>false));
-	$form->Add(Array("name"=>"bgroup","caption"=>"Группа","type"=>"list","add_values"=>"system_data_block_group;id;caption",'required'=>true));
-$form->Add(Array("name"=>"fav","caption"=>"Избранный","type"=>"checkbox",'required'=>false));
-$form->Add(Array("name"=>"hide_folders","caption"=>"Скрыть папки","type"=>"checkbox",'required'=>false));
-$form->Add(Array("name"=>"hide_folders2","caption"=>"Скрыть папки 2го уровня","type"=>"checkbox",'required'=>false));
-$form->Add(Array("name"=>"hide_code","caption"=>"Скрыть код","type"=>"checkbox",'required'=>false));
+	$form->Add(Array("name"=>"caption","caption"=>"РќР°Р·РІР°РЅРёРµ","type"=>"short_text",'required'=>true));
+	$form->Add(Array("name"=>"name","caption"=>"РљРѕРґ","type"=>"short_text",'required'=>true));
+	$form->Add(Array("name"=>"sort","caption"=>"РЎРѕСЂС‚РёСЂРѕРІРєР°","type"=>"sort",'required'=>false));
+	$form->Add(Array("name"=>"bgroup","caption"=>"Р“СЂСѓРїРїР°","type"=>"list","add_values"=>"system_data_block_group;id;caption",'required'=>true));
+$form->Add(Array("name"=>"fav","caption"=>"РР·Р±СЂР°РЅРЅС‹Р№","type"=>"checkbox",'required'=>false));
+$form->Add(Array("name"=>"hide_folders","caption"=>"РЎРєСЂС‹С‚СЊ РїР°РїРєРё","type"=>"checkbox",'required'=>false));
+$form->Add(Array("name"=>"hide_folders2","caption"=>"РЎРєСЂС‹С‚СЊ РїР°РїРєРё 2РіРѕ СѓСЂРѕРІРЅСЏ","type"=>"checkbox",'required'=>false));
+$form->Add(Array("name"=>"hide_code","caption"=>"РЎРєСЂС‹С‚СЊ РєРѕРґ","type"=>"checkbox",'required'=>false));
 
 	if ($form->GO())
 		{
-					$returns_now=false; if ($_POST['submit']=="Сохранить") $returns_now=true;
+					$returns_now=false; if ($_POST['submit']=="РЎРѕС…СЂР°РЅРёС‚СЊ") $returns_now=true;
 					$returns_now=true;
 					$return=true;
 			unset($_POST['submit']);
@@ -104,23 +104,23 @@ $.fancybox(data);
 
 </script>
 <? /* -------------------------------------------- */?>
-<h2>Список полей</h2>
+<h2>РЎРїРёСЃРѕРє РїРѕР»РµР№</h2>
 <?
 	$block= new DBlock();
 	$table= new HTypeTable(Array("table"=>"system_data_block_fields","filter"=>"data_block=".$block->GetIDByName($_GET['dblock'])));
 
-	$mega_array[]=Array("name","Код","type_text","");
-	$mega_array[]=Array("caption","Название","type_text","");
-	$mega_array[]=Array("type","Тип","list","system_data_block_types;id;caption;name");
-	$mega_array[]=Array("sort","Сорт.","integ","");
-	$mega_array[]=Array("required","Обяз.","checkbox","");
-	$mega_array[]=Array("multiple","Множест.","checkbox","");
-	$mega_array[]=Array("owner_type","Папка","checkbox","");
-	$mega_array[]=Array("not_element","Не item","checkbox","");
-	$mega_array[]=Array("not_list","Не в списке","checkbox","");
-	$mega_array[]=Array("admin_only","Админ only","checkbox","");
+	$mega_array[]=Array("name","РљРѕРґ","type_text","");
+	$mega_array[]=Array("caption","РќР°Р·РІР°РЅРёРµ","type_text","");
+	$mega_array[]=Array("type","РўРёРї","list","system_data_block_types;id;caption;name");
+	$mega_array[]=Array("sort","РЎРѕСЂС‚.","integ","");
+	$mega_array[]=Array("required","РћР±СЏР·.","checkbox","");
+	$mega_array[]=Array("multiple","РњРЅРѕР¶РµСЃС‚.","checkbox","");
+	$mega_array[]=Array("owner_type","РџР°РїРєР°","checkbox","");
+	$mega_array[]=Array("not_element","РќРµ item","checkbox","");
+	$mega_array[]=Array("not_list","РќРµ РІ СЃРїРёСЃРєРµ","checkbox","");
+	$mega_array[]=Array("admin_only","РђРґРјРёРЅ only","checkbox","");
 	$mega_array[]=Array("meta","Meta","checkbox","");
-	$mega_array[]=Array("add_values","Дополнительно","add_values","");
+	$mega_array[]=Array("add_values","Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ","add_values","");
 	
 
 	foreach ($mega_array as $i=>$mg)

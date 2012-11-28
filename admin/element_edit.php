@@ -14,10 +14,10 @@ parent.$.fancybox.close();
 }
 </script>
 <?
-if (!isset($_GET['id'])) die("не выбран элемент");
+if (!isset($_GET['id'])) die("РЅРµ РІС‹Р±СЂР°РЅ СЌР»РµРјРµРЅС‚");
 
 if ((!$H_USER->IsAdmin()) && (!$H_USER->CanEdit($_GET['dblock'])))
-SystemAlertFatal("Недостаточно прав.");
+SystemAlertFatal("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ.");
 
 $user_ifno_holy=$H_USER->GetInfo();
 
@@ -41,7 +41,7 @@ if (!$user_ifno_holy['block_control'])
 {
 $not_editor_blocks=array("users","modules","cms_options");
 if (in_array($_GET['dblock'],$not_editor_blocks))
-die("недостаточно прав");
+die("РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ");
 
 
 }
@@ -80,12 +80,12 @@ if (isset($tmp['caption']))
 	$fields=new DBlockFields();
 	$types= new DBlockTypes();
 
-	$form->Add(Array("name"=>"caption","caption"=>"Название","type"=>"short_text",'required'=>1));
+	$form->Add(Array("name"=>"caption","caption"=>"РќР°Р·РІР°РЅРёРµ","type"=>"short_text",'required'=>1));
 	if ($show_code)
-	$form->Add(Array("name"=>"name","caption"=>"Код","type"=>"short_text",'required'=>1));
-	$form->Add(Array("name"=>"sort","caption"=>"Сортировка","type"=>"sort"));
+	$form->Add(Array("name"=>"name","caption"=>"РљРѕРґ","type"=>"short_text",'required'=>1));
+	$form->Add(Array("name"=>"sort","caption"=>"РЎРѕСЂС‚РёСЂРѕРІРєР°","type"=>"sort"));
 	if ($show_folders)
-	$form->Add(Array("name"=>"folder","caption"=>"Папка","type"=>"checkbox"));
+	$form->Add(Array("name"=>"folder","caption"=>"РџР°РїРєР°","type"=>"checkbox"));
 
 	$fields->GetListByBlock($_GET['dblock'],Array("not_element"=>"0"));
 	
@@ -105,7 +105,7 @@ if (isset($tmp['caption']))
 			$element= new DBlockElement(Array("table"=>$_GET['dblock']));
 			//$element->sql->debug=true;
 			if (!isset($_GET['parent'])) $_GET['parent']=0;
-			$returns_now=false; if ($_POST['submit']=="Сохранить") $returns_now=true;
+			$returns_now=false; if ($_POST['submit']=="РЎРѕС…СЂР°РЅРёС‚СЊ") $returns_now=true;
 			unset($_POST['submit']);
 			//if (!isset($_POST['pass'])) unset($_POST['pass']);
 			//if (isset($_POST['pass'])) if ($_POST['pass']=="") unset($_POST['pass']);
@@ -131,7 +131,7 @@ if (isset($tmp['caption']))
 				include_once($_SERVER['DOCUMENT_ROOT']."/site/engine/admin/".$_GET['dblock']."_edit.php");
 			?>
 				<span style="color:green;">
-					Элемент изменён
+					Р­Р»РµРјРµРЅС‚ РёР·РјРµРЅС‘РЅ
 				</span>
 				<? if ($returns_now){?>
 				<script>

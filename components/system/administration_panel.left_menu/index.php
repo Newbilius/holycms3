@@ -1,10 +1,10 @@
 <?php 
 if (!defined('HCMS')) die();
-//íàïîëíèòü ñïèñêè
+//Ğ½Ğ°Ğ¿Ğ¾Ğ»Ğ½Ğ¸Ñ‚ÑŒ ÑĞ¿Ğ¸ÑĞºĞ¸
 $BlockGroups=new DBlockGroup();
 $Block=new DBlock();
 
-//ñïèñîê ãğóïï
+//ÑĞ¿Ğ¸ÑĞ¾Ğº Ğ³Ñ€ÑƒĞ¿Ğ¿
 $BlockGroups->GetList();
 while($data=$BlockGroups->GetNext())
 {
@@ -18,7 +18,7 @@ while($data=$BlockGroups->GetNext())
 			if ($data2['fav'])
 				$fav[]=$data2;
 			$cnt++;	
-			//ïîëó÷àåì ïàïêè
+			//Ğ¿Ğ¾Ğ»ÑƒÑ‡Ğ°ĞµĞ¼ Ğ¿Ğ°Ğ¿ĞºĞ¸
 			$Elements=new DBlockElement(Array("table"=>$data2['name']));
 			$Elements->GetList("folder=1");
 			

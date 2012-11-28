@@ -32,14 +32,14 @@ class HFormEdit {
             if ($_POST['token'] == $this->token) {
                 foreach ($this->columns as $item) {
                     if ((!isset($_POST[$item['name']])) && ($item['required']))
-                        $this->e[] = "Поле <b>[" . $item['caption'] . "]</b> обязательно для заполнения!";
+                        $this->e[] = "РџРѕР»Рµ <b>[" . $item['caption'] . "]</b> РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ!";
                     if (isset($_POST[$item['name']]))
                         if ($_POST[$item['name']] == "")
                             if ($item['required'])
                                 if ($item['type'] == "pass") {
                                     unset($_POST[$item['name']]);
                                 }else
-                                    $this->e[] = "Поле <b>[" . $item['caption'] . "]</b> обязательно для заполнения!";
+                                    $this->e[] = "РџРѕР»Рµ <b>[" . $item['caption'] . "]</b> РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ!";
                 };
                 if (count($this->e) > 0)
                     $this->DrawErrors();
@@ -79,16 +79,16 @@ class HFormEdit {
             ?>
                 <ul class="tabs tabs_item nav nav-pills" style="padding-left:0px;">
                     <li class="active">
-                        <a rel=tab1 href="#">Основные свойства</a>
+                        <a rel=tab1 href="#">РћСЃРЅРѕРІРЅС‹Рµ СЃРІРѕР№СЃС‚РІР°</a>
                     </li>
                    <?if ($meta){?>
                     <li class="">
-                        <a rel=tab2 href="#">Мета-тэги</a>
+                        <a rel=tab2 href="#">РњРµС‚Р°-С‚СЌРіРё</a>
                     </li>
                     <?};?>
                     <?if ($show_add_folder_buttons){?>
                     <li class="">
-                        <a href="elements_list.php?dblock=<?echo $_GET['dblock']?>&parent=<?echo $_GET['id']?>">Содержимое папки</a>
+                        <a href="elements_list.php?dblock=<?echo $_GET['dblock']?>&parent=<?echo $_GET['id']?>">РЎРѕРґРµСЂР¶РёРјРѕРµ РїР°РїРєРё</a>
                     </li>                    
                     <?};?>
                 </ul>
@@ -109,9 +109,9 @@ class HFormEdit {
         ?>
                 <tr>
                     <td colspan=3>
-                        <input name=submit type=submit value="Сохранить" style="float:left;height:26px;width:30%;margin-right:10px;" class="btn btn-success">
-                        <input name=submit type=submit value="Применить" style="height:26px;width:30%;margin-right:10px;" class="btn btn-primary">
-                        <input name=submit onclick="window.location='<?= $this->return_link ?>';" type=button value="Отменить" style="height:26px;width:30%;margin-right:10px;" class="btn btn-warning">
+                        <input name=submit type=submit value="РЎРѕС…СЂР°РЅРёС‚СЊ" style="float:left;height:26px;width:30%;margin-right:10px;" class="btn btn-success">
+                        <input name=submit type=submit value="РџСЂРёРјРµРЅРёС‚СЊ" style="height:26px;width:30%;margin-right:10px;" class="btn btn-primary">
+                        <input name=submit onclick="window.location='<?= $this->return_link ?>';" type=button value="РћС‚РјРµРЅРёС‚СЊ" style="height:26px;width:30%;margin-right:10px;" class="btn btn-warning">
                     </td>
                 </tr>
             </table>
@@ -178,7 +178,7 @@ class HFormEdit {
                         echo "</div>";
                         ?>
                                 <div style="border:0px solid green;width:100%;">
-                                    Порядок вывода: <input name=<?= $item['name'] ?>[SORT][<?= $tmp_counter ?>] value=100>
+                                    РџРѕСЂСЏРґРѕРє РІС‹РІРѕРґР°: <input name=<?= $item['name'] ?>[SORT][<?= $tmp_counter ?>] value=100>
                                 </div>
                                 <?
                             };
@@ -192,10 +192,10 @@ class HFormEdit {
                         $obj->Edit($item['name'], $mi_tmp, $item['add_values'], $item['multiple']);
                         ?>
                             <div style="border:0px solid green;">
-                                Порядок вывода: <input name=<?= $item['name'] ?>[SORT][] value=100>
+                                РџРѕСЂСЏРґРѕРє РІС‹РІРѕРґР°: <input name=<?= $item['name'] ?>[SORT][] value=100>
                             </div>
                         </div>
-                        <div id=adddiv_<?= $item['name'] ?>><a class="btn btn-primary" onclick="AddElementDiv('#hiddden_<?= $item['name'] ?>','#hiddden_<?= $item['name'] ?>','<?= $item['name'] ?>');">Добавить ещё</a></div>
+                        <div id=adddiv_<?= $item['name'] ?>><a class="btn btn-primary" onclick="AddElementDiv('#hiddden_<?= $item['name'] ?>','#hiddden_<?= $item['name'] ?>','<?= $item['name'] ?>');">Р”РѕР±Р°РІРёС‚СЊ РµС‰С‘</a></div>
                         <?
                     }
                     else

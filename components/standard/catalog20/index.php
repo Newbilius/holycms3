@@ -13,7 +13,7 @@ if (!isset($params['count']))
 if (!isset($params['filter']))
     $params['filter'] = "";
 if (!isset($params['table']))
-    die("не указана таблица");
+    die("РЅРµ СѓРєР°Р·Р°РЅР° С‚Р°Р±Р»РёС†Р°");
 if (!isset($params['add_to_bread']))
     $params['add_to_bread'] = "";
 if (!isset($params['set_title']))
@@ -35,7 +35,7 @@ else
     $list_filters.=" AND parent=" . $human_link[0];
 
 /*
- * костыль для вложенных папок для попадания в навигационную цепочку, установки заголовка
+ * РєРѕСЃС‚С‹Р»СЊ РґР»СЏ РІР»РѕР¶РµРЅРЅС‹С… РїР°РїРѕРє РґР»СЏ РїРѕРїР°РґР°РЅРёСЏ РІ РЅР°РІРёРіР°С†РёРѕРЅРЅСѓСЋ С†РµРїРѕС‡РєСѓ, СѓСЃС‚Р°РЅРѕРІРєРё Р·Р°РіРѕР»РѕРІРєР°
  * 
  */
 if ($human_link[0] > 0)
@@ -68,7 +68,7 @@ if (count($add_menu) > 0) {
 };
 //AddToBread($folder);
 /*
- * конец костыля
+ * РєРѕРЅРµС† РєРѕСЃС‚С‹Р»СЏ
  */
 
 $item_filter = $list_filters;

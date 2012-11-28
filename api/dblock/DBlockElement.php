@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Операции над элементами.
+ * РћРїРµСЂР°С†РёРё РЅР°Рґ СЌР»РµРјРµРЅС‚Р°РјРё.
  */
 class DBlockElement extends DBaseClass {
 
@@ -11,7 +11,7 @@ class DBlockElement extends DBaseClass {
     public $datab;
 
     /**
-     * @param string/array <p>таблица (код!) или массив,в котором есть ключ ['table']</p>
+     * @param string/array <p>С‚Р°Р±Р»РёС†Р° (РєРѕРґ!) РёР»Рё РјР°СЃСЃРёРІ,РІ РєРѕС‚РѕСЂРѕРј РµСЃС‚СЊ РєР»СЋС‡ ['table']</p>
      * @return DBlockElement
      */
     function DBlockElement($values) {
@@ -24,7 +24,7 @@ class DBlockElement extends DBaseClass {
             $values['table'] = $tmp;
         };
         $this->sql = new HolySQL($values['table']);
-        //получить список подходящих полей
+        //РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РїРѕРґС…РѕРґСЏС‰РёС… РїРѕР»РµР№
         $this->typesb = new DBlockTypes();
         $this->fieldsb = new DBlockFields();
         $this->fieldsb->GetListByBlock($values['table']);
@@ -33,15 +33,15 @@ class DBlockElement extends DBaseClass {
     }
 
     /**
-     * Обновляет один элемент
+     * РћР±РЅРѕРІР»СЏРµС‚ РѕРґРёРЅ СЌР»РµРјРµРЅС‚
      * 
-     * @param string/int $ID <p>ID или код элемента</p>
-     * @param array $values <p>массив значений</p>
-     * @param arrray $not_only_selected=true <p>[optional] при false обновляет только выбранные свойства, при true - забивает не указанные пустыми значениями и 0 для int/false</p>
+     * @param string/int $ID <p>ID РёР»Рё РєРѕРґ СЌР»РµРјРµРЅС‚Р°</p>
+     * @param array $values <p>РјР°СЃСЃРёРІ Р·РЅР°С‡РµРЅРёР№</p>
+     * @param arrray $not_only_selected=true <p>[optional] РїСЂРё false РѕР±РЅРѕРІР»СЏРµС‚ С‚РѕР»СЊРєРѕ РІС‹Р±СЂР°РЅРЅС‹Рµ СЃРІРѕР№СЃС‚РІР°, РїСЂРё true - Р·Р°Р±РёРІР°РµС‚ РЅРµ СѓРєР°Р·Р°РЅРЅС‹Рµ РїСѓСЃС‚С‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё Рё 0 РґР»СЏ int/false</p>
      */
     function Update($ID, $values, $not_only_selected = true) {
         $insert_values = Array();
-        //пройтись по полям
+        //РїСЂРѕР№С‚РёСЃСЊ РїРѕ РїРѕР»СЏРј
         $this->fieldsb->GetListByBlock($this->table);
         while ($field = $this->fieldsb->GetNext())
             if ((isset($values[$field['name']])) || ($not_only_selected)) {
@@ -91,7 +91,7 @@ class DBlockElement extends DBaseClass {
                                             if ($FIRST >= 2)
                                                 $insert_values[$field['name']].=";";
 
-                                            //@fix некрасиво
+                                            //@fix РЅРµРєСЂР°СЃРёРІРѕ
                                             @$not_insert = $obj->NeedInsert($vvv);
 
                                             if (!$not_insert)
@@ -122,7 +122,7 @@ class DBlockElement extends DBaseClass {
                                 };
                             };
                     } else {
-                        //@fix некрасиво
+                        //@fix РЅРµРєСЂР°СЃРёРІРѕ
                         @$not_insert = $obj->NeedInsert($values[$field['name']]);
 
                         if (!isset($values[$field['name']]))
@@ -139,7 +139,7 @@ class DBlockElement extends DBaseClass {
                     }
                 };
 
-                //если поле множественное первого типа, склеить значение
+                //РµСЃР»Рё РїРѕР»Рµ РјРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРµ РїРµСЂРІРѕРіРѕ С‚РёРїР°, СЃРєР»РµРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ
             };
 
         if (isset($values['folder']))
@@ -163,7 +163,7 @@ class DBlockElement extends DBaseClass {
     }
 
     /**
-     * Возвращает следующий элемент после запроса. Вызывается после <b>GetList()</b>.
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃР»РµРґСѓСЋС‰РёР№ СЌР»РµРјРµРЅС‚ РїРѕСЃР»Рµ Р·Р°РїСЂРѕСЃР°. Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїРѕСЃР»Рµ <b>GetList()</b>.
      * 
      */
     function GetNext() {
@@ -179,13 +179,13 @@ class DBlockElement extends DBaseClass {
     }
 
     /**
-     * Добавляет новый элемент
+     * Р”РѕР±Р°РІР»СЏРµС‚ РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚
      * 
-     * @param array $values <p>массив значений</p>
+     * @param array $values <p>РјР°СЃСЃРёРІ Р·РЅР°С‡РµРЅРёР№</p>
      */
     function Add($values) {
         $insert_values = Array();
-        //пройтись по полям
+        //РїСЂРѕР№С‚РёСЃСЊ РїРѕ РїРѕР»СЏРј
         //PrePrint($values);
         $this->fieldsb->GetListByBlock($this->table);
         while ($field = $this->fieldsb->GetNext()) {
@@ -255,7 +255,7 @@ class DBlockElement extends DBaseClass {
                     $insert_values[$field['name']] = $obj->BeforeAdd($field['name'], $values[$field['name']], $field['add_values']);
             }
         };
-        //отдельно отрабатываем стандартные поля
+        //РѕС‚РґРµР»СЊРЅРѕ РѕС‚СЂР°Р±Р°С‚С‹РІР°РµРј СЃС‚Р°РЅРґР°СЂС‚РЅС‹Рµ РїРѕР»СЏ
 
         if (!isset($values['sort']))
             $values['sort'] = $this->sql->GetSortAuto();

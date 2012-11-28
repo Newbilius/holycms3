@@ -16,15 +16,15 @@
 
 <form method=post class="form-horizontal">
 <fieldset>
-<legend>Вход в систему администрирования</legend>
+<legend>Р’С…РѕРґ РІ СЃРёСЃС‚РµРјСѓ Р°РґРјРёРЅРёСЃС‚СЂРёСЂРѕРІР°РЅРёСЏ</legend>
 <div class="control-group">
 
-            <label class="control-label" for="login">Логин</label>
+            <label class="control-label" for="login">Р›РѕРіРёРЅ</label>
             <div class="controls">
 			  <input class="input-xlarge" type=text value="<?=$_POST['login']?>" name=login id=login>
             </div>
 </BR>			 
-            <label class="control-label" for="pass">Пароль</label>
+            <label class="control-label" for="pass">РџР°СЂРѕР»СЊ</label>
             <div class="controls">
 			  <input class="input-xlarge" type=password value="" name=pass id=pass>
             </div>
@@ -32,7 +32,7 @@
 			<div class="row">
 				<div class="span1 offset1">
 				<div class="controls">
-					<input name=submit type=submit value=Войти class="btn btn-primary">
+					<input name=submit type=submit value=Р’РѕР№С‚Рё class="btn btn-primary">
 				</div>
 				</div>
 			</div>

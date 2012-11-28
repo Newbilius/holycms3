@@ -23,31 +23,31 @@ function Datepicker() {
 	this._inDialog = false; // True if showing within a "dialog", false if not
 	this.regional = []; // Available regional settings, indexed by language code
 	this.regional[''] = { // Default regional settings
-		clearText: 'Очистить', // Display text for clear link
-		clearStatus: 'Стереть текущую дату', // Status text for clear link
-		closeText: 'Закрыть', // Display text for close link
-		closeStatus: 'Закрыть без сохранения', // Status text for close link
-		prevText: '&#x3c;Пред', // Display text for previous month link
-		prevStatus: 'Предыдущий месяц', // Status text for previous month link
-		nextText: 'След&#x3e;', // Display text for next month link
-		nextStatus: 'Следующий месяц', // Status text for next month link
-		currentText: 'Сегодня', // Display text for current month link
-		currentStatus: 'Текущий месяц', // Status text for current month link
-		monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь',
-			'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'], // Names of months for drop-down and formatting
-		monthNamesShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'], // For formatting
-		monthStatus: 'Показать другой месяц', // Status text for selecting a month
-		yearStatus: 'Показать другой год', // Status text for selecting a year
-		weekHeader: 'Нед', // Header for the week of the year column
-		weekStatus: 'Неделя года', // Status text for the week of the year column
-		dayNames: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'], // For formatting
-		dayNamesShort: ['Вск', 'Пнд', 'Втр', 'Срд', 'Чтв', 'Птн', 'Сбт'], // For formatting
-		dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'], // Column headings for days starting at Sunday
-		dayStatus: 'Установить первым днем недели', // Status text for the day of the week selection
-		dateStatus: 'Выбрать день, месяц, год', // Status text for the date selection
+		clearText: 'РћС‡РёСЃС‚РёС‚СЊ', // Display text for clear link
+		clearStatus: 'РЎС‚РµСЂРµС‚СЊ С‚РµРєСѓС‰СѓСЋ РґР°С‚Сѓ', // Status text for clear link
+		closeText: 'Р—Р°РєСЂС‹С‚СЊ', // Display text for close link
+		closeStatus: 'Р—Р°РєСЂС‹С‚СЊ Р±РµР· СЃРѕС…СЂР°РЅРµРЅРёСЏ', // Status text for close link
+		prevText: '&#x3c;РџСЂРµРґ', // Display text for previous month link
+		prevStatus: 'РџСЂРµРґС‹РґСѓС‰РёР№ РјРµСЃСЏС†', // Status text for previous month link
+		nextText: 'РЎР»РµРґ&#x3e;', // Display text for next month link
+		nextStatus: 'РЎР»РµРґСѓСЋС‰РёР№ РјРµСЃСЏС†', // Status text for next month link
+		currentText: 'РЎРµРіРѕРґРЅСЏ', // Display text for current month link
+		currentStatus: 'РўРµРєСѓС‰РёР№ РјРµСЃСЏС†', // Status text for current month link
+		monthNames: ['РЇРЅРІР°СЂСЊ','Р¤РµРІСЂР°Р»СЊ','РњР°СЂС‚','РђРїСЂРµР»СЊ','РњР°Р№','РСЋРЅСЊ',
+			'РСЋР»СЊ','РђРІРіСѓСЃС‚','РЎРµРЅС‚СЏР±СЂСЊ','РћРєС‚СЏР±СЂСЊ','РќРѕСЏР±СЂСЊ','Р”РµРєР°Р±СЂСЊ'], // Names of months for drop-down and formatting
+		monthNamesShort: ['РЇРЅРІ', 'Р¤РµРІ', 'РњР°СЂ', 'РђРїСЂ', 'РњР°Р№', 'РСЋРЅ', 'РСЋР»', 'РђРІРі', 'РЎРµРЅ', 'РћРєС‚', 'РќРѕСЏ', 'Р”РµРє'], // For formatting
+		monthStatus: 'РџРѕРєР°Р·Р°С‚СЊ РґСЂСѓРіРѕР№ РјРµСЃСЏС†', // Status text for selecting a month
+		yearStatus: 'РџРѕРєР°Р·Р°С‚СЊ РґСЂСѓРіРѕР№ РіРѕРґ', // Status text for selecting a year
+		weekHeader: 'РќРµРґ', // Header for the week of the year column
+		weekStatus: 'РќРµРґРµР»СЏ РіРѕРґР°', // Status text for the week of the year column
+		dayNames: ['Р’РѕСЃРєСЂРµСЃРµРЅСЊРµ', 'РџРѕРЅРµРґРµР»СЊРЅРёРє', 'Р’С‚РѕСЂРЅРёРє', 'РЎСЂРµРґР°', 'Р§РµС‚РІРµСЂРі', 'РџСЏС‚РЅРёС†Р°', 'РЎСѓР±Р±РѕС‚Р°'], // For formatting
+		dayNamesShort: ['Р’СЃРє', 'РџРЅРґ', 'Р’С‚СЂ', 'РЎСЂРґ', 'Р§С‚РІ', 'РџС‚РЅ', 'РЎР±С‚'], // For formatting
+		dayNamesMin: ['Р’СЃ','РџРЅ','Р’С‚','РЎСЂ','Р§С‚','РџС‚','РЎР±'], // Column headings for days starting at Sunday
+		dayStatus: 'РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РїРµСЂРІС‹Рј РґРЅРµРј РЅРµРґРµР»Рё', // Status text for the day of the week selection
+		dateStatus: 'Р’С‹Р±СЂР°С‚СЊ РґРµРЅСЊ, РјРµСЃСЏС†, РіРѕРґ', // Status text for the date selection
 		dateFormat: 'dd.mm.yy', // See format options on parseDate
 		firstDay: 1, // The first day of the week, Sun = 0, Mon = 1, ...
-		initStatus: 'Выбрать дату', // Initial Status text on opening
+		initStatus: 'Р’С‹Р±СЂР°С‚СЊ РґР°С‚Сѓ', // Initial Status text on opening
 		isRTL: false // True if right-to-left language, false if left-to-right
 	};
 	this._defaults = { // Global defaults for all the date picker instances

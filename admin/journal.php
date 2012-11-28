@@ -150,12 +150,12 @@ $_global_bread[]=Array($tmp['caption'],"/engine/admin/journal.php?dblock=".$_GET
 	
 	$fields->GetListByBlock($_GET['dblock']);
 	
-	$table->Add(Array("name"=>"item_id","caption"=>"ID ýëåìåíòà","type"=>"short_text"));
-        $table->Add(Array("name"=>"data_caption","caption"=>"Íàçâàíèå","type"=>"short_text"));
-        $table->Add(Array("name"=>"action","caption"=>"Äåéñòâèå","type"=>"journal_text"));
-        $table->Add(Array("name"=>"date_time","caption"=>"Äàòà","type"=>"short_text"));
-        $table->Add(Array("name"=>"block_name","caption"=>"Data-áëîê","type"=>"list","add_values"=>"system_data_block;name;caption"));
-        $table->Add(Array("name"=>"user_id","caption"=>"Ïîëüçîâàòåëü","type"=>"list","add_values"=>"users;id;caption"));
+	$table->Add(Array("name"=>"item_id","caption"=>"ID ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°","type"=>"short_text"));
+        $table->Add(Array("name"=>"data_caption","caption"=>"ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ","type"=>"short_text"));
+        $table->Add(Array("name"=>"action","caption"=>"Ð”ÐµÐ¹ÑÑ‚Ð²Ð¸Ðµ","type"=>"journal_text"));
+        $table->Add(Array("name"=>"date_time","caption"=>"Ð”Ð°Ñ‚Ð°","type"=>"short_text"));
+        $table->Add(Array("name"=>"block_name","caption"=>"Data-Ð±Ð»Ð¾Ðº","type"=>"list","add_values"=>"system_data_block;name;caption"));
+        $table->Add(Array("name"=>"user_id","caption"=>"ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ","type"=>"list","add_values"=>"users;id;caption"));
         
         
         

@@ -8,7 +8,7 @@ class CForm_tags extends CForm_text {
         $tags_list = $tags->GetTagsList();
         $item_tags = $tags->GetListSimple($data);
         ?>
-        <select data-placeholder="Выберите теги..." style="width:100%;" multiple class="chosen" name="<?= $name ?>[]" id="<?= $name ?>">
+        <select data-placeholder="Р’С‹Р±РµСЂРёС‚Рµ С‚РµРіРё..." style="width:100%;" multiple class="chosen" name="<?= $name ?>[]" id="<?= $name ?>">
             <?
             foreach ($tags_list as $_tag_name => $_tag) {
                 $selected = "";
@@ -22,8 +22,14 @@ class CForm_tags extends CForm_text {
                 };
                 ?>
         </select><br>
-        Добавить тэг:<input id="add_tag_<?= $name ?>" name="add_tag_<?= $name ?>" value=""><a onclick="return add_tag_click_<?=$name?>();" href="" class="btn btn-small">Добавить</a>
+        Р”РѕР±Р°РІРёС‚СЊ С‚СЌРі:<input id="add_tag_<?= $name ?>" name="add_tag_<?= $name ?>" value=""><a onclick="return add_tag_click_<?=$name?>();" href="" class="btn btn-small">Р”РѕР±Р°РІРёС‚СЊ</a>
         <br><br>
+				<style>
+		.chzn-container
+{
+width:100% !important;
+}
+</style>
         <?
         $this->_html_add($name);
     }
@@ -76,7 +82,7 @@ class CForm_tags extends CForm_text {
         $tags = new HolyTags($add[0], $add[1]);
         $tags_list = $tags->GetTagsList();
         ?>
-        <select data-placeholder="Выберите теги..." style="width:100%;" multiple class="chosen" name="<?= $name ?>[]" id="<?= $name ?>">
+        <select data-placeholder="Р’С‹Р±РµСЂРёС‚Рµ С‚РµРіРё..." style="width:100%;" multiple class="chosen" name="<?= $name ?>[]" id="<?= $name ?>">
             <?
             foreach ($tags_list as $_tag_name => $_tag) {
                 ?>
@@ -85,8 +91,14 @@ class CForm_tags extends CForm_text {
                 };
                 ?>
         </select><br>
-        Добавить тэг:<input id="add_tag_<?= $name ?>" name="add_tag_<?= $name ?>" value=""><a onclick="return add_tag_click_<?=$name?>();" href="" class="btn btn-small">Добавить</a>
+        Р”РѕР±Р°РІРёС‚СЊ С‚СЌРі:<input id="add_tag_<?= $name ?>" name="add_tag_<?= $name ?>" value=""><a onclick="return add_tag_click_<?=$name?>();" href="" class="btn btn-small">Р”РѕР±Р°РІРёС‚СЊ</a>
         <br><br>
+		<style>
+		.chzn-container
+{
+width:100% !important;
+}
+</style>
         <?
         $this->_html_add($name);
     }

@@ -2,12 +2,12 @@
 require_once("../engine.php");
 
 if (!$H_USER->IsAdmin())
-SystemAlertFatal("Недостаточно прав.");
+SystemAlertFatal("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ.");
 
 global $_global_bread;
-$_global_bread[] = Array("Настройки доступа");
+$_global_bread[] = Array("РќР°СЃС‚СЂРѕР№РєРё РґРѕСЃС‚СѓРїР°");
 
-//получить список
+//РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє
 $users_groups_rs = new DBlockElement("system_user_groups");
 $users_groups_rs->GetList();
 $users_groups = $users_groups_rs->GetFullList();
@@ -46,7 +46,7 @@ foreach ($users_groups as $_ug)
     $full_user_groups_access[$_ug['name']]['delete']=explode(";",$_ug['delete']);
 };
 
-//получить список групп датаблоков
+//РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РіСЂСѓРїРї РґР°С‚Р°Р±Р»РѕРєРѕРІ
 $groups = new DBlockGroup();
 $groups->GetList();
 $groups_list = $groups->GetFullList();
@@ -61,7 +61,7 @@ $groups_count = count($users_groups);
 <table class="table table-striped table-bordered table-hover table-condensed">
     <thead>
         <tr>
-            <th rowspan="2">Название</th>
+            <th rowspan="2">РќР°Р·РІР°РЅРёРµ</th>
             <?
             foreach ($users_groups as $_u_group) {
                 $cols_count+=4;
@@ -132,9 +132,9 @@ $groups_count = count($users_groups);
             ?>
             <?
         }
-//получить список датаблоков в группе
+//РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РґР°С‚Р°Р±Р»РѕРєРѕРІ РІ РіСЂСѓРїРїРµ
         ?>
         </tbody>
 </table>
-<input name=submit type=submit value="Сохранить" style="width:40%;HEIGHT:28px;" class="btn btn-success">
+<input name=submit type=submit value="РЎРѕС…СЂР°РЅРёС‚СЊ" style="width:40%;HEIGHT:28px;" class="btn btn-success">
 </form>

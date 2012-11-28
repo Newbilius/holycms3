@@ -1,7 +1,7 @@
 <?
 
 /**
- * Класс для валидации данных
+ * РљР»Р°СЃСЃ РґР»СЏ РІР°Р»РёРґР°С†РёРё РґР°РЅРЅС‹С…
  */
 class HolyValidator {
 
@@ -10,11 +10,11 @@ class HolyValidator {
     protected $field_names;
 
     /**
-     * Если указанные ключи не существуют в массиве - создаются пустые
+     * Р•СЃР»Рё СѓРєР°Р·Р°РЅРЅС‹Рµ РєР»СЋС‡Рё РЅРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‚ РІ РјР°СЃСЃРёРІРµ - СЃРѕР·РґР°СЋС‚СЃСЏ РїСѓСЃС‚С‹Рµ
      * 
-     * @param array $field_names  <p>массив вида "код поля"=>"навание поля"</p>
+     * @param array $field_names  <p>РјР°СЃСЃРёРІ РІРёРґР° "РєРѕРґ РїРѕР»СЏ"=>"РЅР°РІР°РЅРёРµ РїРѕР»СЏ"</p>
      */
-    //@todo избавиться от параметра - перенести все фразы и названия в i18-файл
+    //@todo РёР·Р±Р°РІРёС‚СЊСЃСЏ РѕС‚ РїР°СЂР°РјРµС‚СЂР° - РїРµСЂРµРЅРµСЃС‚Рё РІСЃРµ С„СЂР°Р·С‹ Рё РЅР°Р·РІР°РЅРёСЏ РІ i18-С„Р°Р№Р»
     public function HolyValidator($field_names) {
         $this->ok = false;
         $this->errors = array();
@@ -27,7 +27,7 @@ class HolyValidator {
         if (isset($array[$key]))
             if ($array[$key]) {
                 $res0 = new DBlockElement($options['table']);
-                //todo нехорошооо
+                //todo РЅРµС…РѕСЂРѕС€РѕРѕРѕ
                 //$options['field']."='".mysql_real_escape_string($array[$key])."'"
                 $tmp = $res0->GetOne(Array($options['field'] => $array[$key]));
                 if (isset($tmp))
@@ -37,7 +37,7 @@ class HolyValidator {
             }
 
         if (!$ok)
-            $this->errors[] = "Такое значение поля " . $this->field_names[$key] . " уже существует.";
+            $this->errors[] = "РўР°РєРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ " . $this->field_names[$key] . " СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚.";
     }
 
     protected function Rule_equal($array, $key, $options) {
@@ -48,7 +48,7 @@ class HolyValidator {
                     $ok = true;
 
         if (!$ok)
-            $this->errors[] = "Не соответствуют значения в полях " . $this->field_names[$key] . " и " . $this->field_names[$options];
+            $this->errors[] = "РќРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‚ Р·РЅР°С‡РµРЅРёСЏ РІ РїРѕР»СЏС… " . $this->field_names[$key] . " Рё " . $this->field_names[$options];
     }
 
     protected function Rule_email($array, $key, $options) {
@@ -60,7 +60,7 @@ class HolyValidator {
             $ok = false;
 
         if (!$ok)
-            $this->errors[] = "Неверный email в поле " . $this->field_names[$key];
+            $this->errors[] = "РќРµРІРµСЂРЅС‹Р№ email РІ РїРѕР»Рµ " . $this->field_names[$key];
     }
 
     protected function Rule_not_empty($array, $key, $options) {
@@ -73,15 +73,15 @@ class HolyValidator {
             $ok = false;
 
         if (!$ok)
-            $this->errors[] = "Не заполнено поле " . $this->field_names[$key];
+            $this->errors[] = "РќРµ Р·Р°РїРѕР»РЅРµРЅРѕ РїРѕР»Рµ " . $this->field_names[$key];
     }
 
     /**
-     * Добавляет правило для проверки
+     * Р”РѕР±Р°РІР»СЏРµС‚ РїСЂР°РІРёР»Рѕ РґР»СЏ РїСЂРѕРІРµСЂРєРё
      * 
-     * @param string $rule  <p>имя правила для валидации</p>
-     * @param string $name  <p>имя поля для валидации</p>
-     * @param array $options  <p>массив дополнительных опций</p>
+     * @param string $rule  <p>РёРјСЏ РїСЂР°РІРёР»Р° РґР»СЏ РІР°Р»РёРґР°С†РёРё</p>
+     * @param string $name  <p>РёРјСЏ РїРѕР»СЏ РґР»СЏ РІР°Р»РёРґР°С†РёРё</p>
+     * @param array $options  <p>РјР°СЃСЃРёРІ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РѕРїС†РёР№</p>
      * 
      * @return HolyValidator
      */
@@ -95,14 +95,14 @@ class HolyValidator {
     }
 
     /**
-     * Проверяет массив по выбранным правилам.
+     * РџСЂРѕРІРµСЂСЏРµС‚ РјР°СЃСЃРёРІ РїРѕ РІС‹Р±СЂР°РЅРЅС‹Рј РїСЂР°РІРёР»Р°Рј.
      * 
-     * @param array $array  <p>массив для валидации</p>
+     * @param array $array  <p>РјР°СЃСЃРёРІ РґР»СЏ РІР°Р»РёРґР°С†РёРё</p>
      */
     public function Check($array) {
         if (count($this->rules) > 0) {
             foreach ($this->rules as $rule) {
-                //вызывает метод, одноименный с выбранным правилом
+                //РІС‹Р·С‹РІР°РµС‚ РјРµС‚РѕРґ, РѕРґРЅРѕРёРјРµРЅРЅС‹Р№ СЃ РІС‹Р±СЂР°РЅРЅС‹Рј РїСЂР°РІРёР»РѕРј
                 $function_name = "Rule_" . $rule['rule'];
                 $this->$function_name($array, $rule['name'], $rule['options']);
             }
@@ -110,7 +110,7 @@ class HolyValidator {
     }
 
     /**
-     * Возвращает true, если последняя проверка прошла упешно и массив ошибок, если нет.
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ true, РµСЃР»Рё РїРѕСЃР»РµРґРЅСЏСЏ РїСЂРѕРІРµСЂРєР° РїСЂРѕС€Р»Р° СѓРїРµС€РЅРѕ Рё РјР°СЃСЃРёРІ РѕС€РёР±РѕРє, РµСЃР»Рё РЅРµС‚.
      * 
      * @return array/bool
      */

@@ -280,7 +280,7 @@ function GetImageResizeCacheAndMask4($fname, $mask, $w, $h, $add = "") {
     <?
 }
 
-//"имя переменной","значение","максимальное число значений"
+//"РёРјСЏ РїРµСЂРµРјРµРЅРЅРѕР№","Р·РЅР°С‡РµРЅРёРµ","РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ Р·РЅР°С‡РµРЅРёР№"
 function AddToCookieArray($name, $value, $max_count = -1) {
     if (isset($_COOKIE[$name]))
         $cur_array = explode(";", $_COOKIE[$name]); else

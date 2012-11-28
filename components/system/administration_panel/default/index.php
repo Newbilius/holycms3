@@ -108,10 +108,10 @@
                     <div class="nav-collapse pull-right">
                         <ul class="nav">
                             <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                            <li><a target=_new href="/">На сайт</a></li>
+                            <li><a target=_new href="/">РќР° СЃР°Р№С‚</a></li>
                             <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                            <li><a class="about_show" href="#about_div">Лицензия</a></li>
-                            <li><a href="<? echo URI_ADMIN ?>?exit=1">Выйти</a></li>
+                            <li><a class="about_show" href="#about_div">Р›РёС†РµРЅР·РёСЏ</a></li>
+                            <li><a href="<? echo URI_ADMIN ?>?exit=1">Р’С‹Р№С‚Рё</a></li>
                         </ul>
                     </div>
 
@@ -198,7 +198,7 @@
     <div id="footer">
       <div class="container">
             <hr style="margin-top:0px;">
-                <p> <strong>HolyCMS <?= $_holy_vers ?></strong>, &copy <a href=http://www.siteszone.ru/ target=_new>Моисеев Дмитрий aka Newbilius</a>. 2011-2012 год</p>
+                <p> <strong>HolyCMS <?= $_holy_vers ?></strong>, &copy <a href=http://www.siteszone.ru/ target=_new>РњРѕРёСЃРµРµРІ Р”РјРёС‚СЂРёР№ aka Newbilius</a>. 2011-2012 РіРѕРґ</p>
       </div>
     </div>
     </body>

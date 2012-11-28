@@ -1,13 +1,13 @@
 <?
 $user_ifno_holy=$H_USER->GetInfo();
-if (!$user_ifno_holy['block_control']) die("недостаточно прав");
+if (!$user_ifno_holy['block_control']) die("РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїСЂР°РІ");
 
 	$form= new HFormAdd(Array('table'=>"system_data_block_group"));
 
 
-	$form->Add(Array("name"=>"caption","caption"=>"Название","type"=>"short_text",'required'=>1));
-	$form->Add(Array("name"=>"name","caption"=>"Код","type"=>"short_text",'required'=>1));
-	$form->Add(Array("name"=>"sort","caption"=>"Сортировка","type"=>"sort"));
+	$form->Add(Array("name"=>"caption","caption"=>"РќР°Р·РІР°РЅРёРµ","type"=>"short_text",'required'=>1));
+	$form->Add(Array("name"=>"name","caption"=>"РљРѕРґ","type"=>"short_text",'required'=>1));
+	$form->Add(Array("name"=>"sort","caption"=>"РЎРѕСЂС‚РёСЂРѕРІРєР°","type"=>"sort"));
 
 	$form->return_link="group_list.php";
 	
@@ -19,7 +19,7 @@ if (!$user_ifno_holy['block_control']) die("недостаточно прав");
 			
 			?>
 				<span style="color:green;">
-					Элемент добавлен
+					Р­Р»РµРјРµРЅС‚ РґРѕР±Р°РІР»РµРЅ
 				</span><script>
 $(document).ready(function () {
 window.location='<?=$form->return_link?>'

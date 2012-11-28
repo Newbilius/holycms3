@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Класс для работы с блоками данных/
+ * РљР»Р°СЃСЃ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ Р±Р»РѕРєР°РјРё РґР°РЅРЅС‹С…/
  */
 class DBlock extends DBaseClass {
 
-    var $group;  //для работы с группами
+    var $group;  //РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РіСЂСѓРїРїР°РјРё
 
     /**
-     * Конструктор
+     * РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
      */
 
     function DBlock() {
@@ -18,11 +18,11 @@ class DBlock extends DBaseClass {
     }
 
     /**
-     * Возвращает список блоков в выбранной группе
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРїРёСЃРѕРє Р±Р»РѕРєРѕРІ РІ РІС‹Р±СЂР°РЅРЅРѕР№ РіСЂСѓРїРїРµ
      * 
-     * @param string/int $group  <p>выбранная группа</p>
-     * @param string/array $filter=Array()  <p>[не обязательное] фильтр блоков</p>
-     * @param string $sort = "sort ASC"  <p>[не обязательное] порядок сортировки блоков</p>
+     * @param string/int $group  <p>РІС‹Р±СЂР°РЅРЅР°СЏ РіСЂСѓРїРїР°</p>
+     * @param string/array $filter=Array()  <p>[РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ] С„РёР»СЊС‚СЂ Р±Р»РѕРєРѕРІ</p>
+     * @param string $sort = "sort ASC"  <p>[РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ] РїРѕСЂСЏРґРѕРє СЃРѕСЂС‚РёСЂРѕРІРєРё Р±Р»РѕРєРѕРІ</p>
      */
     function GetListByGroup($group, $filter = Array(), $sort = "sort ASC") {
         if (is_numeric($group))
@@ -34,17 +34,17 @@ class DBlock extends DBaseClass {
     }
 
     /**
-     * Создает новый блок
+     * РЎРѕР·РґР°РµС‚ РЅРѕРІС‹Р№ Р±Р»РѕРє
      * 
-     * @param array $values  <p>данные для создани:</p>
-     * <br><b>fav</b> - bool - [не обязательное] отображать блок в списке любимых
-     * <br><b>hide_folders</b> - bool - [не обязательное] скрыть папки
-     * <br><b>name</b> - string - код
-     * <br><b>caption</b> - string - имя
-     * <br><b>group</b> - string - группа блока
-     * <br><b>hide_folders</b> - true/false - [не обязательное] скрыть возможность создания папок
-     * <br><b>hide_folders2</b> - true/false - [не обязательное] скрыть возможность создания папок выше первого уровня вложенности
-     * <br><b>hide_code</b> - true/false - [не обязательное] скрыть возможность указывать код
+     * @param array $values  <p>РґР°РЅРЅС‹Рµ РґР»СЏ СЃРѕР·РґР°РЅРё:</p>
+     * <br><b>fav</b> - bool - [РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ] РѕС‚РѕР±СЂР°Р¶Р°С‚СЊ Р±Р»РѕРє РІ СЃРїРёСЃРєРµ Р»СЋР±РёРјС‹С…
+     * <br><b>hide_folders</b> - bool - [РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ] СЃРєСЂС‹С‚СЊ РїР°РїРєРё
+     * <br><b>name</b> - string - РєРѕРґ
+     * <br><b>caption</b> - string - РёРјСЏ
+     * <br><b>group</b> - string - РіСЂСѓРїРїР° Р±Р»РѕРєР°
+     * <br><b>hide_folders</b> - true/false - [РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ] СЃРєСЂС‹С‚СЊ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ СЃРѕР·РґР°РЅРёСЏ РїР°РїРѕРє
+     * <br><b>hide_folders2</b> - true/false - [РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ] СЃРєСЂС‹С‚СЊ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ СЃРѕР·РґР°РЅРёСЏ РїР°РїРѕРє РІС‹С€Рµ РїРµСЂРІРѕРіРѕ СѓСЂРѕРІРЅСЏ РІР»РѕР¶РµРЅРЅРѕСЃС‚Рё
+     * <br><b>hide_code</b> - true/false - [РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕРµ] СЃРєСЂС‹С‚СЊ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ СѓРєР°Р·С‹РІР°С‚СЊ РєРѕРґ
      */
     function Create($values) {
         $name = $values['name'];
@@ -83,17 +83,17 @@ class DBlock extends DBaseClass {
                 )
         );
 
-        //создаём таблицу!
+        //СЃРѕР·РґР°С‘Рј С‚Р°Р±Р»РёС†Сѓ!
 
         $query = "CREATE TABLE `" . $name . "` (`id` INT NOT NULL AUTO_INCREMENT ,`name` TEXT CHARACTER SET cp1251 COLLATE cp1251_general_ci NOT NULL ,`caption` TEXT CHARACTER SET cp1251 COLLATE cp1251_general_ci NOT NULL ,`sort` INT NOT NULL ,`parent` INT NOT NULL ,`folder` INT NOT NULL ,PRIMARY KEY ( `id` ) );";
         $this->sql->Query($query);
     }
 
     /**
-     * Переместить блок $name в группу $group
+     * РџРµСЂРµРјРµСЃС‚РёС‚СЊ Р±Р»РѕРє $name РІ РіСЂСѓРїРїСѓ $group
      * 
-     * @param string/id $name  <p>код/id блока</p>
-     * @param string/int $group  <p>группа для перемещения</p>
+     * @param string/id $name  <p>РєРѕРґ/id Р±Р»РѕРєР°</p>
+     * @param string/int $group  <p>РіСЂСѓРїРїР° РґР»СЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ</p>
      */
     function Move($name, $group) {
         if (is_numeric($name))
@@ -106,9 +106,9 @@ class DBlock extends DBaseClass {
     }
 
     /**
-     * Удалить блок $name
+     * РЈРґР°Р»РёС‚СЊ Р±Р»РѕРє $name
      * 
-     * @param string $name  <p>код блока</p>
+     * @param string $name  <p>РєРѕРґ Р±Р»РѕРєР°</p>
      */
     function Delete($name) {
         $this->sql->Query("DROP TABLE " . $name . "");
@@ -116,10 +116,10 @@ class DBlock extends DBaseClass {
     }
 
     /**
-     * Изменить данные блока (данные нужно указывать целиком!)
+     * РР·РјРµРЅРёС‚СЊ РґР°РЅРЅС‹Рµ Р±Р»РѕРєР° (РґР°РЅРЅС‹Рµ РЅСѓР¶РЅРѕ СѓРєР°Р·С‹РІР°С‚СЊ С†РµР»РёРєРѕРј!)
      * 
-     * @param string/int $id  <p>код/id блока</p>
-     * @param array $values  <p>данные блока</p>
+     * @param string/int $id  <p>РєРѕРґ/id Р±Р»РѕРєР°</p>
+     * @param array $values  <p>РґР°РЅРЅС‹Рµ Р±Р»РѕРєР°</p>
      */
     function Update($id, $values) {
 
@@ -130,7 +130,7 @@ class DBlock extends DBaseClass {
             $val2 = $this->sql2->SelectOne("name='" . $id . "'");
         }
 
-        //переименовывание блока
+        //РїРµСЂРµРёРјРµРЅРѕРІС‹РІР°РЅРёРµ Р±Р»РѕРєР°
         if ($val2['name'] != $values["name"]) {
             $this->sql2->Query("RENAME TABLE " . $val2['name'] . " TO " . $values["name"]);
         };

@@ -4,7 +4,7 @@ if (count($result)>0)
 {
 ?>
 	<div class="spec_block">
-		<h1>Специальные предложения!</h1>
+		<h1>РЎРїРµС†РёР°Р»СЊРЅС‹Рµ РїСЂРµРґР»РѕР¶РµРЅРёСЏ!</h1>
 
 		<? foreach ($result as $item){
 		$item_link=$params['url'].$item['id'];
@@ -22,9 +22,9 @@ if (count($result)>0)
 					<div class="desc"><? if ($params['_text']) echo $item[$params['_text']]?></div>
 					<div class="price">
 						<? if ($params['_old_price']) if ($item[$params['_old_price']]){?><span class="old_price"><?=$item[$params['_old_price']]?></span><?};?>
-						<? if ($params['_price']){?><span><?=$item[$params['_price']]?> рублей</span><?};?>
+						<? if ($params['_price']){?><span><?=$item[$params['_price']]?> СЂСѓР±Р»РµР№</span><?};?>
 					</div>
-					<div class="buy"><a href="<?=$params['cart_url']?>?new_basket=<?=$item['id']?>">купить</a></div>
+					<div class="buy"><a href="<?=$params['cart_url']?>?new_basket=<?=$item['id']?>">РєСѓРїРёС‚СЊ</a></div>
 				</div>
 		</div>
 		<?};?>
