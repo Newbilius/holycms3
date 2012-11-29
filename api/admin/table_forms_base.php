@@ -380,12 +380,12 @@ class HFormTable {
                     };
                 ?>
                 <?
-                if (($item['folder']) && ($this->folder_link)) 
+                if (($item['folder']) && ($this->folder_link)) {
                     if ($this->can_edit){
                     ?>
                     <td><a href=folder_edit.php?dblock=<?= $_GET['dblock'] ?>&parent=<?= $item['parent'] ?>&id=<?= $item['id'] ?>><?= $this->edit_icon ?></a></td>
                     <?
-                } else
+                } }else
                 if ($this->edit_link_base != "#") if ($this->can_edit){
                     $edit = $this->CreateLink($this->edit_link_base, $item);
                     ?><td><a href=<?= $edit ?>><?= $this->edit_icon ?></a></td><? }; ?>

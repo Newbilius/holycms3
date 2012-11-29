@@ -92,12 +92,6 @@
 
 
 
-                    <div style="display:none"><div id="about_div" s>
-                            <?include_once(FOLDER_ENGINE."license.html")?>
-
-                        </div></div>
-
-
                     <div class="btn-group pull-right">
                         <a class="btn"  style="cursor:default;">
                             <i class="icon-user"></i> <?= $user_info['login'] ?>
@@ -110,7 +104,21 @@
                             <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
                             <li><a target=_new href="/">На сайт</a></li>
                             <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                            <li><a class="about_show" href="#about_div">Лицензия</a></li>
+							<li class="dropdown">
+							<a href="#"
+                                       class="dropdown-toggle"
+                                       data-toggle="dropdown">
+                                           Лицензия
+                                        <b class="caret"></b>
+                                    </a>
+									<ul class="dropdown-menu">
+									<li><a class="about_show" href="<?=URI_ENGINE."license.html"?>">Лицензия</a></li>
+									<li><a class="about_show" href="<?=URI_ENGINE."third-party_solutions.html"?>">Сторонние решения</a></li>
+									</ul>
+									
+									
+							</li>
+                            
                             <li><a href="<? echo URI_ADMIN ?>?exit=1">Выйти</a></li>
                         </ul>
                     </div>

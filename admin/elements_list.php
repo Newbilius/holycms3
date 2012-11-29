@@ -259,7 +259,7 @@ SystemAlertFatal("Недостаточно прав.");
 	"edit_link"=>$edit_link,
 	"add_link"=>$add_link,
 	"add_link2"=>$add_link2,
-	"delete_link"=>$delete_need,
+	"delete_link"=>$delete_link,
 	"filter"=>$_GET['filter'],
 	
 	"show_folders"=>$show_folders,

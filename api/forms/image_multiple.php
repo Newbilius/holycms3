@@ -160,37 +160,11 @@ class CForm_image_multiple extends CForm_Text {
             {% } %}
         </script>
         <script>
-            /*
-             * jQuery File Upload Plugin JS Example 6.11
-             * https://github.com/blueimp/jQuery-File-Upload
-             *
-             * Copyright 2010, Sebastian Tschan
-             * https://blueimp.net
-             *
-             * Licensed under the MIT license:
-             * http://www.opensource.org/licenses/MIT
-             */
-
-            /*jslint nomen: true, unparam: true, regexp: true */
-            /*global $, window, document */
-
             $(function () {
                 'use strict';
 
                 // Initialize the jQuery File Upload widget:
-                $('#<?= $file_id_name ?>').fileupload({
-                    url: 'server/php/'
-                });
-
-                // Enable iframe cross-domain access via redirect option:
-                $('#<?= $file_id_name ?>').fileupload(
-                'option',
-                'redirect',
-                window.location.href.replace(
-                /\/[^\/]*$/,
-                '/cors/result.html?%s'
-            )
-            );
+                $('#<?= $file_id_name ?>').fileupload();
                                                         
                 $('#<?= $file_id_name ?>').bind('fileuploaddestroyed',
                 function (e, data) {
@@ -212,7 +186,6 @@ class CForm_image_multiple extends CForm_Text {
                     $("#<?= $name ?>").val(text_tmp);
                 });
 
-                // Demo settings:
                 $('#<?= $file_id_name ?>').fileupload('option', {
                     url: '/engine/admin/ajax/json_upload.php',
                     acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i

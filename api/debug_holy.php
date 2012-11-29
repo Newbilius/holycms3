@@ -4,7 +4,7 @@
  * 
  * @param mixed $data  <p>данные для вывода</p>
  */
-function preprint($data = "") {
+function preprint($data) {
     if (isset($data)) {
         echo "<pre>";
 

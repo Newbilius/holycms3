@@ -181,6 +181,7 @@ define("URI_FILES", "/upload/files/");
 define("FOLDER_SITE", $_SERVER["DOCUMENT_ROOT"] . "/site/");
 define("FOLDER_ADMIN", $_SERVER["DOCUMENT_ROOT"] . "/engine/admin/");
 define("URI_ADMIN", "/engine/admin/");
+define("URI_ENGINE", "/engine/");
 define("FOLDER_ENGINE", $_SERVER["DOCUMENT_ROOT"] . "/engine/");
 
 setlocale(LC_ALL, 'ru_RU', 'rus_RUS', 'Russian');
