@@ -47,22 +47,25 @@ class DBlockFields extends DBaseClass {
         } else {
             $values['data_block'] = $this->datab->GetIDByName($values['data_block']);
 
-            //проверить, не изменился ли код, если да - то всё будет сложнее
+            //если изменился код (name) или тип - производим замену
             $type_info = $this->sql2->SelectOne("id=" . $id);
             if (isset($type_info['name']))
-                if (isset($values['name']))
-                    if ($type_info['name'] != $values['name']) {
-                        //нужно переименовать столбец, а потом уже всё остальное
-                        $type = $this->typeb->GetByID($values['type']);
+                if (isset($values['name'])) {
+                    if (($type_info['multiple'] != $values['multiple']) || ($type_info['name'] != $values['name']) || ($type_info['type'] != $values['type'])) {
+                        
+                        $type_item = $this->typeb->GetByID($values['type']);
+                        $type = $type_item['basetype'];
+                        $block_name_item = $this->datab->GetByID($values['data_block']);
+                        $block_name = $block_name_item['name'];
 
-                        $type = $type['basetype'];
-                        $block_name = $this->datab->GetByID($values['data_block']);
-
-                        $block_name = $block_name['name'];
-
+                        if ($values['multiple']){
+                            $type="TEXT";
+                        }
+                        
                         $sql2 = new HolySQL($block_name);
                         $sql2->RenameColumn($type_info['name'], $values['name'], $type);
                     };
+                };
         }
         parent::Update($id, $values);
     }
@@ -80,11 +83,10 @@ class DBlockFields extends DBaseClass {
      * <br><b>multiple</b> - bool - множественное,false (0 нет, 1 да)
      * <br><b>owner_type</b> - int - владелец (0 - элементы,1 - папки и элементы)
      */
-    
     function Create($values = Array()) {
         $block_name = $values['data_block'];
         $values['data_block'] = $this->datab->GetIDByName($values['data_block']);
-        
+
         //@fix поправить работу с id
         if (is_numeric($values['type'])) {
             
