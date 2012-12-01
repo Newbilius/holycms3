@@ -2,6 +2,8 @@
 if ((!$H_USER->IsAdmin()) && (!$H_USER->CanRead($_GET['dblock'])))
 SystemAlertFatal("Недостаточно прав.");
 
+global $force_filter;
+
 if (!isset($_GET['parent']))
 	$_GET['parent']=0;
 if ($_GET['parent']=="") $_GET['parent']=0;
@@ -237,10 +239,16 @@ SystemAlertFatal("Недостаточно прав.");
 	if ($_GET['parent']!=-1)
 	$_GET['filter']['parent']=$_GET['parent'];
 	
-        $add_link="element_add.php?dblock=".$_GET['dblock']."&parent=".$_GET['parent'];
-        $add_link2="folder_add.php?parent=".$_GET['parent']."&dblock=".$_GET['dblock'];
-        $delete_link="?dblock=".$_GET['dblock']."&delete=#ID#";
-        $edit_link="element_edit.php?dblock=".$_GET['dblock']."&id=#ID#&parent=".$_GET['parent'];
+        if ($force_filter){
+            $_force_filter_name=$_GET['force_filter_name'];
+            $_force_filter_value=$_GET['force_filter_value'];
+            $_GET['filter'][$_force_filter_name]=$_force_filter_value;
+        };
+        
+        $add_link="element_add.php?dblock=".$_GET['dblock']."&parent=".$_GET['parent'].$force_filter;
+        $add_link2="folder_add.php?parent=".$_GET['parent']."&dblock=".$_GET['dblock'].$force_filter;
+        $delete_link="?dblock=".$_GET['dblock']."&delete=#ID#".$force_filter;
+        $edit_link="element_edit.php?dblock=".$_GET['dblock']."&id=#ID#&parent=".$_GET['parent'].$force_filter;
         
         $can_delete=true;
         $can_add=true;
@@ -276,7 +284,7 @@ SystemAlertFatal("Недостаточно прав.");
 	
 	$table->SetPaginator($_GET['page_count'],$_GET['page']);
 	
-	$table->base_link='elements_list.php?dblock='.$_GET['dblock'];
+	$table->base_link='elements_list.php?dblock='.$_GET['dblock'].$force_filter;
 
 		if (isset($_GET['parent']))
 		$table->delete_link_base.="&parent=".$_GET['parent'];

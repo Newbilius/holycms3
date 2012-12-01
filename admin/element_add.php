@@ -15,6 +15,14 @@ parent.$.fancybox.close();
 <?
 if (!isset($_GET['dblock'])) die("не выбран конкретный блок");
 
+global $force_filter;
+if ($force_filter){
+    $_force_filter_name=$_GET['force_filter_name'];
+    $_force_filter_value=$_GET['force_filter_value'];
+    $_GET[$_force_filter_name]=$_force_filter_value;
+    $_POST[$_force_filter_name]=$_force_filter_value;
+    $_REQUEST[$_force_filter_name]=$_force_filter_value;
+};
 if ((!$H_USER->IsAdmin()) && (!$H_USER->CanAdd($_GET['dblock'])))
 SystemAlertFatal("Недостаточно прав.");
 
@@ -71,7 +79,7 @@ if (isset($tmp['caption']))
 	$form->Add(Array("name"=>"name","caption"=>"Код","type"=>"short_text",'required'=>1));
 	$form->Add(Array("name"=>"sort","caption"=>"Сортировка","type"=>"sort"));
 
-	$form->return_link="elements_list.php?dblock=".$_GET['dblock'];
+	$form->return_link="elements_list.php?dblock=".$_GET['dblock'].$force_filter;
 	if (isset($_GET['parent']))
 		$form->return_link.="&parent=".$_GET['parent'];
 

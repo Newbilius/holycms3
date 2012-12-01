@@ -16,6 +16,14 @@ parent.$.fancybox.close();
 <?
 if (!isset($_GET['id'])) die("не выбран элемент");
 
+global $force_filter;
+if ($force_filter){
+    $_force_filter_name=$_GET['force_filter_name'];
+    $_force_filter_value=$_GET['force_filter_value'];
+    $_GET[$_force_filter_name]=$_force_filter_value;
+    $_POST[$_force_filter_name]=$_force_filter_value;
+    $_REQUEST[$_force_filter_name]=$_force_filter_value;
+};
 if ((!$H_USER->IsAdmin()) && (!$H_USER->CanEdit($_GET['dblock'])))
 SystemAlertFatal("Недостаточно прав.");
 
@@ -72,7 +80,7 @@ if (isset($tmp['caption']))
 
 	$gr= new DBlock();
 	$form= new HElementFormEdit(Array('table'=>$_GET['dblock'],'id'=>$_GET['id']));
-	$form->return_link="elements_list.php?dblock=".$_GET['dblock'];
+	$form->return_link="elements_list.php?dblock=".$_GET['dblock'].$force_filter;
 	
 	if (isset($_GET['parent']))
 		$form->return_link.="&parent=".$_GET['parent'];

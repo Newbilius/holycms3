@@ -6,9 +6,8 @@ global $force_filter;
 
 $force_filter=false;
 
-if (isset($_GET['force_filter_name'])){
-    global $force_filter;
-    $force_filter=true;
+if ((isset($_GET['force_filter_name'])) && (isset($_GET['force_filter_value']))){
+    $force_filter="&force_filter_name=".$_GET['force_filter_name']."&force_filter_value=".$_GET['force_filter_value'];
 }
 
 if (isset($_GET['path']))

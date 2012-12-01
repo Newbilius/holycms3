@@ -31,6 +31,7 @@ class HFormTable {
     var $show_count_list;
     var $folder_link;
     var $short_links;
+    var $folder_link_add;
 
     var $can_add;
     var $can_edit;
@@ -110,8 +111,16 @@ class HFormTable {
         $this->token = "table" . $table;
         $this->sql = new HolySQL($table);
         $this->filter = $filter;
-
-
+        $this->folder_link_add="";
+        
+        global $force_filter;
+        if ($force_filter) {
+            $_force_filter_name = $_GET['force_filter_name'];
+            $_force_filter_value = $_GET['force_filter_value'];
+            $this->folder_link_add = "&force_filter_name=" . $_force_filter_name . "&force_filter_value=" . $_force_filter_value;
+        };
+        
+        
         $this->PrepareFilter();
 
         $this->sql->Select($filter, $this->sortfilter);
@@ -187,7 +196,7 @@ class HFormTable {
                     $this->one_folder = $one_folder;
                     $this->Reload();
                     ?>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary ajax" style="margin-left:15px;float:left;" href="folder_edit.php?dblock=<?= $_GET['dblock'] ?>&parent=<?= $this->one_folder['parent'] ?>&id=<?= $_GET['parent'] ?>">Отредактировать папку</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary ajax" style="margin-left:15px;float:left;" href="folder_edit.php?dblock=<?= $_GET['dblock'] ?>&parent=<?= $this->one_folder['parent'] ?>&id=<?= $_GET['parent'] ?><?=$this->folder_link_add?>">Отредактировать папку</a>
                     <?
                 };
         ?>
@@ -352,9 +361,9 @@ class HFormTable {
                             $item['folder'] = 0;
 
                         if (($item['folder']) && ($this->folder_link))
-                            $edit_java = $edit_java1 . "'folder_edit.php?dblock=" . $_GET['dblock'] . "&parent=" . $item['parent'] . "&id=" . $item['id'] . "'" . $edit_java2;
+                            $edit_java = $edit_java1 . "'folder_edit.php?dblock=" . $_GET['dblock'] . "&parent=" . $item['parent'] . "&id=" . $item['id'].$this->folder_link_add . "'" . $edit_java2;
                         elseif ($this->edit_link_base != "#")
-                            $edit_java = $edit_java1 . "'" . ($this->CreateLink($this->edit_link_base, $item)) . "'" . $edit_java2;
+                            $edit_java = $edit_java1 . "'" . ($this->CreateLink($this->edit_link_base, $item)).$this->folder_link_add . "'" . $edit_java2;
                         else
                             $edit_java = "";
                         ?>
@@ -383,7 +392,7 @@ class HFormTable {
                 if (($item['folder']) && ($this->folder_link)) {
                     if ($this->can_edit){
                     ?>
-                    <td><a href=folder_edit.php?dblock=<?= $_GET['dblock'] ?>&parent=<?= $item['parent'] ?>&id=<?= $item['id'] ?>><?= $this->edit_icon ?></a></td>
+                    <td><a href=folder_edit.php?dblock=<?= $_GET['dblock'] ?>&parent=<?= $item['parent'] ?>&id=<?= $item['id'] ?><?=$this->folder_link_add?>><?= $this->edit_icon ?></a></td>
                     <?
                 } }else
                 if ($this->edit_link_base != "#") if ($this->can_edit){

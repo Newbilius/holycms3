@@ -36,6 +36,13 @@ class HElementForm extends HFormTable {
         $this->can_edit = $values['can_edit'];
         $this->can_delete = $values['can_delete'];
         
+        $this->folder_link_add="";
+        global $force_filter;
+        if ($force_filter) {
+            $_force_filter_name = $_GET['force_filter_name'];
+            $_force_filter_value = $_GET['force_filter_value'];
+            $this->folder_link_add = "&force_filter_name=" . $_force_filter_name . "&force_filter_value=" . $_force_filter_value;
+        };
         
         if ($values['filter'] == "")
             $values['filter'] = "1";
