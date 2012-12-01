@@ -106,8 +106,8 @@ if (isset($tmp['caption']))
 				"folder"=>0,
 			));
 			
-			if (file_exists($_SERVER['DOCUMENT_ROOT']."/site/engine/admin/".$_GET['dblock']."_add.php"))
-				include_once($_SERVER['DOCUMENT_ROOT']."/site/engine/admin/".$_GET['dblock']."_add.php");
+			if (file_exists(FOLDER_ROOT."/site/engine/admin/".$_GET['dblock']."_add.php"))
+				include_once(FOLDER_ROOT."/site/engine/admin/".$_GET['dblock']."_add.php");
 			?>
 				<span style="color:green;">
 					Элемент добавлен 

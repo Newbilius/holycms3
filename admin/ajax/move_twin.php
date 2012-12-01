@@ -1,5 +1,5 @@
 <?
-require_once($_SERVER['DOCUMENT_ROOT']."/engine/engine.php");
+echo require_once(realpath(str_replace("\\","/",dirname(dirname(dirname(__FILE__)))."/engine.php")));
 
 //PrePrint($_GET);
 

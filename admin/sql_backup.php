@@ -12,7 +12,7 @@ if (isset($_POST['form_go']))
 		foreach ($_POST['file_list'] as $file)
 		{
 			//echo $file."<HR>";
-			$f_name=$_SERVER['DOCUMENT_ROOT']."/upload/backup/".$file;
+			$f_name=FOLDER_UPLOAD."backup/".$file;
 			if (file_exists($f_name))
 			unlink($f_name);
 		};
@@ -31,8 +31,8 @@ if (isset($_POST['form_go']))
 	</td>
 </tr>
 <?
-if (file_exists($_SERVER['DOCUMENT_ROOT']."/upload/backup/"))
-$file_list = scandir($_SERVER['DOCUMENT_ROOT']."/upload/backup/");
+if (file_exists(FOLDER_UPLOAD."backup/"))
+$file_list = scandir(FOLDER_UPLOAD."backup/");
 $i=0;
 if (isset($file_list))
 if (is_array($file_list))

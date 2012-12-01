@@ -52,14 +52,14 @@ class DBlockElement extends DBaseClass {
                 }
                 else
                     $field['type_name'] = $field['type']; {
-                    $path = $_SERVER['DOCUMENT_ROOT'] . "/site/forms/" . $this->typesb->GetNameByID($field['type']) . ".php";
-                    $path0 = $_SERVER['DOCUMENT_ROOT'] . "/engine/api/forms/" . $this->typesb->GetNameByID($field['type']) . ".php";
+                    $path = FOLDER_ROOT . "/site/forms/" . $this->typesb->GetNameByID($field['type']) . ".php";
+                    $path0 = FOLDER_ROOT . "/engine/api/forms/" . $this->typesb->GetNameByID($field['type']) . ".php";
                     if (!file_exists($path)) {
                         $path = $path0;
                     };
                     if (!file_exists($path)) {
                         $field['type'] = "text";
-                        $path = $_SERVER['DOCUMENT_ROOT'] . "/engine/api/forms/text.php";
+                        $path = FOLDER_ROOT . "/engine/api/forms/text.php";
                     };
                     include_once($path);
                     if (is_numeric($field['type']))
@@ -192,14 +192,14 @@ class DBlockElement extends DBaseClass {
 
             if (!isset($values[$field['name']]))
                 $values[$field['name']] = ""; {
-                $path = $_SERVER['DOCUMENT_ROOT'] . "/site/forms/" . $this->typesb->GetNameByID($field['type']) . ".php";
-                $path0 = $_SERVER['DOCUMENT_ROOT'] . "/engine/api/forms/" . $this->typesb->GetNameByID($field['type']) . ".php";
+                $path = FOLDER_ROOT . "/site/forms/" . $this->typesb->GetNameByID($field['type']) . ".php";
+                $path0 = FOLDER_ROOT . "/engine/api/forms/" . $this->typesb->GetNameByID($field['type']) . ".php";
                 if (!file_exists($path)) {
                     $path = $path0;
                 };
                 if (!file_exists($path)) {
                     $field['type'] = "text";
-                    $path = $_SERVER['DOCUMENT_ROOT'] . "/engine/api/forms/text.php";
+                    $path = FOLDER_ROOT . "/engine/api/forms/text.php";
                 };
                 include_once($path);
                 if (is_numeric($field['type']))

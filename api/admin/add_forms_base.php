@@ -126,14 +126,14 @@ class HFormAdd {
                         </td>
                         <td valign=top>
                     <?
-                    $path = $_SERVER['DOCUMENT_ROOT'] . "/site/forms/" . $item['type'] . ".php";
-                    $path0 = $_SERVER['DOCUMENT_ROOT'] . "/engine/api/forms/" . $item['type'] . ".php";
+                    $path = FOLDER_ROOT . "/site/forms/" . $item['type'] . ".php";
+                    $path0 = FOLDER_ROOT . "/engine/api/forms/" . $item['type'] . ".php";
                     if (!file_exists($path)) {
                         $path = $path0;
                     };
                     if (!file_exists($path)) {
                         $item['type'] = "text";
-                        $path = $_SERVER['DOCUMENT_ROOT'] . "/engine/api/forms/" . $item['type'] . ".php";
+                        $path = FOLDER_ROOT . "/engine/api/forms/" . $item['type'] . ".php";
                     };
                     include_once($path);
                     $name = "CForm_" . $item['type'];

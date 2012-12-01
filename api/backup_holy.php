@@ -63,15 +63,15 @@ function backup_database_tables($tables = "*", $skip_id = false, $file_out_name 
     //save the file
     global $_CONFIG;
     global $base_base;
-    if (!file_exists($_SERVER['DOCUMENT_ROOT'] . "/upload/"))
-        mkdir($_SERVER['DOCUMENT_ROOT'] . "/upload/");
-    if (!file_exists($_SERVER['DOCUMENT_ROOT'] . "/upload/backup/"))
-        mkdir($_SERVER['DOCUMENT_ROOT'] . "/upload/backup/");
+    if (!file_exists(FOLDER_UPLOAD))
+        mkdir(FOLDER_UPLOAD);
+    if (!file_exists(FOLDER_UPLOAD . "backup/"))
+        mkdir(FOLDER_UPLOAD . "backup/");
 
     if (!isset($base_base))
         $base_base = $_CONFIG['BASE'];
     if ($file_out_name == "")
-        $fname = $_SERVER['DOCUMENT_ROOT'] . '/upload/backup/' . $base_base . '__' . date("d.m.Y_H_i_s") . '__' . (md5(implode(',', $tables))) . '.sql';
+        $fname = FOLDER_UPLOAD . 'backup/' . $base_base . '__' . date("d.m.Y_H_i_s") . '__' . (md5(implode(',', $tables))) . '.sql';
     else
         $fname = $file_out_name;
     $handle = fopen($fname, 'w+');
@@ -113,7 +113,7 @@ function GetTableDatas($array_of_table = array()) {
 /**
  * Построчно импортирует SQL-файл. В каждой строке должна храниться законченная команда!
  * 
- * @param string $path  <p>путь к файлу. Если не указан DOCUMENT_ROOT, то подставляет автоматически</p>
+ * @param string $path  <p>путь к файлу.</p>
  * @param array $conv  <p>Переконвертировать файл перед импортом. [0] - ИЗ какой кодировки, [1] - В какую кодировку</p>
  */
 function ImportSQL($path, $conv = array()) {

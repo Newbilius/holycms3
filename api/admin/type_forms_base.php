@@ -108,14 +108,14 @@ class HTypeTable extends HFormTable {
                     <?
                     if ($this->columns)
                         foreach ($this->columns as $column) {
-                            $path = $_SERVER['DOCUMENT_ROOT'] . "/site/forms/" . $column['type'] . ".php";
-                            $path0 = $_SERVER['DOCUMENT_ROOT'] . "/engine/api/forms/" . $column['type'] . ".php";
+                            $path = FOLDER_ROOT . "/site/forms/" . $column['type'] . ".php";
+                            $path0 = FOLDER_ROOT . "/engine/api/forms/" . $column['type'] . ".php";
                             if (!file_exists($path)) {
                                 $path = $path0;
                             };
                             if (!file_exists($path)) {
                                 $column['type'] = "text";
-                                $path = $_SERVER['DOCUMENT_ROOT'] . "/engine/api/forms/" . $column['type'] . ".php";
+                                $path = FOLDER_ROOT . "/engine/api/forms/" . $column['type'] . ".php";
                             };
                             include_once($path);
                             $name = "CForm_" . $column['type'];
@@ -146,14 +146,14 @@ class HTypeTable extends HFormTable {
                 <?
                 if ($this->columns)
                     foreach ($this->columns as $column) {
-                        $path = $_SERVER['DOCUMENT_ROOT'] . "/site/forms/" . $column['type'] . ".php";
-                        $path0 = $_SERVER['DOCUMENT_ROOT'] . "/engine/api/forms/" . $column['type'] . ".php";
+                        $path = FOLDER_ROOT . "/site/forms/" . $column['type'] . ".php";
+                        $path0 = FOLDER_ROOT . "/engine/api/forms/" . $column['type'] . ".php";
                         if (!file_exists($path)) {
                             $path = $path0;
                         };
                         if (!file_exists($path)) {
                             $column['type'] = "text";
-                            $path = $_SERVER['DOCUMENT_ROOT'] . "/engine/api/forms/" . $column['type'] . ".php";
+                            $path = FOLDER_ROOT . "/engine/api/forms/" . $column['type'] . ".php";
                         };
                         include_once($path);
                         $name = "CForm_" . $column['type'];

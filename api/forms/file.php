@@ -70,14 +70,14 @@ class CForm_file extends CForm_Text {
         $add = end($add);
         if (isset($_POST[$name . '_MANUAL'][$add]))
             if ($_POST[$name . '_MANUAL'][$add])
-                if (file_exists($_SERVER['DOCUMENT_ROOT'] . $_POST[$name . '_MANUAL'][$add]))
-                    $value = PrepareFile($_SERVER['DOCUMENT_ROOT'] . $_POST[$name . "_MANUAL"][$add], true);
+                if (file_exists(FOLDER_ROOT . $_POST[$name . '_MANUAL'][$add]))
+                    $value = PrepareFile(FOLDER_ROOT . $_POST[$name . "_MANUAL"][$add], true);
 
         if (isset($_POST[$name . '_MANUAL']))
             if ($_POST[$name . '_MANUAL'])
                 if ($_POST[$name . '_MANUAL'] != "")
-                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . $_POST[$name . '_MANUAL']))
-                        $value = PrepareFile($_SERVER['DOCUMENT_ROOT'] . $_POST[$name . "_MANUAL"], true);
+                    if (file_exists(FOLDER_ROOT . $_POST[$name . '_MANUAL']))
+                        $value = PrepareFile(FOLDER_ROOT . $_POST[$name . "_MANUAL"], true);
 
         if (isset($value['error']))
             if ($value['error'] == 0)
@@ -103,12 +103,12 @@ class CForm_file extends CForm_Text {
 
 
                     if (isset($value['move']))
-                        rename($value['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $file_name);
+                        rename($value['tmp_name'], FOLDER_ROOT . $file_name);
                     else
                     if (isset($value['copy']))
-                        copy($value['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $file_name);
+                        copy($value['tmp_name'], FOLDER_ROOT . $file_name);
                     else
-                        move_uploaded_file($value['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $file_name);
+                        move_uploaded_file($value['tmp_name'], FOLDER_ROOT . $file_name);
                 };
         return $file_name;
     }
@@ -154,23 +154,23 @@ class CForm_file extends CForm_Text {
                         $file_name = URI_FILES . $fold1 . "/" . $fold2 . "/" . $file_name;
 
                         if (isset($value['move']))
-                            rename($value['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $file_name);
+                            rename($value['tmp_name'], FOLDER_ROOT . $file_name);
                         else
                         if (isset($value['copy']))
-                            copy($value['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $file_name);
+                            copy($value['tmp_name'], FOLDER_ROOT . $file_name);
                         else
-                            move_uploaded_file($value['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $file_name);
+                            move_uploaded_file($value['tmp_name'], FOLDER_ROOT . $file_name);
                     };
         if ($multiple) {
             if (isset($_POST[$name . "_DELETE"][$_files_counter[$name]])) {
                 $file_name = "";
                 if ($_POST[$name . "_OLD"][$_files_counter[$name]] != "")
-                    @unlink($_SERVER['DOCUMENT_ROOT'] . $_POST[$name . "_OLD"][$_files_counter[$name]]);
+                    @unlink(FOLDER_ROOT . $_POST[$name . "_OLD"][$_files_counter[$name]]);
             };
 
             if (isset($_POST[$name . "_MANUAL"][$_files_counter[$name]]))
                 if (($_POST[$name . "_MANUAL"][$_files_counter[$name]]))
-                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . $_POST[$name . "_MANUAL"][$_files_counter[$name]])) {
+                    if (file_exists(FOLDER_ROOT . $_POST[$name . "_MANUAL"][$_files_counter[$name]])) {
                         $file_name = $_POST[$name . "_MANUAL"][$_files_counter[$name]];
                         $exp = explode(".", $file_name);
                         $extens = end($exp);
@@ -190,20 +190,19 @@ class CForm_file extends CForm_Text {
 
                         $newname = URI_FILES . $fold1 . "/" . $fold2 . "/" . $newname;
 
-                        copy($_SERVER['DOCUMENT_ROOT'] . $file_name, $_SERVER['DOCUMENT_ROOT'] . $newname);
+                        copy(FOLDER_ROOT . $file_name, FOLDER_ROOT . $newname);
                         $file_name = $newname;
                     };
-//$file_name=PrepareFile($_SERVER['DOCUMENT_ROOT'].$_POST[$name."_MANUAL"][$_files_counter[$name]],true);
         }
         else {
             if (isset($_POST[$name . "_DELETE"])) {
                 $file_name = "";
                 if ($_POST[$name . "_OLD"] != "")
-                    @unlink($_SERVER['DOCUMENT_ROOT'] . $_POST[$name . "_OLD"]);
+                    @unlink(FOLDER_ROOT . $_POST[$name . "_OLD"]);
             };
             if (isset($_POST[$name . "_MANUAL"]))
                 if ($_POST[$name . "_MANUAL"])
-                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . $_POST[$name . "_MANUAL"])) {
+                    if (file_exists(FOLDER_ROOT . $_POST[$name . "_MANUAL"])) {
                         $file_name = $_POST[$name . "_MANUAL"];
                         $exp = explode(".", $file_name);
                         $extens = end($exp);
@@ -223,7 +222,7 @@ class CForm_file extends CForm_Text {
 
                         $newname = URI_FILES . $fold1 . "/" . $fold2 . "/" . $newname;
 
-                        copy($_SERVER['DOCUMENT_ROOT'] . $file_name, $_SERVER['DOCUMENT_ROOT'] . $newname);
+                        copy(FOLDER_ROOT . $file_name, FOLDER_ROOT . $newname);
                         $file_name = $newname;
                     };
         };

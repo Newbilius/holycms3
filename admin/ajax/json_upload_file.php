@@ -1,6 +1,6 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/engine/engine.php");
+echo require_once(realpath(str_replace("\\","/",dirname(dirname(dirname(__FILE__)))."/engine.php")));
 global $H_USER;
 $user_info_holy = $H_USER->GetInfo();
 if ($H_USER->GetID()) {
@@ -30,9 +30,9 @@ if ($H_USER->GetID()) {
 
         $file_name = URI_FILES . $fold1 . "/" . $fold2 . "/" . $name;
 
-        rename($tmp_name, $_SERVER['DOCUMENT_ROOT'] . $file_name);
+        rename($tmp_name, FOLDER_ROOT . $file_name);
 
-        $full_name = $_SERVER['DOCUMENT_ROOT'] . $file_name;
+        $full_name = FOLDER_ROOT . $file_name;
 
         $new_image['name'] = $name;
         $new_image['size'] = $size;

@@ -29,7 +29,7 @@ if (isset($_POST['form_go']))
                             $extens = end($exp);
                             $file_name = MD5(time() . $old_name . rand()) . "." . $extens;
 
-                            move_uploaded_file($_POST[$id]['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/upload/" . $file_name);
+                            move_uploaded_file($_POST[$id]['tmp_name'], FOLDER_ROOT . "/upload/" . $file_name);
                             $val['hvalue'] = $file_name;
                         };
                     };

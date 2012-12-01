@@ -32,13 +32,13 @@ if (isset($_POST['form_go']))
 				//echo "<HR>";
 			};
 if (!isset($_POST['robotstxt'])) $_POST['robotstxt']="";
-$robots_path=$_SERVER['DOCUMENT_ROOT']."/robots.txt";
+$robots_path=FOLDER_ROOT."/robots.txt";
 file_put_contents ($robots_path, $_POST['robotstxt']);
 //preprint($_POST['favicon']);
 if (isset($_POST['favicon']))
 	if ($_POST['favicon']['tmp_name'])
 		if ($_POST['favicon']['type']=="image/x-icon")
-			move_uploaded_file($_FILES['favicon']['tmp_name'],$_SERVER['DOCUMENT_ROOT']."/favicon.ico");
+			move_uploaded_file($_FILES['favicon']['tmp_name'],FOLDER_ROOT."/favicon.ico");
 
 unset($arValues);
 $values->GetList("parent!=0 AND folder=0");
@@ -111,7 +111,7 @@ foreach ($arValues as $val)
 	<td width=200 valign=top style="padding-top:5px;padding-left:5px;">Robots.txt</td>
 	<td>
 	<?
-	$robots_path=$_SERVER['DOCUMENT_ROOT']."/robots.txt";
+	$robots_path=FOLDER_ROOT."/robots.txt";
 	$robots_content="";
 	if (file_exists($robots_path))$robots_content=file_get_contents($robots_path);
 	if ($robots_content=="")
@@ -134,7 +134,7 @@ Disallow: /forum/engine/admin/
 	
 	</td>
 	<td>
-	<? if (file_exists($_SERVER['DOCUMENT_ROOT']."/favicon.ico")){?>
+	<? if (file_exists(FOLDER_ROOT."/favicon.ico")){?>
 	<img src="/favicon.ico?random=<?=time()?>">&nbsp;<?};?><input name=favicon type=file>
 	</td>
 	</tr>

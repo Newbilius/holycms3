@@ -27,7 +27,7 @@ function GetImageResizeCacheAndLink($link, $fname, $w, $h, $add = "", $add2 = ""
 ;
 
 function DrawWater($file_name, $fName, $percent = 50) {
-    if (!file_exists($_SERVER['DOCUMENT_ROOT'] . $fName))
+    if (!file_exists(FOLDER_ROOT . $fName))
         return $file_name;
 
     $pic = new HolyImg($file_name);
@@ -120,7 +120,7 @@ function GetImageResizeCacheAndMask($fname, $mask, $w, $h, $add = "") {
 
     $new_name = "/upload/resize_cache/" . $parts['filename'] . "_" . $w . "_" . $h . "_masked_" . str_replace("/", "_", $mask) . ".png";
 
-    if (file_exists($_SERVER['DOCUMENT_ROOT'] . $new_name))
+    if (file_exists(FOLDER_ROOT . $new_name))
         $complete_link = $new_name;
     else {
 
@@ -134,16 +134,16 @@ function GetImageResizeCacheAndMask($fname, $mask, $w, $h, $add = "") {
 
 
         // Load source and mask
-        $source = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'] . $new_name);
-        $mask = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'] . $mask);
+        $source = imagecreatefrompng(FOLDER_ROOT . $new_name);
+        $mask = imagecreatefrompng(FOLDER_ROOT . $mask);
 // Apply mask to source
         imagealphamask($source, $mask);
 // Output
 //imagepng( $source );
-        unlink($_SERVER['DOCUMENT_ROOT'] . $new_name);
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . "/upload/resize_cache/"))
-            mkdir($_SERVER['DOCUMENT_ROOT'] . "/upload/resize_cache/");
-        imagepng($source, $_SERVER['DOCUMENT_ROOT'] . $new_name);
+        unlink(FOLDER_ROOT . $new_name);
+        if (!file_exists(FOLDER_UPLOAD . "/resize_cache/"))
+            mkdir(FOLDER_UPLOAD . "/resize_cache/");
+        imagepng($source, FOLDER_ROOT . $new_name);
     };
     ?>
     <img src="<?= $complete_link ?>" <?= $add ?>>
@@ -158,7 +158,7 @@ function GetImageResizeCacheAndMask2($fname, $mask, $w, $h, $add = "") {
 
     $new_name = "/upload/resize_cache/" . $parts['filename'] . "_" . $w . "_" . $h . "_masked_" . str_replace("/", "_", $mask[0]) . ".png";
 
-    if (file_exists($_SERVER['DOCUMENT_ROOT'] . $new_name))
+    if (file_exists(FOLDER_ROOT . $new_name))
         $complete_link = $new_name;
     else {
 
@@ -172,22 +172,22 @@ function GetImageResizeCacheAndMask2($fname, $mask, $w, $h, $add = "") {
 
 
         // Load source and mask
-        $source = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'] . $new_name);
-        $mask1 = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'] . $mask[0]);
-        $mask2 = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'] . $mask[1]);
+        $source = imagecreatefrompng(FOLDER_ROOT . $new_name);
+        $mask1 = imagecreatefrompng(FOLDER_ROOT . $mask[0]);
+        $mask2 = imagecreatefrompng(FOLDER_ROOT . $mask[1]);
 // Apply mask to source
         imagealphamask($source, $mask1);
-        imagepng($source, $_SERVER['DOCUMENT_ROOT'] . $new_name);
+        imagepng($source, FOLDER_ROOT . $new_name);
 
         imagedestroy($source);
-        $source = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'] . $new_name);
+        $source = imagecreatefrompng(FOLDER_ROOT . $new_name);
         imagealphamask($source, $mask2);
 // Output
 //imagepng( $source );
-        unlink($_SERVER['DOCUMENT_ROOT'] . $new_name);
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . "/upload/resize_cache/"))
-            mkdir($_SERVER['DOCUMENT_ROOT'] . "/upload/resize_cache/");
-        imagepng($source, $_SERVER['DOCUMENT_ROOT'] . $new_name);
+        unlink(FOLDER_ROOT . $new_name);
+        if (!file_exists(FOLDER_UPLOAD . "resize_cache/"))
+            mkdir(FOLDER_UPLOAD . "resize_cache/");
+        imagepng($source, FOLDER_ROOT . $new_name);
     };
     ?>
     <img src="<?= $complete_link ?>" <?= $add ?>>
@@ -202,7 +202,7 @@ function GetImageResizeCacheAndMask3($fname, $mask, $w, $h, $add = "") {
 
     $new_name = "/upload/resize_cache/" . $parts['filename'] . "_" . $w . "_" . $h . "_masked_" . str_replace("/", "_", $mask[0] . $mask[1]) . ".png";
 
-    if (file_exists($_SERVER['DOCUMENT_ROOT'] . $new_name))
+    if (file_exists(FOLDER_ROOT . $new_name))
         $complete_link = $new_name;
     else {
 
@@ -216,17 +216,17 @@ function GetImageResizeCacheAndMask3($fname, $mask, $w, $h, $add = "") {
 
 
         // Load source and mask
-        $source = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'] . $new_name);
-        $mask[0] = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'] . $mask[0]);
-        $mask[1] = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'] . $mask[1]);
+        $source = imagecreatefrompng(FOLDER_ROOT . $new_name);
+        $mask[0] = imagecreatefrompng(FOLDER_ROOT . $mask[0]);
+        $mask[1] = imagecreatefrompng(FOLDER_ROOT . $mask[1]);
 // Apply mask to source
         imagealphamask3($source, $mask);
 // Output
 //imagepng( $source );
-        unlink($_SERVER['DOCUMENT_ROOT'] . $new_name);
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . "/upload/resize_cache/"))
-            mkdir($_SERVER['DOCUMENT_ROOT'] . "/upload/resize_cache/");
-        imagepng($source, $_SERVER['DOCUMENT_ROOT'] . $new_name);
+        unlink(FOLDER_ROOT . $new_name);
+        if (!file_exists(FOLDER_UPLOAD . "resize_cache/"))
+            mkdir(FOLDER_UPLOAD . "resize_cache/");
+        imagepng($source, FOLDER_ROOT . $new_name);
     };
     ?>
     <img src="<?= $complete_link ?>" <?= $add ?>>
@@ -241,7 +241,7 @@ function GetImageResizeCacheAndMask4($fname, $mask, $w, $h, $add = "") {
 
     $new_name = "/upload/resize_cache/" . $parts['filename'] . "_" . $w . "_" . $h . "_masked_" . str_replace("/", "_", $mask[0] . $mask[1]) . ".png";
 
-    if (file_exists($_SERVER['DOCUMENT_ROOT'] . $new_name))
+    if (file_exists(FOLDER_ROOT . $new_name))
         $complete_link = $new_name;
     else {
 
@@ -253,27 +253,20 @@ function GetImageResizeCacheAndMask4($fname, $mask, $w, $h, $add = "") {
         else
             $complete_link = $fname;
 
-
-        // Load source and mask
-//$source = imagecreatefrompng( $_SERVER['DOCUMENT_ROOT'].$new_name );
-//$mask[0] = imagecreatefrompng( $_SERVER['DOCUMENT_ROOT'].$mask[0] );
-//$mask[1] = imagecreatefrompng( $_SERVER['DOCUMENT_ROOT'].$mask[1] );
-// Apply mask to source
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . "/upload/resize_cache/"))
-            mkdir($_SERVER['DOCUMENT_ROOT'] . "/upload/resize_cache/");
-        $first = new Imagick($_SERVER['DOCUMENT_ROOT'] . $mask[0]);
-        $second = new Imagick($_SERVER['DOCUMENT_ROOT'] . $new_name);
+        if (!file_exists(FOLDER_UPLOAD . "resize_cache/"))
+            mkdir(FOLDER_UPLOAD . "resize_cache/");
+        $first = new Imagick(FOLDER_UPLOAD . $mask[0]);
+        $second = new Imagick(FOLDER_UPLOAD . $new_name);
         $first->compositeImage($second, imagick::COMPOSITE_ATOP, 0, 0);
-        $first->writeImage($_SERVER['DOCUMENT_ROOT'] . $new_name);
+        $first->writeImage(FOLDER_UPLOAD . $new_name);
 
-        $first2 = new Imagick($_SERVER['DOCUMENT_ROOT'] . $mask[1]);
-        $second2 = new Imagick($_SERVER['DOCUMENT_ROOT'] . $new_name);
+        $first2 = new Imagick(FOLDER_UPLOAD . $mask[1]);
+        $second2 = new Imagick(FOLDER_UPLOAD . $new_name);
         $first2->compositeImage($second2, imagick::COMPOSITE_DEFAULT, 0, 0);
-        $first2->writeImage($_SERVER['DOCUMENT_ROOT'] . $new_name);
+        $first2->writeImage(FOLDER_UPLOAD . $new_name);
 
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . "/upload/resize_cache/"))
-            mkdir($_SERVER['DOCUMENT_ROOT'] . "/upload/resize_cache/");
-//imagepng( $source,$_SERVER['DOCUMENT_ROOT'].$new_name );
+        if (!file_exists(FOLDER_ROOT . "resize_cache/"))
+            mkdir(FOLDER_ROOT . "resize_cache/");
     };
     ?>
     <img src="<?= $complete_link ?>" <?= $add ?>>

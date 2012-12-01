@@ -54,7 +54,7 @@ class HolyImg {
             //если передали путь
             $this->add_path.=md5($img);
             $this->url_add.="&water=" . $img;
-            $this->water_path = $_SERVER['DOCUMENT_ROOT'] . $img;
+            $this->water_path = FOLDER_ROOT . $img;
         };
 
         $this->add_path.="_water_" . $params['position_h'] . "_" . $params['position_v'] . "_" . $params['transparent'];
@@ -307,8 +307,8 @@ class HolyImg {
     function HolyImg($fname) {
         $this->url = $fname;
         if (strpos($fname, 'http') === false)
-            if (strpos($fname, $_SERVER['DOCUMENT_ROOT']) === FALSE)
-                $fname = $_SERVER['DOCUMENT_ROOT'] . $fname;
+            if (strpos($fname, FOLDER_ROOT) === FALSE)
+                $fname = FOLDER_ROOT . $fname;
 
         if (!file_exists($fname))
             return null;
@@ -332,7 +332,7 @@ class HolyImg {
             $parts['filename'] = $fold1 . "/" . $fold2 . "/" . $parts['filename'];
 
             $this->complete_url = "/upload/resize_cache/" . $parts['filename'] . "_" . $this->add_path . ".png";
-            $this->complete_path = $_SERVER['DOCUMENT_ROOT'] . $this->complete_url;
+            $this->complete_path = FOLDER_ROOT . $this->complete_url;
 
             if (file_exists($this->complete_path)) {
                 $this->already = true;
@@ -420,7 +420,7 @@ class HolyImg {
     }
 
     protected function CreateDirs() {
-        $full_path = $_SERVER['DOCUMENT_ROOT'] . "/upload/resize_cache/";
+        $full_path = FOLDER_UPLOAD . "/resize_cache/";
         if (!file_exists($full_path))
             mkdir($full_path);
         $new_path = explode("resize_cache", $this->complete_path);

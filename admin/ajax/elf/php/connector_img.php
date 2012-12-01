@@ -1,5 +1,7 @@
-<?require_once($_SERVER['DOCUMENT_ROOT']."/engine/engine.php");
+<?
 
+require_once(str_replace("\\","/",dirname(dirname(dirname(dirname(dirname(__FILE__)))))."/engine.php"));
+ 
 global $H_USER;
 $user_ifno_holy=$H_USER->GetInfo();
 
@@ -37,7 +39,7 @@ $opts = array(
 	'roots' => array(
 		array(
 			'driver'        => 'LocalFileSystem',   // driver for accessing file system (REQUIRED)
-			'path'          => $_SERVER['DOCUMENT_ROOT']."/upload/",         // path to files (REQUIRED)
+			'path'          => FOLDER_ROOT."/upload/",         // path to files (REQUIRED)
 			'URL'           => "/upload/", // URL to files (REQUIRED)
 			'accessControl' => 'access'             // disable and hide dot starting files (OPTIONAL)
 		)

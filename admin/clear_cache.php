@@ -14,7 +14,7 @@ if (isset($_POST['form_go']))
 			if (isset($_POST['clear_resize']))
 				{
 					$ok[]="Кэш картинок очищен";
-					$cache_img_folder=$_SERVER['DOCUMENT_ROOT']."/upload/resize_cache/";
+					$cache_img_folder=FOLDER_UPLOAD."resize_cache/";
 					if (file_exists($cache_img_folder))
 						{
 							DeleteDir($cache_img_folder);
@@ -24,7 +24,7 @@ if (isset($_POST['form_go']))
 			if (isset($_POST['clear_tmp']))
 				{
 					$ok[]="Временные файлы удалены";
-					$tmp_folder=$_SERVER['DOCUMENT_ROOT']."/upload/tmp/";
+					$tmp_folder=FOLDER_UPLOAD."tmp/";
 					if (file_exists($cache_img_folder))
 						{
 							DeleteDir($tmp_folder);

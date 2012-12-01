@@ -90,7 +90,7 @@ function IncludeComponent($name, $template = "", $params = array()) {
                 $base_template_path_s1 = array("site", "engine");
 
                 if (!$select) {
-                    $base_template_path_100 = $_SERVER['DOCUMENT_ROOT'] . "/site/components/" . $name . "/" . $template . "/index.php";
+                    $base_template_path_100 = FOLDER_ROOT . "/site/components/" . $name . "/" . $template . "/index.php";
                     if (file_exists($base_template_path_100)) {
                         $full_template_path = $base_template_path_100;
                         $select = true;
@@ -101,16 +101,16 @@ function IncludeComponent($name, $template = "", $params = array()) {
                     if (!$select)
                         foreach ($template_variants as $tv)
                             if (!$select) {
-                                $base_component_path = $_SERVER['DOCUMENT_ROOT'] . "/" . $bss1 . "/" . $tv . "components/" . $type2 . "/" . $name . "/";
+                                $base_component_path = FOLDER_ROOT . "/" . $bss1 . "/" . $tv . "components/" . $type2 . "/" . $name . "/";
                                 $full_template_path = $base_component_path . $template . "/index.php";
                                 if (file_exists($full_template_path))
                                     $select = true;
                             };
             };
-        $base_component_path = $_SERVER['DOCUMENT_ROOT'] . "/engine/components/" . $type . "/" . $name . "/";
-        $base_component_path25 = $_SERVER['DOCUMENT_ROOT'] . "/engine/components/classic/" . $name . "/";
-        $base_component_path2 = $_SERVER['DOCUMENT_ROOT'] . "/site/components/" . $type . "/" . $name . "/";
-        $base_component_path3 = $_SERVER['DOCUMENT_ROOT'] . "/site/components/" . $name . "/";
+        $base_component_path = FOLDER_ROOT . "/engine/components/" . $type . "/" . $name . "/";
+        $base_component_path25 = FOLDER_ROOT . "/engine/components/classic/" . $name . "/";
+        $base_component_path2 = FOLDER_ROOT . "/site/components/" . $type . "/" . $name . "/";
+        $base_component_path3 = FOLDER_ROOT . "/site/components/" . $name . "/";
         //-----------------------------------------------------
         //закончили выбор шаблона
         //-----------------------------------------------------		

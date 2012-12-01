@@ -1,5 +1,7 @@
-<?require_once($_SERVER['DOCUMENT_ROOT']."/engine/engine.php");
+<?
 
+require_once(str_replace("\\","/",dirname(dirname(dirname(dirname(__FILE__))))."/engine.php"));
+ 
 global $H_USER;
 $user_ifno_holy=$H_USER->GetInfo();
 

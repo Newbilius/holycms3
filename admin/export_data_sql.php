@@ -22,13 +22,13 @@ if (isset($_POST['go'])) {
         </div>
         <?
     } else {
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . "/upload/"))
-            mkdir($_SERVER['DOCUMENT_ROOT'] . "/upload/");
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . "/upload/export/"))
-            mkdir($_SERVER['DOCUMENT_ROOT'] . "/upload/export/");
+        if (!file_exists(FOLDER_UPLOAD))
+            mkdir(FOLDER_UPLOAD);
+        if (!file_exists(FOLDER_UPLOAD . "export/"))
+            mkdir(FOLDER_UPLOAD . "export/");
 
         $fname = '/upload/export/blocks_' . date("d.m.Y_H_i_s") . '.sql';
-        $fname_full = $_SERVER['DOCUMENT_ROOT'] . $fname;
+        $fname_full = FOLDER_ROOT . $fname;
 
         backup_database_tables($_POST['block'], false, $fname_full,true);
         ?>

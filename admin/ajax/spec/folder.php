@@ -1,5 +1,5 @@
 <?
-require_once($_SERVER['DOCUMENT_ROOT']."/engine/engine.php");
+require_once(realpath(str_replace("\\","/",dirname(dirname(dirname(dirname(__FILE__))))."/engine.php")));
 //вывести список иблоков
 $src_block=new DBlock();
 $src_f=new DBlockFields();

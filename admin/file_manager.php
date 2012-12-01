@@ -6,7 +6,7 @@ global $_global_bread;
 $_global_bread[]=Array("Файловый менеджер","/engine/admin/file_manager.php");
 ?>
 <BR>
-<?require_once($_SERVER['DOCUMENT_ROOT']."/engine/engine.php");
+<?
 
 global $H_USER;
 $user_ifno_holy=$H_USER->GetInfo();

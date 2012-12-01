@@ -180,10 +180,10 @@ ob_start();
 if ($_selected_page['modules'] == "")
     $_selected_page['modules'] = "empty";
 
-if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/site/modules/" . $_selected_page['modules'] . "/index.php"))
-    include ($_SERVER['DOCUMENT_ROOT'] . "/site/modules/" . $_selected_page['modules'] . "/index.php");
-elseif (file_exists($_SERVER['DOCUMENT_ROOT'] . "/engine/modules/" . $_selected_page['modules'] . "/index.php"))
-    include ($_SERVER['DOCUMENT_ROOT'] . "/engine/modules/" . $_selected_page['modules'] . "/index.php");
+if (file_exists(DOCUMENT_ROOT . "/site/modules/" . $_selected_page['modules'] . "/index.php"))
+    include (DOCUMENT_ROOT . "/site/modules/" . $_selected_page['modules'] . "/index.php");
+elseif (file_exists(DOCUMENT_ROOT . "/engine/modules/" . $_selected_page['modules'] . "/index.php"))
+    include (DOCUMENT_ROOT . "/engine/modules/" . $_selected_page['modules'] . "/index.php");
 else
     SystemAlert("Не найден модуль <b>" . $_selected_page['modules'] . "</b>");
 
@@ -201,18 +201,18 @@ if (isset($_OPTIONS['TEMPLATE']))
     if ($_OPTIONS['TEMPLATE'])
         $template['name'] = $_OPTIONS['TEMPLATE'];
 
-if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/site/templates/" . $template['name'] . "/header.php"))
-    include ($_SERVER['DOCUMENT_ROOT'] . "/site/templates/" . $template['name'] . "/header.php");
+if (file_exists(FOLDER_ROOT . "/site/templates/" . $template['name'] . "/header.php"))
+    include (FOLDER_ROOT . "/site/templates/" . $template['name'] . "/header.php");
 else
-    include ($_SERVER['DOCUMENT_ROOT'] . "/engine/templates/" . $template['name'] . "/header.php");
+    include (FOLDER_ROOT . "/engine/templates/" . $template['name'] . "/header.php");
 
 $page_text = str_replace('src="upload', 'src="/upload', $page_text);
 echo $page_text;
 
-if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/site/templates/" . $template['name'] . "/footer.php"))
-    include ($_SERVER['DOCUMENT_ROOT'] . "/site/templates/" . $template['name'] . "/footer.php");
+if (file_exists(FOLDER_ROOT . "/site/templates/" . $template['name'] . "/footer.php"))
+    include (FOLDER_ROOT . "/site/templates/" . $template['name'] . "/footer.php");
 else
-    include ($_SERVER['DOCUMENT_ROOT'] . "/engine/templates/" . $template['name'] . "/footer.php");
+    include (FOLDER_ROOT . "/engine/templates/" . $template['name'] . "/footer.php");
 
 
 

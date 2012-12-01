@@ -32,13 +32,13 @@ function RemoveDir($path) {
 }
 
 /**
- * Удаляет директорию. Если не указан DOCUMENT_ROOT, добавляет сам
+ * Удаляет директорию. Если не указан FOLDER_ROOT, добавляет сам
  * 
  * @param string $path  <p>путь к удаляемой директории</p>
  */
 function DeleteDir($path) {
-    if (strpos($path, $_SERVER['DOCUMENT_ROOT']) === FALSE)
-        $path = $_SERVER['DOCUMENT_ROOT'] . $path;
+    if (strpos($path, FOLDER_ROOT) === FALSE)
+        $path = FOLDER_ROOT . $path;
     RemoveDir($path);
 }
 
