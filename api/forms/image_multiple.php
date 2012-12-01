@@ -2,32 +2,86 @@
 
 class CForm_image_multiple extends CForm_Text {
 
-    function View($name,$data,$add,$multiple=false){
+    function View($name, $data, $add, $multiple = false) {
         //echo $data[$name];
         echo "";
     }
-    
+
     function BeforeAdd($name, $value, $add) {
         if ($value == "")
             return $value;
-        $tmp = explode(";", $value);
-        foreach ($tmp as $num => $_item)
-            if (!$_item) {
-                unset($tmp[$num]);
+        if (is_array($value)) {
+            $empty_array = $value;
+            $value = "";
+            foreach ($empty_array as $tmp_file) {
+                $tmp_name = FOLDER_ROOT . $tmp_file['tmp_name'];
+                $exp = explode(".", $tmp_name);
+                $extens = end($exp);
+                $file_name = MD5(time() . $tmp_name . rand()) . "." . $extens;
+                $fold1 = substr($file_name, 0, 2);
+                $fold2 = substr($file_name, 2, 2);
+                if (!file_exists(FOLDER_UPLOAD))
+                    mkdir(FOLDER_UPLOAD);
+                if (!file_exists(FOLDER_IMAGE))
+                    mkdir(FOLDER_IMAGE);
+                if (!file_exists(FOLDER_IMAGE . $fold1))
+                    mkdir(FOLDER_IMAGE . $fold1);
+                if (!file_exists(FOLDER_IMAGE . $fold1 . "/" . $fold2))
+                    mkdir(FOLDER_IMAGE . $fold1 . "/" . $fold2);
+                $file_name_save = URI_IMAGE . $fold1 . "/" . $fold2 . "/" . $file_name;
+                $file_name = FOLDER_IMAGE . $fold1 . "/" . $fold2 . "/" . $file_name;
+                rename($tmp_name, $file_name);
+                if ($value != "")
+                    $value.=";";
+                $value.=$file_name_save;
             };
-        $value = implode(";", $tmp);
+        } else {
+            $tmp = explode(";", $value);
+            foreach ($tmp as $num => $_item)
+                if (!$_item) {
+                    unset($tmp[$num]);
+                };
+            $value = implode(";", $tmp);
+        }
         return $value;
     }
 
     function AfterEdit($name, $value, $add) {
         if ($value == "")
             return $value;
-        $tmp = explode(";", $value);
-        foreach ($tmp as $num => $_item)
-            if (!$_item) {
-                unset($tmp[$num]);
+        if (is_array($value)) {
+            $empty_array = $value;
+            $value = "";
+            foreach ($empty_array as $tmp_file) {
+                $tmp_name = FOLDER_ROOT . $tmp_file['tmp_name'];
+                $exp = explode(".", $tmp_name);
+                $extens = end($exp);
+                $file_name = MD5(time() . $tmp_name . rand()) . "." . $extens;
+                $fold1 = substr($file_name, 0, 2);
+                $fold2 = substr($file_name, 2, 2);
+                if (!file_exists(FOLDER_UPLOAD))
+                    mkdir(FOLDER_UPLOAD);
+                if (!file_exists(FOLDER_IMAGE))
+                    mkdir(FOLDER_IMAGE);
+                if (!file_exists(FOLDER_IMAGE . $fold1))
+                    mkdir(FOLDER_IMAGE . $fold1);
+                if (!file_exists(FOLDER_IMAGE . $fold1 . "/" . $fold2))
+                    mkdir(FOLDER_IMAGE . $fold1 . "/" . $fold2);
+                $file_name_save = URI_IMAGE . $fold1 . "/" . $fold2 . "/" . $file_name;
+                $file_name = FOLDER_IMAGE . $fold1 . "/" . $fold2 . "/" . $file_name;
+                rename($tmp_name, $file_name);
+                if ($value != "")
+                    $value.=";";
+                $value.=$file_name_save;
             };
-        $value = implode(";", $tmp);
+        } else {
+            $tmp = explode(";", $value);
+            foreach ($tmp as $num => $_item)
+                if (!$_item) {
+                    unset($tmp[$num]);
+                };
+            $value = implode(";", $tmp);
+        };
         return $value;
     }
 
@@ -165,7 +219,7 @@ class CForm_image_multiple extends CForm_Text {
 
                 // Initialize the jQuery File Upload widget:
                 $('#<?= $file_id_name ?>').fileupload();
-                                                        
+                                                                                                        
                 $('#<?= $file_id_name ?>').bind('fileuploaddestroyed',
                 function (e, data) {
                     for(var prop in data) {
