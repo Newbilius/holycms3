@@ -2,6 +2,7 @@
     { ?>
     <!DOCTYPE html>
     <? global $_holy_vers; ?>
+    <? global $force_filter;?>
     <html lang="ru">
         <head>
             <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -80,6 +81,7 @@
         <div id=find0>
         </div>
 		<div id="wrap">
+                    <? if (!$force_filter){?>
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
@@ -166,23 +168,27 @@
         </div>
 		
         <BR><BR><BR>
+        <?};?>
         <div class="container-fluid">
             <div class="row-fluid">
-                <div class="span3">
+                <? if (!$force_filter){?>
+                    <div class="span3">
 
                     <? IncludeComponent("system\administration_panel.left_menu", "default"); ?>
                 </div>
+            <?};?>
 
 
 
-                <div class="span9">
+                <div class="<? if (!$force_filter) echo "span9"; else echo "span12";?>">
 
                     <div class="row-fluid">
                         <div class="span12">
 
                             <div id="ajax_div" name="ajax_div">
                             <? }; ?>
-                            <? IncludeComponent("system\global_bread", "system"); ?>
+                                
+                            <? if (!$force_filter) IncludeComponent("system\global_bread", "system"); ?>
                             <? if (isset($global_page_text)) echo $global_page_text ?>&nbsp;  
                             <? if (isset($_GET['_ajax_mode'])) { ?>
                                 <script>
@@ -203,11 +209,12 @@
 
 <div id="push"></div>
         </div>
-    <div id="footer">
+    <? if (!$force_filter) {?><div id="footer">
       <div class="container">
             <hr style="margin-top:0px;">
                 <p> <strong>HolyCMS <?= $_holy_vers ?></strong>, &copy <a href=http://www.siteszone.ru/ target=_new>Моисеев Дмитрий aka Newbilius</a>. 2011-2012 год</p>
       </div>
+        <?};?>
     </div>
     </body>
     </html>

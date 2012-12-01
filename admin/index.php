@@ -2,6 +2,15 @@
 
 require_once("../engine.php");
 
+global $force_filter;
+
+$force_filter=false;
+
+if (isset($_GET['force_filter_name'])){
+    global $force_filter;
+    $force_filter=true;
+}
+
 if (isset($_GET['path']))
     if ($_GET['path'] == "adm") {
         header('Location: /engine/admin/');
