@@ -68,7 +68,12 @@ class DBlock extends DBaseClass {
         if (!isset($values['hide_code']))
             $values['hide_code'] = 0;
         $hide_code = $values['hide_code'];
-
+        
+        if (!isset($values['childs']))
+            $values['childs'] = "";
+        
+        $childs=$values['childs'];
+        
         if (!is_numeric($group))
             $group = $this->group->GetIDByName($group);
         $this->sql->Insert(Array(
@@ -80,6 +85,7 @@ class DBlock extends DBaseClass {
             "hide_folders" => $hide_folders,
             "hide_folders2" => $hide_folders2,
             "hide_code" => $hide_code,
+            "childs"=>$childs,
                 )
         );
 

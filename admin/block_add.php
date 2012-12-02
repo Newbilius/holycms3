@@ -8,6 +8,7 @@ if (!$user_ifno_holy['block_control']) die("недостаточно прав");
 	$form->Add(Array("name"=>"caption","caption"=>"Название","type"=>"short_text",'required'=>1));
 	$form->Add(Array("name"=>"name","caption"=>"Код","type"=>"short_text",'required'=>1));
 	$form->Add(Array("name"=>"sort","caption"=>"Сортировка","type"=>"sort"));
+        $form->Add(Array("name"=>"childs","caption"=>"Связанные блоки<br>(название_блока;<br>поле_родителя;<br>поле_подчиненного/<br>название_блока;...)","type"=>"wysiwyg_text",'required'=>false));
 $form->Add(Array("name"=>"fav","caption"=>"Избранный","type"=>"checkbox",'required'=>false));
 $form->Add(Array("name"=>"hide_folders","caption"=>"Скрыть папки","type"=>"checkbox",'required'=>false));
 $form->Add(Array("name"=>"hide_folders2","caption"=>"Скрыть папки 2го уровня","type"=>"checkbox",'required'=>false));
@@ -29,6 +30,7 @@ $form->Add(Array("name"=>"hide_code","caption"=>"Скрыть код","type"=>"c
 				"hide_folders"=>$_POST["hide_folders"],
 				"hide_folders2"=>$_POST["hide_folders2"],
 				"hide_code"=>$_POST["hide_code"],
+                                "childs"=>$_POST["childs"],
 			));
 			
 			?>
