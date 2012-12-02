@@ -33,6 +33,29 @@ class DBlockElement extends DBaseClass {
     }
 
     /**
+     * 
+     * Получает список вложенных по элементу по выбранному блоку данных.
+     * 
+     * @param integer $id <p>id элемента текущего блока данных</p>
+     * @param string $block <p>имя блока</p>
+     */
+    function GetElementChilds($id,$block){
+        $block_data_src=new DBlock();
+        $block_data=$block_data_src->GetByID($this->table);
+        $childs_data=explode("/",$block_data['childs']);
+        foreach ($childs_data as &$child_data){
+            $child_data=explode(";",$child_data);
+            $child_data_new[$child_data[0]]=$child_data;
+        };
+        $tmp_item=$this->GetByID($id);
+        $filter[$child_data_new[$block][2]]=$tmp_item[$child_data_new[$block][1]];
+        $tmp_res=new DBlockElement($block);
+        $tmp_res->GetList($filter);
+        $items=$tmp_res->GetFullList();
+        return $items;
+    }
+    
+    /**
      * Обновляет один элемент
      * 
      * @param string/int $ID <p>ID или код элемента</p>
