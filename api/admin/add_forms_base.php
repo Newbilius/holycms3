@@ -184,6 +184,8 @@ class HFormAdd {
                                 $values['multiple'] = 0;
                             if (!isset($values['visible']))
                                 $values['visible'] = 1;
+                            if ($type=="hidden")
+                                $values['visible'] = 0;
                             if (!isset($values['meta']))
                                 $values['meta'] = 0;
                             $add_values = $values['add_values'];

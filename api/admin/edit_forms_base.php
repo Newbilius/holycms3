@@ -58,37 +58,34 @@ class HFormEdit {
         $this->data = $this->sql->SelectOnce($this->filter);
     }
 
-    function DrawChildsFormList(){
-        $block_info_src=new DBlock();
+    function DrawChildsForm() {
+        $block_info_src = new DBlock();
         ?>
-            <select style="width:50%" id="childs_param" name="childs_param">
-                <?
-                foreach ($this->childs_info as $_childs_info){
-                    $_block=$block_info_src->GetByID($_childs_info[0]);
-                    ?>
-                <option value="<?=$this->data[$_childs_info[1]]?>" rel0="<?=$_childs_info[0]?>" rel="<?=$_childs_info[2]?>"><?=$_block['caption']?></option>
-                <?
-                }
-                ?>
-            </select>
-            <a href="#" class="btn" onclick="return ChangeChildMode()">Перейти</a>
-            <script>
-        function ChangeChildMode(){
-            var sel=$("#childs_param option:selected");
-            var iframe_url="/engine/admin/elements_list.php?dblock="+sel.attr("rel0")+"&force_filter_name="+sel.attr("rel")+"&force_filter_value="+sel.val();
-            alert(iframe_url);
-        }    
-        </script>
+        <select style="width:50%" id="childs_param" name="childs_param">
             <?
+            foreach ($this->childs_info as $_childs_info) {
+                $_block = $block_info_src->GetByID($_childs_info[0]);
+                ?>
+                <option value="<?= $this->data[$_childs_info[1]] ?>" rel0="<?= $_childs_info[0] ?>" rel="<?= $_childs_info[2] ?>"><?= $_block['caption'] ?></option>
+                <?
+            }
+            ?>
+        </select>
+        <a href="#" class="btn" onclick="return ChangeChildMode()">Перейти</a>
+        <script>
+            function ChangeChildMode(){
+                var sel=$("#childs_param option:selected");
+                var iframe_url="/engine/admin/elements_list.php?dblock="+sel.attr("rel0")+"&force_filter_name="+sel.attr("rel")+"&force_filter_value="+sel.val();
+                //alert(iframe_url);
+                $("#child_iframe").attr("src",iframe_url);
+            }    
+        </script>
+        <hr>
+
+        <iframe width="100%" height="400" id="child_iframe" frameborder="0" allowfullscreen></iframe>
+        <?
     }
-    
-    function DrawChildsForm()
-    {
-        preprint($this->childs_info);
-        //выводим список блоков
-        $this->DrawChildsFormList();
-    }
-    
+
     function DrawBefore() {
         $meta = false;
         $show_add_top_buttons = false;
@@ -146,7 +143,7 @@ class HFormEdit {
                     $this->DrawChildsForm();
                     ?>
                 </div>
-                <? }
+            <? }
             ?>
             <table width=90% border=0 class="item_table">
                 <tr>
@@ -191,11 +188,11 @@ class HFormEdit {
         //preprint($block_data);
         if ($block_data['childs']) {
             $this->childs_on = true;
-            $childs_info=explode("/",$block_data['childs']);
-            foreach ($childs_info as &$_childs_info){
-                $_childs_info=explode(";",$_childs_info);
+            $childs_info = explode("/", $block_data['childs']);
+            foreach ($childs_info as &$_childs_info) {
+                $_childs_info = explode(";", $_childs_info);
             };
-            $this->childs_info=$childs_info;
+            $this->childs_info = $childs_info;
         }
 
         $this->data = $this->sql->SelectOnce($filter);
@@ -282,6 +279,8 @@ class HFormEdit {
             $values['multiple'] = 0;
         if (!isset($values['visible']))
             $values['visible'] = 1;
+        if ($type == "hidden")
+            $values['visible'] = 0;
         $add_values = $values['add_values'];
         if (!isset($values['required']))
             $values['required'] = 0;
