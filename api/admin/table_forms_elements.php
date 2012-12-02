@@ -96,7 +96,17 @@ class HElementForm extends HFormTable {
         ?>
             <input type=hidden name=dblock value="<?= $_GET['dblock'] ?>">
             <input type=hidden name=parent value="<?= $_GET['parent'] ?>">
-
+<?
+        global $force_filter;
+        if ($force_filter) {
+            $_force_filter_name = $_GET['force_filter_name'];
+            $_force_filter_value = $_GET['force_filter_value'];
+?>
+            <input type=hidden name=force_filter_name value="<?= $_GET['force_filter_name'] ?>">
+            <input type=hidden name=force_filter_value value="<?= $_GET['force_filter_value'] ?>">
+            <?
+        };
+        ?>
             <table>
                 <tr valign=top>
                     <td valign=top>
@@ -146,7 +156,7 @@ class HElementForm extends HFormTable {
             $_GET['parent'] = 0;
         ?>
                     <input type=hidden name=parent value=-1 >
-                    <button class="btn" style="margin-bottom:10px;" onclick="window.location='?dblock=<?= $_GET['dblock'] ?>&parent=<?= $_GET['parent'] ?>';return false;">Сбросить</button>
+                    <button class="btn" style="margin-bottom:10px;" onclick="window.location='?dblock=<?= $_GET['dblock'] ?>&parent=<?= $_GET['parent'] ?><?=$this->folder_link_add?>';return false;">Сбросить</button>
                 </center></td>
                 </tr>
             </table>

@@ -1,5 +1,16 @@
 var dialog;
 var obj0;
+function autoIframe(frameId){
+    try{
+        var frame = document.getElementById(frameId);
+        var innerDoc = (frame.contentDocument) ? frame.contentDocument : frame.contentWindow.document;
+        var objToResize = (frame.style) ? frame.style : frame;
+        objToResize.height = innerDoc.body.scrollHeight + 10;
+    }
+    catch(err){
+        window.status = err.message;
+    }
+}
 function GetFileIMG()
 {
     if (!dialog) {
@@ -17,7 +28,7 @@ function GetFileIMG()
             getFileCallback: function(file) { 
                 var tmp_name=file.path.replace(new RegExp("www",'g'),"");
                 tmp_name = tmp_name.replace(/\\/g, "/");
-				tmp_name="/"+tmp_name;
+                tmp_name="/"+tmp_name;
                 /*tmp_name = tmp_name.replace("<?=$_SERVER['HTTP_HOST']?>", "");*/
                 obj0.find('input.fileimg2').val(tmp_name);
             }
@@ -162,12 +173,12 @@ $(document).ready(function() {
     $("a.about_show").fancybox({
         //'hideOnContentClick': true
         });
-	$(".chosen").chosen();
+    $(".chosen").chosen();
 });
 function DeleteTmp()
 {
-$(".delete_before_add").empty();
-return true;
+    $(".delete_before_add").empty();
+    return true;
 };
 var cntglobal=0;
 function AddElementDiv(element,element2,typus){
@@ -176,7 +187,7 @@ function AddElementDiv(element,element2,typus){
     new_line=$(element).html();
     new_line=new_line.replace(new RegExp("###",'g'),cntglobal);
     $(element2).before("<div>"+new_line+"</div>");
- $(".wisiwig"+typus+cntglobal).ckeditor();
+    $(".wisiwig"+typus+cntglobal).ckeditor();
 
 
 }

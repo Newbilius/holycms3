@@ -61,14 +61,14 @@ class HFormEdit {
     function DrawChildsForm() {
         $block_info_src = new DBlock();
         ?>
-        <select style="width:50%" id="childs_param" name="childs_param">
+        <select style="width:50%;margin-left:12px;" id="childs_param" name="childs_param">
             <?
             foreach ($this->childs_info as $_childs_info) {
                 $_block = $block_info_src->GetByID($_childs_info[0]);
                 ?>
                 <option value="<?= $this->data[$_childs_info[1]] ?>" rel0="<?= $_childs_info[0] ?>" rel="<?= $_childs_info[2] ?>"><?= $_block['caption'] ?></option>
                 <?
-            }
+            };
             ?>
         </select>
         <a href="#" class="btn" onclick="return ChangeChildMode()">Перейти</a>
@@ -81,8 +81,7 @@ class HFormEdit {
             }    
         </script>
         <hr>
-
-        <iframe width="100%" height="400" id="child_iframe" frameborder="0" allowfullscreen></iframe>
+        <iframe frameborder="0" allowfullscreen onload="if (window.parent && window.parent.autoIframe){window.parent.autoIframe('child_iframe');}" width="100%" height="600" id="child_iframe" ></iframe>
         <?
     }
 
