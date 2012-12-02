@@ -68,19 +68,28 @@ $(document).ready(function() {
 
     function MenuTopItemsHideShow(){
         var thisRel = $(this).attr('rel');
-        //alert(thisRel);
         if (thisRel=="tab1")
         {
-            //$('.item_table tr').show();
             $('.no_meta_tr').show();
+            $('.table_footer').show();
+            $('.childs_div').hide();
             $('.meta_tr').hide();
         };
         if (thisRel=="tab2")
         {
             $('.no_meta_tr').hide();
+            $('.childs_div').hide();
             $('.meta_tr').show();
+            $('.table_footer').show();
         };
-	
+        if (thisRel=="tab3")
+        {
+            $('.no_meta_tr').hide();
+            $('.meta_tr').hide();
+            $('.childs_div').show();
+            $('.table_footer').hide();
+        };
+        
         $('ul.tabs.tabs_item li').removeClass('active');
         $(this).parent("li").addClass('active');
     }

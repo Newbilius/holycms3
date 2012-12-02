@@ -10,6 +10,9 @@ class HFormEdit {
     var $filter;
     var $e;
     var $return_link;
+    var $block_data;
+    var $childs_on;
+    var $childs_info;
 
     function DrawErrors() {
         foreach ($this->e as $error) {
@@ -55,59 +58,108 @@ class HFormEdit {
         $this->data = $this->sql->SelectOnce($this->filter);
     }
 
+    function DrawChildsFormList(){
+        $block_info_src=new DBlock();
+        ?>
+            <select style="width:50%" id="childs_param" name="childs_param">
+                <?
+                foreach ($this->childs_info as $_childs_info){
+                    $_block=$block_info_src->GetByID($_childs_info[0]);
+                    ?>
+                <option value="<?=$this->data[$_childs_info[1]]?>" rel0="<?=$_childs_info[0]?>" rel="<?=$_childs_info[2]?>"><?=$_block['caption']?></option>
+                <?
+                }
+                ?>
+            </select>
+            <a href="#" class="btn" onclick="return ChangeChildMode()">Перейти</a>
+            <script>
+        function ChangeChildMode(){
+            var sel=$("#childs_param option:selected");
+            var iframe_url="/engine/admin/elements_list.php?dblock="+sel.attr("rel0")+"&force_filter_name="+sel.attr("rel")+"&force_filter_value="+sel.val();
+            alert(iframe_url);
+        }    
+        </script>
+            <?
+    }
+    
+    function DrawChildsForm()
+    {
+        preprint($this->childs_info);
+        //выводим список блоков
+        $this->DrawChildsFormList();
+    }
+    
     function DrawBefore() {
         $meta = false;
-        $show_add_top_buttons=false;
-        $show_add_folder_buttons=false;
-        if ($this->data['folder'])
-                {
-                    $show_add_top_buttons=true;
-                    $show_add_folder_buttons=true;
-                };
+        $show_add_top_buttons = false;
+        $show_add_folder_buttons = false;
+        $show_childs_button = false;
+        if ($this->data['folder']) {
+            $show_add_top_buttons = true;
+            $show_add_folder_buttons = true;
+        };
         foreach ($this->columns as $item)
             if (isset($item['meta']))
-                if ($item['meta'])
-                {
+                if ($item['meta']) {
                     $meta = true;
-                    $show_add_top_buttons=true;
+                    $show_add_top_buttons = true;
                 };
+        if ($this->childs_on) {
+            $show_childs_button = true;
+            $show_add_top_buttons = true;
+        }
         ?>
         <form method=post enctype="multipart/form-data">
             <input type=hidden name=token value=<?= $this->token ?>>
-        <?
-        if ($show_add_top_buttons) {
-            ?>
+            <?
+            if ($show_add_top_buttons) {
+                ?>
                 <ul class="tabs tabs_item nav nav-pills" style="padding-left:0px;">
                     <li class="active">
                         <a rel=tab1 href="#">Основные свойства</a>
                     </li>
-                   <?if ($meta){?>
-                    <li class="">
-                        <a rel=tab2 href="#">Мета-тэги</a>
-                    </li>
-                    <?};?>
-                    <?if ($show_add_folder_buttons){?>
-                    <li class="">
-                        <a href="elements_list.php?dblock=<?echo $_GET['dblock']?>&parent=<?echo $_GET['id']?>">Содержимое папки</a>
-                    </li>                    
-                    <?};?>
+                    <? if ($meta) { ?>
+                        <li class="">
+                            <a rel=tab2 href="#">Мета-тэги</a>
+                        </li>
+                    <? }; ?>
+                    <? if ($show_childs_button) { ?>
+                        <li class="">
+                            <a rel=tab3 href="#">Вложенные элементы</a>
+                        </li>
+                    <? }; ?>
+                    <? if ($show_add_folder_buttons) { ?>
+                        <li class="">
+                            <a href="elements_list.php?dblock=<? echo $_GET['dblock'] ?>&parent=<? echo $_GET['id'] ?>">Содержимое папки</a>
+                        </li>                    
+                    <? }; ?>
                 </ul>
                 <HR>
+                <?
+            };
+            ?>
             <?
-        };
-        ?>
+            if ($this->childs_on) {
+                ?>
+                <div class="childs_div" style="display:none;">
+                    <?
+                    $this->DrawChildsForm();
+                    ?>
+                </div>
+                <? }
+            ?>
             <table width=90% border=0 class="item_table">
                 <tr>
                     <td></td>
                     <td></td>
                     <td></td>
                 </tr>
-        <?
-    }
+                <?
+            }
 
-    function DrawAfter() {
-        ?>
-                <tr>
+            function DrawAfter() {
+                ?>
+                <tr class="table_footer">
                     <td colspan=3>
                         <input name=submit type=submit value="Сохранить" style="float:left;height:26px;width:30%;margin-right:10px;" class="btn btn-success">
                         <input name=submit type=submit value="Применить" style="height:26px;width:30%;margin-right:10px;" class="btn btn-primary">
@@ -133,6 +185,19 @@ class HFormEdit {
 
         $this->filter = $filter;
 
+        $this->childs_on = false;
+        $block_data_src = new DBlock();
+        $block_data = $block_data_src->GetByID($table);
+        //preprint($block_data);
+        if ($block_data['childs']) {
+            $this->childs_on = true;
+            $childs_info=explode("/",$block_data['childs']);
+            foreach ($childs_info as &$_childs_info){
+                $_childs_info=explode(";",$_childs_info);
+            };
+            $this->childs_info=$childs_info;
+        }
+
         $this->data = $this->sql->SelectOnce($filter);
 
         $this->result = false;
@@ -147,36 +212,36 @@ class HFormEdit {
                     <b><?= str_replace(" ", "&nbsp;", $item['caption']) ?></b>
                 </td>
                 <td valign=top>
-            <?
-            $path = FOLDER_ROOT . "/site/forms/" . $item['type'] . ".php";
-            $path0 = FOLDER_ROOT . "/engine/api/forms/" . $item['type'] . ".php";
-            if (!file_exists($path)) {
-                $path = $path0;
-            };
-            if (!file_exists($path)) {
-                $item['type'] = "text";
-                $path = FOLDER_ROOT . "/engine/api/forms/" . $item['type'] . ".php";
-            };
-            include_once($path);
+                    <?
+                    $path = FOLDER_ROOT . "/site/forms/" . $item['type'] . ".php";
+                    $path0 = FOLDER_ROOT . "/engine/api/forms/" . $item['type'] . ".php";
+                    if (!file_exists($path)) {
+                        $path = $path0;
+                    };
+                    if (!file_exists($path)) {
+                        $item['type'] = "text";
+                        $path = FOLDER_ROOT . "/engine/api/forms/" . $item['type'] . ".php";
+                    };
+                    include_once($path);
 
-            $name = "CForm_" . $item['type'];
+                    $name = "CForm_" . $item['type'];
 
-            $obj = new $name;
-            $obj->SetBlock($_GET['dblock']);
-            if ($item['multiple']) {
-                global $_global_counter;
-                $many_items = explode(";", $this->data[$item['name']]);
-                $tmp_counter = -1;
+                    $obj = new $name;
+                    $obj->SetBlock($_GET['dblock']);
+                    if ($item['multiple']) {
+                        global $_global_counter;
+                        $many_items = explode(";", $this->data[$item['name']]);
+                        $tmp_counter = -1;
 
-                foreach ($many_items as $mi)
-                    if ($mi != "") {
-                        $tmp_counter++;
+                        foreach ($many_items as $mi)
+                            if ($mi != "") {
+                                $tmp_counter++;
 
-                        $mi_tmp[$item['name']] = str_replace("[&&&&&&]", ";", $mi);
-                        echo "<div style='border:0px solid red;width:100%;'>";
-                        $obj->Edit($item['name'], $mi_tmp, $item['add_values'], $item['multiple']);
-                        echo "</div>";
-                        ?>
+                                $mi_tmp[$item['name']] = str_replace("[&&&&&&]", ";", $mi);
+                                echo "<div style='border:0px solid red;width:100%;'>";
+                                $obj->Edit($item['name'], $mi_tmp, $item['add_values'], $item['multiple']);
+                                echo "</div>";
+                                ?>
                                 <div style="border:0px solid green;width:100%;">
                                     Порядок вывода: <input name=<?= $item['name'] ?>[SORT][<?= $tmp_counter ?>] value=100>
                                 </div>
@@ -187,10 +252,10 @@ class HFormEdit {
                         ?>
                         <div id=hiddden_<?= $item['name'] ?> style="display:none;">
 
-                        <?
-                        $item['add_values'].=";hidden_add";
-                        $obj->Edit($item['name'], $mi_tmp, $item['add_values'], $item['multiple']);
-                        ?>
+                            <?
+                            $item['add_values'].=";hidden_add";
+                            $obj->Edit($item['name'], $mi_tmp, $item['add_values'], $item['multiple']);
+                            ?>
                             <div style="border:0px solid green;">
                                 Порядок вывода: <input name=<?= $item['name'] ?>[SORT][] value=100>
                             </div>
@@ -202,28 +267,28 @@ class HFormEdit {
                         $obj->Edit($item['name'], $this->data, $item['add_values'], $item['multiple']);
                     ?>
             </tr>
-                        <?
-                    };
-                    $this->DrawAfter();
-                }
+            <?
+        };
+        $this->DrawAfter();
+    }
 
-                function Add($values) {
-                    $name = $values['name'];
-                    $caption = $values['caption'];
-                    $type = $values['type'];
-                    if (!isset($values['add_values']))
-                        $values['add_values'] = "";
-                    if (!isset($values['multiple']))
-                        $values['multiple'] = 0;
-                    if (!isset($values['visible']))
-                        $values['visible'] = 1;
-                    $add_values = $values['add_values'];
-                    if (!isset($values['required']))
-                        $values['required'] = 0;
-                    if (!isset($values['meta']))
-                        $values['meta'] = 0;
-                    $this->columns[] = array("name" => $name, "caption" => $caption, "type" => $type, "add_values" => $add_values, 'required' => $values['required'], 'multiple' => $values['multiple'], 'visible' => $values['visible'], 'meta' => $values['meta']);
-                }
+    function Add($values) {
+        $name = $values['name'];
+        $caption = $values['caption'];
+        $type = $values['type'];
+        if (!isset($values['add_values']))
+            $values['add_values'] = "";
+        if (!isset($values['multiple']))
+            $values['multiple'] = 0;
+        if (!isset($values['visible']))
+            $values['visible'] = 1;
+        $add_values = $values['add_values'];
+        if (!isset($values['required']))
+            $values['required'] = 0;
+        if (!isset($values['meta']))
+            $values['meta'] = 0;
+        $this->columns[] = array("name" => $name, "caption" => $caption, "type" => $type, "add_values" => $add_values, 'required' => $values['required'], 'multiple' => $values['multiple'], 'visible' => $values['visible'], 'meta' => $values['meta']);
+    }
 
-            }
-            ?>
+}
+?>
