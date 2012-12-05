@@ -76,8 +76,21 @@
         <div class="find0"></div>
 
     </head>
-
-    <body>
+    <script>
+        function alertsize(pixels){
+    pixels+=32;
+    document.getElementById('child_iframe').style.height=pixels+"px";
+}
+function getDocHeight() {
+    var D = document;
+    return Math.max(
+        Math.max(D.body.scrollHeight, D.documentElement.scrollHeight),
+        Math.max(D.body.offsetHeight, D.documentElement.offsetHeight),
+        Math.max(D.body.clientHeight, D.documentElement.clientHeight)
+    );
+}
+</script>
+    <body <? if ($force_filter){?>onload="parent.alertsize(getDocHeight());"<?};?> >
         <div id=find0>
         </div>
 		<div id="wrap">

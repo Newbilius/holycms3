@@ -76,12 +76,11 @@ class HFormEdit {
             function ChangeChildMode(){
                 var sel=$("#childs_param option:selected");
                 var iframe_url="/engine/admin/elements_list.php?dblock="+sel.attr("rel0")+"&force_filter_name="+sel.attr("rel")+"&force_filter_value="+sel.val();
-                //alert(iframe_url);
                 $("#child_iframe").attr("src",iframe_url);
             }    
-        </script>
+</script>
         <hr>
-        <iframe frameborder="0" allowfullscreen onload="if (window.parent && window.parent.autoIframe){window.parent.autoIframe('child_iframe');}" width="100%" height="600" id="child_iframe" ></iframe>
+        <iframe frameborder="0" allowfullscreen onload="if (window.parent && window.parent.autoIframe){window.parent.autoIframe('child_iframe');}" width="100%" height="100" id="child_iframe" ></iframe>
         <?
     }
 
