@@ -129,6 +129,7 @@ INSERT INTO system_data_block_types VALUES("16","file","Файл","TEXT","9000")
 INSERT INTO system_data_block_types VALUES("17","list_max","Выпадающий список множественный","TEXT","1001");
 INSERT INTO system_data_block_types VALUES("18","image_multiple","Множественная загрузка картинок","TEXT","5100");
 INSERT INTO system_data_block_types VALUES("19","file_multiple","Множественная загрузка файлов","TEXT","5200");
+INSERT INTO system_data_block_types VALUES("20","hidden","Скрытое поле","TEXT","9200");
 DROP TABLE IF EXISTS system_user_groups;
 CREATE TABLE `system_user_groups` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `name` text NOT NULL,  `caption` text NOT NULL,  `sort` int(11) NOT NULL,  `parent` int(11) NOT NULL,  `folder` int(11) NOT NULL,  `read` text NOT NULL,  `add` text NOT NULL,  `edit` text NOT NULL,  `delete` text NOT NULL,  PRIMARY KEY (`id`)) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 INSERT INTO system_user_groups VALUES("1","admin","Админы","100","0","0","pages;system_user_groups;options;users;templates;modules;cms_options;options_class;journal","pages;system_user_groups;options;users;templates;modules;cms_options;options_class;journal","pages;system_user_groups;options;users;templates;modules;cms_options;options_class;journal","pages;system_user_groups;options;users;templates;modules;cms_options;options_class;journal");
