@@ -9,7 +9,7 @@
             <title>Holy CMS 3</title>
 
             <link rel="stylesheet" type="text/css" href="/engine/js/bootstrap/css/bootstrap.min.css"  />
-            <script src="/engine/js/jquery.1.8.3.min.js"></script>
+            <script src="/engine/js/jquery.1.7.2.min.js"></script>
             <script src="/engine/js/bootstrap/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="/engine/js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
             <script type="text/javascript" src="/engine/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
