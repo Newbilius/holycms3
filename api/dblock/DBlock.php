@@ -90,8 +90,8 @@ class DBlock extends DBaseClass {
         );
 
         //создаём таблицу!
-
-        $query = "CREATE TABLE `" . $name . "` (`id` INT NOT NULL AUTO_INCREMENT ,`name` TEXT CHARACTER SET cp1251 COLLATE cp1251_general_ci NOT NULL ,`caption` TEXT CHARACTER SET cp1251 COLLATE cp1251_general_ci NOT NULL ,`sort` INT NOT NULL ,`parent` INT NOT NULL ,`folder` INT NOT NULL ,PRIMARY KEY ( `id` ) );";
+        global $_CONFIG;
+        $query = "CREATE TABLE `" . $name . "` (`id` INT NOT NULL AUTO_INCREMENT ,`name` TEXT CHARACTER SET ".$_CONFIG['CODEPAGE']." COLLATE ".$_CONFIG['COLLATE']." NOT NULL ,`caption` TEXT CHARACTER SET ".$_CONFIG['CODEPAGE']." COLLATE ".$_CONFIG['COLLATE']." NOT NULL ,`sort` INT NOT NULL ,`parent` INT NOT NULL ,`folder` INT NOT NULL ,PRIMARY KEY ( `id` ) );";
         $this->sql->Query($query);
     }
 

@@ -146,7 +146,7 @@ $_top_menu['export_data_sql'] = Array(
 );
 $_top_menu['import_data_sql'] = Array(
     "url" => "/engine/admin/import_data_sql.php",
-    "caption" => "Импорт структуры из SQL",
+    "caption" => "Импорт данных из SQL",
     "parent" => "utilits",
 );
 //меню на первой левой закладке

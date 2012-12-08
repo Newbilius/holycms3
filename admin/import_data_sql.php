@@ -10,7 +10,7 @@ $groups_list = $groups->GetFullList();
 
 if (isset($_POST['go'])) {
     if ($_POST['xml_file']['error'] == 0) {
-        ImportSQL($_POST['xml_file']['tmp_name'],Array("utf-8","windows-1251"));
+        ImportSQL($_POST['xml_file']['tmp_name']);
         ?>
         <div class="alert alert-success fade in" style="max-width:400px;">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
