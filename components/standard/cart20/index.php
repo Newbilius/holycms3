@@ -5,6 +5,8 @@ if (!defined('HCMS'))
 
 if (!isset($params['filter']))
     $params['filter'] = "";
+if (!isset($params['inner_cache']))
+    $params['inner_cache'] = false;
 if (!isset($params['table']))
     die("не указана таблица");
 if (!isset($params['item_url']))
@@ -87,6 +89,7 @@ if ($params['list_items_template'])
         "debug" => false,
         "url" => $params['item_url'],
         "items_count" => $array_of_items,
+        'cache'=>$params['inner_cache'],
     ));
 if ($params['form_component'])
     if (count($array_for_filter)>1)
@@ -98,6 +101,7 @@ if ($params['form_component'])
         'back_cart_url'=>$params['back_cart_url'],
         'cookie_var'=>$params['cookie_var'],
         'cost_var'=>$params['cost_var'],
+        'cache'=>$params['inner_cache'],
     ));
 
 if (isset($_REQUEST['complete']))

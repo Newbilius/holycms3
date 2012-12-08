@@ -4,6 +4,8 @@ if (!defined('HCMS'))
     die();
 global $human_link;
 
+if (!isset($params['inner_cache']))
+    $params['inner_cache'] = false;
 if (!isset($params['order']))
     $params['order'] = "sort DESC";
 if (!isset($params['paginator_template']))
@@ -24,6 +26,7 @@ if (!isset($human_link[0]))
         "paginator_template" => $params['paginator_template'],
         "order" => $params['order'],
         "filter"=>$params['filter'],
+        'cache'=>$params['inner_cache'],
     ));
 else
     IncludeComponent("detail_item", $params['detail_template'], Array(
@@ -31,5 +34,6 @@ else
         "add_to_bread" => $params['add_to_bread'],
         "set_title" => $params['set_title'],
         "ID" => $human_link[0],
+        'cache'=>$params['inner_cache'],
         "back_url" => $params['url']));
 ?>

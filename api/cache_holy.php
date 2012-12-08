@@ -1,16 +1,88 @@
 <?
 
-/**
- * Класс для работы с кэшированием вывода.
- * 
- * Пример использования:
- * $cache_component = new HolyCacheOut($key, $params['cache_time'], $params['block']);
- * $result_cache = $cache_component->StartCacheOut();
- * if ($result_cache) {
- * [...]
- * $cache_component->EndCacheOut();
- * };
- */
+class HolyCache_files {
+
+    var $sql;
+    var $key;
+    var $time;
+    var $temp_data;
+    var $module;
+    var $full_path;
+
+    function HolyCache_files($key, $time, $module) {
+        $this->key = $key . "_" . $module;
+        $this->module = $module;
+        $this->time = $time;
+    }
+
+    protected function TestCache($key = "") {
+        if (!file_exists(FOLDER_UPLOAD))
+            mkdir(FOLDER_UPLOAD);
+        if (!file_exists(FOLDER_UPLOAD . "cache/"))
+            mkdir(FOLDER_UPLOAD . "cache/");
+        if (!file_exists(FOLDER_UPLOAD . "cache/" . $this->module))
+            mkdir(FOLDER_UPLOAD . "cache/" . $this->module);
+        $part_of_path = FOLDER_UPLOAD . "cache/" . $this->module . "/";
+        if (!file_exists($part_of_path))
+            mkdir($part_of_path);
+
+        if ($key != "") {
+            $fold1 = substr($key, 0, 2);
+            $fold2 = substr($key, 2, 2);
+
+            if (!file_exists($part_of_path . $fold1))
+                mkdir($part_of_path . $fold1);
+            if (!file_exists($part_of_path . $fold1 . "/" . $fold2))
+                mkdir($part_of_path . $fold1 . "/" . $fold2);
+
+            $this->full_path = $part_of_path . $fold1 . "/" . $fold2 . "/" . $key;
+            if (file_exists($this->full_path))
+                return true;
+        }
+        return false;
+    }
+
+    function StartCacheOut() {
+        $create_cache = true;
+
+        if ($this->TestCache($this->key)) {
+            $time = filemtime($this->full_path);
+            if (time() - $time < $this->time) {
+                $content=  file_get_contents($this->full_path);
+                echo $content;
+                $create_cache = false;
+            };
+        }
+
+        if ($create_cache) {
+            ob_start();
+            return true;
+        };
+        return false;
+    }
+
+    function EndCacheOut() {
+        $this->temp_data = ob_get_contents();
+        ob_end_clean();
+        echo $this->temp_data;
+
+        $this->TestCache($this->key);
+
+        file_put_contents($this->full_path, $this->temp_data);
+    }
+
+    function ClearFull() {
+        DeleteDir(FOLDER_UPLOAD . "cache/");
+    }
+
+    function Clear() {
+        if ($this->module) {
+            DeleteDir(FOLDER_UPLOAD . "cache/" . $this->module);
+        }
+    }
+
+}
+
 class HolyCache_base {
 
     var $sql;
@@ -62,6 +134,17 @@ class HolyCache_base {
 
 }
 
+/**
+ * Класс для работы с кэшированием вывода.
+ * 
+ * Пример использования:
+ * $cache_component = new HolyCacheOut($key, $params['cache_time'], $params['block']);
+ * $result_cache = $cache_component->StartCacheOut();
+ * if ($result_cache) {
+ * [...]
+ * $cache_component->EndCacheOut();
+ * };
+ */
 class HolyCacheOut {
 
     var $key;
@@ -103,7 +186,7 @@ class HolyCacheOut {
     function StartCacheOut() {
         global $_CONFIG;
         if ($_CONFIG['CACHE_SYSTEM']) {
-            $this->driver->StartCacheOut();
+            return $this->driver->StartCacheOut();
         };
     }
 

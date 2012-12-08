@@ -4,6 +4,8 @@ if (!defined('HCMS'))
     die();
 global $human_link;
 
+if (!isset($params['inner_cache']))
+    $params['inner_cache'] = false;
 if (!isset($params['order']))
     $params['order'] = "sort ASC";
 if (!isset($params['paginator_template']))
@@ -92,6 +94,7 @@ IncludeComponent("list_items", $params['items_template'], Array(
     "order" => $params['order'],
     "filter" => $item_filter,
     "debug"=>$params['debug'],
+    'cache'=>$params['inner_cache'],
 ));
 
 if ($params['folders_template'])
@@ -104,6 +107,7 @@ if ($params['folders_template'])
         "order" => $params['order'],
         "filter" => $folder_filter,
         "debug"=>$params['debug'],
+        'cache'=>$params['inner_cache'],
     ));
 
 if ($params['detail_template'])
@@ -114,6 +118,7 @@ if ($params['detail_template'])
         "debug"=>$params['debug'],
         "filter"=>"folder=0",
         "cart_url"=>$params['cart_url'],
+        'cache'=>$params['inner_cache'],
             //"back_url" => $params['back_url']
     ));
 ?>
