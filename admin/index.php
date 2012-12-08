@@ -15,7 +15,6 @@ if (isset($_GET['path']))
         header('Location: /engine/admin/');
         exit;
     };
-//preprint($_SERVER);
 if (isset($_SERVER['REDIRECT_URL']))
     if (($_SERVER['REDIRECT_URL'] == "/adm") || ($_SERVER['REDIRECT_URL'] == "/engine/admin/")|| ($_SERVER['REDIRECT_URL'] == "/adm/")) {
         header('Location: /engine/admin/');
