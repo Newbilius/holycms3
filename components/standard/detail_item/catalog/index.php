@@ -28,6 +28,7 @@ if (isset($result)) {
     <div style="clear:both"></div>
     <div>
         <?
+        $result['foto_multi']=explode(";",$result['foto_multi']);
         foreach ($result['foto_multi'] as $foto_multi)
             if ($foto_multi) {
                 ?>
@@ -63,6 +64,7 @@ if (count($result['other']>0))
 {
     ?>
     Подобные товары:<?
+    $result['other']=explode(";",$result['other']);
     $other="id IN (0";
     
     foreach ($result['other'] as $other_item)

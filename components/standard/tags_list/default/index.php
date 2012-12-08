@@ -1,10 +1,12 @@
 <?
-if (!isset($_GET['tags'])) $_GET['tags']="";
-//echo $tags_max_count;
-	foreach ($tags as $tag=>$tag_count)
-		{
-		?>
-		&nbsp;&nbsp;&nbsp;<span  <? if ($_GET['tags']==$tag) {?>style="font-weight:bold;"<?}?>><a class="menu_link" href="<?=$params['url']?><?=urlencode($tag)?>"><?=$tag?> (<?=$tag_count?>)</a></span>&nbsp;&nbsp;&nbsp;
-		<?
-		};
-?>
+if (!defined('HCMS')) die();
+
+$cnt = 0;
+
+foreach ($tags_list as $tag) {
+    $cnt++;
+    ?>
+    <? if ($cnt != 1) { ?>,<? }; ?>
+    <a href="<? echo $tag['url'] ?>"><? echo $tag['caption'] ?> (<? echo $tag['count'] ?>)</a><?
+    ?>
+<? }; ?>
