@@ -2,8 +2,10 @@
 require_once("engine.php");
 global $_global_bread;
 
+$redirect_admin_array=Array("adm","adm/","admin","admin/");
+
 if (isset($_GET['path']))
-    if ($_GET['path'] == "adm" || $_GET['path'] == "admin") {
+    if (in_array($_GET['path'], $redirect_admin_array)){
         header('Location: /engine/admin/');
         exit;
     };
