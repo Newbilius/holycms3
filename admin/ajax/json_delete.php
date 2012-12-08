@@ -1,6 +1,6 @@
 <?
 
-echo require_once(realpath(str_replace("\\","/",dirname(dirname(dirname(__FILE__)))."/engine.php")));
+require_once(realpath(str_replace("\\","/",dirname(dirname(dirname(__FILE__)))."/engine.php")));
 global $H_USER;
 $user_info_holy = $H_USER->GetInfo();
 if ($H_USER->GetID()) {
