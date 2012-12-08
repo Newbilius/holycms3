@@ -90,7 +90,12 @@ $_top_menu['journal'] = Array(
     "admin_right" => false,
     "parent" => "utilits",
 );
-
+$_top_menu['phpinfo'] = Array(
+    "url" => "/engine/admin/php_info.php",
+    "caption" => "Информация о PHP",
+    "admin_right" => false,
+    "parent" => "utilits",
+);
 $_top_menu['options_simple'] = Array(
     "url" => "/engine/admin/options.php",
     "caption" => "Опции сайта",
