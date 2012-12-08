@@ -23,6 +23,6 @@ function DateTimePrefix($num) {
  * @return string
  */
 function PrintDate($pattern, $date) {
-    return strftime($pattern, strtotime($date));
+    return iconv('windows-1251', 'UTF-8',strftime($pattern, strtotime($date)));
 }
 ?>

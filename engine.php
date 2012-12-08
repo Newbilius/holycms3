@@ -32,7 +32,7 @@ define("URI_ADMIN", "/engine/admin/");
 define("URI_ENGINE", "/engine/");
 define("FOLDER_ENGINE", $_SERVER["DOCUMENT_ROOT"] . "/engine/");
 
-setlocale(LC_ALL, 'ru_RU', 'rus_RUS', 'Russian');
+setlocale(LC_TIME, 'RUS');
 
 if (!isset($_CONFIG['CACHE_SYSTEM']))
     $_CONFIG['CACHE_SYSTEM'] = false;
