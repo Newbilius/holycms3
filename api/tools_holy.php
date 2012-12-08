@@ -1,6 +1,29 @@
 <?php
 
-/***
+/**
+ * Рекурсивный поиск файлов по маске в директории. Возвращает массив найденных файлов.
+ * 
+ * @param string $dir <p>начальная директория для поиска</p>
+ * @param array $maskы <p>масив масок поиска, например одной маски - Array(".txt")</p>
+ */
+function FileFindRecursive($dir, $masks, &$tmp_array = array()) {
+    foreach (glob($dir . '/*') as $filename) {
+        $ok = false;
+        foreach ($masks as $mask) {
+            if (strtolower(substr($filename, strlen($filename) - strlen($mask), strlen($mask))) == strtolower($mask))
+                $ok = true;
+        };
+        if ($ok) {
+            $filename = str_replace("//", "/", $filename);
+            $tmp_array[] = $filename;
+        };
+        if (is_dir($filename))
+            $tmp_array = FileFindRecursive($filename, $masks, $tmp_array);
+    }
+    return $tmp_array;
+}
+
+/**
  * Скачивает через Curl файл и возвращает его содержимое.
  * 
  * @param string $url <p>имя файла</p>
