@@ -37,6 +37,13 @@ setlocale(LC_ALL, 'ru_RU', 'rus_RUS', 'Russian');
 if (!isset($_CONFIG['CACHE_SYSTEM']))
     $_CONFIG['CACHE_SYSTEM'] = false;
 
+if ($_CONFIG['CACHE_SYSTEM']){
+    if (!isset($_CONFIG['CACHE_MODE'])){
+        $_CONFIG['CACHE_MODE']="base";
+    }
+}
+
+
 if (isset($_CONFIG['LOGIN'])) {
     if (!isset($_CONFIG['SERVER']))
         $_CONFIG['SERVER'] = "localhost";

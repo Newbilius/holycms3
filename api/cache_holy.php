@@ -11,13 +11,65 @@
  * $cache_component->EndCacheOut();
  * };
  */
-class HolyCacheOut {
+class HolyCache_base {
 
-    var $key;
     var $sql;
+    var $key;
     var $time;
     var $temp_data;
     var $module;
+
+    function HolyCache_base($key, $time, $module) {
+        $this->key = $key . "_" . $module;
+        $this->module = $module;
+        $this->time = $time;
+        $this->sql = new HolySQL('system_cache');
+    }
+
+    function StartCacheOut() {
+        $tmpdata = $this->sql->SelectOnce("id='" . $this->key . "'", 'id');
+
+        if ((isset($tmpdata['id'])) && (time() - $tmpdata['time'] < $this->time)) {
+            echo $tmpdata['value'];
+            return false;
+        } else {
+            ob_start();
+            return true;
+        };
+    }
+
+    function EndCacheOut() {
+        $this->temp_data = ob_get_contents();
+        ob_end_clean();
+        echo $this->temp_data;
+
+        $this->sql->Delete("id='" . $this->key . "'");
+        $this->sql->Insert(array(
+            "id" => $this->key,
+            "value" => $this->temp_data,
+            "time" => time(),
+            "module" => $this->module,
+        ));
+    }
+
+    function ClearFull() {
+        $this->sql->Delete("1");
+    }
+
+    function Clear() {
+        $this->sql->Delete("module='" . $this->module . "' OR module='TEMP'");
+    }
+
+}
+
+class HolyCacheOut {
+
+    var $key;
+    var $time;
+    var $temp_data;
+    var $module;
+    protected $driver;
+    protected $cache_class_name;
 
     /**
      * Инициализирует класс.
@@ -28,6 +80,9 @@ class HolyCacheOut {
      */
     function HolyCacheOut($key = "", $time = 90, $module = "TEMP") {
         global $_CONFIG;
+
+        $this->cache_class_name = "HolyCache_" . $_CONFIG['CACHE_MODE'];
+
         if ($key == "")
             $key = MD5(time());
 
@@ -35,7 +90,8 @@ class HolyCacheOut {
             $this->key = $key . "_" . $module;
             $this->module = $module;
             $this->time = $time;
-            $this->sql = new HolySQL('system_cache');
+
+            $this->driver = new $this->cache_class_name($this->key, $this->time, $this->module);
         };
     }
 
@@ -47,15 +103,7 @@ class HolyCacheOut {
     function StartCacheOut() {
         global $_CONFIG;
         if ($_CONFIG['CACHE_SYSTEM']) {
-            $tmpdata = $this->sql->SelectOnce("id='" . $this->key . "'", 'id');
-
-            if ((isset($tmpdata['id'])) && (time() - $tmpdata['time'] < $this->time)) {
-                echo $tmpdata['value'];
-                return false;
-            } else {
-                ob_start();
-                return true;
-            };
+            $this->driver->StartCacheOut();
         };
     }
 
@@ -64,19 +112,9 @@ class HolyCacheOut {
      * 
      */
     function EndCacheOut() {
-        $this->temp_data = ob_get_contents();
-        ob_end_clean();
-        echo $this->temp_data;
-
         global $_CONFIG;
         if ($_CONFIG['CACHE_SYSTEM']) {
-            $this->sql->Delete("id='" . $this->key . "'");
-            $this->sql->Insert(array(
-                "id" => $this->key,
-                "value" => $this->temp_data,
-                "time" => time(),
-                "module" => $this->module,
-            ));
+            $this->driver->EndCacheOut();
         };
     }
 
@@ -86,8 +124,9 @@ class HolyCacheOut {
      */
     function ClearFull() {
         global $_CONFIG;
-        if ($_CONFIG['CACHE_SYSTEM'])
-            $this->sql->Delete("1");
+        if ($_CONFIG['CACHE_SYSTEM']) {
+            $this->driver->ClearFull();
+        }
     }
 
     /**
@@ -97,7 +136,7 @@ class HolyCacheOut {
     function Clear() {
         global $_CONFIG;
         if ($_CONFIG['CACHE_SYSTEM'])
-            $this->sql->Delete("module='" . $this->module . "' OR module='TEMP'");
+            $this->driver->Clear();
     }
 
 }
