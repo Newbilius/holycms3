@@ -39,15 +39,13 @@ function IncludeComponent($name, $template = "", $params = array()) {
     if (isset($_CONFIG['CACHE_SYSTEM'])) {
         if ($_CONFIG['CACHE_SYSTEM'] === false) {
             unset($params['cache']);
-        } elseif ($_CONFIG['CACHE_SYSTEM']==="always")
-        {
+        } elseif ($_CONFIG['CACHE_SYSTEM'] === "always") {
             if (isset($params['cache']))
-            if ($params['cache']==="auto")
-            {
-            $params['cache']=true;
-            if (!isset($params['cache_time']))
-                $params['cache_time'] = 90;
-            };
+                if ($params['cache'] === "auto") {
+                    $params['cache'] = true;
+                    if (!isset($params['cache_time']))
+                        $params['cache_time'] = 90;
+                };
         }
     }
     $result_cache = true;
@@ -60,7 +58,11 @@ function IncludeComponent($name, $template = "", $params = array()) {
 
             if ($params['cache_time'] == 0)
                 $params['cache_time'] = 90;
-            $key = $name . "__" . $template . "_";
+            if (isset($params['cache_key']))
+                $cache_key = $params['cache_key'];
+            else
+                $cache_key = "";
+            $key = $name . "__" . $template . "_" . $cache_key;
             foreach ($params as $key_part)
                 if (!is_array($key_part))
                     $key.=$key_part . "_";

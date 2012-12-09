@@ -1,0 +1,1 @@
+<? echo $_OPTIONS['page_title'] ?>
