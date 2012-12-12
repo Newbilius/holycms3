@@ -1,5 +1,4 @@
 <?php
-
 include_once("_base_menu.php");
 require_once(dirname(dirname(__FILE__)) . "/site/config.php");
 if (file_exists(dirname(dirname(__FILE__)) . "/site/options.php"))

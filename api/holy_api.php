@@ -21,6 +21,7 @@ require_once("arrays_holy.php");
 require_once("files_holy.php");
 require_once("old_holy.php");
 include_once("forms/text.php");
+require_once("view_holy.php");
 
 require_once("dblock/DBaseClass.php");
 require_once("dblock/DBlockGroup.php");

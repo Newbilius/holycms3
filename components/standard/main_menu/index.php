@@ -48,8 +48,6 @@ while ($result_temp = $res->GetNext()) {
 };
 if (isset($result))
     $_count_result = count($result);
-if (file_exists($full_template_path))
-    include($full_template_path);
-else
-    SystemAlert("Не найден шаблон <b>" . $full_template_path . "</b>");
+
+$view=View::Factory("main_menu/".$template)->Set("result", $result)->Draw();
 ?>
