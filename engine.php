@@ -5,9 +5,6 @@ require_once(dirname(dirname(__FILE__)) . "/site/config.php");
 if (file_exists(dirname(dirname(__FILE__)) . "/site/options.php"))
     require_once(dirname(dirname(__FILE__)) . "/site/options.php");
 
-if (!isset($_log_name))
-    $_log_name = FOLDER_ROOT . "/site/log.txt";
-
 $_holy_vers = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/engine/VERSION");
 
 $host_temp = explode(".", $_SERVER['HTTP_HOST']);
@@ -18,6 +15,8 @@ else
 
 if (!isset($_OPTIONS['back_email']))
     $_OPTIONS['back_email'] = "info@" . $_SERVER['HTTP_HOST'];
+
+require_once(dirname(dirname(__FILE__)) . "/site/config.php");
 
 define("FOLDER_ROOT", $_SERVER["DOCUMENT_ROOT"]);
 define("FOLDER_UPLOAD", $_SERVER["DOCUMENT_ROOT"] . "/upload/");
@@ -32,16 +31,17 @@ define("URI_ADMIN", "/engine/admin/");
 define("URI_ENGINE", "/engine/");
 define("FOLDER_ENGINE", $_SERVER["DOCUMENT_ROOT"] . "/engine/");
 
+if (!isset($_log_name))
+    $_log_name = FOLDER_ROOT . "/site/log.txt";
+
 setlocale(LC_TIME, 'RUS');
 
 if (!isset($_CONFIG['CACHE_SYSTEM']))
     $_CONFIG['CACHE_SYSTEM'] = false;
 
-if ($_CONFIG['CACHE_SYSTEM']){
-    if (!isset($_CONFIG['CACHE_MODE'])){
+if (!isset($_CONFIG['CACHE_MODE'])){
         $_CONFIG['CACHE_MODE']="base";
     }
-}
 
 
 if (isset($_CONFIG['LOGIN'])) {

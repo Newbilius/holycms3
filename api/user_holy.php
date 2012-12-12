@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Класс для работы с пользователями сайта и администраторами
  */
@@ -11,11 +12,11 @@ class DUser extends DBlock {
     var $cookie_prefix;
     var $table;
     protected $uid;
-
     var $read;
     var $add;
     var $edit;
     var $delete;
+
     /**
      * Определяем базовые настройки
      * 
@@ -31,7 +32,7 @@ class DUser extends DBlock {
         $this->cookie_prefix = $cookie_prefix;
         $this->login_name = $login_name;
         $this->pass_name = $pass_name;
-        $this->table=$table;
+        $this->table = $table;
         $this->ID = 0;
 
         $this->sql = new HolySQL($table);
@@ -53,10 +54,9 @@ class DUser extends DBlock {
      * 
      * @return boolean
      */
-    public function IsAdmin(){
+    public function IsAdmin() {
         return $this->inform['block_control'];
     }
-    
 
     /**
      * Возвращает <b>true</b>, если пользователь имеет право добавлять элементы или папки в блок <b>$name</b>
@@ -64,49 +64,48 @@ class DUser extends DBlock {
      * @param string $name <p>имя блока данных/таблицы</p>
      * @return boolean
      */
-    public function CanAdd($name){
+    public function CanAdd($name) {
         if (in_array($name, $this->add))
-                return true;
+            return true;
         return false;
     }
-    
+
     /**
      * Возвращает <b>true</b>, если пользователь имеет право удалять элементы или папки из блока <b>$name</b>
      * 
      * @param string $name <p>имя блока данных/таблицы</p>
      * @return boolean
      */
-    public function CanDelete($name){
+    public function CanDelete($name) {
         if (in_array($name, $this->delete))
-                return true;
-        return false;        
+            return true;
+        return false;
     }
-    
+
     /**
      * Возвращает <b>true</b>, если пользователь имеет право редактировать элементы или папки в блоке <b>$name</b>
      * 
      * @param string $name <p>имя блока данных/таблицы</p>
      * @return boolean
      */
-    public function CanEdit($name){
+    public function CanEdit($name) {
         if (in_array($name, $this->edit))
-                return true;
-        return false;        
+            return true;
+        return false;
     }
-    
-    
+
     /**
      * Возвращает <b>true</b>, если пользователь имеет право просматривать элементы или папки в блоке <b>$name</b>
      * 
      * @param string $name <p>имя блока данных/таблицы</p>
      * @return boolean
      */
-    public function CanRead($name){
+    public function CanRead($name) {
         if (in_array($name, $this->read))
-                return true;
-        return false;        
+            return true;
+        return false;
     }
-    
+
     /**
      * Проверяет, залогинен ли пользователь. Если да, возвращает его ID, если нет - false
      * 
@@ -165,14 +164,14 @@ class DUser extends DBlock {
             };
         };
         $this->ID = $dat['id'];
-        if ($this->ID != 0){
+        if ($this->ID != 0) {
             if ($set_uid) {
                 $pass = MD5(uniqid(time(), true) . time());
-                $uid_list=explode(";",$dat['uid']);
-                $uid_list[]=$pass;
-                if (count($uid_list)>5)
+                $uid_list = explode(";", $dat['uid']);
+                $uid_list[] = $pass;
+                if (count($uid_list) > 5)
                     unset($uid_list[0]);
-                $save_uid=implode(";",$uid_list);
+                $save_uid = implode(";", $uid_list);
                 setcookie($this->cookie_prefix . '_login', $user, time() + 90000, "/");
                 setcookie($this->cookie_prefix . '_pass', $pass, time() + 90000, "/");
                 $_COOIKE[$this->cookie_prefix . '_login'] = $user;
@@ -180,19 +179,19 @@ class DUser extends DBlock {
                 $this->sql->Update("id=" . $this->ID, Array(
                     "uid" => $save_uid
                 ));
-                $this->inform['uid']=$save_uid;
+                $this->inform['uid'] = $save_uid;
             };
             //получаем информацию о группе      
             $users_groups_rs = new DBlockElement("system_user_groups");
-            $users_groups = $users_groups_rs->GetOne("id=".$dat['group']);
-            
-            $this->read=explode(";",$users_groups['read']);
-            $this->add=explode(";",$users_groups['add']);
-            $this->edit=explode(";",$users_groups['edit']);
-            $this->delete=explode(";",$users_groups['delete']);
-            $this->uid=$pass;
-            };
-            
+            $users_groups = $users_groups_rs->GetOne("id=" . $dat['group']);
+
+            $this->read = explode(";", $users_groups['read']);
+            $this->add = explode(";", $users_groups['add']);
+            $this->edit = explode(";", $users_groups['edit']);
+            $this->delete = explode(";", $users_groups['delete']);
+            $this->uid = $pass;
+        };
+
         return $this->GetID();
     }
 
@@ -203,48 +202,52 @@ class DUser extends DBlock {
      * @param string $pass  <p>пароль</p>
      * @param array $params  <p>дополнительные параметры</p>
      */
-    function AddUser($login, $pass,$params=array()) {
+    function AddUser($login, $pass, $params = array()) {
         $new_user_data = Array(
-            "name"=>$login,
+            "name" => $login,
             $this->login_name => $login,
             $this->pass_name => MD5($pass),
         );
-        $new_user_data=  array_merge($new_user_data,$params);
+        $new_user_data = array_merge($new_user_data, $params);
         $this->sql->Insert($new_user_data);
     }
 
     /**
-     * Обновить выбранные данные
+     * Обновить выбранные данные пользователя
      * 
      * @param array $data  <p>данные</p>
+     * @param integer $id  <p>id пользователя (не обязаельное - если не указать, обрабатывается текущий)</p>
      */
-    
-    function Update($data)
-    {
-        $tmp=new DBlockElement($this->table);
-        $tmp->sql->debug=true;
-        $tmp->Update($this->ID, $data,false);
-        $this->ID=0;
+    function Update($data, $id = 0) {
+        $tmp = new DBlockElement($this->table);
+        $tmp->sql->debug = true;
+        if ($id == 0) {
+            $tmp->Update($this->ID, $data, false);
+        } else {
+            $tmp->Update($this->ID, $data, false);
+        }
+        $this->ID = 0;
         $this->IsAuth();
     }
+
     /**
      * Выйти с сайта
      */
     function Logout() {
         AddToLog("Пользователь " . $_COOKIE[$this->cookie_prefix . '_login'] . " (" . $this->ID . ") ВЫШЕЛ из системы администрирования.");
-       
-        $uid_list=explode(";",$this->inform['uid']);
-        
-        foreach ($uid_list as $num=>$_uid){
-            if ($_uid==$this->uid){
+
+        $uid_list = explode(";", $this->inform['uid']);
+
+        foreach ($uid_list as $num => $_uid) {
+            if ($_uid == $this->uid) {
                 unset($uid_list[$num]);
             };
         }
-        
-        $uid_list_save=implode(";",$uid_list);
+
+        $uid_list_save = implode(";", $uid_list);
         $this->sql->Update("id=" . $this->ID, Array(
-                    "uid" => $uid_list_save
-                ));
+            "uid" => $uid_list_save
+        ));
         $this->ID = 0;
         setcookie($this->cookie_prefix . '_login', $_COOKIE[$this->cookie_prefix . '_login'], time() - 90000, "/");
         setcookie($this->cookie_prefix . '_pass', $_COOKIE[$this->cookie_prefix . '_pass'], time() - 90000, "/");
@@ -253,7 +256,6 @@ class DUser extends DBlock {
     }
 
 }
-
 
 /**
  * Класс-оберта для работы с пользователями сайта (НЕ администраторами)
@@ -278,5 +280,7 @@ class HolyUser extends DUser {
         
     }
 
-};
+}
+
+;
 ?>

@@ -78,7 +78,7 @@ class HFormEdit {
                 var iframe_url="/engine/admin/elements_list.php?dblock="+sel.attr("rel0")+"&force_filter_name="+sel.attr("rel")+"&force_filter_value="+sel.val();
                 $("#child_iframe").attr("src",iframe_url);
             }    
-</script>
+        </script>
         <hr>
         <iframe frameborder="0" allowfullscreen onload="if (window.parent && window.parent.autoIframe){window.parent.autoIframe('child_iframe');}" width="100%" height="100" id="child_iframe" ></iframe>
         <?
@@ -89,9 +89,11 @@ class HFormEdit {
         $show_add_top_buttons = false;
         $show_add_folder_buttons = false;
         $show_childs_button = false;
-        if ($this->data['folder']) {
-            $show_add_top_buttons = true;
-            $show_add_folder_buttons = true;
+        if (isset($this->data['folder'])) {
+            if ($this->data['folder']) {
+                $show_add_top_buttons = true;
+                $show_add_folder_buttons = true;
+            };
         };
         foreach ($this->columns as $item)
             if (isset($item['meta']))
@@ -183,15 +185,16 @@ class HFormEdit {
         $this->childs_on = false;
         $block_data_src = new DBlock();
         $block_data = $block_data_src->GetByID($table);
-        //preprint($block_data);
-        if ($block_data['childs']) {
-            $this->childs_on = true;
-            $childs_info = explode("/", $block_data['childs']);
-            foreach ($childs_info as &$_childs_info) {
-                $_childs_info = explode(";", $_childs_info);
-            };
-            $this->childs_info = $childs_info;
-        }
+        if (isset($block_data['childs'])) {
+            if ($block_data['childs']) {
+                $this->childs_on = true;
+                $childs_info = explode("/", $block_data['childs']);
+                foreach ($childs_info as &$_childs_info) {
+                    $_childs_info = explode(";", $_childs_info);
+                };
+                $this->childs_info = $childs_info;
+            }
+        };
 
         $this->data = $this->sql->SelectOnce($filter);
 
@@ -222,7 +225,9 @@ class HFormEdit {
                     $name = "CForm_" . $item['type'];
 
                     $obj = new $name;
-                    $obj->SetBlock($_GET['dblock']);
+                    if (isset($_GET['dblock'])) {
+                        $obj->SetBlock($_GET['dblock']);
+                    };
                     if ($item['multiple']) {
                         global $_global_counter;
                         $many_items = explode(";", $this->data[$item['name']]);

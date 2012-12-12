@@ -14,7 +14,7 @@ $fields = new DBlockFields();
 $blocks = new DBlock;
 
 if (isset($_POST['go'])) {
-    if (count($_POST['block']) == 0) {
+    if ((!isset($_POST['block'])) ||(count($_POST['block']) == 0)) {
         ?>
         <div class="alert alert-error fade in" style="max-width:400px;">
             <button type="button" class="close" data-dismiss="alert">&times;</button>

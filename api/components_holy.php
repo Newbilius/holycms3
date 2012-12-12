@@ -56,8 +56,9 @@ function IncludeComponent($name, $template = "", $params = array()) {
             else
                 $params['cache_time'] = intval($params['cache_time']);
 
-            if ($params['cache_time'] == 0)
+            if ((!isset($params['cache_time'])) || ($params['cache_time'] == 0)) {
                 $params['cache_time'] = 90;
+            };
             if (isset($params['cache_key']))
                 $cache_key = $params['cache_key'];
             else

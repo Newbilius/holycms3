@@ -48,7 +48,7 @@ class HolyCache_files {
         if ($this->TestCache($this->key)) {
             $time = filemtime($this->full_path);
             if (time() - $time < $this->time) {
-                $content=  file_get_contents($this->full_path);
+                $content = file_get_contents($this->full_path);
                 echo $content;
                 $create_cache = false;
             };
@@ -163,13 +163,14 @@ class HolyCacheOut {
      */
     function HolyCacheOut($key = "", $time = 90, $module = "TEMP") {
         global $_CONFIG;
-
-        $this->cache_class_name = "HolyCache_" . $_CONFIG['CACHE_MODE'];
-
-        if ($key == "")
-            $key = MD5(time());
-
         if ($_CONFIG['CACHE_SYSTEM']) {
+
+            $this->cache_class_name = "HolyCache_" . $_CONFIG['CACHE_MODE'];
+
+            if ($key == "")
+                $key = MD5(time());
+
+
             $this->key = $key . "_" . $module;
             $this->module = $module;
             $this->time = $time;

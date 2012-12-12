@@ -61,7 +61,7 @@ class CForm_list extends CForm_Text {
         <select name=<?= $name ?><? if ($multiple) { ?>[]<? }; ?> style="width:101%">
             <option value="">[нет значения]</option>
             <?
-            $this->PrintListItems(&$result_list, 0, &$data, &$add_datas, "", $name);
+            $this->PrintListItems($result_list, 0, $data, $add_datas, "", $name);
             ?>
         </select>
 
@@ -80,7 +80,7 @@ class CForm_list extends CForm_Text {
                 ?>
                 <option  <? if ($data[$name] == $list_item[$add_datas[1]]) { ?>selected<? }; ?> value="<?= $list_item[$add_datas[1]] ?>"><?= $text_add . $list_item[$add_datas[2]] ?></option>
                 <?
-                $this->PrintListItems(&$result_list, $list_item['id'], $data, &$add_datas, $text_add, $name);
+                $this->PrintListItems($result_list, $list_item['id'], $data, $add_datas, $text_add, $name);
             };
         };
     }
@@ -104,7 +104,7 @@ class CForm_list extends CForm_Text {
         <select name=<?= $name ?><? if ($multiple) { ?>[]<? }; ?> style="width:101%">
             <option value="">[нет значения]</option>
             <?
-            $this->PrintListItems(&$result_list, 0, &$data, &$add_datas, "", $name);
+            $this->PrintListItems($result_list, 0, $data, $add_datas, "", $name);
             ?>
         </select>
 
