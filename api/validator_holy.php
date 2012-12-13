@@ -27,8 +27,6 @@ class HolyValidator {
         if (isset($array[$key]))
             if ($array[$key]) {
                 $res0 = new DBlockElement($options['table']);
-                //todo нехорошооо
-                //$options['field']."='".mysql_real_escape_string($array[$key])."'"
                 $tmp = $res0->GetOne(Array($options['field'] => $array[$key]));
                 if (isset($tmp))
                     if (isset($tmp['id']))
