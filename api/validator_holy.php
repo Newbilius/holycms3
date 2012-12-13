@@ -105,6 +105,7 @@ class HolyValidator {
                 $this->$function_name($array, $rule['name'], $rule['options']);
             }
         }
+        return $this->Complete();
     }
 
     /**
