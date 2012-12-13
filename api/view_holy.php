@@ -15,6 +15,13 @@ class View {
         return $view;
     }
 
+    public function IsExists(){
+        if ($this->full_path)
+            return true;
+        else
+            return false;
+    }
+    
     public function CacheOn($key, $block = "TEMP", $time = 90) {
         $this->cache_key = $key;
         $this->cache = new HolyCacheOut($key, $time, $block);
@@ -26,6 +33,7 @@ class View {
 
     public function View($path) {
         $this->params = array();
+        $this->full_path = "";
         if (file_exists(FOLDER_SITE . "views/" . $path . ".php")) {
             $this->full_path = FOLDER_SITE . "views/" . $path . ".php";
         } elseif (file_exists(FOLDER_ENGINE . "views/" . $path . ".php")) {
