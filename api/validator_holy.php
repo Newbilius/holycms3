@@ -70,8 +70,15 @@ class HolyValidator {
         else
             $ok = false;
 
-        if (!$ok)
-            $this->errors[] = "Не заполнено поле " . $this->field_names[$key];
+
+        if (!$ok) {
+            if (!isset($this->field_names[$key])){
+                $fname=$key;
+            }else{
+                $fname=$this->field_names[$key];
+            }
+            $this->errors[] = "Не заполнено поле " . $fname;
+        }
     }
 
     /**

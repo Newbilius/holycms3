@@ -5,27 +5,28 @@ class Component {
     protected $params;
     protected $name;
     protected $cache;
+    protected $errors;
 
     static public function Factory($path) {
         $base_component_path1 = FOLDER_ROOT . "/site/components/" . $path . ".php";
         $base_component_path2 = FOLDER_ROOT . "/engine/components/" . $path . ".php";
-
-        $this->name = $path;
 
         if (file_exists($base_component_path1)) {
             include_once($base_component_path1);
         } elseif (file_exists($base_component_path2)) {
             include_once($base_component_path2);
         } else {
-            SystemAlert("Не найден компонент <b>$path</b>");
+            SystemAlertFatal("Не найден компонент <b>$path</b>");
         };
         $component_class = "Component_" . str_replace("/", "_", $path);
 
-        return $component = new $component_class();
+        $component = new $component_class($path);
+        return $component;
     }
 
-    public function Component() {
+    public function Component($name) {
         $this->params = $this->GetDefaults();
+        $this->name=$name;
         $this->cache = false;
         return $this;
     }
@@ -45,9 +46,10 @@ class Component {
         if (count($params) > 0) {
             $fields_list = array();
             foreach ($this->params as $_param_name => $_param) {
-                $fields_list[] = $_param_name;
+                $fields_list[$_param_name] = $_param_name;
             };
             $validator = new HolyValidator($fields_list);
+
             foreach ($params as $_param) {
                 if (isset($_param['options'])) {
                     $validator->AddRule($_param['rule'], $_param['name'], $_param['options']);
@@ -55,7 +57,9 @@ class Component {
                     $validator->AddRule($_param['rule'], $_param['name']);
                 }
             }
-            return $validator->Check($this->params);
+            $result = $validator->Check($this->params);
+            $this->errors = $result;
+            return $result;
         }
         return true;
     }
@@ -64,12 +68,12 @@ class Component {
         return array();
     }
 
-    public function AddParam($name, $value) {
+    public function SetParam($name, $value) {
         $this->params[$name] = $value;
         return $this;
     }
 
-    public function AddParams($values) {
+    public function SetParams($values) {
         foreach ($values as $_name => $_value) {
             $this->params[$_name] = $_value;
         }
@@ -97,7 +101,17 @@ class Component {
                     };
                 $this->params['cache_key'] = MD5($key);
             };
+        return true;
+            
         };
+        
+        return false;
+    }
+
+    protected function PrintErrors() {
+        foreach ($this->errors as $_error){
+            echo "<b style='color:red;'>".$_error."</b><BR>";
+        }
     }
 
     protected function Action() {
@@ -106,17 +120,17 @@ class Component {
     }
 
     public function Execute() {
-        if ($this->GetParamsValidators()) {
-
-            $view = View::Factory($this->params['template'])->Set("params", $this->params);
-
+        $validate = $this->ParamsValidate();
+        if ($validate===true) {
+            //echo "components/".$this->name."/".$this->params['template'];
+            $view = View::Factory("components/".$this->name."/".$this->params['template'])->Set("params", $this->params);
             $view->Set("result", $this->Action());
-
             if ($this->PrepareCache()) {
-                $view->CacheOn($this->params['cache_key'], $this->params['table'], $this->params['time']);
+                $view->CacheOn($this->params['cache_key'], $this->params['table'], $this->params['cache_time']);
             };
-
             $view->Draw();
+        } else {
+            $this->PrintErrors();
         }
     }
 

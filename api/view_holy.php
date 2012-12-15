@@ -8,7 +8,6 @@ class View {
     protected $params;
     protected $full_path;
     protected $cache_key;
-    protected $cache;
 
     static public function Factory($path) {
         $view = new View($path);
@@ -24,7 +23,7 @@ class View {
     
     public function CacheOn($key, $block = "TEMP", $time = 90) {
         $this->cache_key = $key;
-        $this->cache = new HolyCacheOut($key, $time, $block);
+        $this->cache_component = new HolyCacheOut($key, $time, $block);
     }
 
     public function CacheOff() {

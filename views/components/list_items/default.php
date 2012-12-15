@@ -6,12 +6,6 @@ if (isset($result))
 
         <? preprint($result); ?>
 
-        <?
-
-        foreach ($result as $item) {
-            
-        };
-        ?>
 
     <? };
 ?>
