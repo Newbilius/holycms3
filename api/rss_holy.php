@@ -21,9 +21,9 @@ class SmallRSS {
      * @param string $link  <p>ссылка на сайт ленты</p>
      * @param string $descr  <p>описание ленты</p>
      */
-    function SmallRSS($title = "", $link = "", $descr = "") {
+    function SmallRSS($title = "", $link = "", $descr = "",$encode="utf-8") {
 
-        $this->data = '<?xml version="1.0" encoding="utf-8"?>' . $this->eof;
+        $this->data = '<?xml version="1.0" encoding="'.$encode.'"?>' . $this->eof;
         $this->data = $this->data . '<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">' . $this->eof;
 
         $this->data.='<channel>' . $this->eof;
