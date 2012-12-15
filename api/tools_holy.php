@@ -30,6 +30,8 @@ function FileFindRecursive($dir, $masks, &$tmp_array = array()) {
  */
 
 function FileDownloadCURL($url) {
+    $result = "";
+    if (function_exists("curl_init")){
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_FAILONERROR, 1);
@@ -41,7 +43,9 @@ function FileDownloadCURL($url) {
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     $result = curl_exec($ch);
     curl_close($ch);
-    return $result;
+};
+
+return $result;
 }
 
 /**
