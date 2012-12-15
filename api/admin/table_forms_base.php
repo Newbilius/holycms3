@@ -98,6 +98,14 @@ class HFormTable {
         $table = $values['table'];
         $filter = $values['filter'];
 
+                if (is_array($filter))
+        foreach ($filter as $_filt_id=>$_filter){
+            if (is_numeric($_filter)){
+                $filter[$_filt_id]=Array($_filt_id,"=",$_filter);
+            }else{
+                $filter[$_filt_id]=Array($_filt_id,"LIKE","%".$_filter."%");
+            };
+        };
 
         $this->folder_link = $values['folder_link'];
         $this->hide_group_action = $values['hide_group_action'];
