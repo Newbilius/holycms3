@@ -1,5 +1,5 @@
 <?
-if ($_count > 0) {
+if (count($result) > 0) {
     $cost_full=0;
     ?>
 <form method="post">

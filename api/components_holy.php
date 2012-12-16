@@ -6,6 +6,7 @@ class Component {
     protected $name;
     protected $cache;
     protected $errors;
+    protected $result_array = false;
 
     static public function Factory($path) {
         $base_component_path1 = FOLDER_ROOT . "/site/components/" . $path . ".php";
@@ -122,8 +123,17 @@ class Component {
         $validate = $this->ParamsValidate();
         if ($validate === true) {
             $view = View::Factory("components/" . $this->name . "/" . $this->params['template'])
-                    ->Set("params", $this->params)
-                    ->Set("result", $this->Action());
+                    ->Set("params", $this->params);
+
+            $result = $this->Action();
+
+            if ($this->result_array) {
+                foreach ($result as $result_index => $_result_item) {
+                    $view->Set($result_index, $_result_item);
+                }
+            } else {
+                $view->Set("result", $result);
+            }
             if ($this->PrepareCache()) {
                 $view->CacheOn($this->params['cache_key'], $this->params['table'], $this->params['cache_time']);
             };
