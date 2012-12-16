@@ -122,7 +122,6 @@ class Component {
     public function Execute() {
         $validate = $this->ParamsValidate();
         if ($validate===true) {
-            //echo "components/".$this->name."/".$this->params['template'];
             $view = View::Factory("components/".$this->name."/".$this->params['template'])->Set("params", $this->params);
             $view->Set("result", $this->Action());
             if ($this->PrepareCache()) {
