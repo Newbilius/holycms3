@@ -14,13 +14,13 @@ class View {
         return $view;
     }
 
-    public function IsExists(){
+    public function IsExists() {
         if ($this->full_path)
             return true;
         else
             return false;
     }
-    
+
     public function CacheOn($key, $block = "TEMP", $time = 90) {
         $this->cache_key = $key;
         $this->cache_component = new HolyCacheOut($key, $time, $block);
@@ -37,7 +37,9 @@ class View {
             $this->full_path = FOLDER_SITE . "views/" . $path . ".php";
         } elseif (file_exists(FOLDER_ENGINE . "views/" . $path . ".php")) {
             $this->full_path = FOLDER_ENGINE . "views/" . $path . ".php";
-        };
+        } else {
+            SystemAlert("не найдено отображение $path");
+        }
         $this->cache_key = null;
         return $this;
     }
@@ -55,21 +57,23 @@ class View {
     }
 
     public function Draw() {
-        if ($this->cache_key) {
-            $result = $this->cache_component->StartCacheOut();
-        } else {
-            $result = true;
-        };
-
-        if ($result) {
-            extract($this->params);
-            include_once($this->full_path);
-
+        if ($this->full_path) {
             if ($this->cache_key) {
-                $this->cache_component->EndCacheOut();
+                $result = $this->cache_component->StartCacheOut();
+            } else {
+                $result = true;
             };
 
-            return $this;
+            if ($result) {
+                extract($this->params);
+                include_once($this->full_path);
+
+                if ($this->cache_key) {
+                    $this->cache_component->EndCacheOut();
+                };
+
+                return $this;
+            };
         };
     }
 
