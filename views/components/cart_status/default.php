@@ -1,10 +1,10 @@
 <?
-if ($_count >0) {
+if ($result['count'] >0) {
     $cost_full=0;
     ?>
-    Товаров в корзине: <? echo $all_count;?>
+    Товаров в корзине: <? echo $result['count'];?>
     <br>
-    Сумма в корзине: <? echo $all_summ;?>
+    Сумма в корзине: <? echo $result['summ'];?>
     <br>
     <a href="<? echo $params['cart_url']?>">Перейти в корзину</a>
     <?
