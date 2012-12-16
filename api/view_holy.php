@@ -8,9 +8,10 @@ class View {
     protected $params;
     protected $full_path;
     protected $cache_key;
+    public $fatal_if_not_find;
 
-    static public function Factory($path) {
-        $view = new View($path);
+    static public function Factory($path,$fatal_if_not_find=true) {
+        $view = new View($path,$fatal_if_not_find);
         return $view;
     }
 
@@ -30,7 +31,7 @@ class View {
         $this->cache_key = null;
     }
 
-    public function View($path) {
+    public function View($path,$fatal_if_not_find=true) {
         $this->params = array();
         $this->full_path = "";
         if (file_exists(FOLDER_SITE . "views/" . $path . ".php")) {
@@ -38,6 +39,7 @@ class View {
         } elseif (file_exists(FOLDER_ENGINE . "views/" . $path . ".php")) {
             $this->full_path = FOLDER_ENGINE . "views/" . $path . ".php";
         } else {
+            if ($fatal_if_not_find)
             SystemAlert("не найдено отображение $path");
         }
         $this->cache_key = null;

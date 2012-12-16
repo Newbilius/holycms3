@@ -210,7 +210,7 @@ if (isset($_OPTIONS['TEMPLATE']))
 
 $page_text = str_replace('src="upload', 'src="/upload', $page_text);
     
-$view=View::Factory("templates/" . $template['name'] . "/index");
+$view=View::Factory("templates/" . $template['name'] . "/index",false);
 
 if ($view->IsExists()){
     $view->Set("CONTENT", $page_text);
