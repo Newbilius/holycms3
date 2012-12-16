@@ -1,5 +1,5 @@
 <?
-if (isset($result)) {
+if ($result['id']>0) {
     $tags = new HolyTags($params['table'], "tags", "/tags_filter/#tag#");
     ?>
 
@@ -65,13 +65,11 @@ if (count($result['other']>0))
     ?>
     Подобные товары:<?
     $result['other']=explode(";",$result['other']);
-    $other="id IN (0";
     
-    foreach ($result['other'] as $other_item)
-           $other.="," . $other_item;
+    $filter[]=Array("id","IN",$result['other']);
     
-    $other.=")";
-    $res->GetList($other);
+    $res = new DBlockElement($params['table']);
+    $res->GetList($filter);
     $other_items_list=$res->GetFullList();
     foreach ($other_items_list as $item2)
         {

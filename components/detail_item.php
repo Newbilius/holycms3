@@ -18,7 +18,7 @@ class Component_detail_item extends Component {
             "draw_paginator" => false,
             "add_to_bread" => false,
             "set_title" => false,
-            "add_to_bread_parent"=>false,
+            "add_to_bread_parent" => false,
         );
     }
 
@@ -51,32 +51,31 @@ class Component_detail_item extends Component {
         else
             $filter[] = Array("name", "=", $this->params['ID']);
 
-        $res->sql->debug=$this->params['debug'];
-        
+        $res->sql->debug = $this->params['debug'];
         $result = $res->GetOne($filter, $this->params['order']);
 
-        if ($this->params['add_to_bread_parent'])
-            if (isset($result['parent']))
-                if ($result['parent']) {
-                    $res2 = new DBlockElement($this->params['table']);
-                    $res2_data = $res2->GetOne("id=" . $result['parent']);
-                    if (isset($res2_data[$this->params['add_to_bread_parent']]))
-                        AddToBread($res2_data[$this->params['add_to_bread_parent']], $this->params['back_url'] . $res2_data['id']);
-                    $_OPTIONS['now_item_folder'] = $res2_data;
-                };
+        if (isset($result['id'])) {
+            if ($this->params['add_to_bread_parent'])
+                if (isset($result['parent']))
+                    if ($result['parent']) {
+                        $res2 = new DBlockElement($this->params['table']);
+                        $res2_data = $res2->GetOne("id=" . $result['parent']);
+                        if (isset($res2_data[$this->params['add_to_bread_parent']]))
+                            AddToBread($res2_data[$this->params['add_to_bread_parent']], $this->params['back_url'] . $res2_data['id']);
+                        $_OPTIONS['now_item_folder'] = $res2_data;
+                    };
 
-        if ($this->params['add_to_bread'])
-            AddToBread($result[$this->params['add_to_bread']]);
+            if ($this->params['add_to_bread'])
+                AddToBread($result[$this->params['add_to_bread']]);
 
-        if ($this->params['set_title'])
-            $_OPTIONS['page_title'] = $result[$this->params['set_title']];
+            if ($this->params['set_title'])
+                $_OPTIONS['page_title'] = $result[$this->params['set_title']];
 
-        SetMetatags($result);
+            SetMetatags($result);
 
-        //if (!isset($result['id']))
-          //  $result=array();
-        
-        return $result;
+            return $result;
+        };
+        return false;
     }
 
 }
