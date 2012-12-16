@@ -26,7 +26,7 @@ class Component {
 
     public function Component($name) {
         $this->params = $this->GetDefaults();
-        $this->name=$name;
+        $this->name = $name;
         $this->cache = false;
         return $this;
     }
@@ -101,16 +101,15 @@ class Component {
                     };
                 $this->params['cache_key'] = MD5($key);
             };
-        return true;
-            
+            return true;
         };
-        
+
         return false;
     }
 
     protected function PrintErrors() {
-        foreach ($this->errors as $_error){
-            echo "<b style='color:red;'>".$_error."</b><BR>";
+        foreach ($this->errors as $_error) {
+            echo "<b style='color:red;'>" . $_error . "</b><BR>";
         }
     }
 
@@ -121,9 +120,10 @@ class Component {
 
     public function Execute() {
         $validate = $this->ParamsValidate();
-        if ($validate===true) {
-            $view = View::Factory("components/".$this->name."/".$this->params['template'])->Set("params", $this->params);
-            $view->Set("result", $this->Action());
+        if ($validate === true) {
+            $view = View::Factory("components/" . $this->name . "/" . $this->params['template'])
+                    ->Set("params", $this->params)
+                    ->Set("result", $this->Action());
             if ($this->PrepareCache()) {
                 $view->CacheOn($this->params['cache_key'], $this->params['table'], $this->params['cache_time']);
             };
