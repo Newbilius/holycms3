@@ -9,6 +9,11 @@ class Component_auth_user_form extends Component {
         );
     }
 
+    protected function PrepareCache() {
+        $this->params['cache']=false;
+        return false;
+    }
+    
     protected function GetParamsValidators() {
         return array();
     }
