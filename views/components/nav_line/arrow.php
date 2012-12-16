@@ -6,6 +6,6 @@ foreach ($result as $i=>$gb)
 			{
 			?>&nbsp;»&nbsp;<?
 			};
-		if (isset($gb[1])){?><a href="<?=$gb[1]?>"><?};?><?=$gb[0]?><? if (isset($gb[1])){?></a><?};
+		if (isset($gb[1])){?><a href="<?=$gb[1]?>"><?};?><?=strip_tags($gb[0])?><? if (isset($gb[1])){?></a><?};
 	};
 ?>
