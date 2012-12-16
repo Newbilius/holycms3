@@ -36,14 +36,12 @@ class Component_cart_status extends Component {
 
         $array_for_filter[] = 0;
 
-        $filter = implode(",", $array_for_filter);
-
-        $filter = "id IN (" . $filter . ")" . $this->params['filter'];
-
+        $filter =Array(array("id","IN",$array_for_filter));
+        
         $res = new DBlockElement($this->params['table']);
 
         $res->sql->debug = $this->params['debug'];
-
+        
         $res->GetList($filter, $this->params['order']);
 
         $all_summ = 0;

@@ -1,9 +1,10 @@
 <?
-if (!defined('HCMS')) die();
+if (!defined('HCMS'))
+    die();
 
 $cnt = 0;
 
-foreach ($tags_list as $tag) {
+foreach ($result['list'] as $tag) {
     $cnt++;
     ?>
     <? if ($cnt != 1) { ?>,<? }; ?>
