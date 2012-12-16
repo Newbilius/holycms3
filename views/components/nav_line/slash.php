@@ -1,6 +1,6 @@
 <?
 if (!defined('HCMS')) die();
-foreach ($_global_bread as $i=>$gb)
+foreach ($result as $i=>$gb)
 	{
 		if ($i!=0)
 			{
