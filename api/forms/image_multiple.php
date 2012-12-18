@@ -168,7 +168,7 @@ class CForm_image_multiple extends CForm_Text {
                 </td>
                 <td class="start">{% if (!o.options.autoUpload) { %}
                     <button class="btn btn-primary">
-                        <i class="icon-upload icon-white"></i>
+                        
                         <span>Старт</span>
                     </button>
                     {% } %}</td>
@@ -178,7 +178,7 @@ class CForm_image_multiple extends CForm_Text {
                 <td class="cancel">{% if (!i) { %}
                     <button class="btn btn-warning">
                         <i class="icon-ban-circle icon-white"></i>
-                        <span>Отмена</span>
+                        <span></span>
                     </button>
                     {% } %}</td>
             </tr>
@@ -206,7 +206,7 @@ class CForm_image_multiple extends CForm_Text {
                 <td class="delete">
                     <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}"{% if (file.delete_with_credentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                             <i class="icon-trash icon-white"></i>
-                        <span>Удалить</span>
+                        <span></span>
                     </button>
                     <input type="checkbox" name="delete" value="1">
                 </td>
@@ -242,6 +242,8 @@ class CForm_image_multiple extends CForm_Text {
 
                 $('#<?= $file_id_name ?>').fileupload('option', {
                     url: '/engine/admin/ajax/json_upload.php',
+                    sequentialUploads:true,
+                    limitConcurrentUploads:1,
                     acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
                 });
         <? if ($data !== null) { ?>

@@ -111,7 +111,6 @@ if (isset($_photo_id))
                 </td>
                 <td class="start">{% if (!o.options.autoUpload) { %}
                     <button class="btn btn-primary">
-                        <i class="icon-upload icon-white"></i>
                         <span>Старт</span>
                     </button>
                     {% } %}</td>
@@ -121,7 +120,7 @@ if (isset($_photo_id))
                 <td class="cancel">{% if (!i) { %}
                     <button class="btn btn-warning">
                         <i class="icon-ban-circle icon-white"></i>
-                        <span>Отмена</span>
+                        <span></span>
                     </button>
                     {% } %}</td>
             </tr>
@@ -158,6 +157,8 @@ if (isset($_photo_id))
                 // Demo settings:
                 $('#multiple_foto').fileupload('option', {
                     url: '/engine/admin/ajax/json_upload_foto.php',
+                    sequentialUploads:true,
+                    limitConcurrentUploads:1,
                     acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
                 });
             });
