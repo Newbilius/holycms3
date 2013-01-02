@@ -224,7 +224,6 @@ class HolySQL {
         $this->counter = 0;
         global $holy_sql_cache;
         $this->current_index = $query;
-
         if (!isset($holy_sql_cache[$query])) {
             DebugADD("SQL запросов");
             DebugAddValue('команды', $query);
@@ -278,11 +277,18 @@ class HolySQL {
      * @return int
      */
     function GetCount() {
+        global $holy_sql_cache_count;
         if (isset($holy_sql_cache_count[$this->current_index]))
             return $holy_sql_cache_count[$this->current_index];
-        else
-        if ($this->res)
-            return mysql_num_rows($this->res);
+        else {
+            if ($this->res) {
+                return mysql_num_rows($this->res);
+            } else {
+                global $holy_sql_cache;
+                if (isset($holy_sql_cache[$this->current_index]))
+                    return count($holy_sql_cache[$this->current_index]);
+            }
+        };
     }
 
     /**
@@ -391,6 +397,7 @@ class HolySQL {
 
         $this->counter = 0;
         global $holy_sql_cache;
+        global $holy_sql_cache_count;
         $this->current_index = $query;
 
         if (!isset($holy_sql_cache[$query])) {
