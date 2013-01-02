@@ -1,1 +1,0 @@
-<? if (!defined('HCMS')) die(); ?>

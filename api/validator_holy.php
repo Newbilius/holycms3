@@ -27,8 +27,6 @@ class HolyValidator {
         if (isset($array[$key]))
             if ($array[$key]) {
                 $res0 = new DBlockElement($options['table']);
-                //todo нехорошооо
-                //$options['field']."='".mysql_real_escape_string($array[$key])."'"
                 $tmp = $res0->GetOne(Array($options['field'] => $array[$key]));
                 if (isset($tmp))
                     if (isset($tmp['id']))
@@ -72,8 +70,15 @@ class HolyValidator {
         else
             $ok = false;
 
-        if (!$ok)
-            $this->errors[] = "Не заполнено поле " . $this->field_names[$key];
+
+        if (!$ok) {
+            if (!isset($this->field_names[$key])){
+                $fname=$key;
+            }else{
+                $fname=$this->field_names[$key];
+            }
+            $this->errors[] = "Не заполнено поле " . $fname;
+        }
     }
 
     /**
@@ -107,6 +112,7 @@ class HolyValidator {
                 $this->$function_name($array, $rule['name'], $rule['options']);
             }
         }
+        return $this->Complete();
     }
 
     /**

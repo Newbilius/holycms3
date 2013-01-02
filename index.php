@@ -2,10 +2,10 @@
 require_once("engine.php");
 global $_global_bread;
 
-$redirect_admin_array=Array("adm","adm/","admin","admin/");
+$redirect_admin_array = Array("adm", "adm/", "admin", "admin/");
 
 if (isset($_GET['path']))
-    if (in_array($_GET['path'], $redirect_admin_array)){
+    if (in_array($_GET['path'], $redirect_admin_array)) {
         header('Location: /engine/admin/');
         exit;
     };
@@ -179,7 +179,6 @@ if (count($_global_bread) > 0) {
             if ($_global_bread[$i][1][0] != "/")
                 $_global_bread[$i][1] = "/" . $_global_bread[$i][1];
         $_global_bread[$i][1] = str_replace("//", "/", $_global_bread[$i][1]);
-
     };
 };
 //---------------------------------------
@@ -209,19 +208,24 @@ if (isset($_OPTIONS['TEMPLATE']))
     if ($_OPTIONS['TEMPLATE'])
         $template['name'] = $_OPTIONS['TEMPLATE'];
 
-if (file_exists(FOLDER_ROOT . "/site/templates/" . $template['name'] . "/header.php"))
-    include (FOLDER_ROOT . "/site/templates/" . $template['name'] . "/header.php");
-else
-    include (FOLDER_ROOT . "/engine/templates/" . $template['name'] . "/header.php");
-
 $page_text = str_replace('src="upload', 'src="/upload', $page_text);
-echo $page_text;
+    
+$view=View::Factory("templates/" . $template['name'] . "/index",false);
 
-if (file_exists(FOLDER_ROOT . "/site/templates/" . $template['name'] . "/footer.php"))
-    include (FOLDER_ROOT . "/site/templates/" . $template['name'] . "/footer.php");
-else
-    include (FOLDER_ROOT . "/engine/templates/" . $template['name'] . "/footer.php");
+if ($view->IsExists()){
+    $view->Set("CONTENT", $page_text);
+    $view->Set("_OPTIONS", $_OPTIONS);
+    $view->Draw();
+} else {
 
+    $view_header=View::Factory("templates/" . $template['name'] . "/header");
+    $view_header->Draw();
+
+    echo $page_text;
+
+    $view_footer=View::Factory("templates/" . $template['name'] . "/footer");
+    $view_footer->Draw();
+};
 
 
 $_DEBUG['Время генерации страницы'] = $GTIMER1->Stop();
