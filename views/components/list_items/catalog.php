@@ -39,3 +39,9 @@ if (isset($result))
         ?>
     <? };
 ?>
+
+<?
+if (isset($paginator)){
+    $paginator->Draw();
+}
+?>

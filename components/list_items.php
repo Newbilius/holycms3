@@ -11,8 +11,8 @@ class Component_list_items extends Component {
             "count" => "",
             "order" => "sort ASC",
             "page" => "1",
-            "paginator_template" => "",
-            "page_base_link" => "?page=",
+            "paginator_template" => "default",
+            "paginator_url" => "#PAGE#",
             "filter" => "1",
             "debug" => false,
             "draw_paginator" => false,
@@ -34,18 +34,27 @@ class Component_list_items extends Component {
         $res = new DBlockElement($this->params['table']);
 
         $res->sql->debug = $this->params['debug'];
-
         $res->GetList($this->params['filter'], $this->params['order']);
         $max_count_now = $res->GetCount();
+        if ($this->params['page']<1)
+            $this->params['page']=1;
         $res->GetList($this->params['filter'], $this->params['order'], $this->params['count'], $this->params['page']);        
         
         $result=$res->GetFullList();
 
-
-        /* if ($this->params['draw_paginator']) {
-          $res->SetPaginator($this->params['count'], $this->params['page']);
-          $res->DrawPaginator($this->params['paginator_template']);
-          }; */
+        if ($this->params['draw_paginator']) {
+           //получить полное число элементов
+           $res2 = new DBlockElement($this->params['table']);
+           $res2->GetList($this->params['filter']);
+           $max_count=$res2->GetCount();
+           //вызывать вьюшку с параметрами
+           $this->paginator=$view = View::Factory("paginator/".$this->params['paginator_template'])
+                    ->Set("count", $this->params['count'])
+                    ->Set("max_count", $max_count)
+                    ->Set("page", $this->params['page'])
+                    ->Set("url", $this->params['paginator_url'])
+                  ;
+          }; 
 
         return $result;
     }

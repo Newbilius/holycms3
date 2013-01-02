@@ -7,6 +7,7 @@ class Component {
     protected $cache;
     protected $errors;
     protected $result_array = false;
+    protected $paginator = false;
 
     static public function Factory($path) {
         $base_component_path1 = FOLDER_ROOT . "/site/components/" . $path . ".php";
@@ -96,10 +97,12 @@ class Component {
         if ($this->params['cache']) {
             if ($this->params['cache_key'] === null) {
                 $key = $this->name;
-                foreach ($this->params as $key_part)
+                foreach ($this->params as $key_key=>$key_part)
                     if (!is_array($key_part)) {
-                        $key.=$key_part . "_";
-                    };
+                        $key.=MD5($key_part) . "_";
+                    }else{
+                        $key.=MD5($key_key.serialize($key_part)) . "_";
+                    }
                 $this->params['cache_key'] = MD5($key);
             };
             return true;
@@ -127,6 +130,9 @@ class Component {
 
             $result = $this->Action();
 
+            if ($this->paginator)
+                $view->Set("paginator", $this->paginator);
+            
             if ($this->result_array) {
                 foreach ($result as $result_index => $_result_item) {
                     $view->Set($result_index, $_result_item);
@@ -135,7 +141,11 @@ class Component {
                 $view->Set("result", $result);
             }
             if ($this->PrepareCache()) {
-                $view->CacheOn($this->params['cache_key'], $this->params['table'], $this->params['cache_time']);
+                if (isset($this->params['table']))
+                    $cache_block=$this->params['table'];
+                else
+                    $cache_block="TEMP";
+                $view->CacheOn($this->params['cache_key'], $cache_block, $this->params['cache_time']);
             };
             $view->Draw();
         } else {

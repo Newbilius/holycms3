@@ -17,6 +17,7 @@ class Component_catalog20 extends Component {
             "debug" => false,
             "back_url" => "",
             "add_to_bread" => "",
+            "draw_paginator" => false,
         );
     }
 
@@ -93,7 +94,7 @@ class Component_catalog20 extends Component {
             Component::Factory("list_items")
                     ->SetParam("template", $this->params['items_template'])
                     ->SetParam("table", $this->params['table'])
-                    ->SetParam("draw_paginator", $this->params['table'])
+                    ->SetParam("draw_paginator", $this->params['draw_paginator'])
                     ->SetParam("url", $this->params['url'])
                     ->SetParam("count", $this->params['count'])
                     ->SetParam("paginator_template", $this->params['paginator_template'])
@@ -138,7 +139,7 @@ class Component_catalog20 extends Component {
                         ->SetParam("cache_time", $this->params['cache_time'])
                         ->SetParam("cache_key", $this->params['cache_key'])
                         ->SetParam("debug", $this->params['debug'])
-                        ->SetParam("filter", Array("folder","=",0))
+                        ->SetParam("filter", Array("folder", "=", 0))
                         ->Execute();
             };
         }
