@@ -87,7 +87,14 @@ class CForm_file_multiple extends CForm_Text {
     function HTML($name, $data = null) {
         $file_id_name = "fileupload_" . $name
         ?>
-        <? $_data_tmp = explode(";", $data[$name]); ?>
+        <? $_data_tmp = explode(";", $data[$name]); 
+        foreach ($_data_tmp as $i=>$__data_tmp){
+            if (!$__data_tmp)
+                unset($_data_tmp[$i]);
+        }
+        if (count($_data_tmp)==0)
+            $data = null;
+        ?>
         <textarea style="display: none;width:100%;height:200px;" id="<?= $name ?>" name=<?= $name ?>><? echo $data[$name] ?></textarea>
 
         <!-- The file upload form used as target for the file upload widget -->
@@ -129,6 +136,9 @@ class CForm_file_multiple extends CForm_Text {
             <div class="fileupload-loading"></div>
             <!-- The table listing the files available for upload/download -->
             <table role="presentation" class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
+        </div>
+        <div id="loader_image_ajax" style="display:none">
+            <img src="/engine/admin/img/ajax_loader_mini2x.gif">
         </div>
         <!-- The template to display files available for upload -->
         <script id="template-upload" type="text/x-tmpl">
@@ -219,6 +229,7 @@ class CForm_file_multiple extends CForm_Text {
                 });
         <? if ($data !== null) { ?>
                     // Load existing files:
+                    $("#loader_image_ajax").show();
                     $.ajax({
                         url: "/engine/admin/ajax/json_uploader_info_file.php?dblock=<? echo $this->GetBlock(); ?>&id=<?= $data['id'] ?>&field=<?= $name ?>",
                         dataType: 'json',

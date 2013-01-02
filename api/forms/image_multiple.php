@@ -88,7 +88,14 @@ class CForm_image_multiple extends CForm_Text {
     function HTML($name, $data = null) {
         $file_id_name = "fileupload_" . $name
         ?>
-        <? $_data_tmp = explode(";", $data[$name]); ?>
+        <? $_data_tmp = explode(";", $data[$name]); 
+        foreach ($_data_tmp as $i=>$__data_tmp){
+            if (!$__data_tmp)
+                unset($_data_tmp[$i]);
+        }
+        if (count($_data_tmp)==0)
+            $data = null;
+        ?>
         <textarea style="display: none;width:100%;height:200px;" id="<?= $name ?>" name=<?= $name ?>><? echo $data[$name] ?></textarea>
 
         <!-- The file upload form used as target for the file upload widget -->
@@ -153,6 +160,10 @@ class CForm_image_multiple extends CForm_Text {
                 </a>
             </div>
         </div>
+        <div id="loader_image_ajax" style="display:none">
+            <img src="/engine/admin/img/ajax_loader_mini2x.gif">
+        </div>
+            
         <!-- The template to display files available for upload -->
         <script id="template-upload" type="text/x-tmpl">
             {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -248,6 +259,7 @@ class CForm_image_multiple extends CForm_Text {
                 });
         <? if ($data !== null) { ?>
                     // Load existing files:
+                    $("#loader_image_ajax").show();
                     $.ajax({
                         url: "/engine/admin/ajax/json_uploader_info.php?dblock=<? echo $this->GetBlock(); ?>&id=<?= $data['id'] ?>&field=<?= $name ?>",
                         dataType: 'json',
@@ -257,6 +269,7 @@ class CForm_image_multiple extends CForm_Text {
                             $(this).fileupload('option', 'done')
                             .call(this, null, {result: result});
                         }
+                        $("#loader_image_ajax").hide();
                     });
         <? }; ?>
 
@@ -272,9 +285,6 @@ class CForm_image_multiple extends CForm_Text {
 
     function Edit($name, $data, $add, $multiple = false) {
         ?>
-        <? /*
-         * <input name=<?= $name ?><? if ($multiple) { ?>[]<? }; ?> value="<?= htmlspecialchars($data[$name]) ?>" style="width:100%">
-         */ ?>
         <? $this->HTML($name, $data); ?>
         <?
     }
