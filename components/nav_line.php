@@ -7,7 +7,7 @@ class Component_nav_line extends Component {
             "template" => "default",
             "cache" => false,
             "cache_time" => 90,
-            "cache_key" => $_SERVER['REQUEST_URI'],
+            "cache_key" => MD5($_SERVER['REQUEST_URI']),
         );
     }
 
