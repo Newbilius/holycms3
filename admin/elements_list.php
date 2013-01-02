@@ -247,8 +247,8 @@ SystemAlertFatal("Недостаточно прав.");
         
         $add_link="element_add.php?dblock=".$_GET['dblock']."&parent=".$_GET['parent'].$force_filter;
         $add_link2="folder_add.php?parent=".$_GET['parent']."&dblock=".$_GET['dblock'].$force_filter;
-        $delete_link="?dblock=".$_GET['dblock']."&delete=#ID#".$force_filter;
-        $edit_link="element_edit.php?dblock=".$_GET['dblock']."&id=#ID#&parent=".$_GET['parent'].$force_filter;
+        $delete_link="?parent=#PARENT#&dblock=".$_GET['dblock']."&delete=#ID#".$force_filter;
+        $edit_link="element_edit.php?dblock=".$_GET['dblock']."&parent=#PARENT#&id=#ID#".$force_filter;
         
         $can_delete=true;
         $can_add=true;

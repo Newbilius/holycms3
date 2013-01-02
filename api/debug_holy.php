@@ -80,7 +80,11 @@ function AddToJournal($data) {
     
     
     $data['data_after']=base64_encode($data['data_after']);
+    if (isset($data['data_before'])){
     $data['data_before']=base64_encode($data['data_before']);
+    }else{
+        $data['data_before']="";
+    }
     $element = new DBlockElement('journal');
     $element->Add($data);
 }

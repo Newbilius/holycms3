@@ -175,7 +175,16 @@ class DBlockElement extends DBaseClass {
             $insert_values['name'] = $values['name'];
         if (isset($values['caption']))
             $insert_values['caption'] = $values['caption'];
-
+        if (!isset($insert_values['parent'])) {
+            $insert_values['parent'] = 0;
+        }
+        $insert_values['parent'] = intval($values['parent']);
+        
+        if ($insert_values['parent'] < 0) {
+            $insert_values['parent'] = 0;
+        }
+        
+        
         if (is_numeric($ID)) {
             $this->sql->Update(Array("id" => intval($ID)), $insert_values);
         } else {
