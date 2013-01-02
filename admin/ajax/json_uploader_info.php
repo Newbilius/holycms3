@@ -8,7 +8,7 @@ if ($H_USER->GetID()) {
     $element = $src->GetByID($_GET['id']);
     $images = explode(";", $element[$_GET['field']]);
     $images_array = array();
-    foreach ($images as $_image)
+    foreach ($images as $_image) {
         if (file_exists(FOLDER_ROOT . $_image))
             if ($_image) { {
                     $tmp_name = explode("/", $_image);
@@ -23,6 +23,22 @@ if ($H_USER->GetID()) {
                     $images_array[] = $new_image;
                 }
             }
+        if (file_exists(FOLDER_ROOT ."/upload/". $_image))
+            if ($_image) { {
+                $_image="/upload/". $_image;
+                    $tmp_name = explode("/", $_image);
+                    $new_image['delete_url'] = "/engine/admin/ajax/json_delete.php?delete_path=" . $_image;
+                    $new_image['name'] = end($tmp_name);
+                    $new_image['size'] = filesize(FOLDER_ROOT . $_image);
+                    $new_image['url'] = $_image;
+                    $resize_img = new HolyImg(FOLDER_ROOT . $_image);
+                    $resize_img->Resize(Array("width" => 80, "height" => 80));
+                    $new_image['thumbnail_url'] = $resize_img->GetURL(true);
+                    $new_image['delete_type'] = "GET";
+                    $images_array[] = $new_image;
+                }
+            }
+    }
     header('Vary: Accept');
     header('Content-type: application/json');
     echo json_encode($images_array);
