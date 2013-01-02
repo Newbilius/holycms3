@@ -139,7 +139,7 @@ class Component_catalog20 extends Component {
                         ->SetParam("cache_time", $this->params['cache_time'])
                         ->SetParam("cache_key", $this->params['cache_key'])
                         ->SetParam("debug", $this->params['debug'])
-                        ->SetParam("filter", Array("folder", "=", 0))
+                        ->SetParam("filter", Array(Array("folder", "=", 0)))
                         ->Execute();
             };
         }
