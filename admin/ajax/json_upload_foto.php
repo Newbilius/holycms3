@@ -2,12 +2,14 @@
 
 require_once(realpath(str_replace("\\","/",dirname(dirname(dirname(__FILE__)))."/engine.php")));
 global $H_USER;
+global $photo_album_config;
+
 $user_info_holy = $H_USER->GetInfo();
 if ($H_USER->GetID()) {
     $tmp_file = $_POST['json_json_multiple_foto'][0];
 
     if ($tmp_file['error'] == 0) {
-        $el = new DBlockElement($_photo_id);
+        $el = new DBlockElement($photo_album_config['id']);
         $el->Add(Array(
             "foto" => $tmp_file,
             "name" => MD5($tmp_file['name'] . time()),

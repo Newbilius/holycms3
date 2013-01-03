@@ -177,8 +177,8 @@ SystemAlertFatal("Недостаточно прав.");
 			if (is_array($_POST['id']))
 			foreach ($_POST['id'] as $fid)
                         {
-                            $gr->Delete($fid);
                             $_del_tmp=$gr->GetByID($fid);
+                            $gr->Delete($fid);
                             JournalDelete(Array(
 				"block_name"=>$_GET['dblock'],
 				"item_id"=>$fid,

@@ -1,7 +1,8 @@
 <?
 global $_global_bread;
-global $_photo_id;
-global $_folder_selector;
+global $photo_album_config;
+$_photo_id=$photo_album_config['id'];
+$_folder_selector=$photo_album_config['folder_selector'];
 if (isset($_photo_id))
     if ($_photo_id) {
         ?>

@@ -1,4 +1,44 @@
 <?php
+/**
+ * Подключает аддон.
+ * 
+ * @param string $name <p>Имя аддона.</p>
+ */
+function IncludeAddon($name) {
+    global $_MODULES_LIST;
+    $_MODULES_LIST[] = $name;
+    IncludeAddonFile($name."/config.php");
+}
+
+/**
+ * Подключает файл из одного из аддонов.
+ * 
+ * @param string $file <p>адрес файла, включая имя аддона</p>
+ */
+function IncludeAddonFile($file) {  
+    if (file_exists(FOLDER_ADDONS_SITE . $file)) {
+        include_once (FOLDER_ADDONS_SITE . $file);
+        return true;
+    } elseif (file_exists(FOLDER_ADDONS_ENGINE . $file)) {
+        include_once (FOLDER_ADDONS_ENGINE . $file);
+        return true;
+    };
+    return false;
+}
+
+/**
+ * Подклюает файл из всех аддонов.
+ * 
+ * @param string $file <p>адрес файла, включая имя аддона</p>
+ */
+function IncludeFromAddonsFile($file) {
+    global $_MODULES_LIST;
+    foreach ($_MODULES_LIST as $_module) {
+        if (IncludeAddonFile($_module . "/" . $file))
+            return true;
+    };
+    return false;
+}
 
 /**
  * Рекурсивный поиск файлов по маске в директории. Возвращает массив найденных файлов.

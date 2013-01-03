@@ -1,8 +1,6 @@
 <?php
 include_once("_base_menu.php");
 require_once(dirname(dirname(__FILE__)) . "/site/config.php");
-if (file_exists(dirname(dirname(__FILE__)) . "/site/options.php"))
-    require_once(dirname(dirname(__FILE__)) . "/site/options.php");
 
 $_holy_vers = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/engine/VERSION");
 
@@ -25,6 +23,8 @@ define("URI_IMAGE", "/upload/pics/");
 define("FOLDER_FILES", $_SERVER["DOCUMENT_ROOT"] . "/upload/files/");
 define("URI_FILES", "/upload/files/");
 define("FOLDER_SITE", $_SERVER["DOCUMENT_ROOT"] . "/site/");
+define("FOLDER_ADDONS_SITE", $_SERVER["DOCUMENT_ROOT"] . "/site/addons/");
+define("FOLDER_ADDONS_ENGINE", $_SERVER["DOCUMENT_ROOT"] . "/engine/addons/");
 define("FOLDER_ADMIN", $_SERVER["DOCUMENT_ROOT"] . "/engine/admin/");
 define("URI_ADMIN", "/engine/admin/");
 define("URI_ENGINE", "/engine/");
@@ -60,6 +60,10 @@ if (isset($_CONFIG['LOGIN'])) {
 };
 
 require_once("api/holy_api.php");
+
+if (file_exists(dirname(dirname(__FILE__)) . "/site/options.php"))
+    require_once(dirname(dirname(__FILE__)) . "/site/options.php");
+
 POSTPreWork();
 
 $H_USER = new DUser(1);
