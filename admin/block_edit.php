@@ -27,6 +27,7 @@ $_global_bread[]=Array($tmp['caption'],"/engine/admin/block_edit.php?group=".$_G
 	$form->Add(Array("name"=>"sort","caption"=>"Сортировка","type"=>"sort",'required'=>false));
 	$form->Add(Array("name"=>"bgroup","caption"=>"Группа","type"=>"list","add_values"=>"system_data_block_group;id;caption",'required'=>true));
         $form->Add(Array("name"=>"childs","caption"=>"Связанные блоки<br>(название_блока;<br>поле_родителя;<br>поле_подчиненного/<br>название_блока;...)","type"=>"wysiwyg_text",'required'=>false));
+		$form->Add(Array("name"=>"bind_cache","caption"=>"Чистить<br>следующие<br>блоки при<br>очистки кэша<br>(через ';')","type"=>"wysiwyg_text",'required'=>false));
 $form->Add(Array("name"=>"fav","caption"=>"Избранный","type"=>"checkbox",'required'=>false));
 $form->Add(Array("name"=>"hide_folders","caption"=>"Скрыть папки","type"=>"checkbox",'required'=>false));
 $form->Add(Array("name"=>"hide_folders2","caption"=>"Скрыть папки 2го уровня","type"=>"checkbox",'required'=>false));
@@ -54,6 +55,7 @@ $form->Add(Array("name"=>"hide_code","caption"=>"Скрыть код","type"=>"c
 				"hide_folders2"=>$_POST["hide_folders2"],
 				"hide_code"=>$_POST["hide_code"],
                                 "childs"=>$_POST["childs"],
+								"bind_cache"=>$_POST["bind_cache"],
 			));
 			$form->Reload();
 			?>

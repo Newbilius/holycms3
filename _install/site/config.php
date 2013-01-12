@@ -1,9 +1,9 @@
 <?php
 define('HCMS',"HCMS");
-/*
 $_CONFIG["SERVER"]="localhost";
 $_CONFIG["LOGIN"]="root";
 $_CONFIG["PASS"]="";
-$_CONFIG["BASE"]="install_test";
-*/
+$_CONFIG["BASE"]="demo_empty";
+//$_CONFIG['CACHE_SYSTEM']=false;
+//$_CONFIG['CACHE_MODE']="files";
 ?>
