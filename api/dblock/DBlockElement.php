@@ -9,7 +9,52 @@ class DBlockElement extends DBaseClass {
     public $typesb;
     public $table;
     public $datab;
+    public $table_name;
 
+    /**
+     * @param string/array <p>таблица (код!) или массив,в котором есть ключ ['table']</p>
+     * @return DBlockElement
+     */
+    function Delete($id) {
+        $_func_name1="DBlockBeforeDelete_".$this->table_name;
+        $_func_name2="DBlockBeforeDelete";
+        $_func_name3="DBlockAfterDelete_".$this->table_name;
+        $_func_name4="DBlockAfterDelete";
+
+        $_before_data=NULL;
+        
+        if ((function_exists($_func_name1)) ||
+                (function_exists($_func_name2)) ||
+                (function_exists($_func_name3)) ||
+                (function_exists($_func_name4))){
+            $_before_data = GetElement($this->table_name);
+        }
+        
+        
+        if (function_exists($_func_name1)) {
+            $_before_data = $_func_name1($_before_data);
+        };
+        if (function_exists($_func_name2)) {
+            if ($_before_data !== NULL) {
+                $_before_data = $_func_name2($_before_data);
+            };
+        };
+        
+        if ($_before_data!==NULL)
+            parent::Delete($id);
+        
+        if (function_exists($_func_name3)) {
+            if ($_before_data !== NULL) {
+                $_before_data = $_func_name1($_before_data);
+            };
+        };
+        if (function_exists($_func_name4)) {
+            if ($_before_data !== NULL) {
+                $_before_data = $_func_name2($_before_data);
+            };
+        };
+    }    
+    
     /**
      * @param string/array <p>таблица (код!) или массив,в котором есть ключ ['table']</p>
      * @return DBlockElement
@@ -64,6 +109,29 @@ class DBlockElement extends DBaseClass {
      */
     function Update($ID, $values, $not_only_selected = true) {
         $insert_values = Array();
+        $_func_name1="DBlockBeforeUpdate_".$this->table_name;
+        $_func_name2="DBlockBeforeUpdate";
+        $_func_name3="DBlockAfterUpdate_".$this->table_name;
+        $_func_name4="DBlockAfterUpdate";
+        
+        $_before_data=NULL;
+        
+        if ((function_exists($_func_name1)) ||
+                (function_exists($_func_name2)) ||
+                (function_exists($_func_name3)) ||
+                (function_exists($_func_name4))){
+            $_before_data = GetElement($this->table_name, $ID);
+        }
+        
+        if (function_exists($_func_name1)) {
+            $values = $_func_name1($_before_data, $values);
+        };
+        if (function_exists($_func_name2)) {
+            if ($values !== NULL) {
+                $values = $_func_name2($_before_data, $values);
+            };
+        };
+        if ($values !== NULL){
         //пройтись по полям
         $this->fieldsb->GetListByBlock($this->table);
         while ($field = $this->fieldsb->GetNext())
@@ -175,23 +243,24 @@ class DBlockElement extends DBaseClass {
             $insert_values['name'] = $values['name'];
         if (isset($values['caption']))
             $insert_values['caption'] = $values['caption'];
-        if (!isset($insert_values['parent'])) {
-            $insert_values['parent'] = 0;
-        }
-        $insert_values['parent'] = intval($values['parent']);
         
-        if ($insert_values['parent'] < 0) {
-            $insert_values['parent'] = 0;
-        }
+        if ($insert_values !== NULL) {
+            if (is_numeric($ID)) {
+                $this->sql->Update(Array("id" => intval($ID)), $insert_values);
+            } else {
+                $this->sql->Update(Array("name" => $ID), $insert_values);
+            }
+        };
         
-        
-        if (is_numeric($ID)) {
-            $this->sql->Update(Array("id" => intval($ID)), $insert_values);
-        } else {
-            $this->sql->Update(Array("name" => $ID), $insert_values);
-        }
+        if (function_exists($_func_name3)) {
+                $insert_values = $_func_name3($_before_data, $insert_values);
+            };
+        if (function_exists($_func_name4)) {
+                $insert_values = $_func_name4($_before_data, $insert_values);
+        };
 
         $this->fieldsb->GetListByBlock($this->table);
+        };
     }
 
     /**
@@ -216,6 +285,22 @@ class DBlockElement extends DBaseClass {
      * @param array $values <p>массив значений</p>
      */
     function Add($values) {
+        $_func_name1="DBlockBeforeAdd_".$this->table_name;
+        $_func_name2="DBlockBeforeAdd";
+        $_func_name3="DBlockAfterAdd_".$this->table_name;
+        $_func_name4="DBlockAfterAdd";
+
+        $_before_data=NULL;
+        
+        if (function_exists($_func_name1)) {
+            $values = $_func_name1($values);
+        };
+        if (function_exists($_func_name2)) {
+            if ($values !== NULL) {
+                $values = $_func_name2($values);
+            };
+        };
+        if ($values !== NULL){
         $insert_values = Array();
         //пройтись по полям
         //PrePrint($values);
@@ -311,8 +396,26 @@ class DBlockElement extends DBaseClass {
         $insert_values['name'] = $values['name'];
         $insert_values['caption'] = $values['caption'];
 
-        $this->sql->Insert($insert_values);
+        if ($insert_values['parent'] < 0) {
+            $insert_values['parent'] = 0;
+        }
+        
+        if ($values !== NULL)
+            $this->sql->Insert($insert_values);
+        
+        if (function_exists($_func_name3)) {
+            if ($values !== NULL) {
+                $values = $_func_name3($insert_values);
+            };
+        };
+        if (function_exists($_func_name4)) {
+            if ($values !== NULL) {
+                $values = $_func_name4($insert_values);
+            };
+        };
+        
         $this->fieldsb->GetListByBlock($this->table);
+        };
     }
 
 }

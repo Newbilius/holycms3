@@ -1,5 +1,17 @@
 <?php
 /**
+ * Возвращает массив с элементом из выбранного блока данных.
+ * 
+ * @param type имя блока
+ * @param type ID/name элемента
+ * 
+ * @return array
+ */
+function GetElement($table_name,$id){
+    $table=new DBlockElement($table_name);
+    return $table->GetByID($id);
+}
+/**
  * Подключает аддон.
  * 
  * @param string $name <p>Имя аддона.</p>

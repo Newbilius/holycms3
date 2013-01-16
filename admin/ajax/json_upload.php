@@ -30,7 +30,7 @@ if ($H_USER->GetID()) {
         $file_name = URI_IMAGE . $fold1 . "/" . $fold2 . "/" . $file_name;
 
         move_uploaded_file($tmp_name, FOLDER_ROOT . $file_name);
-        chmod(FOLDER_ROOT . $file_name, 644);
+        chmod(FOLDER_ROOT . $file_name, 0777);
         
         $full_name = FOLDER_ROOT . $file_name;
 
