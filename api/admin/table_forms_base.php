@@ -144,9 +144,9 @@ class HFormTable {
     }
 
     function DrawTableHeader() {
-        $this->folder_icon = '<img src=img/folder.png align=left style="padding-right:4px;">';
-        $this->edit_icon = '<img src=img/edit.png align=left >';
-        $this->delete_icon = '<img src=img/delete.png align=left >';
+        $this->folder_icon = '<img style="max-width:16px;" width=16 height=14 src=img/folder.png align=left style="padding-right:4px;">';
+        $this->edit_icon = '<img style="max-width:16px;" width=16 height=16 src=img/edit.png align=left >';
+        $this->delete_icon = '<img style="max-width:16px;" width=16 height=16 src=img/delete.png align=left >';
 
         $this->add_icon = '<img src=img/add.png align=left>';
         $this->add_folder_icon = '<img src=img/add_folder.png align=left>';
