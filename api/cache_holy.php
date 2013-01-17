@@ -1,5 +1,66 @@
 <?
 
+class HolyCache_memcached {
+
+    var $sql;
+    var $key;
+    var $time;
+    var $temp_data;
+    var $out_data;
+    var $module;
+    var $mem_obj;
+
+    function HolyCache_memcached($key, $time, $module) {
+        $this->key = $key . "_" . $module;
+        $this->module = $module;
+        $this->time = $time;
+
+        global $_CONFIG;
+        $this->mem_obj = new Memcache;
+        $this->mem_obj->connect($_CONFIG['CACHE_SYSTEM_HOST'], $_CONFIG['CACHE_SYSTEM_PORT']);
+    }
+
+    protected function TestCache($key = "") {
+        if ($key != "") {
+            $this->out_data = $this->mem_obj->get($this->key);
+            if ($this->out_data !== false)
+                return true;
+        }
+        return false;
+    }
+
+    function StartCacheOut() {
+        $create_cache = true;
+
+        if ($this->TestCache($this->key)) {
+            $create_cache = false;
+            echo $this->out_data;
+        };
+
+        if ($create_cache) {
+            ob_start();
+            return true;
+        };
+        return false;
+    }
+
+    function EndCacheOut() {
+        $this->temp_data = ob_get_contents();
+        ob_end_clean();
+        echo $this->temp_data;
+        $this->mem_obj->set($this->key, $this->temp_data, 0, $this->time);
+    }
+
+    function ClearFull() {
+        $this->mem_obj->flush();
+    }
+
+    function Clear() {
+        $this->mem_obj->delete($this->key);
+    }
+
+}
+
 class HolyCache_files {
 
     var $sql;
