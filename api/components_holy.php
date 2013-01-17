@@ -122,32 +122,45 @@ class Component {
         return true;
     }
 
+    protected function Execute_inner($view) {
+        $result = $this->Action();
+
+        if ($this->paginator)
+            $view->Set("paginator", $this->paginator);
+
+        if ($this->result_array) {
+            foreach ($result as $result_index => $_result_item) {
+                $view->Set($result_index, $_result_item);
+            }
+        } else {
+            $view->Set("result", $result);
+        }
+        return $view;
+    }
+    
     public function Execute() {
         $validate = $this->ParamsValidate();
         if ($validate === true) {
             $view = View::Factory("components/" . $this->name . "/" . $this->params['template'])
                     ->Set("params", $this->params);
 
-            $result = $this->Action();
 
-            if ($this->paginator)
-                $view->Set("paginator", $this->paginator);
-            
-            if ($this->result_array) {
-                foreach ($result as $result_index => $_result_item) {
-                    $view->Set($result_index, $_result_item);
-                }
-            } else {
-                $view->Set("result", $result);
-            }
             if ($this->PrepareCache()) {
                 if (isset($this->params['table']))
                     $cache_block=$this->params['table'];
                 else
                     $cache_block="TEMP";
-                $view->CacheOn($this->params['cache_key'], $cache_block, $this->params['cache_time']);
-            };
-            $view->Draw();
+                $cache_component = new HolyCacheOut($this->params['cache_key'], $this->params['cache_time'], $cache_block);
+                if ($cache_component->StartCacheOut()){
+                    $view=$this->Execute_inner($view);
+                    $view->Draw();
+                    $cache_component->EndCacheOut();
+                }
+                
+            }else{
+                $view=$this->Execute_inner($view);
+                $view->Draw();
+            }
         } else {
             $this->PrintErrors();
         }
