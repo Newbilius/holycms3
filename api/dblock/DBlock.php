@@ -1,5 +1,8 @@
 <?php
 
+//кэши для того, что бы постоянно не дергать одно и то же
+//в пределах однного скрипта
+$_full_blocks_array=array();
 /**
  * Класс для работы с блоками данных/
  */
@@ -11,10 +14,34 @@ class DBlock extends DBaseClass {
      * Конструктор
      */
 
+    function GetIDByName($name) {
+        $dat = $this->GetByID($name);
+        if (!isset($dat['id']))
+            $dat['id'] = false;
+        return $dat['id'];
+    }
+    
+    function GetByID($id = 0, $sort = "sort ASC") {
+        global $_full_blocks_array;
+        if (isset($_full_blocks_array[$id]))
+            return $_full_blocks_array[$id];
+        else
+            parent::GetByID ($id,$sort);
+    }
+    
     function DBlock() {
+        global $_full_blocks_array;
         $this->sql = new HolySQL("system_data_block");
         $this->sql2 = new HolySQL("system_data_block");
         $this->group = new DBlockGroup();
+        
+        if (count($_full_blocks_array)==0){
+            $this->sql->Select();
+            while ($_tmp_block=$this->sql->GetNext()){
+                $_full_blocks_array[$_tmp_block['id']]=$_tmp_block;
+                $_full_blocks_array[$_tmp_block['name']]=$_tmp_block;
+            }
+        }
     }
 
     /**
@@ -122,6 +149,8 @@ class DBlock extends DBaseClass {
     function Delete($name) {
         $this->sql->Query("DROP TABLE " . $name . "");
         $this->sql->Delete("name='" . $name . "'");
+        global $_full_blocks_array;
+        unset($_full_blocks_array);
     }
 
     /**
@@ -151,6 +180,8 @@ class DBlock extends DBaseClass {
         } else {
             $this->sql->Update(Array("name" => $id), $values);
         }
+        global $_full_blocks_array;
+        unset($_full_blocks_array);
     }
 
 }
