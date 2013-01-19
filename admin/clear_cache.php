@@ -19,7 +19,7 @@ if (isset($_POST['form_go'])) {
     if (isset($_POST['clear_tmp'])) {
         $ok[] = "Временные файлы удалены";
         $tmp_folder = FOLDER_UPLOAD . "tmp/";
-        if (file_exists($cache_img_folder)) {
+        if (file_exists($tmp_folder)) {
             DeleteDir($tmp_folder);
             mkdir($tmp_folder);
         };

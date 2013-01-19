@@ -28,6 +28,8 @@ class DBlockElement extends DBaseClass {
                 (function_exists($_func_name3)) ||
                 (function_exists($_func_name4))){
             $_before_data = GetElement($this->table_name);
+        }else{
+            $_before_data ="DONT_NEED";
         }
         
         

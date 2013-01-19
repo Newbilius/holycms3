@@ -132,7 +132,7 @@ class Component_cart20 extends Component {
 
         //@fix нехорошо
         if (isset($_REQUEST['complete']))
-            echo "<BR>Заказ успешно отправлен!";
+            echo "<BR><b>Заказ успешно отправлен!</b>";
         return true;
     }
 

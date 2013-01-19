@@ -12,7 +12,7 @@ class CForm_pass extends CForm_Text{
 		{
 		}
 
-	function Add($name,$data,$add,$multiple=false)
+	function Add($name,$add,$multiple=false)
 		{
 		?>
 			<input type=password name=<?=$name?><?if ($multiple){?>[]<?};?> value="" style="width:100%">

@@ -183,12 +183,19 @@ class DUser extends DBlock {
             };
             //получаем информацию о группе      
             $users_groups_rs = new DBlockElement("system_user_groups");
+            if (!isset($dat['group']))
+            {
+                $this->read=array();
+                $this->add=array();
+                $this->edit=array();
+                $this->delete=array();
+            }else{
             $users_groups = $users_groups_rs->GetOne("id=" . $dat['group']);
-
             $this->read = explode(";", $users_groups['read']);
             $this->add = explode(";", $users_groups['add']);
             $this->edit = explode(";", $users_groups['edit']);
             $this->delete = explode(";", $users_groups['delete']);
+            };
             $this->uid = $pass;
         };
 
@@ -220,7 +227,6 @@ class DUser extends DBlock {
      */
     function Update($data, $id = 0) {
         $tmp = new DBlockElement($this->table);
-        $tmp->sql->debug = true;
         if ($id == 0) {
             $tmp->Update($this->ID, $data, false);
         } else {

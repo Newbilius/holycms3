@@ -16,7 +16,6 @@ class Component_catalog20 extends Component {
             "cart_url" => "",
             "debug" => false,
             "back_url" => "",
-            "add_to_bread" => "",
             "draw_paginator" => false,
         );
     }
@@ -130,7 +129,6 @@ class Component_catalog20 extends Component {
                 Component::Factory("detail_item")
                         ->SetParam("template", $this->params['detail_template'])
                         ->SetParam("table", $this->params['table'])
-                        ->SetParam("add_to_bread", $this->params['add_to_bread'])
                         ->SetParam("back_url", $this->params['back_url'])
                         ->SetParam("set_title", $this->params['set_title'])
                         ->SetParam("ID", $human_link[0])
