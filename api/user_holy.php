@@ -3,6 +3,7 @@
 /**
  * Класс для работы с пользователями сайта и администраторами
  */
+//@fix чтение через sql, запись через блоки - не дело. привести к общему знаменателю
 class DUser extends DBlock {
 
     var $ID;
@@ -139,6 +140,58 @@ class DUser extends DBlock {
         return $this->inform;
     }
 
+    function GetUser($where){
+        $data = $this->sql->SelectOne($where);
+        if (!isset($data['id']))
+            $data=null;
+        return $data;
+    }
+    
+    function AuthByID($id) {
+        $dat = $this->sql->SelectOnce(Array(Array("id", "=", $id)));
+        if (isset($dat['id'])) {
+            $this->ID = $dat['id'];
+            $set_uid = true;
+            //@todo убрать дублирование кода
+            if ($this->ID != 0) {
+                if ($set_uid) {
+                    $pass = MD5(uniqid(time(), true) . time());
+                    //@todo под вопросом
+                    $user=$dat['email'];
+                    $uid_list = explode(";", $dat['uid']);
+                    $uid_list[] = $pass;
+                    if (count($uid_list) > 5)
+                        unset($uid_list[0]);
+                    $save_uid = implode(";", $uid_list);
+                    setcookie($this->cookie_prefix . '_login', $user, time() + 90000, "/");
+                    setcookie($this->cookie_prefix . '_pass', $pass, time() + 90000, "/");
+                    $_COOIKE[$this->cookie_prefix . '_login'] = $user;
+                    $_COOIKE[$this->cookie_prefix . '_pass'] = $pass;
+                    $this->sql->Update("id=" . $this->ID, Array(
+                        "uid" => $save_uid
+                    ));
+                    $this->inform['uid'] = $save_uid;
+                };
+                //получаем информацию о группе      
+                $users_groups_rs = new DBlockElement("system_user_groups");
+                if (!isset($dat['group'])) {
+                    $this->read = array();
+                    $this->add = array();
+                    $this->edit = array();
+                    $this->delete = array();
+                } else {
+                    $users_groups = $users_groups_rs->GetOne("id=" . $dat['group']);
+                    $this->read = explode(";", $users_groups['read']);
+                    $this->add = explode(";", $users_groups['add']);
+                    $this->edit = explode(";", $users_groups['edit']);
+                    $this->delete = explode(";", $users_groups['delete']);
+                };
+                $this->uid = $pass;
+            };
+            return $this->GetID();
+        };
+    }
+    
     /**
      * Пытается залогиниться. Возвращает false или ID пользователя.
      * 
@@ -230,7 +283,7 @@ class DUser extends DBlock {
         if ($id == 0) {
             $tmp->Update($this->ID, $data, false);
         } else {
-            $tmp->Update($this->ID, $data, false);
+            $tmp->Update($id, $data, false);
         }
         $this->ID = 0;
         $this->IsAuth();

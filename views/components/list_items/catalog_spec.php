@@ -9,7 +9,7 @@ if (isset($result))
                 <?
                 if ($item['foto']) {
                     $img = new HolyImg($item['foto']);
-                    $img->Resize(Array("height" => 80, "width" => 200));
+                    $img->Resize(Array("height" => 200, "width" => 200));
 					?>
                 <a href="<? echo ReplaceURL($params['url'], $item); ?>"><? echo $img->DrawHref(); ?></a><br>
                 <?};
