@@ -13,6 +13,7 @@ class Component_ajax_cart extends Component {
             "back_cart_url" => "",
             "debug" => false,
             "order" => "caption ASC",
+            "template" => "default",
         );
     }
 
@@ -31,16 +32,19 @@ class Component_ajax_cart extends Component {
 
     protected function _complete() {
         if ($this->params['back_cart_url']) {
-            echo "<a href='" . $this->params['back_cart_url'] . "'>Состояние корзины</a> обновлено.";
+            $view = View::Factory("components/" . $this->name . "/" . $this->params['template']."/ok_link",true)
+                    ->Set("params", $this->params);
         } else {
-            echo "Состояние корзины обновлено.";
-        }
+            $view = View::Factory("components/" . $this->name . "/" . $this->params['template']."/ok",true)
+                    ->Set("params", $this->params);
+        };
+        $view->Draw();
     }
 
     protected function Action() {
         $add_need = 0; //номер товара, который будем добавлять
         $delete_need = 0; //номер товара, который нужно удалить
-        //@todo много isset'ов
+
         if (!isset($_REQUEST['count']))
             $_REQUEST['count'] = 1;
 
@@ -84,7 +88,6 @@ class Component_ajax_cart extends Component {
             $this->_complete();
         };
 
-        //@fix нехорошо
         return true;
     }
 

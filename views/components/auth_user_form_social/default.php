@@ -10,18 +10,11 @@ if ($result['reg_ok']) {
             }
             ?>
         </div>
-        <? } else {
+    <? } else {
         ?>
         <div class="alert alert-success">
-        <?= $result['message'] ?>
+            <?= $result['message'] ?>
         </div>
-        <? if (isset($result['redirect_url'])) {
-            ?>
-            <script>
-                window.location='<?= $result['redirect_url'] ?>';
-            </script>
-            <? }
-        ?>
         <?
     };
     ?><?
@@ -30,30 +23,43 @@ if ($result['reg_ok']) {
     <div id="social_out_text" style="display:none;"></div>
     <script src="//ulogin.ru/js/ulogin.js"></script>
     <div id="content_inner">
-        <div id="uLogin" data-ulogin="display=panel;fields=email;optional=first_name,nickname,last_name;providers=vkontakte,twitter,google,yandex,steam,facebook;hidden=other;redirect_uri=<?= urlencode("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']) ?>"></div>
+        <div id="uLogin" data-ulogin="callback=ajaxautho;display=panel;fields=email;optional=first_name,nickname,last_name;providers=vkontakte,twitter,google,yandex,steam,facebook;hidden=other;redirect_uri"></div>
     </div>
+
+    <?
+    if (isset($result['list_of_socials'])) {
+        echo "Уже привязанные аккаунты:<ul>";
+        if (is_array($result['list_of_socials']['socials']))
+        foreach ($result['list_of_socials']['socials'] as $social_name) 
+            if ($social_name){
+            $social_name_new = explode("//", $social_name);
+            $social_name_new = $social_name_new[1];
+            $social_name_new = explode("/", $social_name_new);
+            $social_name_new = $social_name_new[0];
+            ?>
+            <li><a href="?delete_social=<?= $social_name ?>"><?= $social_name_new ?></a></li>
+            <?
+        }
+        echo "</ul>";
+    }
+    ?>
 
     <script>
         function ajaxautho(token)
         {
-            $.ajax({
-                url: 'http://ulogin.ru/token.php',
-                type: 'GET',
-                dataType:'jsonp',
-                data: {'token': token, 'host': encodeURIComponent(location.toString())},
-                success: function (jqXHR){
-                    var data_get = jQuery.parseJSON(jqXHR);
-                    data_get["token"]=token;
-                    $.post("<?= $result['reg_url'] ?>", data_get,
-                    function(data) {
-                        $("#social_out_text").show();
-                        $("#social_out_text").html(data);
-                    });
-                },
-                complete: function(jqXHR,status){
-                    //console.log(status);
-                }
+            $.post("<?= $result['reg_url'] ?>", {"token":token},
+            function(data) {
+                $("#social_out_text").show();
+                $("#social_out_text").html(data);
             });
         };
     </script>
 <? }; ?>
+
+<? if (isset($result['redirect_url'])) {
+    ?>
+    <script>
+        window.location='<?= $result['redirect_url'] ?>';
+    </script>
+<? }
+?>

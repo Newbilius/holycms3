@@ -13,6 +13,8 @@ class Component_nav_line extends Component {
 
     protected function Action() {
         global $_global_bread;
+        if (count($_global_bread)<2)
+            $this->draw_on=false;
         return $_global_bread;
     }
 

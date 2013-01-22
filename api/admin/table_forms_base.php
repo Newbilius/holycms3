@@ -322,7 +322,7 @@ class HFormTable {
     function DrawTable() {
         $count = 1;
         if (!isset($_GET['parent']))
-            $_GET['parent'] = 0; //@todo ох неправильно это, ох неправильно
+            $_GET['parent'] = 0;
 
         if ($_GET['parent'] > 0) {
             $one_folder = $this->sql->SelectOne("id=" . $_GET['parent']);

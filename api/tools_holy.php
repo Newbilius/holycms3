@@ -322,7 +322,7 @@ function SetMetatags($data) {
  * Подменяет значения в строке на значения из массива,<br>
  * в шаблоне можно использовать вставки вида #индекс_массива#<br>
  * <br>
- * <b>Пример:</b> #id# заменяется на значение $data['id']
+ * <b>Пример:</b> #id# заменяется на значение $data['id'], #foto|5# заменяется на $data['foto'][5]
  * 
  * @param string $url  <p>ссылка-шаблон</p>
  * @param array $data  <p>даные для замены</p>
@@ -330,9 +330,13 @@ function SetMetatags($data) {
  */
 function ReplaceURL($url, $data) {
     foreach ($data as $num => $value)
-        if (!is_array($value))
+        if (!is_array($value)){
             $url = str_replace("#" . $num . "#", $value, $url);
-	//@todo добавить обработку массивов, метки вида #переменная|номер/код в массиве#
+        }else{
+            foreach ($value as $num_inner=>$value_inner)
+                if (!is_array($value_inner))
+                    $url = str_replace("#" . $num ."|".$num_inner. "#", $value_inner, $url);
+        }
     return $url;
 }
 

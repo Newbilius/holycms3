@@ -32,7 +32,6 @@ class DBlockElement extends DBaseClass {
             $_before_data ="DONT_NEED";
         }
         
-        
         if (function_exists($_func_name1)) {
             $_before_data = $_func_name1($_before_data);
         };
@@ -175,6 +174,7 @@ class DBlockElement extends DBaseClass {
 
                         if (isset($values[$field['name']]))
                             if ($values[$field['name']])
+                                if (is_array($values[$field['name']]))
                                 foreach ($values[$field['name']] as $num_of_many => $vvv)
                                     if ($num_of_many !== "SORT")
                                         if ($vvv != "") {
@@ -272,12 +272,13 @@ class DBlockElement extends DBaseClass {
     function GetNext() {
         $tmp = $this->sql->GetNext();
         $this->fieldsb->GetList(Array("data_block" => $this->table, "multiple" => 1));
-        while ($ttt = $this->fieldsb->GetNext())
+        while ($ttt = $this->fieldsb->GetNext()){
             if (isset($tmp[$ttt['name']])) {
                 $tmp[$ttt['name']] = explode(";", $tmp[$ttt['name']]);
                 foreach ($tmp[$ttt['name']] as &$_tmp_item)
                     $_tmp_item = str_replace("[&&&&&&]", ";", $_tmp_item);
             };
+        };
         return $tmp;
     }
 
@@ -335,7 +336,10 @@ class DBlockElement extends DBaseClass {
                         $spec_counter = -1;
 
                         unset($tmp_sort_of_multi_item);
-
+                        if (!is_array($values[$field['name']]))
+                        {
+                            $values[$field['name']]=array($values[$field['name']]);
+                        }
                         foreach ($values[$field['name']] as $num_of_many => $vvv)
                             if ($num_of_many !== "SORT")
                                 if ($vvv != "") {
@@ -358,16 +362,17 @@ class DBlockElement extends DBaseClass {
                                 };
 
                         $insert_values[$field['name']] = "";
-
-                        if (is_array($tmp_sort_of_multi_item)) {
-                            ksort($tmp_sort_of_multi_item);
-                            if (count($tmp_sort_of_multi_item) > 0) {
-                                $insert_values[$field['name']] = implode(";", $tmp_sort_of_multi_item);
-                                $insert_values_tmp = explode(";", $insert_values[$field['name']]);
-                                $insert_values_tmp = array_filter($insert_values_tmp);
-                                $insert_values[$field['name']] = implode(";", $insert_values_tmp);
+                        if (isset($tmp_sort_of_multi_item)) {
+                                if (is_array($tmp_sort_of_multi_item)) {
+                                    ksort($tmp_sort_of_multi_item);
+                                    if (count($tmp_sort_of_multi_item) > 0) {
+                                        $insert_values[$field['name']] = implode(";", $tmp_sort_of_multi_item);
+                                        $insert_values_tmp = explode(";", $insert_values[$field['name']]);
+                                        $insert_values_tmp = array_filter($insert_values_tmp);
+                                        $insert_values[$field['name']] = implode(";", $insert_values_tmp);
+                                    };
+                                };
                             };
-                        };
                     };
                 }
                 else

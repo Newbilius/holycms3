@@ -4,6 +4,7 @@ if (!defined('HCMS')) die();
 require_once("xmltoarray_holy.php");
 require_once("tools_holy.php");
 require_once("components_holy.php");
+require_once("components_holy_old.php");    //старый принцип подключения компонентов
 require_once("pic_resize_holy.php");
 require_once("sql_holy.php");
 require_once("mail_holy.php");

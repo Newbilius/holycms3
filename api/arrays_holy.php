@@ -58,4 +58,21 @@ function fill_empty_array($array, $keys) {
 
     return $array;
 }
+
+/**
+ * Если указанные ключи не существуют в массиве - они создаются, с указанными значениями
+ * 
+ * @param array $array  <p>массив для наполнения</p>
+ * @param array $keys  <p>массив ключей=>значений</p>
+ * @return array
+ */
+function fill_array_defaults($array, $keys) {
+
+    foreach ($keys as $key=>&$value) {
+        if (!isset($array[$key]))
+            $array[$key] = $value;
+    };
+
+    return $array;
+}
 ?>

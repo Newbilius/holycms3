@@ -1,5 +1,4 @@
 <?
-//@todo очистка журнала - только для админов... или нет?
 $_global_bread[] = Array("Очистка кэша", "");
 if (isset($_POST['form_go'])) {
     $SQL = new HolySQL('system_cache');

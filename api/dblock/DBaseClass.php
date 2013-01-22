@@ -151,7 +151,8 @@ class DBaseClass {
  */
     
     function GetOne($filter = "1", $sort = "sort ASC") {
-        return $this->sql->SelectOnce($filter, $sort);
+        $this->GetList($filter, $sort, 1, 1);
+        return $this->GetNext();
     }
 
  /**

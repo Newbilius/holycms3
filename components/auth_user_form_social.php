@@ -45,16 +45,33 @@ class Component_auth_user_form_social extends Component {
                 $error[] = $user_data['error'];
             }
         };
+        
+        $user = HolyUser::getInstance();
+         
+        if ($user->IsAuth()) {
+            $result['list_of_socials']=$user->GetInfo();
+            if (isset($_GET['delete_social'])){
+                $soc_array=$result['list_of_socials']['socials'];
+                foreach ($soc_array as $_soc_id=>$_soc){
+                    if ($_soc==$_GET['delete_social']){
+                        unset($soc_array[$_soc_id]);
+                    }
+                }
+                $user->Update(Array(
+                    'socials'=>$soc_array
+                ));
+                $result['redirect_url']=$this->params['cabinet_url'];
+            }
+        };
+        
         if (isset($error)) {
             $result['errors'] = $error;
         } else {
             if ($result['reg_ok']) {
-                $user = HolyUser::getInstance();
                 if (!$user->IsAuth()) {
                     //регистрация/авторизация
                     //@todo проверять существование такого EMAILа!!
                     $data=$user->GetUser(Array(
-                        Array("email","=",$user_data['email']),
                         Array("socials","LIKE","%".$user_data['identity']."%"),
                     ));
                     if ($data==NULL){
@@ -72,6 +89,7 @@ class Component_auth_user_form_social extends Component {
                             else
                                 $data_add['fio'] = $data_add['fio']." " . $user_data['last_name'];
                         };
+                        $data_add['caption']=$user_data['email'];
                         $user->AddUser($user_data['email'], $new_pass, $data_add);
                         $data = $user->GetUser(Array(
                             Array("email", "=", $user_data['email']),
@@ -82,13 +100,13 @@ class Component_auth_user_form_social extends Component {
                     }else
                     {
                         $user->AuthByID($data['id']);
-                        $result['message']="авторизация пользовтеля существующего";
+                        $result['message']="авторизация пользователя существующего";
                         $result['redirect_url']=$this->params['cabinet_url'];
                     }
                     
                 }else{
                     $info = $user->GetInfo();
-                    $_socials_tmp=explode(";",$info["socials"]);
+                    $_socials_tmp=$info["socials"];
                     foreach ($_socials_tmp as $_social){
                         $_socials[$_social]=$_social;
                     };

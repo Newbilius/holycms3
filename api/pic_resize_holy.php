@@ -20,6 +20,8 @@ class HolyImg {
     private $file_type;     //тип файла
     private $water_pic;
     private $water_path;
+    private $water_width;
+    private $water_height;
     private $water_params;
 
 /**
@@ -83,23 +85,22 @@ class HolyImg {
             $this->width = imagesx($this->picture);
             $this->height = imagesy($this->picture);
         };
-        //@todo вынести в свойства класса
 
-        $water_width = imagesx($this->water_pic);
-        $water_height = imagesy($this->water_pic);
-        if (($water_width > $this->width) || ($water_height > $water_height)) {
-            $water_height_old = $water_height;
-            $water_width_old = $water_width;
-            if ($water_width > $water_height) {
-                $water_width = $this->width;
-                $water_height = $water_height_old * $water_width / $water_width_old;
+        $this->water_width = imagesx($this->water_pic);
+        $this->water_height = imagesy($this->water_pic);
+        if (($this->water_width > $this->width) || ($this->water_height > $this->water_height)) {
+            $this->water_height_old = $this->water_height;
+            $this->water_width_old = $this->water_width;
+            if ($this->water_width > $this->water_height) {
+                $this->water_width = $this->width;
+                $this->water_height = $this->water_height_old * $this->water_width / $this->water_width_old;
             } else {
-                $water_height = $this->height;
-                $water_width = $water_width_old * $water_height / $water_height_old;
+                $this->water_height = $this->height;
+                $this->water_width = $this->water_width_old * $this->water_height / $this->water_height_old;
             }
-            $watermark2 = @imagecreatetruecolor($water_width, $water_height);
+            $watermark2 = @imagecreatetruecolor($this->water_width, $this->water_height);
 
-            imagecopyresampled($watermark2, $this->water_pic, 0, 0, 0, 0, $water_width, $water_height, $water_width_old, $water_height_old);
+            imagecopyresampled($watermark2, $this->water_pic, 0, 0, 0, 0, $this->water_width, $this->water_height, $this->water_width_old, $this->water_height_old);
             $this->water_pic = $watermark2;
         }
         $out = imageCreateTrueColor($this->width, $this->height);
@@ -114,10 +115,10 @@ class HolyImg {
                 $dst_x = 0;
                 break;
             case "right":
-                $dst_x = $this->width - $water_width;
+                $dst_x = $this->width - $this->water_width;
                 break;
             default://center
-                $dst_x = ($this->width - $water_width) / 2;
+                $dst_x = ($this->width - $this->water_width) / 2;
         }
 
         switch ($this->water_params['position_v']) {
@@ -125,13 +126,13 @@ class HolyImg {
                 $dst_y = 0;
                 break;
             case "bottom":
-                $dst_y = $this->height - $water_height;
+                $dst_y = $this->height - $this->water_height;
                 break;
             default://center
-                $dst_y = ($this->height - $water_height) / 2;
+                $dst_y = ($this->height - $this->water_height) / 2;
         }
 
-        imageCopyMerge($out, $this->water_pic, $dst_x, $dst_y, 0, 0, $water_width, $water_height, $this->water_params['transparent']);
+        imageCopyMerge($out, $this->water_pic, $dst_x, $dst_y, 0, 0, $this->water_width, $this->water_height, $this->water_params['transparent']);
 
         $this->picture = $out;
     }

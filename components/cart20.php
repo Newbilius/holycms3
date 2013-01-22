@@ -36,7 +36,6 @@ class Component_cart20 extends Component {
     protected function Action() {
         $add_need = 0; //номер товара, который будем добавлять
         $delete_need = 0; //номер товара, который нужно удалить
-        //@todo много isset'ов
         if (!isset($_REQUEST['count']))
             $_REQUEST['count'] = 1;
 
@@ -54,9 +53,6 @@ class Component_cart20 extends Component {
         $cookie_work = new HolyCookie($this->params['cookie_var']);
         if (isset($_REQUEST['complete']))
             $cookie_work->Delete();
-
-        //процесс добавления в корзину
-
         if ($add_need > 0) {
             $cookie_work->AddToArray($add_need, $_REQUEST['count']);
             if ($this->params['back_cart_url'])

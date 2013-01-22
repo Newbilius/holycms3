@@ -3,20 +3,20 @@
 /**
  * Класс для работы с пользователями сайта и администраторами
  */
-//@fix чтение через sql, запись через блоки - не дело. привести к общему знаменателю
-class DUser extends DBlock {
+class DUser {
 
-    var $ID;
-    var $inform;
-    var $pass_name;
-    var $login_name;
-    var $cookie_prefix;
-    var $table;
+    public $ID;
+    public $inform;
+    public $pass_name;
+    public $login_name;
+    public $cookie_prefix;
+    public $table;
     protected $uid;
-    var $read;
-    var $add;
-    var $edit;
-    var $delete;
+    public $read;
+    public $add;
+    public $edit;
+    public $delete;
+    public $src;
 
     /**
      * Определяем базовые настройки
@@ -35,9 +35,7 @@ class DUser extends DBlock {
         $this->pass_name = $pass_name;
         $this->table = $table;
         $this->ID = 0;
-
-        $this->sql = new HolySQL($table);
-
+        $this->src=new DBlockElement($table);
         if ($first) {
             if (!isset($_COOKIE[$this->cookie_prefix . '_login']))
                 $_COOKIE[$this->cookie_prefix . '_login'] = "";
@@ -46,7 +44,6 @@ class DUser extends DBlock {
             if (($_COOKIE[$this->cookie_prefix . '_login'] != "") && ($_COOKIE[$this->cookie_prefix . '_pass'] != ""))
                 $this->ID = $this->Auth($_COOKIE[$this->cookie_prefix . '_login'], $_COOKIE[$this->cookie_prefix . '_pass']);
         };
-
         return $this;
     }
 
@@ -141,35 +138,33 @@ class DUser extends DBlock {
     }
 
     function GetUser($where){
-        $data = $this->sql->SelectOne($where);
+        $data = $this->src->GetOne($where);
         if (!isset($data['id']))
             $data=null;
         return $data;
     }
     
-    function AuthByID($id) {
-        $dat = $this->sql->SelectOnce(Array(Array("id", "=", $id)));
+    function AuthByID($id,$dat=array()) {
+        if (count($dat) == 0) {
+            $dat = $this->src->GetOne(Array(Array("id", "=", $id)));
+        };
         if (isset($dat['id'])) {
             $this->ID = $dat['id'];
             $set_uid = true;
-            //@todo убрать дублирование кода
             if ($this->ID != 0) {
                 if ($set_uid) {
                     $pass = MD5(uniqid(time(), true) . time());
-                    //@todo под вопросом
-                    $user=$dat['email'];
-                    $uid_list = explode(";", $dat['uid']);
+                    $user=$dat[$this->login_name];
+                    $uid_list = $dat['uid'];
                     $uid_list[] = $pass;
                     if (count($uid_list) > 5)
                         unset($uid_list[0]);
-                    $save_uid = implode(";", $uid_list);
+                    $save_uid = $uid_list;
                     setcookie($this->cookie_prefix . '_login', $user, time() + 90000, "/");
                     setcookie($this->cookie_prefix . '_pass', $pass, time() + 90000, "/");
                     $_COOIKE[$this->cookie_prefix . '_login'] = $user;
                     $_COOIKE[$this->cookie_prefix . '_pass'] = $pass;
-                    $this->sql->Update("id=" . $this->ID, Array(
-                        "uid" => $save_uid
-                    ));
+                    $this->src->Update($this->ID, Array("uid" => $save_uid), false);
                     $this->inform['uid'] = $save_uid;
                 };
                 //получаем информацию о группе      
@@ -201,13 +196,17 @@ class DUser extends DBlock {
      * @return array/bool
      */
     function Auth($user, $pass) {
-
-        $user = mysql_real_escape_string($user);
         $set_uid = false;
-        $dat = $this->sql->SelectOnce($this->login_name . "='" . $user . "' AND uid LIKE'%" . mysql_real_escape_string($pass) . "%'");
+        $dat=$this->src->GetOne(Array(
+            Array($this->login_name,"=",$user),
+            Array('uid',"LIKE","%".$pass."%"),
+        ));
         $this->inform = $dat;
         if (!isset($dat['id'])) {
-            $dat = $this->sql->SelectOnce($this->login_name . "='" . $user . "' AND " . $this->pass_name . "='" . MD5($pass) . "'");
+                    $dat = $this->src->GetOne(Array(
+                            Array($this->login_name, "=", $user),
+                            Array($this->pass_name, "=",MD5($pass)),
+                    ));
             $this->inform = $dat;
             if (!isset($dat['id'])) {
                 $dat['id'] = 0;
@@ -220,18 +219,16 @@ class DUser extends DBlock {
         if ($this->ID != 0) {
             if ($set_uid) {
                 $pass = MD5(uniqid(time(), true) . time());
-                $uid_list = explode(";", $dat['uid']);
+                $uid_list =  $dat['uid'];
                 $uid_list[] = $pass;
                 if (count($uid_list) > 5)
                     unset($uid_list[0]);
-                $save_uid = implode(";", $uid_list);
+                $save_uid = $uid_list;
                 setcookie($this->cookie_prefix . '_login', $user, time() + 90000, "/");
                 setcookie($this->cookie_prefix . '_pass', $pass, time() + 90000, "/");
                 $_COOIKE[$this->cookie_prefix . '_login'] = $user;
                 $_COOIKE[$this->cookie_prefix . '_pass'] = $pass;
-                $this->sql->Update("id=" . $this->ID, Array(
-                    "uid" => $save_uid
-                ));
+                $this->src->Update($this->ID,Array("uid"=>$save_uid),false);
                 $this->inform['uid'] = $save_uid;
             };
             //получаем информацию о группе      
@@ -266,10 +263,10 @@ class DUser extends DBlock {
         $new_user_data = Array(
             "name" => $login,
             $this->login_name => $login,
-            $this->pass_name => MD5($pass),
+            $this->pass_name => $pass,
         );
         $new_user_data = array_merge($new_user_data, $params);
-        $this->sql->Insert($new_user_data);
+        $this->src->Add($new_user_data);
     }
 
     /**
@@ -295,7 +292,7 @@ class DUser extends DBlock {
     function Logout() {
         AddToLog("Пользователь " . $_COOKIE[$this->cookie_prefix . '_login'] . " (" . $this->ID . ") ВЫШЕЛ из системы администрирования.");
 
-        $uid_list = explode(";", $this->inform['uid']);
+        $uid_list = $this->inform['uid'];
 
         foreach ($uid_list as $num => $_uid) {
             if ($_uid == $this->uid) {
@@ -304,9 +301,7 @@ class DUser extends DBlock {
         }
 
         $uid_list_save = implode(";", $uid_list);
-        $this->sql->Update("id=" . $this->ID, Array(
-            "uid" => $uid_list_save
-        ));
+        $this->src->Update($this->ID,Array("uid"=>$uid_list_save),false);
         $this->ID = 0;
         setcookie($this->cookie_prefix . '_login', $_COOKIE[$this->cookie_prefix . '_login'], time() - 90000, "/");
         setcookie($this->cookie_prefix . '_pass', $_COOKIE[$this->cookie_prefix . '_pass'], time() - 90000, "/");
@@ -327,7 +322,6 @@ class HolyUser extends DUser {
         if (is_null(self::$instance)) {
             self::$instance = new HolyUser ();
         }
-
         return self::$instance;
     }
 
@@ -335,8 +329,7 @@ class HolyUser extends DUser {
         parent::DUser(1, "site_users", "email", "password", "holy_site_user");
     }
 
-    private function __clone() {
-        
+    private function __clone() {      
     }
 
 }
