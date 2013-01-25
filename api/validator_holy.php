@@ -14,7 +14,6 @@ class HolyValidator {
      * 
      * @param array $field_names  <p>массив вида "код поля"=>"навание поля"</p>
      */
-    //@todo избавиться от параметра - перенести все фразы и названия в i18-файл
     public function HolyValidator($field_names) {
         $this->ok = false;
         $this->errors = array();

@@ -128,8 +128,14 @@ class HolyCookie {
         return $this;
     }
 
-    //@todo добавить функцию, возвращающую список ключей
-    //или найти такую функцию в готовых PHP
+    /**
+     * Возвращает список ключей.
+     * 
+     * @return array
+     */
+    public function GetKeys(){
+        return array_keys($_COOKIE);
+    }
 }
 
 ;

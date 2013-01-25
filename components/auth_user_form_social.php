@@ -1,5 +1,4 @@
 <?php
-//@todo - удаление социальных аккаутнов
 class Component_auth_user_form_social extends Component {
 
     protected function GetDefaults() {

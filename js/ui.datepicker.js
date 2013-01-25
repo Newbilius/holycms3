@@ -226,9 +226,6 @@ $.extend(Datepicker.prototype, {
 		input.addClass(this.markerClassName).append(inst._datepickerDiv);
 		input[0]._calId = inst._id;
 		this._updateDatepicker(inst);
-		/* @todo: fix _inlineShow automatic resizing
-			- Endless loop bug in IE6.  
-			- inst._datepickerDiv.resize doesn't ever fire in firefox.  */
 		// inst._datepickerDiv.resize(function() { $.datepicker._inlineShow(inst); });
 	},
 
