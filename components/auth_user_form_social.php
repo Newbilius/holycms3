@@ -69,10 +69,19 @@ class Component_auth_user_form_social extends Component {
             if ($result['reg_ok']) {
                 if (!$user->IsAuth()) {
                     //регистрация/авторизация
-                    //@todo проверять существование такого EMAILа!!
                     $data=$user->GetUser(Array(
                         Array("socials","LIKE","%".$user_data['identity']."%"),
                     ));
+                    $data2=$user->GetUser(Array(
+                        Array("email","=",$user_data['email']),
+                    ));
+                    if (isset($data2['id']))
+                        if (!isset($data['id']))
+                        if ($data2['id']){
+                            $error[]="пользователь с таким email'ом уже зарегестрирован!";
+                            $result['errors'] = $error;
+                        }
+                        if (!isset($error)){
                     if ($data==NULL){
                         $result['message']="регистрация нового пользователя";
                         $new_pass = PasswordGenerate(8);
@@ -102,6 +111,7 @@ class Component_auth_user_form_social extends Component {
                         $result['message']="авторизация пользователя существующего";
                         $result['redirect_url']=$this->params['cabinet_url'];
                     }
+                        };
                     
                 }else{
                     $info = $user->GetInfo();
