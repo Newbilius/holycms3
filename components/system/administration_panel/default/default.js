@@ -72,6 +72,12 @@ function onAjaxSuccess(data)
 
 $(document).ready(function() {
 
+$('form').submit(function() {
+  $("input[value='Сохранить']").addClass("disabled");
+  $("input[value='Применить']").addClass("disabled");
+  return true;
+});
+
     AjaxLoadAlp();
 
     $(".meta_tr").hide();
