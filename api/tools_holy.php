@@ -115,7 +115,7 @@ function ParseXMLToArray($xml_data) {
 ;
 
 /**
- * Скачивае по ссылке XML-файл, преобразуя его в массив
+ * Скачивает по ссылке XML-файл, преобразуя его в массив
  * 
  * @param string $url  <p>ссылка для скачивания</p>
  * @param bool/array $convert=false  <p>преобразовать из кодировки $convert[0] в $convert[1] данные</p>
