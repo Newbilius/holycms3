@@ -224,7 +224,7 @@ function getDocHeight() {
     <? if (!$force_filter) {?><div id="footer">
       <div class="container">
             <hr style="margin-top:0px;">
-                <p> <strong>HolyCMS <?= $_holy_vers ?></strong>, &copy <a href=http://www.siteszone.ru/ target=_new>Моисеев Дмитрий aka Newbilius</a>. 2011-2012 год</p>
+                <p> <strong>HolyCMS <?= $_holy_vers ?></strong>, &copy <a href=http://www.siteszone.ru/ target=_new>Моисеев Дмитрий aka Newbilius</a>. 2011-2013 год</p>
       </div>
         <?};?>
     </div>
