@@ -414,7 +414,7 @@ function PasswordGenerate($number) {
 function GetWordForms($count,$forms)
 {
     $cases = array (2, 0, 1, 1, 1, 2);
-    return $forms[ ($number%100 >4 && $number%100< 20)? 2 : $cases[min($number%10, 5)] ];
+    return $forms[ ($count%100 >4 && $count%100< 20)? 2 : $cases[min($count%10, 5)] ];
 };
 
 /**

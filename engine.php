@@ -14,21 +14,22 @@ if (!isset($_OPTIONS['back_email']))
     $_OPTIONS['back_email'] = "info@" . $_SERVER['HTTP_HOST'];
 
 require_once(dirname(dirname(__FILE__)) . "/site/config.php");
+//@todo переписать циклом
+defined('FOLDER_ROOT') or define("FOLDER_ROOT", $_SERVER["DOCUMENT_ROOT"]);
+defined('FOLDER_UPLOAD') or define("FOLDER_UPLOAD", $_SERVER["DOCUMENT_ROOT"] . "/upload/");
+defined('URI_UPLOAD') or define("URI_UPLOAD", "/upload/");
+defined('FOLDER_IMAGE') or define("FOLDER_IMAGE", $_SERVER["DOCUMENT_ROOT"] . "/upload/pics/");
+defined('URI_IMAGE') or define("URI_IMAGE", "/upload/pics/");
+defined('FOLDER_FILES') or define("FOLDER_FILES", $_SERVER["DOCUMENT_ROOT"] . "/upload/files/");
+defined('URI_FILES') or define("URI_FILES", "/upload/files/");
 
-define("FOLDER_ROOT", $_SERVER["DOCUMENT_ROOT"]);
-define("FOLDER_UPLOAD", $_SERVER["DOCUMENT_ROOT"] . "/upload/");
-define("URI_UPLOAD", "/upload/");
-define("FOLDER_IMAGE", $_SERVER["DOCUMENT_ROOT"] . "/upload/pics/");
-define("URI_IMAGE", "/upload/pics/");
-define("FOLDER_FILES", $_SERVER["DOCUMENT_ROOT"] . "/upload/files/");
-define("URI_FILES", "/upload/files/");
-define("FOLDER_SITE", $_SERVER["DOCUMENT_ROOT"] . "/site/");
-define("FOLDER_ADDONS_SITE", $_SERVER["DOCUMENT_ROOT"] . "/site/addons/");
-define("FOLDER_ADDONS_ENGINE", $_SERVER["DOCUMENT_ROOT"] . "/engine/addons/");
-define("FOLDER_ADMIN", $_SERVER["DOCUMENT_ROOT"] . "/engine/admin/");
-define("URI_ADMIN", "/engine/admin/");
-define("URI_ENGINE", "/engine/");
-define("FOLDER_ENGINE", $_SERVER["DOCUMENT_ROOT"] . "/engine/");
+defined('FOLDER_SITE') or define("FOLDER_SITE", $_SERVER["DOCUMENT_ROOT"] . "/site/");
+defined('FOLDER_ADDONS_SITE') or define("FOLDER_ADDONS_SITE", $_SERVER["DOCUMENT_ROOT"] . "/site/addons/");
+defined('FOLDER_ADDONS_ENGINE') or define("FOLDER_ADDONS_ENGINE", $_SERVER["DOCUMENT_ROOT"] . "/engine/addons/");
+defined('FOLDER_ADMIN') or define("FOLDER_ADMIN", $_SERVER["DOCUMENT_ROOT"] . "/engine/admin/");
+defined('URI_ADMIN') or define("URI_ADMIN", "/engine/admin/");
+defined('URI_ENGINE') or define("URI_ENGINE", "/engine/");
+defined('FOLDER_ENGINE') or define("FOLDER_ENGINE", $_SERVER["DOCUMENT_ROOT"] . "/engine/");
 
 if (!isset($_log_name))
     $_log_name = FOLDER_ROOT . "/site/log.txt";

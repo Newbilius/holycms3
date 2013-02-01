@@ -332,7 +332,7 @@ class HolyImg {
             $fold2 = substr($new_path, 2, 2);
             $parts['filename'] = $fold1 . "/" . $fold2 . "/" . $parts['filename'];
 
-            $this->complete_url = "/upload/resize_cache/" . $parts['filename'] . "_" . $this->add_path . ".png";
+            $this->complete_url = URI_UPLOAD."resize_cache/" . $parts['filename'] . "_" . $this->add_path . ".png";
             $this->complete_path = FOLDER_ROOT . $this->complete_url;
 
             if (file_exists($this->complete_path)) {

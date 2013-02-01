@@ -41,4 +41,8 @@ require_once("admin/type_forms_base.php");
 require_once("admin/edit_forms_element.php");
 require_once("admin/add_forms_folder.php");
 require_once("admin/table_forms_elements.php");
+
+require_once("php_mailer/class.phpmailer.php");
+require_once("php_mailer/class.pop3.php");
+require_once("php_mailer/class.smtp.php");
 ?>
