@@ -298,9 +298,9 @@ $fields->GetListByBlock($_GET['dblock']);
 
 $table->Add(Array("name" => "sort", "caption" => "Сортировка", "type" => "sort"));
 $table->Add(Array("name" => "id", "caption" => "ID", "type" => "short_text"));
+$table->Add(Array("name" => "caption", "caption" => "Название", "type" => "short_text"));
 if ($show_code)
     $table->Add(Array("name" => "name", "caption" => "Код", "type" => "short_text"));
-$table->Add(Array("name" => "caption", "caption" => "Название", "type" => "short_text"));
 
 while ($data = $fields->GetNext()) {
     if ((!$data['not_list']) && (($user_info['block_control']) || (!$data['admin_only'])))

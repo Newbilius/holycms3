@@ -76,7 +76,17 @@ if (isset($tmp['caption']))
 		{
 		if (!isset($data['meta']))
 			$data['meta']=0;
-		$form->Add(Array("name"=>$data['name'],"caption"=>$data['caption'],"type"=>$types->GetNameByID($data['type']),"add_values"=>$data['add_values'],'required'=>$data['required'],'meta'=>$data['meta'],'multiple'=>$data['multiple']));
+                $visible = true;
+                if ((!$user_info['block_control']) && ($data['admin_only']))
+                    $visible = false;
+		$form->Add(Array("name"=>$data['name'],
+                    "caption"=>$data['caption'],
+                    "type"=>$types->GetNameByID($data['type']),
+                    "add_values"=>$data['add_values'],
+                    'required'=>$data['required'],
+                    'meta'=>$data['meta'],
+                    'visible' => $visible,
+                    'multiple'=>$data['multiple']));
 		};
 
 					
