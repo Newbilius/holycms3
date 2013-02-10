@@ -95,7 +95,7 @@ foreach ($arValues as $val)
 								<?break;
 								
 								default:?>
-									<input style="width:90%;" type=text value="<?=$val['hvalue']?>" name="<?=$val['id']?>">
+									<input style="width:90%;" type=text value="<?=ClearValue($val['hvalue'])?>" name="<?=$val['id']?>">
 								<?
 								break;
 							};

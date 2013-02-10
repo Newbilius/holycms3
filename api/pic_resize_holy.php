@@ -389,7 +389,7 @@ class HolyImg {
                 return $this->complete_url;
             } else {
                 if ($this->path != "")
-                    return "/engine/resize.php?file_name=" . $this->path . "&w=" . $this->width . "&h=" . $this->height . $this->url_add;
+                    return "/engine/resize.php?file_name=" . $this->url . "&w=" . $this->width . "&h=" . $this->height . $this->url_add;
                 else
                     return "";
             };

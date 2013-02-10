@@ -37,6 +37,15 @@ function IncludeAddonFile($file) {
     };
     return false;
 }
+/**
+ * Чистит строку от потенциальных XSS.
+ * 
+ * @param type $string
+ * @return string
+ */
+function ClearValue($value){
+    return filter_var($value, FILTER_SANITIZE_STRING);
+}
 
 /**
  * Подклюает файл из всех аддонов.

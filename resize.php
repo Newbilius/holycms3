@@ -1,5 +1,6 @@
 <?PHP
 require_once("engine.php");
+$_GET['file_name']=  str_replace($_SERVER['DOCUMENT_ROOT'], "", $_GET['file_name']);
 $pic= new HolyImg($_GET['file_name']);
 
 
