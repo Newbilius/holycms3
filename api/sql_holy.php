@@ -166,9 +166,10 @@ class HolySQL {
         else
             $query.=$what . " ";
 
-        $query.="FROM " . $table . " WHERE ";
+        $query.="FROM " . $table;
 
         if (is_array($where)) {
+            $query.=" WHERE ";
             $cnt = 0;
             foreach ($where as $i => $w) {
 
@@ -209,9 +210,15 @@ class HolySQL {
                 $cnt++;
             };
         }
-        else
-            $query.=$where . " ";
+        else{
+            if ($where!=""){
+                $query.=" WHERE ";
+                $query.=$where . " ";
+            }
+        }
+            
         
+        if ($order_by!="")
         $query.="ORDER BY " . $order_by;
 
         if ($count_on_page != 0) {

@@ -45,4 +45,6 @@ require_once("admin/table_forms_elements.php");
 require_once("php_mailer/class.phpmailer.php");
 require_once("php_mailer/class.pop3.php");
 require_once("php_mailer/class.smtp.php");
+
+require_once("orm_holy.php");
 ?>
