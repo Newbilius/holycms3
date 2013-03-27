@@ -52,6 +52,9 @@ function DeleteDir($path) {
  * @return array
  */
 function PrepareFile($path, $copy = false) {
+    if (!file_exists($path)){
+        return "";
+    };
     $arReturn = Array(
         "error" => 0,
         "tmp_name" => $path,

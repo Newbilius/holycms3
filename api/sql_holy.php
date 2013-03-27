@@ -218,7 +218,7 @@ class HolySQL {
 
 
         if ($order_by != "")
-            $query.="ORDER BY " . $order_by;
+            $query.=" ORDER BY " . $order_by;
 
         if ($count_on_page != 0) {
             $query.=" LIMIT " . ($count_on_page * ($page - 1)) . " , " . $count_on_page;

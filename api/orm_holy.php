@@ -2,8 +2,61 @@
 
 class HolyElements extends HolyORM {
 
-    protected $fields;
     protected $fields_list;
+    protected $include_types = array();
+
+    protected function _PrepareStandartField($name, $value) {
+        return $value;
+    }
+
+    protected function _LoadClass($type) {
+        if (!isset($this->include_types[$type])) {
+            $path = FOLDER_ROOT . "/site/forms/" . $type . ".php";
+            $path0 = FOLDER_ROOT . "/engine/api/forms/" . $type . ".php";
+            if (!file_exists($path)) {
+                $path = $path0;
+            };
+            if (!file_exists($path)) {
+                $field['type'] = "text";
+                $path = FOLDER_ROOT . "/engine/api/forms/text.php";
+            };
+            include_once($path);
+            $name = "CForm_" . $type;
+            $this->include_types[$type] = $name;
+        } else {
+            $name = $this->include_types[$type];
+        }
+        return new $name;
+    }
+
+    protected function _PrepareDataToSave($data) {
+        foreach ($data as $num => &$item) {
+            if (isset($this->fields_list[$num])) {
+                $type = $this->fields_list[$num];
+                preprint($type);
+                $obj = $this->_LoadClass($type['_type']);
+                $item=$obj->AfterEdit($num, $item, $type['add_values'], $type['multiple']);
+            } else {
+                $item = $this->_PrepareStandartField($num, $item);
+            }
+        };
+        if (intval($data['id']) == 0) {
+            unset($data['id']);
+        };
+        return $data;
+    }
+
+    protected function _UpdateItem($data) {
+        $data = $this->_PrepareDataToSave($data);
+        preprint($data);
+        $this->_sql->Update(Array("id" => intval($this->_data['id'])), $data);
+    }
+
+    protected function _CreateItem($data) {
+        $data = $this->_PrepareDataToSave($data);
+        preprint($data);
+        //$this->_sql->Insert($data);
+    }
 
     public static function GetClassName($name) {
         $class_name = "HolyElements";
@@ -20,9 +73,14 @@ class HolyElements extends HolyORM {
     }
 
     protected function LoadPropertys() {
-        $this->fields = new DBlockFields();
-        $this->fields->GetListByBlock($this->_table_name);
-        $this->fields_list = $this->fields->GetFullList();
+        $fields = new DBlockFields();
+        $typesb = new DBlockTypes();
+        $fields->GetListByBlock($this->_table_name);
+        //$this->fields_list = $fields->GetFullList();
+        while ($field = $fields->GetNext()) {
+            $field['_type'] = $typesb->GetNameByID($field['type']);
+            $this->fields_list[$field['name']] = $field;
+        }
         //if (count($this->fields_list)>0)
         //preprint($this->fields_list);
     }
@@ -68,16 +126,19 @@ class HolyORM {
         return $this;
     }
 
-    public function Delete(){
-        if (!$this->IsLoaded()){
+    public function Delete() {
+        if (!$this->IsLoaded()) {
             return false;
         };
-        $this->_sql->Delete(Array("id"=>$this->_data['id']));
+        $this->_sql->Delete(Array("id" => $this->_data['id']));
         return true;
     }
-    
+
     protected function _PrepareDefaultData() {
         //preprint($this);
+        $debug_old = $this->_sql->debug;
+        $this->_sql->debug = false;
+
         $this->_sql->Query("DESC {$this->_table_name}");
         $this->_fields = array();
         $_fields_tmp = $this->_sql->GetAll();
@@ -85,6 +146,8 @@ class HolyORM {
             $this->_fields[$field['Field']] = $field['Field'];
             $this->_data[$field['Field']] = "";
         };
+
+        $this->_sql->debug = $debug_old;
     }
 
     function HolyORM($name = "") {
@@ -134,6 +197,7 @@ class HolyORM {
     function PrepareOrder($direction) {
         if ($direction != "ASC" && $direction != "DESC")
             return "ASC";
+        return $direction;
     }
 
     function Order($field, $direction = "ASC") {
@@ -291,7 +355,7 @@ class HolyORM {
                 $item = serialize($item);
             }
         }
-        if (intval($data['id'])==0){
+        if (intval($data['id']) == 0) {
             unset($data['id']);
         };
         return $data;
@@ -304,11 +368,9 @@ class HolyORM {
 
     protected function _CreateItem($data) {
         $data = $this->_PrepareDataToSave($data);
-        preprint($data);
         $this->_sql->Insert($data);
-        //$this->_sql->Update(Array("id" => intval($this->_data['id'])), $data);
     }
-    
+
     public function _SaveComplete($data) {
         if ($this->IsLoaded()) {
             $this->_UpdateItem($data);
