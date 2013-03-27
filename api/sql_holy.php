@@ -36,10 +36,10 @@ class HolySQL {
 
         $table = $this->table;
 
-		global $_CONFIG;
-		
+        global $_CONFIG;
+
         if (($type == "TEXT") || ($type == "LONGTEXT"))
-            $type.=" CHARACTER SET ".$_CONFIG['CODEPAGE']." COLLATE ".$_CONFIG['COLLATE']." ";
+            $type.=" CHARACTER SET " . $_CONFIG['CODEPAGE'] . " COLLATE " . $_CONFIG['COLLATE'] . " ";
 
         $query = "ALTER TABLE `" . $table . "` ADD `" . $name . "` " . $type . " NOT NULL";
 
@@ -179,26 +179,25 @@ class HolySQL {
                     if (count($w) == 3) {
                         if ($cnt > 0)
                             $_GLUE = "AND";
-                        $_PARAM=$w[0];
-                        $_ACTION=$w[1];
-                        if ($_ACTION=="IN"){
-                            $_VALUE="(".implode(",",$w[2]).")";
+                        $_PARAM = $w[0];
+                        $_ACTION = $w[1];
+                        if ($_ACTION == "IN") {
+                            $_VALUE = "(" . implode(",", $w[2]) . ")";
                         }else
-                        $_VALUE="'".mysql_real_escape_string($w[2])."' ";
+                            $_VALUE = "'" . mysql_real_escape_string($w[2]) . "' ";
                     } else {
                         $_GLUE = $w[0];
-                        $_PARAM=$w[1];
-                        $_ACTION=$w[2];
-                        if ($_ACTION=="IN"){
-                            $_VALUE="(".implode(",",$w[3]).")";
-                        }else
-                            if (is_numeric($w[3]))
-                        $_VALUE=$w[3];
-                            else
-                        $_VALUE="'".mysql_real_escape_string($w[3])."' ";
+                        $_PARAM = $w[1];
+                        $_ACTION = $w[2];
+                        if ($_ACTION == "IN") {
+                            $_VALUE = "(" . implode(",", $w[3]) . ")";
+                        } else
+                        if (is_numeric($w[3]))
+                            $_VALUE = $w[3];
+                        else
+                            $_VALUE = "'" . mysql_real_escape_string($w[3]) . "' ";
                     };
-                    $query.=$_GLUE . " " . $_PARAM . " " . $_ACTION . " " . $_VALUE." ";
-                    
+                    $query.=$_GLUE . " " . $_PARAM . " " . $_ACTION . " " . $_VALUE . " ";
                 } else {
                     if ($cnt > 0)
                         $query.=" AND ";
@@ -210,16 +209,16 @@ class HolySQL {
                 $cnt++;
             };
         }
-        else{
-            if ($where!=""){
+        else {
+            if ($where != "") {
                 $query.=" WHERE ";
                 $query.=$where . " ";
             }
         }
-            
-        
-        if ($order_by!="")
-        $query.="ORDER BY " . $order_by;
+
+
+        if ($order_by != "")
+            $query.="ORDER BY " . $order_by;
 
         if ($count_on_page != 0) {
             $query.=" LIMIT " . ($count_on_page * ($page - 1)) . " , " . $count_on_page;
@@ -257,6 +256,18 @@ class HolySQL {
                     $holy_sql_cache_count[$query] = count($holy_sql_cache[$query]);
             };
         };
+    }
+
+    function GetAll() {
+        global $holy_sql_cache;
+        if (isset($holy_sql_cache[$this->current_index])) {
+            if (isset($holy_sql_cache[$this->current_index])) {
+                return $holy_sql_cache[$this->current_index];
+            }
+            else
+                return false;
+        } else
+            return false;
     }
 
     /**
@@ -463,9 +474,9 @@ class HolySQL {
                 if ($cnt > 0)
                     $query.=",";
                 if (is_numeric($w))
-                    $query.="`".$i . "`=" . $w . "";
+                    $query.="`" . $i . "`=" . $w . "";
                 else
-                    $query.="`".$i . "`='" . mysql_real_escape_string($w) . "'";
+                    $query.="`" . $i . "`='" . mysql_real_escape_string($w) . "'";
                 $cnt++;
             };
         }
