@@ -68,6 +68,14 @@ class HolyORM {
         return $this;
     }
 
+    public function Delete(){
+        if (!$this->IsLoaded()){
+            return false;
+        };
+        $this->_sql->Delete(Array("id"=>$this->_data['id']));
+        return true;
+    }
+    
     protected function _PrepareDefaultData() {
         //preprint($this);
         $this->_sql->Query("DESC {$this->_table_name}");
@@ -77,7 +85,6 @@ class HolyORM {
             $this->_fields[$field['Field']] = $field['Field'];
             $this->_data[$field['Field']] = "";
         };
-        preprint($this->_fields);
     }
 
     function HolyORM($name = "") {
