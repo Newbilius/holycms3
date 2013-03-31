@@ -118,6 +118,7 @@ $.fancybox(data);
 	$mega_array[]=Array("sort","Сорт.","integ","");
 	$mega_array[]=Array("required","Обяз.","checkbox","");
 	$mega_array[]=Array("multiple","Множест.","checkbox","");
+        $mega_array[]=Array("force_multiple","Force множ","checkbox","");
 	$mega_array[]=Array("owner_type","Папка","checkbox","");
 	$mega_array[]=Array("not_element","Не item","checkbox","");
 	$mega_array[]=Array("not_list","Не в списке","checkbox","");
@@ -169,6 +170,7 @@ $.fancybox(data);
 										"not_list"=>$_POST['not_list'][$num],
 										"admin_only"=>$_POST['admin_only'][$num],
 										"meta"=>$_POST['meta'][$num],
+                                                                                "force_multiple"=>$_POST['force_multiple'][$num],
 									);
 									if (isset($_POST['delete_id'][$num]))
 										{

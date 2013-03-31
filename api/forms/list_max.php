@@ -35,24 +35,29 @@ class CForm_list_max extends CForm_text {
 
     function BeforeAdd($name, $value, $add) {
         $new_value = "";
-        foreach ($value as $_value)
-            if ($_value) {
-                if ($new_value!="")
-                    $new_value.=";";
-                $new_value.=$_value;
-            }
+        if (is_array($value)) {
+            $value = array_unique($value);
+            foreach ($value as $_value)
+                if ($_value) {
+                    if ($new_value != "")
+                        $new_value.=";";
+                    $new_value.=$_value;
+                }
+        }
         return $new_value;
     }
     
     function AfterEdit($name, $value, $add, $multiple = false) {
         $new_value = "";
-        if (is_array($value))
-        foreach ($value as $_value)
-            if ($_value) {
-                if ($new_value!="")
-                    $new_value.=";";
-                $new_value.=$_value;
-            }
+        if (is_array($value)) {
+            $value=array_unique($value);
+            foreach ($value as $_value)
+                if ($_value) {
+                    if ($new_value != "")
+                        $new_value.=";";
+                    $new_value.=$_value;
+                }
+        }
         return $new_value;
     }
 

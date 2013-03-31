@@ -9,6 +9,23 @@ class HolyElements extends HolyORM {
         return $value;
     }
 
+    function LoadData() {
+        parent::LoadData();
+        foreach ($this->fields_list as $num => $field) {
+            if ($field['multiple'] || $field['force_multiple']) {
+                if ($this->_data[$num]!="")
+                    $this->_data[$num] = explode(";", $this->_data[$num]);
+                if (is_array($this->_data[$num])) {
+                    foreach ($this->_data[$num] as &$_num) {
+                        $_num = str_replace("[&&&&&&]", ";", $_num);
+                    }
+                }else{
+                    $this->_data[$num]=array();
+                }
+            }
+        }
+    }
+
     protected function _LoadClass($type) {
         if (!isset($this->include_types[$type])) {
             $path = FOLDER_ROOT . "/site/forms/" . $type . ".php";
@@ -18,6 +35,7 @@ class HolyElements extends HolyORM {
             };
             if (!file_exists($path)) {
                 $field['type'] = "text";
+                $type="text";
                 $path = FOLDER_ROOT . "/engine/api/forms/text.php";
             };
             include_once($path);
@@ -33,9 +51,16 @@ class HolyElements extends HolyORM {
         foreach ($data as $num => &$item) {
             if (isset($this->fields_list[$num])) {
                 $type = $this->fields_list[$num];
-                preprint($type);
                 $obj = $this->_LoadClass($type['_type']);
-                $item=$obj->AfterEdit($num, $item, $type['add_values'], $type['multiple']);
+                if ($type['multiple']) {
+                    $tmp=array();
+                    foreach ($item as $item_part){
+                        $tmp[]=str_replace(";","[&&&&&&]", $obj->AfterEdit($num, $item_part, $type['add_values'], $type['multiple']));
+                    }
+                    $item=  implode(";", $tmp);
+                }else{
+                    $item = $obj->AfterEdit($num, $item, $type['add_values'], $type['multiple']);
+                }
             } else {
                 $item = $this->_PrepareStandartField($num, $item);
             }
@@ -49,7 +74,7 @@ class HolyElements extends HolyORM {
     protected function _UpdateItem($data) {
         $data = $this->_PrepareDataToSave($data);
         preprint($data);
-        $this->_sql->Update(Array("id" => intval($this->_data['id'])), $data);
+        //$this->_sql->Update(Array("id" => intval($this->_data['id'])), $data);
     }
 
     protected function _CreateItem($data) {
@@ -300,6 +325,7 @@ class HolyORM {
 
         while ($item = $this->_sql->GetNext()) {
             $this->_data = $item;
+            $this->LoadData();
             $items[$this->_data['id']] = $this->_data;
         };
         return $items;
@@ -341,12 +367,16 @@ class HolyORM {
         };
     }
 
-    public function __get($name) {
+    public function &__get($name) {
         if (isset($this->_data[$name])) {
             return $this->_data[$name];
         } else {
             die("несуществующе поле {$name}");  //@todo эксепшн
         }
+    }
+
+    public function GetAll() {
+        return $this->_data;
     }
 
     protected function _PrepareDataToSave($data) {
@@ -380,10 +410,12 @@ class HolyORM {
     }
 
     public function Save($data_to_save = array()) {
-        if (count($this->_changed_fields) == 0)
-            return false;
+        //if (count($this->_changed_fields) == 0)
+            //return false;
         if (count($data_to_save) == 0) {
-            foreach ($this->_changed_fields as $field) {
+            //foreach ($this->_changed_fields as $field) 
+            foreach ($this->_fields as $field)
+            {
                 $data_to_save[$field] = $this->_data[$field];
             }
         };
@@ -392,8 +424,6 @@ class HolyORM {
     }
 
     public function SaveAll($data_to_save = array()) {
-        if (count($this->_changed_fields) == 0)
-            return false;
         if (count($data_to_save) == 0) {
             foreach ($this->_data as $field => $value) {
                 $data_to_save[$field] = $value;
