@@ -1,4 +1,4 @@
-<? //if (!isset($_GET['_ajax_mode'])) 
+<? if (!isset($_GET['_ajax_mode'])) 
     { ?>
     <!DOCTYPE html>
     <? global $_holy_vers; ?>
@@ -198,9 +198,9 @@ function getDocHeight() {
                         <div class="span12">
 
                             <div id="ajax_div" name="ajax_div">
-                            <? }; ?>
-                                
                             <? if (!$force_filter) IncludeComponent("system\global_bread", "system"); ?>
+                            <? }; ?>
+                            
                             <? if (isset($global_page_text)) echo $global_page_text ?>&nbsp;  
                             <? if (isset($_GET['_ajax_mode'])) { ?>
                                 <script>

@@ -106,7 +106,14 @@ class HFormEdit {
             $show_add_top_buttons = true;
         }
         ?>
-        <form method=post enctype="multipart/form-data">
+        <script>
+            function FormNum<?= $this->token ?>(){
+                alert("12");
+                return false;
+            }
+        </script>
+            
+        <form method=post enctype="multipart/form-data" onsubmit="return FormNum<?= $this->token ?>();">
             <input type=hidden name=token value=<?= $this->token ?>>
             <?
             if ($show_add_top_buttons) {
