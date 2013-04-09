@@ -2,7 +2,7 @@
 
 class HolyElements extends HolyORM {
 
-    protected $fields_list;
+    protected $fields_list=array();
     protected $include_types = array();
 
     protected function _PrepareStandartField($name, $value) {
@@ -320,13 +320,14 @@ class HolyORM {
         return $items;
     }
 
-    protected function FindAsArray() {
+    protected function FindAsArray($key_param="") {
         $items = array();
-
+        if ($key_param=="")
+            $key_param="id";
         while ($item = $this->_sql->GetNext()) {
             $this->_data = $item;
             $this->LoadData();
-            $items[$this->_data['id']] = $this->_data;
+            $items[$this->_data[$key_param]] = $this->_data;
         };
         return $items;
     }
@@ -344,9 +345,9 @@ class HolyORM {
         return $items;
     }
 
-    function FindAllAsArray() {
+    function FindAllAsArray($key_param="") {
         $this->_select();
-        $items = $this->FindAsArray();
+        $items = $this->FindAsArray($key_param);
         return $items;
     }
 
