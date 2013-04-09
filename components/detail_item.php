@@ -18,6 +18,7 @@ class Component_detail_item extends Component {
             "draw_paginator" => false,
             "add_to_bread" => false,
             "set_title" => false,
+            "set_site_title" => false,
             "add_to_bread_parent" => false,
         );
     }
@@ -69,7 +70,10 @@ class Component_detail_item extends Component {
                 AddToBread($result[$this->params['add_to_bread']]);
 
             if ($this->params['set_title'])
-                $_OPTIONS['page_title'] = $result[$this->params['set_title']];
+                $_OPTIONS['page_title'] = ReplaceURL($this->params['set_title'],$result);
+
+            if ($this->params['set_site_title'])
+                $_OPTIONS['site_title'] = ReplaceURL($this->params['set_site_title'], $result);
 
             SetMetatags($result);
 
