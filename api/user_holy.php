@@ -195,12 +195,14 @@ class DUser {
      * 
      * @return array/bool
      */
-    function Auth($user, $pass) {
+    function Auth($user, $pass,$not_set_cookie=false) {
         $set_uid = false;
+		//$this->src->sql->debug=true;
         $dat=$this->src->GetOne(Array(
             Array($this->login_name,"=",$user),
             Array('uid',"LIKE","%".$pass."%"),
         ));
+		if ($pass=="")unset($dat);
         $this->inform = $dat;
         if (!isset($dat['id'])) {
                     $dat = $this->src->GetOne(Array(
@@ -218,6 +220,7 @@ class DUser {
         $this->ID = $dat['id'];
         if ($this->ID != 0) {
             if ($set_uid) {
+			if (!$not_set_cookie){
                 $pass = MD5(uniqid(time(), true) . time());
                 $uid_list =  $dat['uid'];
                 $uid_list[] = $pass;
@@ -230,6 +233,7 @@ class DUser {
                 $_COOIKE[$this->cookie_prefix . '_pass'] = $pass;
                 $this->src->Update($this->ID,Array("uid"=>$save_uid),false);
                 $this->inform['uid'] = $save_uid;
+				};
             };
             //получаем информацию о группе      
             $users_groups_rs = new DBlockElement("system_user_groups");
