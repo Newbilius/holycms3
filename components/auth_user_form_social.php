@@ -78,7 +78,7 @@ class Component_auth_user_form_social extends Component {
                     if (isset($data2['id']))
                         if (!isset($data['id']))
                         if ($data2['id']){
-                            $error[]="пользователь с таким email'ом уже зарегестрирован!";
+                            $error[]="пользователь с таким email'ом уже зарегистрирован!";
                             $result['errors'] = $error;
                         }
                         if (!isset($error)){
