@@ -160,7 +160,6 @@ class HolyORM {
     }
 
     protected function _PrepareDefaultData() {
-        //preprint($this);
         $debug_old = $this->_sql->debug;
         $this->_sql->debug = false;
 
@@ -280,7 +279,7 @@ class HolyORM {
         if ($this->_filter != "") {
             $this->_filter.=" {$glue} ";
         }
-        $this->_filter.="`" . $field . "`" . $command . " " . $this->PrepareValue($value);
+        $this->_filter.="`" . $field . "` " . $command . " " . $this->PrepareValue($value);
 
         return $this;
     }
@@ -364,7 +363,7 @@ class HolyORM {
             $this->_changed_fields[$name] = $name;
             $this->_data[$name] = $value;
         } else {
-            die("несуществующе поле {$name}");  //@todo эксепшн
+            throw new Exception("несуществующе поле {$name}");
         };
     }
 
@@ -372,7 +371,7 @@ class HolyORM {
         if (isset($this->_data[$name])) {
             return $this->_data[$name];
         } else {
-            die("несуществующе поле {$name}");  //@todo эксепшн
+            throw new Exception("несуществующе поле {$name}");
         }
     }
 
@@ -411,10 +410,7 @@ class HolyORM {
     }
 
     public function Save($data_to_save = array()) {
-        //if (count($this->_changed_fields) == 0)
-            //return false;
         if (count($data_to_save) == 0) {
-            //foreach ($this->_changed_fields as $field) 
             foreach ($this->_fields as $field)
             {
                 $data_to_save[$field] = $this->_data[$field];
